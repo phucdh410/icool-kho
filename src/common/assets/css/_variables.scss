@@ -1,0 +1,80 @@
+/* Variable overrides */
+$primary-color                           : #053C7F;
+$secondary-color                         : #00a7e6;
+$third-color                             : #90A0B7; 
+
+/* Color */
+$color-red                               : #F26464;
+$color-blue                              : #5887FF;
+$color-blue-icool                        : #053C7F;
+$color-blue-background                   : #7B98B9;
+$color-light-blue                        : #E3F0FF;
+$color-dark-light-blue                   : #CAE1FD;
+$color-light-blue-table                  : #D0E5FF;
+$color-background                        : #ECECEC;
+$color-gray                              : #96A7B0;
+$color-dark-gray                         : #C5CED3;
+$color-black                             : #000000;
+$color-white                             : #ffffff;
+
+$color-note                              : #7B7676;
+$color-menu                              : #A0B0B8;
+
+$color-success                           : #228743;
+$color-error                             : #F26464;
+$color-warning                           : #EC7406;
+$color-info                              : #053C7F;
+
+/* Button Color */
+$btn-primary                             : $primary-color;
+$btn-danger                              : #F26464;
+$btn-action                              : #FFFFFF;
+$btn-disabled                            : white;
+
+/* Button Background Color */
+$btn-bc-primary                          : #D1E5FF;
+$btn-bc-danger                           : #F1D8D8;
+$btn-bc-action                           : #053C7F;
+$btn-bc-disabled                         : #C2CFE0;
+
+/* Button Border Color */
+$btn-border-primary                      : $primary-color;
+$btn-border-danger                       : #F26464;
+$btn-border-action                       : #053C7F;
+$btn-border-disabled                     : #C2CFE0;
+
+/* Background Color */
+$success-bg-color                        : #D8FFEA;
+$error-bg-color                          : #F1D8D8;
+$warning-bg-color                        : #FCEBCF;
+$info-bg-color                           : #D1E5FF;
+/* Font */
+
+/* Font Family */
+$ff-main                                 : Roboto;
+
+/* Font Size */
+$fs-small                                : 11px;
+$fs-normal                               : 16px;
+$fs-medium                               : $fs-normal;
+$fs-large                                : 20px;
+
+$fs-h1                                   : 53px;
+$fs-h2                                   : 40px;
+$fs-h3                                   : 34px;
+$fs-h4                                   : 30px;
+$fs-h5                                   : 20px;
+$fs-h6                                   : 16px;
+
+/* Border */
+$border-light                            : 1px solid #d8d7d7;
+
+/* Link */
+$active-color                            : $color-blue-icool;
+$item-link--active--hover                : $color-light-blue;
+$dropdown-item-bg-color                  : $color-white;
+$dropdown-item-bg-color--hover           : $color-blue-icool;
+$dropdown-item-bg-color--active          : $color-blue-icool;
+$dropdown-item-color                     : black;
+$dropdown-item-color--hover              : white;
+$dropdown-item-color--active             : white;

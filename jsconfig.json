@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "_configs/*": ["src/configs/*"],
+      "_common/*": ["src/common/*"],
+      "_components/*": ["src/common/components/*"],
+      "_modules/*": ["src/modules/*"],
+      "_models/*": ["src/utils/models/*"],
+      "_assets/*": ["src/common/assets/*"]
+    }
+  },
+  "include": ["src/*"]
+}

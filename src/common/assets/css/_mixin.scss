@@ -1,0 +1,13 @@
+@mixin header-text-bold {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@mixin header-text { font-size: $fs-h6; }
+
+@mixin body-text-bold {
+    font-size: $fs-medium;
+    font-weight: bold;
+}
+
+@mixin body-text { font-size: $fs-normal; }

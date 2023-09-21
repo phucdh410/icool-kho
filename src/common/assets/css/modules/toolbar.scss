@@ -1,0 +1,37 @@
+.t-btn-group {
+  display: inline-block;
+  &:first-child { margin-right: 1rem; }
+} 
+.btn-collapse {
+  display: none;
+  position: absolute;
+  bottom: 0rem;
+  right: -3px;
+
+  .btn-custom {
+    margin: 0 16px 0 0!important;
+  }
+}
+@media (min-width: 992px) {
+  .custom-size-toolbar .col-lg-1{
+    -webkit-flex: 0 0 12.3333333%;
+    flex: 0 0 13.3333333%;
+    max-width: 13.3333333%;
+  }
+  .custom-size-toolbar .mt-lg-4 { margin-top: 1.35rem !important; }
+}
+@media (max-width: 576px) {
+  .t-btn-group {
+    display: flex;
+    gap: 5vw;
+  }
+  .btn-collapse { 
+    bottom: 0.45rem !important
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .btn-collapse { display: block; 
+    bottom: 0.7rem;
+  } 
+}

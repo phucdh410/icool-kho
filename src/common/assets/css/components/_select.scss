@@ -1,0 +1,91 @@
+.c-select {
+  &>div>div {
+    padding: 1px 0;
+    margin-top: 1px;
+  }
+
+  label {
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: -webkit-baseline-middle;
+    font-weight: 500;
+    font-size: $fs-normal;
+  }
+
+  .react-select__control {
+    cursor: pointer;
+    font-size: 17px;
+    border: 1px solid #d8dbe0;
+    transition: none;
+
+    height: 39.49px !important;
+
+    .css-g1d714-ValueContainer {
+      padding: 0 0.65rem !important;
+    }
+  }
+
+  .react-select__placeholder {
+    font-size: 17px;
+    color: hsl(0, 0%, 20%);
+  }
+
+  .react-select__control--menu-is-open {
+    cursor: text;
+    height: 39.49px !important;
+
+    border-color: $color-blue-icool;
+    box-shadow: 0 0 0 0.1rem #053c7f;
+
+    &:hover {
+      border-color: $color-blue-icool;
+    }
+
+    .css-1wa3eu0-placeholder {
+      font-size: 17px !important;
+    }
+  }
+
+  .react-select__value-container {
+    padding: 0 0.65rem !important;
+  }
+
+  .react-select__indicator-separator {
+    display: none;
+  }
+
+  .react-select__menu {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #d8dbe0;
+
+    &-portal {
+      z-index: 10000;
+    }
+  }
+
+  .is-invalid {
+    .css-yk16xz-control {
+      border-color: #e55353;
+    }
+
+    .css-1pahdxg-control {
+      border: 1px solid #e55353;
+      box-shadow: 0 0 0 0.1rem #053c7f !important;
+    }
+  }
+}
+
+.react-select-multi {
+  &__value-container {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll !important;
+  }
+
+  &__multi-value {
+    min-width: auto !important;
+  }
+}

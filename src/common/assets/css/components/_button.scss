@@ -1,0 +1,134 @@
+.btn-group {
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .c-button {
+    margin: 0;
+    flex: 0 1;
+  }
+}
+
+.btn-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .c-button {
+    margin: 0;
+    margin-bottom: 1px;
+  }
+}
+
+.c-button {
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: $fs-normal;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  margin: 0 8px 0px 0;
+  min-width: 90px;
+  padding: 7px;
+  text-decoration: none;
+
+  &.btn {
+
+    i,
+    .c-icon,
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+      margin: 0 7px 0 0;
+    }
+
+    &-icon {
+      min-width: 25px;
+      padding-left: 7px;
+      padding-right: 7px;
+
+      svg {
+        margin: 0 !important;
+
+        &+span {
+          display: none;
+        }
+      }
+    }
+
+    &-fill {
+      &.btn {
+        &-primary {
+          color: $color-white;
+          background-color: $btn-border-primary;
+          border: 1px solid $btn-border-primary;
+        }
+
+        &-danger {
+          color: $color-white;
+          background-color: $btn-border-danger;
+          border: 1px solid $btn-border-danger;
+        }
+
+        &-action {
+          color: $color-white;
+          background-color: $btn-border-action;
+          border: 1px solid $btn-border-action;
+        }
+      }
+    }
+
+    &-primary {
+      color: $btn-primary;
+      background-color: $btn-bc-primary;
+      border: 1px solid $btn-border-primary;
+    }
+
+    &-danger {
+      color: $btn-danger;
+      background-color: $btn-bc-danger;
+      border: 1px solid $btn-border-danger;
+    }
+
+    &-action {
+      color: $btn-action;
+      background-color: $btn-bc-action;
+      border: 1px solid $btn-border-action;
+    }
+  }
+
+  &.disabled {
+    opacity: 1 !important;
+    color: $btn-disabled !important;
+    background-color: $btn-bc-disabled !important;
+    border: 1px solid $btn-border-disabled !important;
+  }
+
+  span {
+    justify-self: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .c-button {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    min-width: 100px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .c-button {
+    min-width: 41px;
+    padding-left: 7px;
+    padding-right: 7px;
+
+    svg {
+      margin: 0 !important;
+    }
+
+    svg+span {
+      display: none;
+    }
+  }
+}

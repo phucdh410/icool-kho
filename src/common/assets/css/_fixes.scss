@@ -1,0 +1,303 @@
+* {
+  font-family: $ff-main;
+  // font-size: $fs-normal;
+}
+
+body {
+  overflow: overlay;
+}
+
+/* scrollbar */
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-thumb {
+  width: 14px;
+  border-radius: 13px;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
+}
+
+/* scrollbar */
+
+h1 {
+  font-size: $fs-h1;
+}
+
+h2 {
+  font-size: $fs-h2;
+}
+
+h3 {
+  font-size: $fs-h3;
+}
+
+h4 {
+  font-size: $fs-h4;
+}
+
+h5 {
+  font-size: $fs-h5;
+}
+
+h6 {
+  font-size: $fs-h6;
+}
+
+button {
+  &.disabled {
+    cursor: default;
+  }
+
+  &.bg-inherit {
+    background-color: inherit;
+  }
+
+  &.btn-brand:not(:only-child) {
+    .c-icon {
+      margin-top: 0 !important;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+a {
+  color: $color-blue;
+  text-decoration: underline;
+}
+
+label {
+  color: $color-black;
+  font-size: $fs-normal;
+}
+
+.react-datepicker {
+  display: flex !important;
+}
+
+.c-body {
+  padding-left: 25px;
+  padding-right: 25px;
+
+  >.card:first-child {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+
+    .card-body {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.card {
+  border: none !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px;
+
+  &.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 123px;
+    z-index: 1;
+  }
+
+  .card-header {
+    border: 1px solid #d8dbe0;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    &~.card-body {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &.tabs {
+      background-color: $color-background;
+      border: none;
+    }
+  }
+
+  .card-body {
+    border: 1px solid #d8dbe0;
+    border-radius: 8px;
+
+    &.border-error {
+      border-color: #e55353;
+    }
+  }
+}
+
+.row {
+  gap: 12px 0;
+}
+
+.page-item {
+  &.active {
+    .page-link {
+      z-index: 0;
+    }
+  }
+}
+
+.form-group {
+  margin: 0;
+  position: relative;
+
+  label {
+    color: #000;
+    font-size: $fs-normal;
+    font-weight: 500;
+    margin-bottom: 0;
+    margin-top: 0;
+    vertical-align: -webkit-baseline-middle;
+  }
+
+  .form-control {
+    margin-top: 1px !important;
+    font-size: 17px;
+    color: $color-black;
+
+    &:focus {
+      border-color: $color-blue-icool;
+      box-shadow: 0 0 0 0.1rem #053c7f;
+    }
+
+    &:disabled {
+      background-color: #f6f7f7;
+      opacity: 1;
+    }
+
+    &[readonly] {
+      background-color: inherit;
+      opacity: 1;
+      pointer-events: none;
+    }
+  }
+
+  .c-button {
+    padding: 6px 7px;
+  }
+
+  &.loading {
+    >div::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 25px;
+      height: 25px;
+
+      border-radius: 50%;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid $color-blue-icool;
+
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+  }
+}
+
+.btn-group>.btn:focus,
+.btn-group>.btn:active,
+.btn-group>.btn.active,
+.btn-group-vertical>.btn:focus,
+.btn-group-vertical>.btn:active,
+.btn-group-vertical>.btn.active,
+.btn-group>.btn:hover,
+.btn-group-vertical>.btn:hover {
+  z-index: inherit;
+}
+
+
+.react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow,
+.react-datepicker__navigation-icon::before {
+  top: 45% !important;
+}
+
+.rdl-list-box {
+  .rdl-control-container {
+    min-height: 300px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .modal-dialog {
+    &.modal-xl {
+      max-width: 75% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .modal-dialog {
+    &.modal-xl {
+      max-width: 80% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-dialog {
+    margin: 0;
+
+    &.modal-xl {
+      max-width: 100% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .c-subheader,
+  .c-body {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+}
+
+// bootstrap breakpoint
+@media screen and (min-width: 768px) {
+  .d-md-none {
+    display: none;
+  }
+
+  .d-md-inline {
+    display: inline;
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}

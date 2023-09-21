@@ -1,0 +1,65 @@
+.was-validated .form-control:invalid,
+html:not([dir=rtl]) .form-control.is-invalid {
+  padding-right: calc(1em + 0.75rem);
+  background: none;
+}
+
+.c-input {
+  input {
+    &::placeholder {
+      color: hsl(0, 0%, 20%);
+    }
+
+    &:read-only {
+      padding-right: 12px !important;
+    }
+
+    &:not([disabled])[type='text'],
+    &[type='text'] {
+      padding-right: 2rem;
+    }
+
+    &[type='password']::-ms-reveal {
+      display: none;
+    }
+
+    &.is-invalid {
+      &~.extends {
+        svg {
+          color: #e55353;
+        }
+      }
+    }
+  }
+
+  div {
+    position: relative;
+
+    .extends {
+      position: absolute;
+      top: 50%;
+      right: 11px;
+      transform: translateY(-50%);
+
+      display: flex;
+      gap: 1rem;
+
+      svg {
+        color: #c8c8c8;
+        cursor: pointer;
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+
+  &.is-error {
+    input:not([value='']).is-invalid {
+      background: none;
+    }
+  }
+
+  .c-button {
+    margin-top: 5px;
+  }
+}

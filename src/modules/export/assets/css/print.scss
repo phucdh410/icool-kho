@@ -1,0 +1,19 @@
+@media print {
+  .print-content {
+    .card {
+      .card-body {
+        border: none;
+      }
+    }
+
+    table,
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      border: 1px solid black !important;
+      border-collapse: collapse;
+    }
+  }
+}
