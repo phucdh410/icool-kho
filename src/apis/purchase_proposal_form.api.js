@@ -1,6 +1,6 @@
 import fileDownload from "js-file-download";
 
-import { map, get, post, FORM_HEADER_ENCODED } from "src/utils/axios";
+import { map, get, post, FORM_HEADER_ENCODED, _delete } from "src/utils/axios";
 
 import { format } from "src/utils/moment";
 
@@ -170,4 +170,24 @@ export const remove = async (codes) => {
   params.append("listCode", codes.join(","));
 
   return await post(PURCHASE_PROPOSAL_FORM.delete, params, FORM_HEADER_ENCODED);
+};
+
+export const getQuantitative = async (params) => {
+  return await map(({ data }) => data).get(
+    `${PURCHASE_PROPOSAL_FORM.quantitative}`,
+    { params }
+  );
+};
+
+export const handleQuantitative = async (body) => {
+  return await post(PURCHASE_PROPOSAL_FORM.quantitative, body);
+};
+
+export const getQuantitativePreview = async (id) =>
+  await map(({ data }) => data).get(
+    `${PURCHASE_PROPOSAL_FORM.quantitative}/${id}`
+  );
+
+export const removeQuantitative = async (id) => {
+  return await _delete(`${PURCHASE_PROPOSAL_FORM.quantitative}/${id}`);
 };

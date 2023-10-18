@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -10,16 +10,21 @@ import Toolbar from "./Toolbar";
 
 import {
   approver,
-  getAll,
+  getAllQuantitative,
 } from "_common/queries-fn/purchase-proposal-form.query";
 
-import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
+import {
+  approve,
+  confirm,
+  removeQuantitative,
+} from "src/apis/purchase_proposal_form.api";
 
-import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import { isCentral, isSuccess } from "src/utils/funcs";
+import { fireError, fireSuccess } from "src/utils/alert";
+import { isCentral } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
 import { setFilter } from "src/common/actions/config.action";
+
+import { MQuantitativeDialog } from "./Dialog";
 
 export const MOCK_DATA = [
   {
@@ -194,7 +199,7 @@ const QuantitativeListPage = ({}) => {
 
   const [status, setStatus] = useState(1);
 
-  const { data, set, refetch } = getAll(filters, isLoading, {
+  const { data, set, refetch } = getAllQuantitative(filters, isLoading, {
     onSuccess: () => setFetching(false),
   });
 
@@ -210,6 +215,7 @@ const QuantitativeListPage = ({}) => {
     [isFetching, data]
   );
 
+  const modalRef = useRef(null);
   //#endregion
 
   //#region Event
@@ -235,41 +241,31 @@ const QuantitativeListPage = ({}) => {
     [dispatch]
   );
 
-  const onAdd = useCallback(() => history.push());
+  const onAdd = () => {
+    modalRef.current?.open();
+  };
 
-  const onEdit = useCallback(() => {
-    if (selected.length === 1)
-      history.push(`/solution/form/${selected[0].code}`);
-  });
-
-  const onApprove = useCallback((status) => async () => {
-    setFetching(true);
-    const res = await mutation.mutateAsync({
-      code: selected.map((s) => s.code),
-      status,
-    });
-
-    if (isSuccess(res)) {
-      noti("success", res.message);
-      refetch();
-    } else {
-      setFetching(false);
+  const onEdit = () => {
+    if (selected.length === 1) {
+      modalRef.current?.open(selected[0]);
     }
-  });
+  };
 
-  const onRemove = useCallback(async () => {
-    const allow = await fireDelete();
-    if (allow) {
-      const res = await remove(selected.map((s) => s.code));
-
-      if (isSuccess(res)) {
+  const onRemove = async () => {
+    if (selected.length === 1) {
+      try {
+        console.log("Go deetele");
+        await removeQuantitative(selected[0]?.id);
+        fireSuccess("Thành công", "Xóa thành công!");
         refetch();
-        fireSuccess();
-      } else {
-        fireError();
+      } catch (error) {
+        fireError(
+          "Lỗi",
+          error?.response?.data?.message || "Xóa không thành công!"
+        );
       }
     }
-  }, [selected, refetch]);
+  };
   //#endregion
 
   return (
@@ -286,7 +282,6 @@ const QuantitativeListPage = ({}) => {
             onSearch={onSearch}
             onAdd={onAdd}
             onEdit={onEdit}
-            onApprove={onApprove}
             onRemove={onRemove}
           />
         </CCardBody>
@@ -298,11 +293,12 @@ const QuantitativeListPage = ({}) => {
           <Table
             loading={isLoading}
             isSelectAll={isSelectAll}
-            data={MOCK_DATA || data}
+            data={data}
             onSelect={select}
           />
         </CCardBody>
       </CCard>
+      <MQuantitativeDialog ref={modalRef} refetch={refetch} />
     </>
   );
 };

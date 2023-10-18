@@ -5,7 +5,7 @@ import { CTable, CPagination } from "_components/others";
 
 import MQuantitativePreview from "../../components/QuantitativePreview";
 
-import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
+import { getQuantitativePreview } from "_common/queries-fn/purchase-proposal-form.query";
 import { format } from "src/utils/moment";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
@@ -22,7 +22,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   );
 
   const onPreview = useCallback(
-    (code) => (e) => e.preventDefault() || setPreview(code),
+    (id) => (e) => e.preventDefault() || setPreview(id),
     [setPreview]
   );
 
@@ -75,19 +75,24 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "storeName",
+      key: "name",
       label: "Chi nhánh",
       _style: { width: "250px", minWidth: "250px", textAlign: "start" },
     },
     {
-      key: "creator",
+      key: "created_by",
       label: "Người tạo",
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "createdDate",
+      key: "created_date",
       label: "Ngày tạo",
       _style: { width: "200px", minWidth: "200px" },
+    },
+    {
+      key: "updated_date",
+      label: "Ngày cập nhật định lượng",
+      _style: { width: "260px", minWidth: "260px" },
     },
     {
       key: "status",
@@ -107,18 +112,21 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    code: ({ code }) => (
+    code: ({ code, id }) => (
       <td>
-        <a href={`#preview/${code}`} onClick={onPreview(code)}>
+        <a href={`#preview/${id}`} onClick={onPreview(id)}>
           {code}
         </a>
       </td>
     ),
     status: ({ status }) => mapStatus(status),
-    createdDate: ({ createdDate }) => (
-      <td>{format(createdDate, "DD/MM/YYYY HH:mm:ss")}</td>
+    created_date: ({ created_date }) => (
+      <td>{format(created_date, "DD/MM/YYYY HH:mm:ss")}</td>
     ),
-    storeName: ({ storeName }) => <td className="text-left">{storeName}</td>,
+    updated_date: ({ updated_date }) => (
+      <td>{format(updated_date, "DD/MM/YYYY")}</td>
+    ),
+    name: ({ name }) => <td className="text-left">{name}</td>,
     note: ({ note }) => <td className="text-left">{note}</td>,
   };
 
@@ -145,7 +153,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       {preview && (
         <MQuantitativePreview
           code={preview}
-          getter={getPreview}
+          getter={getQuantitativePreview}
           onClose={onClose}
         />
       )}

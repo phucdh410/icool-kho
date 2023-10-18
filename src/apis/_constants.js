@@ -64,6 +64,8 @@ export const PURCHASE_PROPOSAL_FORM = {
   approve: `${api}/purchase_proposal_forms/approve`,
   confirm: `${api}/purchase_proposal_forms/confirm`,
   delete: `${api}/purchase_proposal_forms/delete`,
+
+  quantitative: `${api}/quantification_forms`,
 };
 
 // Phiếu mua hàng or Phiếu nhập hàng

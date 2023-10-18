@@ -73,7 +73,7 @@ export default ({
           <div>
             <CActionGroup
               onClick={onClick}
-              canAdd={false}
+              canAdd={true}
               canSave={false}
               canEdit={selectedNo === 1}
               canRemove={!!selectedNo}

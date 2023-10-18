@@ -8,57 +8,9 @@ import { CDialog, CLoading, CTable, CPagination } from "_components/others";
 import { format } from "src/utils/moment";
 import { money } from "src/utils/funcs";
 
-const MOCK_DATA = {
-  id: "8d8b5dfa-c8e0-452f-8ad0-db0f0d4d433f",
-  code: "IN000001",
-  updatedDate: "2021-08-30T00:00:00.000Z",
-  total: 10000,
-  note: "Bổ sung rau hư hỏng, bổ sung bánh còn thiếu,  vận chuyển thiếu",
-  storeCode: "1",
-  storeName: "ICOOL Ung Văn Khiêm",
-  storeAddress: "KARAOKE ICOOL 122 UNG VĂN KHIÊM PHƯỜNG 25 QUẬN BÌNH THẠNH",
-  storePhone: "0835120708",
-  wareCode: "1",
-  materials: [
-    {
-      id: "1",
-      code: "MH001",
-      name: "Khô Mực Nướng",
-      boughtUnit: "Con",
-      total: 150000,
-      quantity: 15,
-    },
-    {
-      id: "2",
-      code: "MH002",
-      name: "Tương Ớt Petrolimex",
-      boughtUnit: "Chai",
-      total: 80000,
-      quantity: 29,
-    },
-    {
-      id: "3",
-      code: "MH003",
-      name: "Thịt mỡ bụng Phương",
-      boughtUnit: "Kg",
-      total: 199000,
-      quantity: 51,
-    },
-    {
-      id: "4",
-      code: "MH004",
-      name: "Tửu Nhi Hồng",
-      boughtUnit: "Bình",
-      total: 459000,
-      quantity: 4,
-    },
-  ],
-};
-
 export default ({ code, getter, onClose }) => {
-  //   const { data, isLoading } = getter(code); // Mở cái này khi ráp API
-  const { isLoading } = getter(code); // Xóa 2 dòng này khi ráp Api
-  const data = MOCK_DATA; // Xóa 2 dòng này khi ráp Api
+  const { data, isLoading } = getter(code);
+
   //   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
   const [materialPaginate, setMaterialPaginate] = useState({
     page: 1,
@@ -168,24 +120,20 @@ export default ({ code, getter, onClose }) => {
                 <CInput readOnly label="Số chứng từ" value={data?.code} />
               </CCol>
               <CCol xs="12" sm="6" md="6" lg="4" xl="4" xxl="4">
-                <CInput readOnly label="Chi nhánh" value={data?.storeName} />
+                <CInput readOnly label="Chi nhánh" value={data?.name} />
               </CCol>
               <CCol xs="12" sm="4" md="4" lg="3" xl="3" xxl="3">
                 <CInput
                   readOnly
                   label="Ngày cập nhật định lượng"
-                  value={data ? format(data?.updatedDate) : ""}
+                  value={data ? format(data?.updated_date) : ""}
                 />
               </CCol>
               <CCol xs="12" sm="6" md="6" lg="2" xl="2" xxl="2">
-                <CInput
-                  readOnly
-                  label="Số điện thoại"
-                  value={data?.storePhone}
-                />
+                <CInput readOnly label="Số điện thoại" value={data?.tel} />
               </CCol>
               <CCol xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
-                <CInput readOnly label="Địa chỉ" value={data?.storeAddress} />
+                <CInput readOnly label="Địa chỉ" value={data?.address} />
               </CCol>
               <CCol xs="12" sm="12" md="12" lg="12" xl="12" xxl="12">
                 <CInput readOnly label="Ghi chú" value={data?.note} />
