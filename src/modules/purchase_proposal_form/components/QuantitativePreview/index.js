@@ -31,7 +31,7 @@ export default ({ code, getter, onClose }) => {
 
   const materialFields = [
     {
-      key: "code",
+      key: "nvl_id",
       label: "Mã NVL",
       _style: { width: "150px", minWidth: "150px" },
     },
@@ -41,12 +41,12 @@ export default ({ code, getter, onClose }) => {
       _style: { width: "300px", minWidth: "300px", textAlign: "left" },
     },
     {
-      key: "boughtUnit",
+      key: "ware_unit",
       label: "ĐVT",
       _style: { width: "150px", minWidth: "150px" },
     },
     {
-      key: "quantity",
+      key: "formula_q",
       label: "Số lượng",
       _style: { width: "150px", minWidth: "150px" },
     },

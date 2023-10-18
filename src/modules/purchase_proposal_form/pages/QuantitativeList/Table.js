@@ -47,16 +47,22 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         );
       case 2:
         return (
-          <td className="pr-4 font-weight-medium text-center text-danger">
-            Không thành công
+          <td className="pr-4 font-weight-medium text-center text-success">
+            Thành công
           </td>
+          // <td className="pr-4 font-weight-medium text-center text-danger">
+          //   Không thành công
+          // </td>
         );
 
       default:
         return (
-          <td className="pr-4 font-weight-medium text-center text-warning">
-            Đang cập nhật
+          <td className="pr-4 font-weight-medium text-center text-success">
+            Thành công
           </td>
+          // <td className="pr-4 font-weight-medium text-center text-warning">
+          //   Đang cập nhật
+          // </td>
         );
     }
   };

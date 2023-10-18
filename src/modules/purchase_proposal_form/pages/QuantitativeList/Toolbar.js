@@ -75,8 +75,9 @@ export default ({
               onClick={onClick}
               canAdd={true}
               canSave={false}
+              hideSaveBtn
               canEdit={selectedNo === 1}
-              canRemove={!!selectedNo}
+              canRemove={selectedNo === 1}
             />
           </div>
           <div>
