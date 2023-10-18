@@ -99,7 +99,8 @@ export const approver = (api) =>
 export const getAllQuantitative = (params, isLoading = false, options = {}) => {
   const _params = { ...params };
 
-  if (_params.date) _params.date = format(_params.date, "yyyy-MM-DD");
+  if (_params.startAt) _params.startAt = format(_params.startAt, "yyyy-MM-DD");
+  if (_params.endAt) _params.endAt = format(_params.endAt, "yyyy-MM-DD");
 
   return createQuery(
     ["quantitative_list", _params],
