@@ -21,7 +21,7 @@ export const MQuantitativeDialog = forwardRef(({ refetch }, ref) => {
 
   const { data: stores } = getAll();
 
-  const { control, reset, handleSubmit, getValues } = useForm({
+  const { control, reset, handleSubmit } = useForm({
     mode: "all",
     defaultValues,
   });
@@ -43,19 +43,17 @@ export const MQuantitativeDialog = forwardRef(({ refetch }, ref) => {
 
   const onSubmit = () => {
     handleSubmit(async (values) => {
-      try {
-        const body = { ...values, date: format(values?.date, "YYYY-MM-DD") };
+      const body = { ...values, date: format(values?.date, "YYYY-MM-DD") };
 
-        await handleQuantitative(body);
+      const res = await handleQuantitative(body);
+
+      if (isSuccess(res)) {
         fireSuccess("Thành công", "Cập nhật định lượng thành công!");
+
         refetch();
         onClose();
-      } catch (error) {
-        fireError(
-          "Lỗi",
-          error?.response?.data?.message ||
-            "Cập nhật định lượng không thành công!"
-        );
+      } else {
+        fireError("Lỗi", "Cập nhật định lượng không thành công!");
       }
     })();
   };
