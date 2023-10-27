@@ -29,6 +29,7 @@ export default ({
   onApprove,
   onRemove,
   onSearch,
+  onReCalculate,
 }) => {
   //#region Data
 
@@ -77,7 +78,7 @@ export default ({
               canSave={false}
               hideSaveBtn
               canEdit={selectedNo === 1}
-              canRemove={selectedNo === 1}
+              canRemove={false}
             />
           </div>
           <div>
@@ -85,7 +86,11 @@ export default ({
               do={PERMISSION_VALUE.CREATE}
               on={ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM}
             > */}
-            <CButton className="btn-fill" to="/solution/form">
+            <CButton
+              disabled={selectedNo !== 1}
+              className="btn-fill"
+              onClick={onReCalculate}
+            >
               Tính Toán
             </CButton>
             {/* </Can> */}

@@ -17,14 +17,16 @@ import {
   approve,
   confirm,
   removeQuantitative,
+  handleQuantitative,
 } from "src/apis/purchase_proposal_form.api";
 
 import { fireError, fireSuccess } from "src/utils/alert";
-import { isCentral } from "src/utils/funcs";
+import { isCentral, isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
 import { setFilter } from "src/common/actions/config.action";
 
 import { MQuantitativeDialog } from "./Dialog";
+import { format } from "src/utils/moment";
 
 const selectData = createSelector(
   (state) => state.config,
@@ -100,17 +102,30 @@ const QuantitativeListPage = ({}) => {
 
   const onRemove = async () => {
     if (selected.length === 1) {
-      try {
-        console.log("Go deetele");
-        await removeQuantitative(selected[0]?.id);
+      const res = await removeQuantitative(selected[0]?.id);
+      if (isSuccess(res)) {
         fireSuccess("Thành công", "Xóa thành công!");
         refetch();
-      } catch (error) {
-        fireError(
-          "Lỗi",
-          error?.response?.data?.message || "Xóa không thành công!"
-        );
+      } else {
+        fireError("Lỗi", "Xóa không thành công!");
       }
+    }
+  };
+
+  const onReCalculate = async () => {
+    const values = {
+      storeCode: selected[0]?.store_code,
+      date: format(selected[0]?.updated_date, "YYYY-MM-DD"),
+      note: selected[0]?.note,
+    };
+
+    const res = await handleQuantitative(values);
+
+    if (isSuccess(res)) {
+      fireSuccess("Thành công", "Cập nhật định lượng thành công!");
+      refetch();
+    } else {
+      fireError("Lỗi", "Cập nhật định lượng không thành công!");
     }
   };
   //#endregion
@@ -130,6 +145,7 @@ const QuantitativeListPage = ({}) => {
             onAdd={onAdd}
             onEdit={onEdit}
             onRemove={onRemove}
+            onReCalculate={onReCalculate}
           />
         </CCardBody>
       </CCard>

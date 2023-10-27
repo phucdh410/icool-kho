@@ -8,6 +8,7 @@ import { fireError, fireSuccess } from "src/utils/alert";
 import { format } from "src/utils/moment";
 import { handleQuantitative } from "src/apis/purchase_proposal_form.api";
 import moment from "moment";
+import { isSuccess } from "src/utils/funcs";
 
 const defaultValues = {
   storeCode: "",
