@@ -52,7 +52,8 @@ const Login = () => {
                 await dispatch(setUser(user));
                 await dispatch(setPermission(user));
 
-                history.push("/summary");
+                // history.push("/summary");
+                history.push("/inventory-slip/list");
               })
               .catch((err) => {
                 setLoading(false);
