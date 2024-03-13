@@ -110,12 +110,12 @@ const MaterialGroupList = () => {
           <Toolbar
             status={status}
             selectedNo={selected.length}
-            toggleStatus={onStatusChange}
-            onSearch={onSearch}
+            canSave={status}
             onAdd={onAdd}
             onEdit={onEdit}
-            onExpor={onExport}
             onRemove={onRemove}
+            onSave={onSave}
+            onExport={onExport}
           />
         </CCardBody>
       </CCard>

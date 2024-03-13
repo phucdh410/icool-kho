@@ -1,15 +1,7 @@
-import { useEffect } from "react";
+import { CRow, CCol } from "@coreui/react";
 
-import classNames from "classnames";
-import { Controller, useForm } from "react-hook-form";
-import { CRow, CCol, CCollapse } from "@coreui/react";
-
-import { CInput, CButton } from "_components/controls";
+import { CButton } from "_components/controls";
 import { CActionGroup } from "_components/others";
-
-import { filter } from "src/utils/funcs";
-import { Magnifying } from "_assets/icons";
-import { ERROR_MESSAGE } from "src/configs/constant";
 
 export default ({
   status,

@@ -14,6 +14,7 @@ import { getAll } from "_common/queries-fn/material.query";
 import { create, update, getByCode, remove } from "src/apis/material.api";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
+import { exportExcel } from "src/apis/material_industry.api";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
@@ -27,7 +28,7 @@ const MaterialList = () => {
 
   const [filter, setFilter] = useState({});
 
-  const { data, set, refetch } = getAll(filter, isLoading);
+  const { data, isLoading: loading, set, refetch } = getAll(filter, isLoading);
 
   const [status, setStatus] = useState(false);
 
@@ -95,6 +96,10 @@ const MaterialList = () => {
       refetch();
     }
   };
+
+  const onExport = () => {
+    exportExcel(filter);
+  };
   //#endregion
 
   useEffect(() => {
@@ -113,9 +118,11 @@ const MaterialList = () => {
             onEdit={onEdit}
             onRemove={onRemove}
             onSave={onSave}
+            onExport={onExport}
           />
         </CCardBody>
       </CCard>
+
       <CRow>
         <CCol
           xs="12"
@@ -123,6 +130,7 @@ const MaterialList = () => {
           md={status > 1 ? 5 : 12}
           lg={status > 1 ? 5 : 12}
           xl={status > 1 ? 5 : 12}
+          className={classNames(status && "d-none")}
         >
           <CCard>
             <CCardHeader>
@@ -133,18 +141,12 @@ const MaterialList = () => {
                 onSelect={onSelect}
                 isSelectAll={isSelectAll}
                 data={data}
+                loading={loading}
               />
             </CCardBody>
           </CCard>
         </CCol>
-        <CCol
-          xs="12"
-          sm="12"
-          md={status > 1 && 7}
-          lg={status > 1 && 7}
-          xl={status > 1 && 7}
-          className={classNames(!status && "d-none")}
-        >
+        <CCol xs="12" className={classNames(!status && "d-none")}>
           <CCard>
             <CCardBody className="bg-light-blue">
               <Form ref={ref} />

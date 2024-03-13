@@ -65,10 +65,17 @@ const MaterialIndustryList = () => {
   const onEdit = async () => {
     onStatusChange(3);
 
-    // data return get one is array
-    const res = await getByCode(selected[0].code);
+    if (selected[0]) {
+      const editData = {
+        code: selected[0]?.code,
+        name: selected[0]?.name,
+        status: !!selected[0]?.status,
+        acronym: selected[0]?.acronym,
+        note: selected[0]?.note,
+      };
 
-    if (res[0]) ref.current.clear(res[0]);
+      ref.current.clear(editData);
+    }
   };
 
   const onSearch = (where) => {
@@ -77,9 +84,16 @@ const MaterialIndustryList = () => {
 
   const onSave = () => {
     ref.current.handleSubmit(
-      async (d) => {
-        const func = status === 3 ? update : create;
-        const res = await func(d);
+      async (values) => {
+        const body = { ...values, status: Number(values?.status) };
+
+        let res = null;
+
+        if (status === 3) {
+          res = await update(selected[0]?.id, body);
+        } else {
+          res = await create(body);
+        }
 
         if (isSuccess(res)) {
           refetch();

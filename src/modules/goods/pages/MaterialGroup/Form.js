@@ -26,7 +26,7 @@ export default forwardRef(({}, ref) => {
             <CCol xl="5" style={{ minWidth: "200px" }}>
               <Controller
                 control={control}
-                name="code"
+                name="nganh_code"
                 rules={{ required: true }}
                 render={({ field }) => (
                   <CInput label="Mã Ngành NVL" {...field} required />
@@ -36,7 +36,7 @@ export default forwardRef(({}, ref) => {
             <CCol xl="7" style={{ minWidth: "250px" }}>
               <Controller
                 control={control}
-                name="name"
+                name="nganh_name"
                 rules={{ required: true }}
                 render={({ field }) => (
                   <CInput label="Tên Ngành NVL" {...field} required />
@@ -46,10 +46,30 @@ export default forwardRef(({}, ref) => {
             <CCol xl="5" style={{ minWidth: "200px" }}>
               <Controller
                 control={control}
+                name="code"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <CInput label="Mã Nhóm NVL" {...field} required />
+                )}
+              />
+            </CCol>
+            <CCol xl="7" style={{ minWidth: "250px" }}>
+              <Controller
+                control={control}
+                name="name"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <CInput label="Tên Nhóm NVL" {...field} required />
+                )}
+              />
+            </CCol>
+            <CCol xl="5" style={{ minWidth: "200px" }}>
+              <Controller
+                control={control}
                 name="acronym"
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <CInput label="Viết tắt Ngành NVL" {...field} required />
+                  <CInput label="Viết tắt Nhóm NVL" {...field} required />
                 )}
               />
             </CCol>

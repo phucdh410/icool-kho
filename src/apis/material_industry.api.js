@@ -1,4 +1,4 @@
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
+import { map, post, FORM_HEADER_ENCODED, put } from "src/utils/axios";
 
 import { MATERIAL_INDUSTRY } from "./_constants";
 
@@ -13,23 +13,16 @@ export const getAll = async (params) =>
 export const getByCode = async (code) =>
   await map().get(`${MATERIAL_INDUSTRY.getByCode}/${code}`);
 
-export const create = async ({ code, name }) => {
-  const params = new URLSearchParams();
-
-  params.append("code", code);
-  params.append("name", name);
-
-  return await post(MATERIAL_INDUSTRY.create, params, FORM_HEADER_ENCODED);
+export const create = async (body) => {
+  return await post(MATERIAL_INDUSTRY.create, body, FORM_HEADER_ENCODED);
 };
 
-export const update = async ({ code, name, active }) => {
-  const params = new URLSearchParams();
-
-  params.append("code", code);
-  params.append("name", name);
-  params.append("active", active);
-
-  return await post(MATERIAL_INDUSTRY.update, params, FORM_HEADER_ENCODED);
+export const update = async (id, body) => {
+  return await put(
+    `${MATERIAL_INDUSTRY.update}/${id}`,
+    body,
+    FORM_HEADER_ENCODED
+  );
 };
 
 export const remove = async (codes) => {

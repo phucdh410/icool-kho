@@ -197,7 +197,7 @@ export const MATERIAL_INDUSTRY = {
   getByCode: `${api}/industries/getByCode`,
   search: `${api}/industries/search`,
   create: `${api}/industries/create`,
-  update: `${api}/industries/update`,
+  update: `${api}/industries/updateById`,
   delete: `${api}/industries/delete`,
   exportExcel: `${api}/industries/export`,
 };
