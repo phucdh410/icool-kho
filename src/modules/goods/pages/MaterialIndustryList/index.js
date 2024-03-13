@@ -10,11 +10,16 @@ import Search from "./Search";
 import Table from "./Table";
 import Form from "./Form";
 
-import { getAll } from "_common/queries-fn/material.query";
-import { create, update, getByCode, remove } from "src/apis/material.api";
+import { getAll } from "_common/queries-fn/material-industry.query";
+import {
+  create,
+  update,
+  getByCode,
+  remove,
+  exportExcel,
+} from "src/apis/material_industry.api";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
-import { MOCK_DATA } from "./mock";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
@@ -26,11 +31,11 @@ const MaterialIndustryList = () => {
   //#region Data
   const isLoading = useSelector(selectIsLoading);
 
+  const [status, setStatus] = useState(0);
+
   const [filter, setFilter] = useState({});
 
-  const { data, set, refetch } = getAll(filter, isLoading);
-
-  const [status, setStatus] = useState(false);
+  const { data, isLoading: loading, refetch, set } = getAll(filter, isLoading);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.check) ?? false,
@@ -96,6 +101,10 @@ const MaterialIndustryList = () => {
       refetch();
     }
   };
+
+  const onExport = () => {
+    exportExcel(filter);
+  };
   //#endregion
 
   useEffect(() => {
@@ -114,9 +123,11 @@ const MaterialIndustryList = () => {
             onEdit={onEdit}
             onRemove={onRemove}
             onSave={onSave}
+            onExport={onExport}
           />
         </CCardBody>
       </CCard>
+
       <CRow>
         <CCol
           xs="12"
@@ -133,7 +144,8 @@ const MaterialIndustryList = () => {
               <Table
                 onSelect={onSelect}
                 isSelectAll={isSelectAll}
-                data={MOCK_DATA || data}
+                data={data}
+                loading={loading}
               />
             </CCardBody>
           </CCard>

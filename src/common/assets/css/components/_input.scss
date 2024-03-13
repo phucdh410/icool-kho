@@ -1,5 +1,5 @@
 .was-validated .form-control:invalid,
-html:not([dir=rtl]) .form-control.is-invalid {
+html:not([dir="rtl"]) .form-control.is-invalid {
   padding-right: calc(1em + 0.75rem);
   background: none;
 }
@@ -7,24 +7,24 @@ html:not([dir=rtl]) .form-control.is-invalid {
 .c-input {
   input {
     &::placeholder {
-      color: hsl(0, 0%, 20%);
+      color: hsl(0, 0%, 70%);
     }
 
     &:read-only {
       padding-right: 12px !important;
     }
 
-    &:not([disabled])[type='text'],
-    &[type='text'] {
+    &:not([disabled])[type="text"],
+    &[type="text"] {
       padding-right: 2rem;
     }
 
-    &[type='password']::-ms-reveal {
+    &[type="password"]::-ms-reveal {
       display: none;
     }
 
     &.is-invalid {
-      &~.extends {
+      & ~ .extends {
         svg {
           color: #e55353;
         }
@@ -54,7 +54,7 @@ html:not([dir=rtl]) .form-control.is-invalid {
   }
 
   &.is-error {
-    input:not([value='']).is-invalid {
+    input:not([value=""]).is-invalid {
       background: none;
     }
   }

@@ -10,14 +10,15 @@ import CSelectMulti from "./CSelectMulti";
 import CTextarea from "./CTextarea";
 
 export {
-	CButton,
-	CCheckbox,
-	CDate,
-	CDualListBox,
-	CFile,
-	CInput,
-	CNumber,
-	CSelect,
-	CSelectMulti,
-	CTextarea,
+  CButton,
+  CCheckbox,
+  CDate,
+  CDualListBox,
+  CFile,
+  CInput,
+  CNumber,
+  CSelect,
+  CSelectMulti,
+  CTextarea,
 };
+export * from "./CSwitch";

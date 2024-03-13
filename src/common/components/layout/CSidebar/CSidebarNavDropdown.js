@@ -29,13 +29,13 @@ const SidebarNavDropdown = ({ children, childrens, required, ...rest }) => {
   const canAccess = useMemo(
     () =>
       required?.some(({ permission, code, stores }) => {
-        console.log(
-          "canAccess",
-          permission,
-          code,
-          PERMISSION_VALUE.READ,
-          ENTITY_GROUP_CODE.ALL
-        );
+        // console.log(
+        //   "canAccess",
+        //   permission,
+        //   code,
+        //   PERMISSION_VALUE.READ,
+        //   ENTITY_GROUP_CODE.ALL
+        // );
         if (
           ability.can(
             permission || PERMISSION_VALUE.READ,

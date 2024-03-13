@@ -192,6 +192,17 @@ export const GOOD = {
 };
 
 // Nhóm Nguyên Vật liệu
+export const MATERIAL_INDUSTRY = {
+  getAll: `${api}/industries`,
+  getByCode: `${api}/industries/getByCode`,
+  search: `${api}/industries/search`,
+  create: `${api}/industries/create`,
+  update: `${api}/industries/update`,
+  delete: `${api}/industries/delete`,
+  exportExcel: `${api}/industries/export`,
+};
+
+// Nhóm Nguyên Vật liệu
 export const MATERIAL_GROUP = {
   getAll: `${api}/material_groups/search`,
   getForRole: `${api}/material_groups`,

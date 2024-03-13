@@ -7,15 +7,15 @@ body {
 
 .min-vh {
   &-25 {
-    min-height: 25vh
+    min-height: 25vh;
   }
 
   &-50 {
-    min-height: 50vh
+    min-height: 50vh;
   }
 
   &-75 {
-    min-height: 75vh
+    min-height: 75vh;
   }
 }
 
@@ -25,41 +25,41 @@ body {
 
 .text {
   &-black {
-    color: $color-black !important
+    color: $color-black !important;
   }
 
   &-gray {
-    color: $color-gray !important
+    color: $color-gray !important;
   }
 
   &-blue {
-    color: $color-blue !important
+    color: $color-blue !important;
   }
 
   &-icool-blue {
-    color: $color-blue-icool !important
+    color: $color-blue-icool !important;
   }
 
   &-success {
-    color: $color-success !important
+    color: $color-success !important;
   }
 
   &-warning {
-    color: $color-warning !important
+    color: $color-warning !important;
   }
 
   &-danger {
-    color: $color-red !important
+    color: $color-red !important;
   }
 
   &-info {
-    color: $color-info !important
+    color: $color-info !important;
   }
 }
 
 .bg {
   &-light-blue {
-    background-color: $color-light-blue-table
+    background-color: $color-light-blue-table;
   }
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 .logo-sm::after {
-  content: 'logo';
+  content: "logo";
   font-size: 24px;
 }
 

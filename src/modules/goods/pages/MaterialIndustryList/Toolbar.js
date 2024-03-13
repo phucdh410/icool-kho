@@ -12,9 +12,9 @@ export default ({
   onRemove,
   onPrint,
   canSave,
+  onExport,
 }) => {
   //#region Event
-
   const onClick = (state) => {
     switch (state) {
       case "add":
@@ -46,13 +46,12 @@ export default ({
             canAdd={status !== 3}
             canSave={canSave}
             canEdit={selectedNo === 1 && status !== 2}
-            canRemove={!!selectedNo && !status}
+            canRemove={selectedNo === 1 && status !== 2}
+            // canRemove={!!selectedNo && !status}
           />
           <CButton
             className="btn-fill"
-            onClick={() => {
-              console.log("Xuất excel ngành vật liệu");
-            }}
+            onClick={onExport}
             style={{ marginLeft: "auto" }}
           >
             Xuất File Excel
