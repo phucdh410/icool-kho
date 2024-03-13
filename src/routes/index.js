@@ -15,6 +15,7 @@ import { Profile as MProfile } from "_modules/auth/pages";
 import {
   MaterialGroup,
   Material as MaterialComponent,
+  MaterialIndustryList,
 } from "_modules/goods/pages";
 
 import {
@@ -244,6 +245,11 @@ const routes = [
   },
   //#endregion
   //#region MATERIALS
+  {
+    ...Material.Industry,
+    exact: true,
+    component: MaterialIndustryList,
+  },
   {
     ...Material.Category,
     exact: true,

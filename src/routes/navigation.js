@@ -376,6 +376,13 @@ const navigation = [
     _children: [
       {
         _tag: "CSidebarNavItem",
+        name: Material.Industry.name,
+        to: Material.Industry.path,
+        childrens: [Material.Industry.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
         name: Material.Category.name,
         to: Material.Category.path,
         childrens: [Material.Category.path],

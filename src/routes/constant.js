@@ -368,6 +368,15 @@ export const Material = {
     name: "DS nhóm nguyên vật liệu",
     path: "/material/category",
   },
+  Industry: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS ngành NVL",
+    path: "/material/industry",
+  },
 };
 
 export const Good = {
