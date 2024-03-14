@@ -148,3 +148,8 @@ export const SUCCESS_MESSAGE = {
     UPDATE: "Cập nhật phân quyền thành công",
   },
 };
+
+export const DATE_MANAGEMENT_OPTIONS = [
+  { value: 0, label: "Không" },
+  { value: 1, label: "Có" },
+];

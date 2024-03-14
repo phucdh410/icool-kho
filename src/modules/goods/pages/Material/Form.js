@@ -1,6 +1,6 @@
 import styles from "../../assets/material.module.scss";
 
-import React, { forwardRef, useEffect, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 
 import classNames from "classnames";
 
@@ -11,13 +11,38 @@ import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 import { CInput, CCheckbox, CSelect, CNumber } from "_components/controls";
 
 import { getAll } from "../../queries-fn/material-group.query";
+import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
+import { CodeMaterialInput } from "./CodeMaterialInput";
+
+export const NGANH_OPTIONS = [
+  { value: "1", label: "Thức ăn - Thức uống", acronym: "TATU" },
+  { value: "2", label: "Đồ gia dụng", acronym: "DGD" },
+  { value: "3", label: "Thiết bị điện tử", acronym: "TBDT" },
+  { value: "4", label: "Nhu yếu phẩm", acronym: "NYP" },
+];
+
+export const NHOM_OPTIONS = [
+  { value: "1", label: "Thức ăn", acronym: "TA" },
+  { value: "2", label: "Thức uống", acronym: "TU" },
+  { value: "3", label: "Rau củ", acronym: "RAU" },
+  { value: "4", label: "Khăn ướt", acronym: "KU" },
+];
+
+export const LOAI_OPTIONS = [
+  { value: "1", label: "Gia vị", acronym: "GV" },
+  { value: "2", label: "Giải khát", acronym: "GK" },
+];
+
+export const VI_TRI_OPTIONS = [
+  { value: "1", label: "Kho Mát", acronym: "MAT" },
+  { value: "2", label: "Kho Đông", acronym: "DONG" },
+  { value: "3", label: "Kho Lạnh", acronym: "LANH" },
+];
 
 export default forwardRef(({}, ref) => {
+  //#region Data
   const { control, reset, setValue, watch, handleSubmit } = useForm();
-
-  const { data: groups } = getAll({});
-
-  const onGroupChange = ({ value }) => setValue("group_id", value);
+  //#endregion
 
   useImperativeHandle(
     ref,
@@ -28,14 +53,15 @@ export default forwardRef(({}, ref) => {
     []
   );
 
+  //#region Render
   return (
     <>
       <CCard>
         <CCardBody>
           <CRow>
-            <CCol xs="7">
+            <CCol xs="12">
               <CRow>
-                <CCol>
+                <CCol style={{ minWidth: 250 }}>
                   <Controller
                     control={control}
                     name="nganh"
@@ -43,7 +69,7 @@ export default forwardRef(({}, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Ngành NVL"
-                        options={[]}
+                        options={NGANH_OPTIONS}
                         {...field}
                         required
                       />
@@ -58,7 +84,7 @@ export default forwardRef(({}, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Nhóm NVL"
-                        options={[]}
+                        options={NHOM_OPTIONS}
                         {...field}
                         required
                       />
@@ -73,7 +99,7 @@ export default forwardRef(({}, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Loại NVL"
-                        options={[]}
+                        options={LOAI_OPTIONS}
                         {...field}
                         required
                       />
@@ -88,7 +114,7 @@ export default forwardRef(({}, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Vị trí NVL"
-                        options={[]}
+                        options={VI_TRI_OPTIONS}
                         {...field}
                         required
                       />
@@ -103,7 +129,7 @@ export default forwardRef(({}, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Quản lý date"
-                        options={[]}
+                        options={DATE_MANAGEMENT_OPTIONS}
                         {...field}
                         required
                       />
@@ -111,8 +137,25 @@ export default forwardRef(({}, ref) => {
                   />
                 </CCol>
               </CRow>
+              <CRow style={{ marginTop: "10px" }}>
+                <CCol xs="4">
+                  <CodeMaterialInput control={control} />
+                  <i style={{ color: "red", fontWeight: 500, fontSize: 16 }}>
+                    *Số 0001 chỉ là ví dụ, số mã NVL sẽ được tạo tự động khi lưu
+                    vào hệ thống
+                  </i>
+                </CCol>
+                <CCol xs="4"></CCol>
+              </CRow>
             </CCol>
-            <CCol xs="5">
+          </CRow>
+        </CCardBody>
+      </CCard>
+
+      <CCard>
+        <CCardBody>
+          <CRow>
+            <CCol xs="12">
               <CRow>
                 <CCol>
                   <Controller
@@ -146,10 +189,10 @@ export default forwardRef(({}, ref) => {
                 </CCol>
               </CRow>
             </CCol>
-            <CCol xl="12" style={{ maxWidth: "600px" }}>
+            <CCol xl="12" style={{ maxWidth: "800px" }}>
               <Controller
                 control={control}
-                name="code"
+                name="note"
                 render={({ field }) => <CInput label="Ghi chú" {...field} />}
               />
             </CCol>
@@ -356,4 +399,5 @@ export default forwardRef(({}, ref) => {
       </CRow>
     </>
   );
+  //#endregion
 });

@@ -109,7 +109,7 @@ const MaterialIndustryList = () => {
   };
 
   const onRemove = async () => {
-    const res = await remove(selected.map((c) => c.code));
+    const res = await remove(selected[0]?.id);
 
     if (isSuccess(res)) {
       refetch();
