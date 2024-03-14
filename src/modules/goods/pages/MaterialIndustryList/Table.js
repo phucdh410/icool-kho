@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
+import { CTable, CPagination, CTag } from "_components/others";
 
 export default ({ isSelectAll, data, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
@@ -61,6 +61,14 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       </td>
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,
+    status: ({ status }) => (
+      <td>
+        <CTag
+          label={status ? "Hoạt động" : "Ẩn"}
+          color={!status && "#FF8080"}
+        />
+      </td>
+    ),
   };
 
   return (

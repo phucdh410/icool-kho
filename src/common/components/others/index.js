@@ -13,11 +13,12 @@ import CPrintComponent from "./CPrintComponent";
 import CTable from "./CTable";
 
 export {
-	CDialog,
-	CImagePreview,
-	CLoading,
-	CActionGroup,
-	CPagination,
-	CPrintComponent,
-	CTable,
+  CDialog,
+  CImagePreview,
+  CLoading,
+  CActionGroup,
+  CPagination,
+  CPrintComponent,
+  CTable,
 };
+export * from "./CTag";

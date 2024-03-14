@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { CRow, CCol } from "@coreui/react";
-import { STATUS_OPTIONS } from "src/configs/constant";
+import { GROUP_NVL_STATUS_OPTIONS, STATUS_OPTIONS } from "src/configs/constant";
 
 import { CInput, CSelect } from "_components/controls";
 
@@ -15,7 +15,7 @@ export default ({ onSearch }) => {
     clearTimeout(_timeout);
     _timeout = setTimeout(() => onSearch(getValues()), 500);
     return () => clearTimeout(_timeout);
-  }, [watch("code"), watch("name")]);
+  }, [watch("status"), watch("code"), watch("name")]);
 
   return (
     <CRow>
@@ -32,7 +32,7 @@ export default ({ onSearch }) => {
             <CSelect
               label="Trạng thái"
               placeholder="Tất cả"
-              options={STATUS_OPTIONS}
+              options={GROUP_NVL_STATUS_OPTIONS}
               {...field}
               onChange={({ value }) => field.onChange(value)}
             ></CSelect>

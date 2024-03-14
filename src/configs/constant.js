@@ -149,6 +149,12 @@ export const SUCCESS_MESSAGE = {
   },
 };
 
+export const GROUP_NVL_STATUS_OPTIONS = [
+  { value: "", label: "Tất cả" },
+  { value: 0, label: "Ẩn" },
+  { value: 1, label: "Hoạt động" },
+];
+
 export const DATE_MANAGEMENT_OPTIONS = [
   { value: 0, label: "Không" },
   { value: 1, label: "Có" },
