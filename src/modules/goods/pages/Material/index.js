@@ -149,7 +149,7 @@ const MaterialList = () => {
         <CCol xs="12" className={classNames(!status && "d-none")}>
           <CCard>
             <CCardBody className="bg-light-blue">
-              <Form ref={ref} />
+              <Form isEdit={status === 3} ref={ref} />
             </CCardBody>
           </CCard>
         </CCol>

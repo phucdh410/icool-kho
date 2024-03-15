@@ -10,9 +10,10 @@ import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 
 import { CInput, CCheckbox, CSelect, CNumber } from "_components/controls";
 
-import { getAll } from "../../queries-fn/material-group.query";
 import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
 import { CodeMaterialInput } from "./CodeMaterialInput";
+import { NameMaterialInput } from "./NameMaterialInput";
+import { FormTable } from "./FormTable";
 
 export const NGANH_OPTIONS = [
   { value: "1", label: "Thức ăn - Thức uống", acronym: "TATU" },
@@ -39,7 +40,7 @@ export const VI_TRI_OPTIONS = [
   { value: "3", label: "Kho Lạnh", acronym: "LANH" },
 ];
 
-export default forwardRef(({}, ref) => {
+export default forwardRef(({ isEdit = false }, ref) => {
   //#region Data
   const { control, reset, setValue, watch, handleSubmit } = useForm();
   //#endregion
@@ -59,6 +60,11 @@ export default forwardRef(({}, ref) => {
       <CCard>
         <CCardBody>
           <CRow>
+            <CCol xs="12">
+              <h5 className="text-icool-blue text-uppercase">
+                Mã nguyên vật liệu
+              </h5>
+            </CCol>
             <CCol xs="12">
               <CRow>
                 <CCol style={{ minWidth: 250 }}>
@@ -156,6 +162,11 @@ export default forwardRef(({}, ref) => {
         <CCardBody>
           <CRow>
             <CCol xs="12">
+              <h5 className="text-icool-blue text-uppercase">
+                Tên nguyên vật liệu
+              </h5>
+            </CCol>
+            <CCol xs="12">
               <CRow>
                 <CCol>
                   <Controller
@@ -188,24 +199,42 @@ export default forwardRef(({}, ref) => {
                   />
                 </CCol>
               </CRow>
-            </CCol>
-            <CCol xl="12" style={{ maxWidth: "800px" }}>
-              <Controller
-                control={control}
-                name="note"
-                render={({ field }) => <CInput label="Ghi chú" {...field} />}
-              />
+              <CRow style={{ marginTop: "10px" }}>
+                <CCol xs="4">
+                  <NameMaterialInput control={control} />
+                </CCol>
+                <CCol xs="4">
+                  <Controller
+                    control={control}
+                    name="note"
+                    render={({ field }) => (
+                      <CInput label="Ghi chú" {...field} />
+                    )}
+                  />
+                </CCol>
+              </CRow>
             </CCol>
           </CRow>
         </CCardBody>
       </CCard>
 
-      <div className={classNames(styles["checkbox_group"])}>
+      <div
+        className={classNames(styles["checkbox_group"])}
+        style={{ marginBlock: "16px" }}
+      >
         <div className="mr-4">
-          <CCheckbox
-            label="Ngưng cung cấp"
-            className="text-black font-weight-bold"
-          />
+          <Controller
+            name="stop"
+            control={control}
+            render={({ field }) => (
+              <CCheckbox
+                label="Ngưng cung cấp"
+                className="text-black font-weight-bold"
+                disabled={!isEdit}
+                {...field}
+              />
+            )}
+          ></Controller>
         </div>
         <div className="mr-4">
           <Controller
@@ -221,9 +250,16 @@ export default forwardRef(({}, ref) => {
           />
         </div>
         <div className="mr-4">
-          <CCheckbox
-            label="Nhập về trung tâm"
-            className="text-black font-weight-bold"
+          <Controller
+            name="center"
+            control={control}
+            render={({ field }) => (
+              <CCheckbox
+                label="Nhập về bếp trung tâm"
+                className="text-black font-weight-bold"
+                {...field}
+              />
+            )}
           />
         </div>
       </div>
@@ -268,7 +304,13 @@ export default forwardRef(({}, ref) => {
                       control={control}
                       name="wareUnit"
                       rules={{ required: true }}
-                      render={({ field }) => <CInput required {...field} />}
+                      render={({ field }) => (
+                        <CInput
+                          required
+                          {...field}
+                          style={{ justifySelf: "start" }}
+                        />
+                      )}
                     />
                     <div className={classNames(styles["equal_sign"])}>
                       <span> = </span>
@@ -379,11 +421,17 @@ export default forwardRef(({}, ref) => {
         </CCardBody>
       </CCard>
 
-      <CCard>
-        <CCardBody className="p-0">Table</CCardBody>
+      <CCard style={{ marginBottom: "100px" }}>
+        <CCardBody>
+          <CRow>
+            <CCol xs="12" md="8" lg="7" xl="6" xxl="5">
+              <FormTable />
+            </CCol>
+          </CRow>
+        </CCardBody>
       </CCard>
 
-      <CRow>
+      {/* <CRow>
         <CCol
           xs="12"
           className="d-flex justify-content-between"
@@ -396,7 +444,7 @@ export default forwardRef(({}, ref) => {
             <CSelect className="m-0" />
           </div>
         </CCol>
-      </CRow>
+      </CRow> */}
     </>
   );
   //#endregion
