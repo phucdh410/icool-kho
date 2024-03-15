@@ -211,6 +211,7 @@ export const MATERIAL_GROUP = {
   create: `${api}/material_groups/create`,
   update: `${api}/material_groups/update`,
   delete: `${api}/material_groups/delete`,
+  exportExcel: `${api}/material_groups/export`,
 };
 
 // Nguyên vật liệu

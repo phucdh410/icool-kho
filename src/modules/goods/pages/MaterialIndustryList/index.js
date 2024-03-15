@@ -14,7 +14,6 @@ import { getAll } from "_common/queries-fn/material-industry.query";
 import {
   create,
   update,
-  getByCode,
   remove,
   exportExcel,
 } from "src/apis/material_industry.api";

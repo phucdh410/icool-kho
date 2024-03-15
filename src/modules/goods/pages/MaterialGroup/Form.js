@@ -1,13 +1,37 @@
-import { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle, useMemo } from "react";
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useController, useForm } from "react-hook-form";
 
 import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 
-import { CInput, CSwitch } from "_components/controls";
+import { CInput, CSelect, CSwitch } from "_components/controls";
+import { getAll } from "_common/queries-fn/material-industry.query";
 
 export default forwardRef(({}, ref) => {
+  //#region Data
   const { control, reset, handleSubmit } = useForm();
+
+  const {
+    field: { onChange: changeCode },
+  } = useController({ control, name: "industryCode" });
+  const {
+    field: { onChange: changeName },
+  } = useController({ control, name: "industryName" });
+
+  const { data } = getAll({ name: "", code: "" });
+
+  const industryCodes = useMemo(() => {
+    if (data && data?.length > 0) {
+      return data.map((e) => ({ value: e?.code, label: e?.code }));
+    } else return [];
+  }, [data]);
+
+  const industryNames = useMemo(() => {
+    if (data && data?.length > 0) {
+      return data.map((e) => ({ value: e?.code, label: e?.name }));
+    } else return [];
+  }, [data]);
+  //#endregion
 
   useImperativeHandle(
     ref,
@@ -18,6 +42,7 @@ export default forwardRef(({}, ref) => {
     []
   );
 
+  //#region Render
   return (
     <>
       <CCard>
@@ -26,20 +51,38 @@ export default forwardRef(({}, ref) => {
             <CCol xl="5" style={{ minWidth: "200px" }}>
               <Controller
                 control={control}
-                name="nganh_code"
+                name="industryCode"
                 rules={{ required: true }}
-                render={({ field }) => (
-                  <CInput label="Mã Ngành NVL" {...field} required />
+                render={({ field: { onChange, ..._field } }) => (
+                  <CSelect
+                    label="Mã Ngành NVL"
+                    options={industryCodes}
+                    onChange={(selectedOpt) => {
+                      onChange(selectedOpt?.value);
+                      changeName(selectedOpt?.value);
+                    }}
+                    {..._field}
+                    required
+                  />
                 )}
               />
             </CCol>
             <CCol xl="7" style={{ minWidth: "250px" }}>
               <Controller
                 control={control}
-                name="nganh_name"
+                name="industryName"
                 rules={{ required: true }}
-                render={({ field }) => (
-                  <CInput label="Tên Ngành NVL" {...field} required />
+                render={({ field: { onChange, ..._field } }) => (
+                  <CSelect
+                    label="Tên Ngành NVL"
+                    options={industryNames}
+                    onChange={(selectedOpt) => {
+                      onChange(selectedOpt?.value);
+                      changeCode(selectedOpt?.value);
+                    }}
+                    {..._field}
+                    required
+                  />
                 )}
               />
             </CCol>
@@ -83,7 +126,7 @@ export default forwardRef(({}, ref) => {
             <CCol xl="5" style={{ minWidth: "200px" }}>
               <Controller
                 control={control}
-                name="status"
+                name="active"
                 render={({ field }) => (
                   <CSwitch label="Trạng thái" {...field} />
                 )}
@@ -94,4 +137,5 @@ export default forwardRef(({}, ref) => {
       </CCard>
     </>
   );
+  //#endregion
 });

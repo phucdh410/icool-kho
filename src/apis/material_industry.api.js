@@ -47,7 +47,6 @@ export const exportExcel = async (params) => {
     responseType: "blob",
     headers: FORM_HEADER_ENCODED,
   }).then((res) => {
-    console.log(res);
     return fileDownload(res.data, "report.xlsx");
   });
 };

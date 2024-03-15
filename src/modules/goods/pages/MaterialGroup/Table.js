@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
+import { CTable, CPagination, CTag } from "_components/others";
 
 const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
@@ -33,17 +33,17 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
       _style: { minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "code_nganh",
+      key: "industryCode",
       label: "Mã Ngành NVL",
       _style: { minWidth: "175px" },
     },
     {
-      key: "name_nganh",
+      key: "industryName",
       label: "Tên Ngành NVL",
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "created_by",
+      key: "createdBy",
       label: "Người đề xuất",
       _style: { minWidth: "150px" },
     },
@@ -53,7 +53,7 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
       _style: { width: "140px", minWidth: "140px" },
     },
     {
-      key: "status",
+      key: "active",
       label: "Trạng Thái",
       _style: { width: "auto", minWidth: "200px" },
     },
@@ -72,6 +72,14 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
     ),
     code: ({ code }) => <td>{code}</td>,
     name: ({ name }) => <td className="text-left">{name}</td>,
+    active: ({ active }) => (
+      <td>
+        <CTag
+          label={active ? "Hoạt động" : "Ẩn"}
+          color={!active && "#FF8080"}
+        />
+      </td>
+    ),
   };
 
   return (

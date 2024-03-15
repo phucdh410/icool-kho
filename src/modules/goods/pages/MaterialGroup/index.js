@@ -10,8 +10,15 @@ import Table from "./Table";
 import Form from "./Form";
 
 import { getAll } from "_common/queries-fn/material-group.query";
-import { create, remove, update } from "src/apis/material_group.api";
+import {
+  create,
+  exportExcel,
+  remove,
+  update,
+} from "src/apis/material_group.api";
 import classNames from "classnames";
+import { isSuccess } from "src/utils/funcs";
+import { ERROR_MESSAGE } from "src/configs/constant";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
@@ -57,10 +64,19 @@ const MaterialGroupList = () => {
   const onEdit = async () => {
     onStatusChange(3);
 
-    // data return get one is array
-    const res = await getByCode(selected[0].code);
+    if (selected[0]) {
+      const editData = {
+        code: selected[0]?.code,
+        name: selected[0]?.name,
+        active: !!selected[0]?.active,
+        acronym: selected[0]?.acronym,
+        note: selected[0]?.note,
+        industryCode: selected[0]?.industryCode,
+        industryName: selected[0]?.industryCode,
+      };
 
-    if (res[0]) ref.current.clear(res[0]);
+      ref.current.clear(editData);
+    }
   };
 
   const onSearch = (where) => {
