@@ -9,23 +9,24 @@ import Search from "./Search";
 import Table from "./Table";
 import Form from "./Form";
 
-import { getAll } from "_common/queries-fn/material-group.query";
+import { getAllMaterialTypes } from "_common/queries-fn/material-type.query";
 import {
-  create,
-  exportExcel,
-  remove,
-  update,
-} from "src/apis/material_group.api";
+  createMaterialType,
+  exportExcelMaterialType,
+  removeMaterialType,
+  updateMaterialType,
+} from "src/apis/material_type.api";
 import classNames from "classnames";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
+import { useQuery } from "react-query";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
   ({ isLoading }) => isLoading
 );
 
-const MaterialGroupList = () => {
+const MaterialType = () => {
   const ref = useRef();
   //#region Data
   const isLoading = useSelector(selectIsLoading);
@@ -34,7 +35,12 @@ const MaterialGroupList = () => {
 
   const [filter, setFilter] = useState({});
 
-  const { data, isLoading: loading, refetch, set } = getAll(filter, isLoading);
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+    set,
+  } = getAllMaterialTypes(filter, isLoading);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.check) ?? false,
@@ -45,7 +51,7 @@ const MaterialGroupList = () => {
   //#endregion
 
   //#region Events
-  const onSelect = (code, value) => {
+  const onSelect = (code, value) =>
     set(
       data && data?.length > 0
         ? data.map((d) =>
@@ -53,7 +59,6 @@ const MaterialGroupList = () => {
           )
         : []
     );
-  };
 
   const onStatusChange = useCallback(
     (_status) => setStatus(_status === status ? 0 : _status),
@@ -74,8 +79,8 @@ const MaterialGroupList = () => {
         active: !!selected[0]?.active,
         acronym: selected[0]?.acronym,
         note: selected[0]?.note,
-        industryCode: selected[0]?.industryCode,
-        industryName: selected[0]?.industryCode,
+        materialGroupCode: selected[0]?.materialGroupCode,
+        materialGroupName: selected[0]?.materialGroupCode,
       };
 
       ref.current.clear(editData);
@@ -89,8 +94,11 @@ const MaterialGroupList = () => {
   const onSave = () => {
     ref.current.handleSubmit(
       async (d) => {
-        const func = status === 3 ? update : create;
-        const res = await func(d);
+        const { active, ..._params } = d;
+        _params.active = Number(active) || 0;
+
+        const func = status === 3 ? updateMaterialType : createMaterialType;
+        const res = await func(_params);
 
         if (isSuccess(res)) {
           refetch();
@@ -106,7 +114,7 @@ const MaterialGroupList = () => {
   };
 
   const onRemove = async () => {
-    const res = await remove(selected.map((c) => c.code));
+    const res = await removeMaterialType(selected.map((c) => c.code));
 
     if (isSuccess(res)) {
       refetch();
@@ -114,7 +122,7 @@ const MaterialGroupList = () => {
   };
 
   const onExport = () => {
-    exportExcel(filter);
+    exportExcelMaterialType(filter);
   };
   //#endregion
 
@@ -181,4 +189,4 @@ const MaterialGroupList = () => {
   );
 };
 
-export default MaterialGroupList;
+export default MaterialType;

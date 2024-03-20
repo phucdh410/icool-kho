@@ -17,6 +17,10 @@ export const CONFIGURATION = {
   removeCategories: `${api}/configuration/delete/WAREHOUSE_CATEGORIES`,
 };
 
+export const CONFIG = {
+  getConfigs: `${api}/warehouses/configs`,
+};
+
 // User
 export const USER = {
   getAll: `${api}/users/search`,
@@ -191,7 +195,7 @@ export const GOOD = {
   getAll: `${api}/goods`,
 };
 
-// Nhóm Nguyên Vật liệu
+// Ngành Nguyên Vật liệu
 export const MATERIAL_INDUSTRY = {
   getAll: `${api}/industries`,
   getByCode: `${api}/industries/getByCode`,
@@ -212,6 +216,15 @@ export const MATERIAL_GROUP = {
   update: `${api}/material_groups/update`,
   delete: `${api}/material_groups/delete`,
   exportExcel: `${api}/material_groups/export`,
+};
+
+// Loại Nguyên Vật liệu
+export const MATERIAL_TYPE = {
+  getAll: `${api}/material_types`,
+  create: `${api}/material_types/create`,
+  update: `${api}/material_types/update`,
+  delete: `${api}/material_types/delete`,
+  exportExcel: `${api}/material_types/export`,
 };
 
 // Nguyên vật liệu

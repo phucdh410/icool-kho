@@ -16,6 +16,7 @@ import {
   MaterialGroup,
   Material as MaterialComponent,
   MaterialIndustryList,
+  MaterialType,
 } from "_modules/goods/pages";
 
 import {
@@ -254,6 +255,11 @@ const routes = [
     ...Material.Category,
     exact: true,
     component: MaterialGroup,
+  },
+  {
+    ...Material.Type,
+    exact: true,
+    component: MaterialType,
   },
   {
     ...Material.List,

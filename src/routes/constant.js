@@ -374,8 +374,17 @@ export const Material = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "DS ngành NVL",
+    name: "DS ngành nguyên vật liệu",
     path: "/material/industry",
+  },
+  Type: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS loại nguyên vật liệu",
+    path: "/material/type",
   },
 };
 

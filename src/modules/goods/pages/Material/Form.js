@@ -1,6 +1,6 @@
 import styles from "../../assets/material.module.scss";
 
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, useMemo } from "react";
 
 import classNames from "classnames";
 
@@ -14,6 +14,8 @@ import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
 import { CodeMaterialInput } from "./CodeMaterialInput";
 import { NameMaterialInput } from "./NameMaterialInput";
 import { FormTable } from "./FormTable";
+import { useQuery } from "react-query";
+import { getConfigs } from "src/apis/config.api";
 
 export const NGANH_OPTIONS = [
   { value: "1", label: "Thức ăn - Thức uống", acronym: "TATU" },
@@ -42,7 +44,17 @@ export const VI_TRI_OPTIONS = [
 
 export default forwardRef(({ isEdit = false }, ref) => {
   //#region Data
-  const { control, reset, setValue, watch, handleSubmit } = useForm();
+  const { control, reset, watch, handleSubmit } = useForm();
+
+  const { data: response } = useQuery({
+    queryKey: ["configs"],
+    queryFn: () => getConfigs(),
+  });
+
+  const locations = useMemo(
+    () => response?.data?.material_locations || [],
+    [response]
+  );
   //#endregion
 
   useImperativeHandle(
@@ -120,7 +132,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     render={({ field }) => (
                       <CSelect
                         label="Vị trí NVL"
-                        options={VI_TRI_OPTIONS}
+                        options={locations}
                         {...field}
                         required
                       />

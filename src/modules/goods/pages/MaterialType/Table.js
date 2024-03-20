@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { CCheckbox } from "_components/controls";
 import { CTable, CPagination, CTag } from "_components/others";
 
-const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
+const MaterialTypeTable = ({ data, isSelectAll, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
   const onPaginationChange = useCallback(
@@ -24,22 +24,22 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
     },
     {
       key: "code",
-      label: "Mã Nhóm",
+      label: "Mã Loại",
       _style: { minWidth: "175px" },
     },
     {
       key: "name",
-      label: "Tên Nhóm",
+      label: "Tên Loại",
       _style: { minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "industryCode",
-      label: "Mã Ngành NVL",
+      key: "materialGroupCode",
+      label: "Mã Nhóm NVL",
       _style: { minWidth: "175px" },
     },
     {
-      key: "industryName",
-      label: "Tên Ngành NVL",
+      key: "materialGroupName",
+      label: "Tên Nhóm NVL",
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
@@ -72,8 +72,8 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
     ),
     code: ({ code }) => <td>{code}</td>,
     name: ({ name }) => <td className="text-left">{name}</td>,
-    industryName: ({ industryName }) => (
-      <td className="text-left">{industryName}</td>
+    materialGroupName: ({ materialGroupName }) => (
+      <td className="text-left">{materialGroupName}</td>
     ),
     active: ({ active }) => (
       <td>
@@ -106,4 +106,4 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
   );
 };
 
-export default MaterialGroupTable;
+export default MaterialTypeTable;
