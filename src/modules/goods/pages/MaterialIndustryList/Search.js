@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { CRow, CCol } from "@coreui/react";
-import { GROUP_NVL_STATUS_OPTIONS, STATUS_OPTIONS } from "src/configs/constant";
+import { GROUP_NVL_STATUS_OPTIONS } from "src/configs/constant";
 
 import { CInput, CSelect } from "_components/controls";
 
