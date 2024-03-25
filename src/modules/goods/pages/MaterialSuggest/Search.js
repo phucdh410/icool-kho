@@ -21,7 +21,7 @@ export default ({ onSearch }) => {
     <CRow>
       <CCol xs="12">
         <h5 className="text-icool-blue text-center">
-          DANH SÁCH NGUYÊN VẬT LIỆU
+          DANH SÁCH ĐỀ XUẤT NGUYÊN VẬT LIỆU
         </h5>
       </CCol>
       <CCol xs="12" sm="6" md="4" lg="4" xl="3" style={{ maxWidth: "250px" }}>

@@ -6,6 +6,14 @@ const MaterialGroup = lazy(() => import("./MaterialGroup"));
 
 const MaterialType = lazy(() => import("./MaterialType"));
 
+const MaterialSuggest = lazy(() => import("./MaterialSuggest"));
+
 const MaterialIndustryList = lazy(() => import("./MaterialIndustryList"));
 
-export { Material, MaterialGroup, MaterialType, MaterialIndustryList };
+export {
+  Material,
+  MaterialGroup,
+  MaterialType,
+  MaterialSuggest,
+  MaterialIndustryList,
+};

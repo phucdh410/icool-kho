@@ -6,9 +6,9 @@ export const CodeMaterialInput = ({ control }) => {
   //#region Data
   const nganhValue = useWatch({ control, name: "nganh" });
   const nhomValue = useWatch({ control, name: "nhom" });
-  const loaiValue = useWatch({ control, name: "loai" });
-  const vitriValue = useWatch({ control, name: "vi_tri" });
-  const qldateValue = useWatch({ control, name: "quan_ly_date" });
+  const loaiValue = useWatch({ control, name: "materialTypeCode" });
+  const vitriValue = useWatch({ control, name: "materialLocation" });
+  const qldateValue = useWatch({ control, name: "expired" });
 
   const {
     field: { onChange },

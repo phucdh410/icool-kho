@@ -19,7 +19,6 @@ import {
 import classNames from "classnames";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
-import { useQuery } from "react-query";
 
 const selectIsLoading = createSelector(
   (state) => state.config,

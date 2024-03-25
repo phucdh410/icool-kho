@@ -11,36 +11,17 @@ import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 import { CInput, CCheckbox, CSelect, CNumber } from "_components/controls";
 
 import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
-import { CodeMaterialInput } from "./CodeMaterialInput";
-import { NameMaterialInput } from "./NameMaterialInput";
-import { FormTable } from "./FormTable";
+
 import { useQuery } from "react-query";
 import { getConfigs } from "src/apis/config.api";
-
-export const NGANH_OPTIONS = [
-  { value: "1", label: "Thức ăn - Thức uống", acronym: "TATU" },
-  { value: "2", label: "Đồ gia dụng", acronym: "DGD" },
-  { value: "3", label: "Thiết bị điện tử", acronym: "TBDT" },
-  { value: "4", label: "Nhu yếu phẩm", acronym: "NYP" },
-];
-
-export const NHOM_OPTIONS = [
-  { value: "1", label: "Thức ăn", acronym: "TA" },
-  { value: "2", label: "Thức uống", acronym: "TU" },
-  { value: "3", label: "Rau củ", acronym: "RAU" },
-  { value: "4", label: "Khăn ướt", acronym: "KU" },
-];
-
-export const LOAI_OPTIONS = [
-  { value: "1", label: "Gia vị", acronym: "GV" },
-  { value: "2", label: "Giải khát", acronym: "GK" },
-];
-
-export const VI_TRI_OPTIONS = [
-  { value: "1", label: "Kho Mát", acronym: "MAT" },
-  { value: "2", label: "Kho Đông", acronym: "DONG" },
-  { value: "3", label: "Kho Lạnh", acronym: "LANH" },
-];
+import {
+  GroupInput,
+  IndustryInput,
+  TypeInput,
+  CodeMaterialInput,
+  NameMaterialInput,
+  FormTable,
+} from "./Inputs";
 
 export default forwardRef(({ isEdit = false }, ref) => {
   //#region Data
@@ -52,7 +33,12 @@ export default forwardRef(({ isEdit = false }, ref) => {
   });
 
   const locations = useMemo(
-    () => response?.data?.material_locations || [],
+    () =>
+      response?.data?.material_location.map((e) => ({
+        value: e?.key,
+        label: e?.label,
+        acronym: e.acronym,
+      })) || [],
     [response]
   );
   //#endregion
@@ -80,54 +66,18 @@ export default forwardRef(({ isEdit = false }, ref) => {
             <CCol xs="12">
               <CRow>
                 <CCol style={{ minWidth: 250 }}>
-                  <Controller
-                    control={control}
-                    name="nganh"
-                    rules={{ required: true }}
-                    render={({ field }) => (
-                      <CSelect
-                        label="Ngành NVL"
-                        options={NGANH_OPTIONS}
-                        {...field}
-                        required
-                      />
-                    )}
-                  />
+                  <IndustryInput control={control} />
+                </CCol>
+                <CCol>
+                  <GroupInput control={control} />
+                </CCol>
+                <CCol>
+                  <TypeInput control={control} />
                 </CCol>
                 <CCol>
                   <Controller
                     control={control}
-                    name="nhom"
-                    rules={{ required: true }}
-                    render={({ field }) => (
-                      <CSelect
-                        label="Nhóm NVL"
-                        options={NHOM_OPTIONS}
-                        {...field}
-                        required
-                      />
-                    )}
-                  />
-                </CCol>
-                <CCol>
-                  <Controller
-                    control={control}
-                    name="loai"
-                    rules={{ required: true }}
-                    render={({ field }) => (
-                      <CSelect
-                        label="Loại NVL"
-                        options={LOAI_OPTIONS}
-                        {...field}
-                        required
-                      />
-                    )}
-                  />
-                </CCol>
-                <CCol>
-                  <Controller
-                    control={control}
-                    name="vi_tri"
+                    name="materialLocation"
                     rules={{ required: true }}
                     render={({ field }) => (
                       <CSelect
@@ -142,7 +92,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                 <CCol>
                   <Controller
                     control={control}
-                    name="quan_ly_date"
+                    name="expired"
                     rules={{ required: true }}
                     render={({ field }) => (
                       <CSelect
@@ -163,7 +113,15 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     vào hệ thống
                   </i>
                 </CCol>
-                <CCol xs="4"></CCol>
+                <CCol xs="2">
+                  <Controller
+                    control={control}
+                    name="time"
+                    render={({ field }) => (
+                      <CNumber label="Thời gian (Ngày)" {...field} />
+                    )}
+                  />
+                </CCol>
               </CRow>
             </CCol>
           </CRow>
@@ -183,7 +141,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                 <CCol>
                   <Controller
                     control={control}
-                    name="chu_ngu"
+                    name="subject"
                     rules={{ required: true }}
                     render={({ field }) => (
                       <CInput label="Chủ Ngữ" {...field} required />
@@ -193,7 +151,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                 <CCol>
                   <Controller
                     control={control}
-                    name="vi_ngu"
+                    name="predicate"
                     rules={{ required: true }}
                     render={({ field }) => (
                       <CInput label="Vị Ngữ" required {...field} />
@@ -203,7 +161,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                 <CCol>
                   <Controller
                     control={control}
-                    name="bo_ngu"
+                    name="complement"
                     rules={{ required: true }}
                     render={({ field }) => (
                       <CInput label="Bổ Ngữ" required {...field} />
@@ -263,7 +221,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
         </div>
         <div className="mr-4">
           <Controller
-            name="center"
+            name="allow_central"
             control={control}
             render={({ field }) => (
               <CCheckbox
@@ -295,7 +253,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                   <div className="form">
                     <Controller
                       control={control}
-                      name="unit"
+                      name="formulaUnit"
                       rules={{ required: true }}
                       render={({ field }) => (
                         <CInput className="w-100" required {...field} />
@@ -329,7 +287,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     </div>
                     <Controller
                       control={control}
-                      name="ware_ex"
+                      name="wareEx"
                       rules={{ required: true }}
                       render={({ field }) => (
                         <CNumber
@@ -368,7 +326,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     </div>
                     <Controller
                       control={control}
-                      name="bought_ex"
+                      name="boughtEx"
                       rules={{ required: true }}
                       render={({ field }) => (
                         <CNumber
@@ -408,7 +366,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     </div>
                     <Controller
                       control={control}
-                      name="provider_ex"
+                      name="providerEx"
                       rules={{ required: true }}
                       render={({ field }) => (
                         <CNumber
@@ -437,7 +395,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
         <CCardBody>
           <CRow>
             <CCol xs="12" md="8" lg="7" xl="6" xxl="5">
-              <FormTable />
+              <FormTable control={control} />
             </CCol>
           </CRow>
         </CCardBody>

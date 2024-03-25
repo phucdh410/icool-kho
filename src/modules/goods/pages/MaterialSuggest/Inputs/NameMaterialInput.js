@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 export const NameMaterialInput = ({ control }) => {
   //#region Data
-  const chuNguValue = useWatch({ control, name: "chu_ngu" });
-  const viNguValue = useWatch({ control, name: "vi_ngu" });
-  const boNguValue = useWatch({ control, name: "bo_ngu" });
+  const chuNguValue = useWatch({ control, name: "subject" });
+  const viNguValue = useWatch({ control, name: "predicate" });
+  const boNguValue = useWatch({ control, name: "complement" });
 
   const {
     field: { onChange },

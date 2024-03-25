@@ -17,6 +17,7 @@ import {
   Material as MaterialComponent,
   MaterialIndustryList,
   MaterialType,
+  MaterialSuggest,
 } from "_modules/goods/pages";
 
 import {
@@ -260,6 +261,11 @@ const routes = [
     ...Material.Type,
     exact: true,
     component: MaterialType,
+  },
+  {
+    ...Material.Suggest,
+    exact: true,
+    component: MaterialSuggest,
   },
   {
     ...Material.List,

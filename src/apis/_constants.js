@@ -227,6 +227,15 @@ export const MATERIAL_TYPE = {
   exportExcel: `${api}/material_types/export`,
 };
 
+// Loại Nguyên Vật liệu
+export const MATERIAL_SUGGEST = {
+  getAll: `${api}/material_suggestion`,
+  create: `${api}/material_suggestion/create`,
+  update: `${api}/material_suggestion/update`,
+  delete: `${api}/material_suggestion/delete`,
+  exportExcel: `${api}/material_suggestion/export`,
+};
+
 // Nguyên vật liệu
 export const MATERIAL = {
   getAll: `${api}/materials`,

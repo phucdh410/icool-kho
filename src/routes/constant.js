@@ -386,6 +386,15 @@ export const Material = {
     name: "DS loại nguyên vật liệu",
     path: "/material/type",
   },
+  Suggest: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS đề xuất nguyên vật liệu",
+    path: "/material/suggest",
+  },
 };
 
 export const Good = {

@@ -11,10 +11,15 @@ import Table from "./Table";
 import Form from "./Form";
 
 import { getAll } from "_common/queries-fn/material.query";
-import { create, update, getByCode, remove } from "src/apis/material.api";
+import {
+  createMaterialSuggest,
+  updateMaterialSuggest,
+  removeMaterialSuggest,
+} from "src/apis/material_suggest.api";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
 import { exportExcel } from "src/apis/material_industry.api";
+import { formatPayload, removeLastDot } from "./func";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
@@ -73,8 +78,11 @@ const MaterialList = () => {
   const onSave = () => {
     ref.current.handleSubmit(
       async (d) => {
-        const func = status === 3 ? update : create;
-        const res = await func(d);
+        const _payload = formatPayload(d);
+
+        const func =
+          status === 3 ? updateMaterialSuggest : createMaterialSuggest;
+        const res = await func(_payload);
 
         if (isSuccess(res)) {
           refetch();
@@ -90,7 +98,7 @@ const MaterialList = () => {
   };
 
   const onRemove = async () => {
-    const res = await remove(selected.map((c) => c.code));
+    const res = await removeMaterialSuggest(selected.map((c) => c.code));
 
     if (isSuccess(res)) {
       refetch();
