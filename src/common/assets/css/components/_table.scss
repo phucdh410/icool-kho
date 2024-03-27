@@ -1,0 +1,58 @@
+.c-table {
+  font-size: $fs-normal;
+  color: #000;
+  margin: 0;
+
+  border-left: unset !important;
+  border-right: unset !important;
+
+  thead {
+    background-color: $color-light-blue-table;
+    font-weight: 500;
+
+    text-transform: capitalize;
+
+    th {
+      text-align: center;
+      vertical-align: middle;
+
+      svg {
+        margin-left: 10px;
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+
+  tbody {
+    td {
+      padding-right: 24px;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+
+  .badge {
+    padding: 0.5rem 0.75rem;
+  }
+
+  &.selectable {
+    thead {
+      th {
+        &:first-child {
+          width: 36px;
+          padding: 0 0 0 21px !important;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        &:first-child {
+          width: 36px;
+          padding: 0.75rem 0 0.75rem 21px !important;
+        }
+      }
+    }
+  }
+}

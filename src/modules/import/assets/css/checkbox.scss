@@ -1,0 +1,65 @@
+.module {
+  display: block;
+  position: relative;
+  padding-left: 0;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  >div {
+    cursor: pointer;
+  }
+
+  input {
+    position: absolute;
+    display: none;
+
+    &:checked~.checkmark {
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  .checkmark {
+    width: 40px;
+    top: 0px;
+    position: absolute;
+    left: 0;
+    height: 40px;
+    font-size: 22px;
+    border: 1px solid #d8dbe0;
+    border-radius: .25rem;
+    background-color: inherit;
+
+    &:after {
+      width: 100%;
+      text-align: center;
+      stroke-width: 2px;
+      position: absolute;
+      line-height: 37px;
+      height: 100%;
+      display: none;
+      content: url('../x2px.svg');
+    }
+  }
+
+  .custom-control-label {
+    margin-left: 40px;
+    padding-left: 10px;
+    height: 40px;
+    font-weight: 500 !important;
+    font-size: 16px;
+    display: flex;
+    color: #000 !important;
+    align-items: center;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+}

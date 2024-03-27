@@ -1,0 +1,18 @@
+.contain-form {
+  margin: 0;
+
+  .col {
+    padding: 0;
+  }
+
+  .card {
+    max-height: 500px;
+  }
+
+  .btn-group {
+    max-width: 100px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+}

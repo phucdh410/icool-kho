@@ -1,0 +1,67 @@
+.c-header {
+  border: none;
+  background-color: $color-blue-icool;
+
+  .c-header-nav {
+    height: 60px;
+  }
+
+  .c-header-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+  }
+
+  .c-header-nav-account {
+    margin: 0;
+
+    .nav-link {
+      padding: 0;
+      color: $color-white !important;
+      text-decoration: none;
+      font-size: $fs-normal;
+
+      span {
+        padding-left: 11px;
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+.c-subheader {
+  background-color: $color-background;
+  border-top: 0 !important;
+  min-height: 25px !important;
+  padding: 14px 25px 0 25px;
+  width: 100%;
+
+  .header-nav-tabs {
+    flex: 1;
+    overflow: hidden;
+
+    .nav-tabs {
+      align-items: flex-end;
+      display: inline-flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      position: relative;
+      white-space: nowrap;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      .nav-item {
+        display: inline-block;
+      }
+
+      .ps__rail-x {
+        background-color: transparent;
+        z-index: 1000;
+        height: 0 !important;
+
+        .ps__thumb-x {
+          height: 0 !important;
+        }
+      }
+    }
+  }
+}

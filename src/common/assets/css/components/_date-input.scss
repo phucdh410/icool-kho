@@ -1,0 +1,34 @@
+.c-input-date {
+    &.inline {
+        width: fit-content;
+    }
+
+    input {
+        padding-right: 2rem;
+    }
+
+    input::placeholder {
+        color: hsl(0, 0%, 20%);
+    }
+
+    label {
+        margin-top: 0;
+        margin-bottom: 0;
+        vertical-align: -webkit-baseline-middle;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    svg {
+        position: absolute;
+        cursor: pointer;
+        top: 13px;
+        right: 9px;
+        color: black;
+    }
+
+    .react-datepicker-wrapper {
+        width: 100% !important;
+    }
+
+}

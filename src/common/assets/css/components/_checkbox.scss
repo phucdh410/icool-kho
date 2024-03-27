@@ -1,0 +1,85 @@
+.c-checkbox {
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  cursor: pointer;
+
+  input {
+    &:checked {
+      &~label.custom-control-label {
+        color: $color-blue;
+
+        &::before {
+          border-color: $color-blue-icool;
+          background-color: $color-white;
+        }
+
+        &::after {
+          display: inline;
+        }
+      }
+    }
+
+    &:disabled {
+      pointer-events: none;
+
+      &~label.custom-control-label {
+        color: $color-blue;
+
+        &::before {
+          border-color: #9da5b1 !important;
+          background-color: #d8dbe0;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.custom-control {
+    padding-left: 16px !important;
+
+    label.custom-control-label {
+      padding-left: 10px;
+      cursor: pointer;
+
+      &::before {
+        cursor: pointer;
+        border-radius: 4px;
+        box-sizing: content-box;
+        width: 16px;
+        height: 15px;
+        left: -16px !important;
+      }
+
+      &::after {
+        cursor: pointer;
+        background: url('../../icons/tick.svg') no-repeat;
+        background-size: contain;
+        display: none;
+        left: -13px !important;
+        top: 6px !important;
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+  }
+
+  &.text-black {
+    label.custom-control-label {
+      color: $color-black !important;
+    }
+  }
+
+  &.font-weight-bold {
+    label.custom-control-label {
+      font-weight: bold !important;
+    }
+  }
+}

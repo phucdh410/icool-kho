@@ -1,0 +1,112 @@
+.tabs {
+  height: 50px;
+}
+
+.nav {
+  overflow: none;
+
+  &.nav-tabs {
+    align-items: flex-end;
+    border: none;
+    box-sizing: border-box;
+    display: inline-flex;
+    height: 100%;
+    max-width: 100%;
+
+    flex-wrap: nowrap;
+    overflow: auto;
+
+    &.modules {
+      .nav-item::after {
+        display: none;
+      }
+    }
+
+    .nav-item {
+      position: relative;
+      margin: 0 0 0 1.5px;
+
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      text-transform: capitalize;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:hover {
+        .nav-link {
+          padding: 0.65rem 1rem 0.75rem 1rem;
+          opacity: 1;
+          background-color: $color-white !important;
+          // border-bottom: 3px solid $color-blue-icool;
+
+          &::after {
+            top: 76% !important;
+            border-left-color: rgba(152, 168, 176, 0.3) !important;
+          }
+        }
+      }
+
+      &.active {
+        &+.nav-item::after {
+          display: none;
+        }
+      }
+
+      &~.nav-item:not(.active)::after {
+        content: "";
+        bottom: 0%;
+        left: -1.5px;
+        position: absolute;
+        height: 36px;
+        border-left: 3px solid rgba(152, 168, 176, 0.4);
+      }
+
+      .nav-link {
+        font-weight: 700;
+        font-size: $fs-normal;
+        padding: 0.6rem 1rem 0.45rem 1rem;
+        background-color: $color-dark-gray !important;
+        border-top: transparent !important;
+        border-right: transparent !important;
+        border-left: transparent !important;
+        border-bottom: 3px solid transparent;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        color: $color-blue-icool;
+        opacity: 0.5;
+        cursor: pointer;
+        text-decoration: none;
+
+        transition: padding 0.3s;
+
+        &.active {
+          padding: 0.65rem 1rem 0.75rem 1rem;
+          opacity: 1;
+          background-color: $color-white !important;
+          border-bottom: 3px solid $color-blue-icool;
+          transition: none;
+        }
+      }
+    }
+
+    .close-btn {
+      margin-left: 20px;
+      margin-bottom: 0;
+      line-height: 0;
+      cursor: pointer;
+
+      svg {
+        margin-top: -2px;
+        width: 15px !important;
+        height: 15px !important;
+        stroke-width: 2px;
+
+        path {
+          stroke: $color-gray;
+        }
+      }
+    }
+  }
+}

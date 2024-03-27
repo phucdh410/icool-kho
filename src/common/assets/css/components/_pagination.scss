@@ -1,0 +1,42 @@
+.c-pagination {
+  display: flex;
+  justify-content: center;
+
+  border-top: 1px solid;
+  border-top-color: #d8dbe0;
+
+  padding-top: 10px;
+
+  .form-group {
+    margin: 0 30px;
+  }
+
+  nav {
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+
+    .pagination {
+      margin-bottom: 0;
+    }
+
+    .page-item {
+      .page-link {
+        margin: 0;
+        text-decoration: none;
+        height: 40px;
+        border-color: #d8dbe0 !important;
+      }
+
+      &.disabled {
+        cursor: no-drop;
+      }
+
+      &.active {
+        .page-link {
+          background-color: $color-blue-icool;
+        }
+      }
+    }
+  }
+}
