@@ -19,7 +19,9 @@ import {
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
 import { exportExcel } from "src/apis/material_industry.api";
-import { formatPayload, removeLastDot } from "./func";
+import { formatPayload } from "./func";
+import { CButton } from "src/common/components/controls";
+import { MPriceSuggest } from "../../components";
 
 const selectIsLoading = createSelector(
   (state) => state.config,
@@ -30,6 +32,8 @@ const MaterialList = () => {
   const ref = useRef();
   //#region Data
   const isLoading = useSelector(selectIsLoading);
+
+  const modalRef = useRef(null);
 
   const [filter, setFilter] = useState({});
 
@@ -108,6 +112,13 @@ const MaterialList = () => {
   const onExport = () => {
     exportExcel(filter);
   };
+
+  const onSuggest = () => {
+    if (selected.length === 1) {
+      const _code = selected[0]?.code;
+    }
+    modalRef.current?.open(_code);
+  };
   //#endregion
 
   useEffect(() => {
@@ -127,6 +138,17 @@ const MaterialList = () => {
             onRemove={onRemove}
             onSave={onSave}
             onExport={onExport}
+            CustomFeatures={
+              <>
+                <CButton
+                  className="btn-primary"
+                  disabled={!(selected?.length === 1 && status !== 2)}
+                  onClick={onSuggest}
+                >
+                  Đề Xuất Giá
+                </CButton>
+              </>
+            }
           />
         </CCardBody>
       </CCard>
@@ -162,6 +184,8 @@ const MaterialList = () => {
           </CCard>
         </CCol>
       </CRow>
+
+      <MPriceSuggest ref={modalRef} />
     </>
   );
 };

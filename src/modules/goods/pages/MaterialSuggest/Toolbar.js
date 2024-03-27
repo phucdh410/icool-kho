@@ -13,6 +13,7 @@ export default ({
   onPrint,
   canSave,
   onExport,
+  CustomFeatures,
 }) => {
   //#region Event
   const onClick = (state) => {
@@ -49,13 +50,12 @@ export default ({
             canRemove={selectedNo === 1 && status !== 2}
             // canRemove={!!selectedNo && !status}
           />
-          <CButton
-            className="btn-fill"
-            onClick={onExport}
-            style={{ marginLeft: "auto" }}
-          >
-            Xuất File Excel
-          </CButton>
+          <div style={{ marginLeft: "auto" }}>
+            {CustomFeatures}
+            <CButton className="btn-fill" onClick={onExport}>
+              Xuất File Excel
+            </CButton>
+          </div>
         </div>
       </CCol>
     </CRow>

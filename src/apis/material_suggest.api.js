@@ -29,3 +29,11 @@ export const exportExcelMaterialSuggest = async (params) => {
     return fileDownload(res.data, "report.xlsx");
   });
 };
+
+export const createPriceSuggest = async (body) => {
+  return await post(MATERIAL_SUGGEST.createSuggest, body);
+};
+
+export const removePriceSuggest = async () => {
+  return await post(MATERIAL_SUGGEST.deleteSuggest);
+};
