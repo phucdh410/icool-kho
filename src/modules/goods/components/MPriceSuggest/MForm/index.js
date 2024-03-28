@@ -1,44 +1,46 @@
+import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   CButton,
-  CFile,
   CInput,
   CNumber,
   CSelect,
 } from "src/common/components/controls";
 import { getAll as getAllSupplier } from "src/common/queries-fn/supplier.query";
-
-const NCC_CODES = [
-  { value: "KTT", label: "KTT" },
-  { value: "TH", label: "TH" },
-  { value: "NTC", label: "NTC" },
-  { value: "MT", label: "MT" },
-  { value: "HQS", label: "HQS" },
-  { value: "TTRX", label: "TTRX" },
-  { value: "RACK", label: "RACK" },
-];
-
-const NCC_NAMES = [
-  { value: "KTT", label: "Kho Trung Tâm" },
-  { value: "TH", label: "Thuận Hương" },
-  { value: "NTC", label: "Nghĩa Trái Cây" },
-  { value: "MT", label: "Minh Tâm" },
-  { value: "HQS", label: "Hoa Quả Sơn" },
-  { value: "TTRX", label: "Trên Trời Rơi Xuống" },
-  { value: "RACK", label: "Jack J-97" },
-];
+import { MFileInput } from "./MFileInput";
+import { createPriceSuggest } from "src/apis/material_suggest.api";
 
 export const MForm = ({ code }) => {
   //#region Data
   const { control, handleSubmit, reset } = useForm({ mode: "all" });
 
   const { data } = getAllSupplier();
+
+  const NCC = useMemo(() => {
+    if (data && data?.length > 0) {
+      const codes = data.map((e) => ({ value: e?.code, label: e?.code }));
+
+      const names = data.map((e) => ({ value: e?.code, label: e?.name }));
+
+      return { codes, names };
+    }
+    return { codes: [], names: [] };
+  }, [data]);
   //#endregion
 
   //#region Event
   const onSubmit = () => {
     handleSubmit(async (values) => {
-      console.log(values);
+      try {
+        const payload = { ...values };
+        (payload.vendorId = values?.vendorId?.value),
+          (payload.materialId = code),
+          (payload.files = values?.files?.map((e) => e?.id));
+
+        await createPriceSuggest(payload);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   };
   //#endregion
@@ -59,7 +61,7 @@ export const MForm = ({ code }) => {
             name="vendorId"
             rules={{ required: true }}
             render={({ field }) => (
-              <CSelect {...field} label="Mã NCC" options={NCC_CODES} required />
+              <CSelect {...field} label="Mã NCC" options={NCC.codes} required />
             )}
           />
         </div>
@@ -72,7 +74,7 @@ export const MForm = ({ code }) => {
               <CSelect
                 {...field}
                 label="Tên NCC"
-                options={NCC_NAMES}
+                options={NCC.names}
                 required
               />
             )}
@@ -103,14 +105,7 @@ export const MForm = ({ code }) => {
           </div>
         </div>
         <div className="col-3">
-          <Controller
-            control={control}
-            name="file"
-            rules={{ required: true }}
-            render={({ field }) => (
-              <CFile label="Chứng từ đính kèm" {...field} required />
-            )}
-          />
+          <MFileInput control={control} />
         </div>
         <div className="col-5">
           <Controller

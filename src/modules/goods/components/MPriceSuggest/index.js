@@ -5,7 +5,7 @@ import { MTable } from "./MTable";
 
 export const MPriceSuggest = forwardRef((props, ref) => {
   //#region Data
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [code, setCode] = useState(null);
   //#endregion
@@ -30,7 +30,14 @@ export const MPriceSuggest = forwardRef((props, ref) => {
       size="xl"
       style={{ background: "white" }}
     >
-      <div style={{ padding: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          padding: "20px",
+        }}
+      >
         <MForm code={code} />
 
         <MTable code={code} />

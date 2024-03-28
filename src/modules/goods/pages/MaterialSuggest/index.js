@@ -116,8 +116,8 @@ const MaterialList = () => {
   const onSuggest = () => {
     if (selected.length === 1) {
       const _code = selected[0]?.code;
+      modalRef.current?.open(_code);
     }
-    modalRef.current?.open(_code);
   };
   //#endregion
 

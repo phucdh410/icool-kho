@@ -1,9 +1,13 @@
-import { post } from "src/utils/axios";
+const { api } = global;
+
+import { FORM_HEADER_FORMDATA, post } from "src/utils/axios";
 
 export const fileApi = {
   upload: async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    return await post("/files/create", formData);
+    return await post(`${api}/files/create`, formData, {
+      headers: FORM_HEADER_FORMDATA,
+    });
   },
 };
