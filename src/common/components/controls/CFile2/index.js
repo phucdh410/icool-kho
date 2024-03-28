@@ -57,9 +57,16 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
         <span className={classNames("c-icon")}></span>
       </span>
       {fields.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "4px",
+            gap: "4px",
+          }}
+        >
           {fields.map((e) => (
-            <a key={e?.id} href="">
+            <a key={e?.id} href={e?.path} rel="noopener noreferrer">
               {e?.name}
             </a>
           ))}
