@@ -6,7 +6,7 @@
   "homepage": "/",
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-app-rewired start",
+    "start": "set PORT=3333 && react-app-rewired start",
     "build": "react-app-rewired build && compress-cra",
     "serve": "serve -s build",
     "lint": "eslint ."
