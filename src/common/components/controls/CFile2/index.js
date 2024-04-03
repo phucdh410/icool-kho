@@ -22,6 +22,7 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
 
         const dataFile = res?.data;
         append(dataFile);
+        inputRef.current = null;
       } catch (error) {
         console.log(error);
       } finally {

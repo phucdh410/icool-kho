@@ -10,9 +10,9 @@ import { getAll as getAllSupplier } from "src/common/queries-fn/supplier.query";
 import { MFileInput } from "./MFileInput";
 import { createPriceSuggest } from "src/apis/material_suggest.api";
 
-export const MForm = ({ code }) => {
+export const MForm = ({ code, refetch }) => {
   //#region Data
-  const { control, handleSubmit, reset } = useForm({ mode: "all" });
+  const { control, handleSubmit, reset, resetField } = useForm({ mode: "all" });
 
   const { data } = getAllSupplier();
 
@@ -38,6 +38,10 @@ export const MForm = ({ code }) => {
           (payload.files = values?.files?.map((e) => e?.id));
 
         await createPriceSuggest(payload);
+
+        refetch();
+        reset();
+        resetField("files", { defaultValue: [] });
       } catch (error) {
         console.log(error);
       }

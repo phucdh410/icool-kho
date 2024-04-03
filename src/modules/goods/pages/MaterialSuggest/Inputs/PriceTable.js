@@ -1,23 +1,41 @@
 import { useRef } from "react";
 import { useFieldArray } from "react-hook-form";
+import {
+  removeMaterialSuggest,
+  removePriceSuggest,
+} from "src/apis/material_suggest.api";
 import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { MPriceSuggest } from "src/modules/goods/components";
 
 const isBGD = true;
 
-export const PriceTable = ({ code, control }) => {
+export const PriceTable = ({ code, control, refetch }) => {
   const priceModalRef = useRef();
 
-  const { fields: suppliers } = useFieldArray({ control, name: "suppliers" });
+  const { fields: suppliers } = useFieldArray({
+    control,
+    name: "suppliers",
+    keyName: "_id",
+  });
 
   const onClick = () => {
     priceModalRef.current?.open(code);
   };
 
+  const onRemove = (id) => async () => {
+    try {
+      await removePriceSuggest(id);
+
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fields = [
     {
-      key: "remove",
+      key: "action",
       label: (
         <button
           onClick={onClick}
@@ -78,9 +96,10 @@ export const PriceTable = ({ code, control }) => {
   ];
 
   const render = {
-    remove: ({ check, code }) => (
+    action: ({ id }) => (
       <td>
         <button
+          onClick={onRemove(id)}
           style={{
             color: "red",
             fontWeight: "700",
@@ -141,7 +160,11 @@ export const PriceTable = ({ code, control }) => {
         render={render}
       />
 
-      <MPriceSuggest ref={priceModalRef} isShowTable={false} />
+      <MPriceSuggest
+        ref={priceModalRef}
+        isShowTable={false}
+        refetch={refetch}
+      />
     </>
   );
 };

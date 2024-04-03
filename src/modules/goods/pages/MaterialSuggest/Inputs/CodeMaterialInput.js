@@ -39,7 +39,8 @@ export const CodeMaterialInput = ({ control, isEdit }) => {
       rules={{ required: true }}
       render={({ field: { value, ..._field } }) => (
         <CInput
-          readOnly
+          readOnly={!isEdit}
+          disabled={isEdit}
           label="Mã NVL"
           value={isEdit ? value : `${value}0001`}
           style={{ marginBottom: "5px" }}

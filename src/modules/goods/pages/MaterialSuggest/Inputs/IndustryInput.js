@@ -1,9 +1,9 @@
 import { Controller, useController } from "react-hook-form";
-import { CSelect } from "_components/controls";
+import { CInput, CSelect } from "_components/controls";
 import { getAll as getAllMaterialIndustries } from "src/common/queries-fn/material-industry.query";
 import { useMemo } from "react";
 
-export const IndustryInput = ({ control }) => {
+export const IndustryInput = ({ control, isEdit, industryName }) => {
   const { data: dataIndustry } = getAllMaterialIndustries({ code: "" });
 
   const industries = useMemo(() => {
@@ -28,20 +28,25 @@ export const IndustryInput = ({ control }) => {
     <Controller
       control={control}
       name="nganh"
-      rules={{ required: true }}
-      render={({ field: { onChange, ..._field } }) => (
-        <CSelect
-          label="Ngành NVL"
-          options={industries}
-          onChange={(option) => {
-            onChange(option);
-            onChangeNhom("");
-            onChangeLoai("");
-          }}
-          {..._field}
-          required
-        />
-      )}
+      rules={{ required: !isEdit }}
+      render={({ field: { onChange, ..._field } }) =>
+        isEdit ? (
+          <CInput label="Ngành NVL" disabled required value={industryName} />
+        ) : (
+          <CSelect
+            isDisabled={isEdit}
+            label="Ngành NVL"
+            options={industries}
+            onChange={(option) => {
+              onChange(option);
+              onChangeNhom("");
+              onChangeLoai("");
+            }}
+            {..._field}
+            required
+          />
+        )
+      }
     />
   );
 };

@@ -35,7 +35,7 @@ import {
   PriceTable,
 } from "./Inputs";
 
-export default forwardRef(({ isEdit = false }, ref) => {
+export default forwardRef(({ isEdit = false, refetch }, ref) => {
   //#region Data
   const [code, setCode] = useState("");
   const { control, reset, watch, handleSubmit } = useForm();
@@ -60,7 +60,11 @@ export default forwardRef(({ isEdit = false }, ref) => {
     ref,
     () => ({
       handleSubmit,
-      clear: (data = {}) => reset(data),
+      clear: (data = {}) => {
+        const { code } = data;
+        if (code) setCode(code);
+        reset(data);
+      },
     }),
     []
   );
@@ -79,13 +83,25 @@ export default forwardRef(({ isEdit = false }, ref) => {
             <CCol xs="12">
               <CRow>
                 <CCol style={{ minWidth: 250 }}>
-                  <IndustryInput control={control} />
+                  <IndustryInput
+                    control={control}
+                    isEdit={isEdit}
+                    industryName={watch("industryName")}
+                  />
                 </CCol>
                 <CCol>
-                  <GroupInput control={control} />
+                  <GroupInput
+                    control={control}
+                    isEdit={isEdit}
+                    materialGroupName={watch("materialGroupName")}
+                  />
                 </CCol>
                 <CCol>
-                  <TypeInput control={control} />
+                  <TypeInput
+                    control={control}
+                    isEdit={isEdit}
+                    materialTypeName={watch("materialTypeName")}
+                  />
                 </CCol>
                 <CCol>
                   <Controller
@@ -96,6 +112,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                       <CSelect
                         label="Vị trí NVL"
                         options={locations}
+                        isDisabled={isEdit}
                         {...field}
                         required
                       />
@@ -111,6 +128,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                       <CSelect
                         label="Quản lý date"
                         options={DATE_MANAGEMENT_OPTIONS}
+                        isDisabled={isEdit}
                         {...field}
                         required
                       />
@@ -120,14 +138,13 @@ export default forwardRef(({ isEdit = false }, ref) => {
               </CRow>
               <CRow style={{ marginTop: "10px" }}>
                 <CCol xs="4">
-                  <CodeMaterialInput
-                    control={control}
-                    isEdit={isEdit}
-                  />
-                  <i style={{ color: "red", fontWeight: 500, fontSize: 16 }}>
-                    *Số 0001 chỉ là ví dụ, số mã NVL sẽ được tạo tự động khi lưu
-                    vào hệ thống
-                  </i>
+                  <CodeMaterialInput control={control} isEdit={isEdit} />
+                  {!isEdit && (
+                    <i style={{ color: "red", fontWeight: 500, fontSize: 16 }}>
+                      *Số 0001 chỉ là ví dụ, số mã NVL sẽ được tạo tự động khi
+                      lưu vào hệ thống
+                    </i>
+                  )}
                 </CCol>
                 <CCol xs="2">
                   <Controller
@@ -225,7 +242,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
         className={classNames(styles["checkbox_group"])}
         style={{ marginBlock: "16px" }}
       >
-        <div className="mr-4">
+        {/* <div className="mr-4">
           <Controller
             name="stop"
             control={control}
@@ -238,7 +255,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
               />
             )}
           ></Controller>
-        </div>
+        </div> */}
         <div className="mr-4">
           <Controller
             name="allow"
@@ -433,7 +450,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
 
             {isEdit && (
               <CCol xs="12" xxl="8">
-                <PriceTable code={code} control={control} />
+                <PriceTable code={code} control={control} refetch={refetch} />
               </CCol>
             )}
           </CRow>

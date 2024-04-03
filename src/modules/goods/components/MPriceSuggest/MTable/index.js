@@ -1,11 +1,22 @@
+import { removePriceSuggest } from "src/apis/material_suggest.api";
 import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
-export const MTable = ({ code, data }) => {
+export const MTable = ({ data, refetch }) => {
   //#region Data
+  const onRemove = (id) => async () => {
+    try {
+      await removePriceSuggest(id);
+
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fields = [
     {
-      key: "remove",
+      key: "action",
       label: "",
       sorter: false,
     },
@@ -42,9 +53,11 @@ export const MTable = ({ code, data }) => {
   ];
 
   const render = {
-    remove: ({ check, code }) => (
+    action: ({ id }) => (
       <td>
-        <CButton color="danger">Xóa</CButton>
+        <CButton color="danger" onClick={onRemove(id)}>
+          Xóa
+        </CButton>
       </td>
     ),
     files: ({ files }) => (

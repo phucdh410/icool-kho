@@ -38,6 +38,6 @@ export const createPriceSuggest = async (body) => {
   return await post(MATERIAL_SUGGEST.createSuggest, body);
 };
 
-export const removePriceSuggest = async () => {
-  return await post(MATERIAL_SUGGEST.deleteSuggest);
+export const removePriceSuggest = async (id) => {
+  return await post(MATERIAL_SUGGEST.deleteSuggest, { id });
 };

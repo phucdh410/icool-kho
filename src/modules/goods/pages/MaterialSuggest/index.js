@@ -84,6 +84,16 @@ const MaterialList = () => {
     }
   };
 
+  const refetchDetail = async () => {
+    try {
+      const res = await getMaterialSuggestByCode(selected[0].code);
+
+      if (res?.data) ref.current.clear(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSearch = (where) => {
     setFilter(where);
   };
@@ -188,7 +198,7 @@ const MaterialList = () => {
         <CCol xs="12" className={classNames(!status && "d-none")}>
           <CCard>
             <CCardBody className="bg-light-blue">
-              <Form isEdit={status === 3} ref={ref} />
+              <Form isEdit={status === 3} ref={ref} refetch={refetchDetail} />
             </CCardBody>
           </CCard>
         </CCol>

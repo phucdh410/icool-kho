@@ -1,9 +1,9 @@
 import { Controller, useController, useWatch } from "react-hook-form";
-import { CSelect } from "_components/controls";
+import { CInput, CSelect } from "_components/controls";
 import { getAll as getAllMaterialGroups } from "_common/queries-fn/material-group.query";
 import { useMemo } from "react";
 
-export const GroupInput = ({ control }) => {
+export const GroupInput = ({ control, isEdit, materialGroupName }) => {
   const nganhValue = useWatch({ control, name: "nganh" });
 
   const {
@@ -29,19 +29,28 @@ export const GroupInput = ({ control }) => {
     <Controller
       control={control}
       name="nhom"
-      rules={{ required: true }}
-      render={({ field: { onChange, ..._field } }) => (
-        <CSelect
-          label="Nhóm NVL"
-          options={groups}
-          onChange={(option) => {
-            onChange(option);
-            onChangeLoai("");
-          }}
-          {..._field}
-          required
-        />
-      )}
+      rules={{ required: !isEdit }}
+      render={({ field: { onChange, ..._field } }) =>
+        isEdit ? (
+          <CInput
+            label="Nhóm NVL"
+            disabled
+            required
+            value={materialGroupName}
+          />
+        ) : (
+          <CSelect
+            label="Nhóm NVL"
+            options={groups}
+            onChange={(option) => {
+              onChange(option);
+              onChangeLoai("");
+            }}
+            {..._field}
+            required
+          />
+        )
+      }
     />
   );
 };

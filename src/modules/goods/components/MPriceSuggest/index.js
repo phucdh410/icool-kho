@@ -5,61 +5,62 @@ import { MTable } from "./MTable";
 import { getMaterialSuggestByCode } from "src/apis/material_suggest.api";
 import { useQuery } from "react-query";
 
-export const MPriceSuggest = forwardRef(({ isShowTable = true }, ref) => {
-  //#region Data
-  const [open, setOpen] = useState(false);
+export const MPriceSuggest = forwardRef(
+  ({ isShowTable = true, refetch }, ref) => {
+    //#region Data
+    const [open, setOpen] = useState(false);
 
-  const [code, setCode] = useState(null);
+    const [code, setCode] = useState(null);
 
-  const { data: response } = useQuery({
-    queryKey: ["material-suggest-detail"],
-    queryFn: () => getMaterialSuggestByCode(code),
-    enabled: !!code,
-  });
+    const { data: response, refetch: tableRefetch } = useQuery({
+      queryKey: ["material-suggest-detail"],
+      queryFn: () => getMaterialSuggestByCode(code),
+      enabled: !!code,
+    });
 
-  const suppliers = useMemo(() => {
-    console.log(response);
-    if (!!response?.data?.suppliers) {
-      return response.data.suppliers;
-    }
-    return [];
-  }, [response]);
-  //#endregion
+    const suppliers = useMemo(() => {
+      if (!!response?.data?.suppliers) {
+        return response.data.suppliers;
+      }
+      return [];
+    }, [response]);
+    //#endregion
 
-  //#region Event
-  const onClose = () => setOpen(false);
-  //#endregion
+    //#region Event
+    const onClose = () => setOpen(false);
+    //#endregion
 
-  useImperativeHandle(ref, () => ({
-    open: (code) => {
-      setCode(code);
-      setOpen(true);
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      open: (code) => {
+        setCode(code);
+        setOpen(true);
+      },
+    }));
 
-  //#region Render
+    //#region Render
 
-  return (
-    <CModal
-      show={open}
-      onClose={onClose}
-      size="xl"
-      className="wide-modal"
-      style={{ background: "white" }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
-          padding: "20px",
-        }}
+    return (
+      <CModal
+        show={open}
+        onClose={onClose}
+        size="xl"
+        className="wide-modal"
+        style={{ background: "white" }}
       >
-        <MForm code={code} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            padding: "20px",
+          }}
+        >
+          <MForm code={code} refetch={refetch || tableRefetch} />
 
-        {isShowTable && <MTable code={code} data={suppliers} />}
-      </div>
-    </CModal>
-  );
-  //#endregion
-});
+          {isShowTable && <MTable data={suppliers} refetch={tableRefetch} />}
+        </div>
+      </CModal>
+    );
+    //#endregion
+  }
+);
