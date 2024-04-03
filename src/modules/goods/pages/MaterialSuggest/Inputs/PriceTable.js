@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useFieldArray } from "react-hook-form";
+import { useSelector } from "react-redux";
 import {
   confirmPriceSuggest,
   removeMaterialSuggest,
@@ -11,6 +12,8 @@ import { CTable } from "src/common/components/others";
 import { MPriceSuggest } from "src/modules/goods/components";
 
 export const PriceTable = ({ code, control, refetch }) => {
+  const role = useSelector((state) => state?.auth?.role);
+
   const priceModalRef = useRef();
 
   const { fields: suppliers } = useFieldArray({
@@ -163,36 +166,45 @@ export const PriceTable = ({ code, control, refetch }) => {
     supplierName: ({ supplierName }) => (
       <td className="text-left">{supplierName}</td>
     ),
-    wareChoice: ({ id, wareChoice }) => (
-      <td>
-        <CButton
-          color={wareChoice ? "success" : "primary"}
-          onClick={onConfirm(id)}
-        >
-          Xác nhận
-        </CButton>
-      </td>
-    ),
-    accountantChoice: ({ id, accountantChoice }) => (
-      <td>
-        <CButton
-          color={accountantChoice ? "success" : "primary"}
-          onClick={onConfirm(id)}
-        >
-          Xác nhận
-        </CButton>
-      </td>
-    ),
-    confirm: ({ id, confirm }) => (
-      <td>
-        <CButton
-          color={confirm ? "success" : "primary"}
-          onClick={onConfirm(id)}
-        >
-          Xác nhận
-        </CButton>
-      </td>
-    ),
+    wareChoice: ({ id, wareChoice }) =>
+      role === "STOCKER" ? (
+        <td>
+          <CButton
+            color={wareChoice ? "success" : "primary"}
+            onClick={onConfirm(id)}
+          >
+            Xác nhận
+          </CButton>
+        </td>
+      ) : (
+        <td>{wareChoice ? "Đã chọn" : ""}</td>
+      ),
+    accountantChoice: ({ id, accountantChoice }) =>
+      role === "ACCOUNTER" ? (
+        <td>
+          <CButton
+            color={accountantChoice ? "success" : "primary"}
+            onClick={onConfirm(id)}
+          >
+            Xác nhận
+          </CButton>
+        </td>
+      ) : (
+        <td>{accountantChoice ? "Đã chọn" : ""}</td>
+      ),
+    confirm: ({ id, confirm }) =>
+      role === "OPERATOR" ? (
+        <td>
+          <CButton
+            color={confirm ? "success" : "primary"}
+            onClick={onConfirm(id)}
+          >
+            Xác nhận
+          </CButton>
+        </td>
+      ) : (
+        <td>{confirm ? "Đã chọn" : ""}</td>
+      ),
   };
 
   return (
