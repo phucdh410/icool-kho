@@ -1,6 +1,11 @@
 import styles from "../../assets/material.module.scss";
 
-import React, { forwardRef, useImperativeHandle, useMemo } from "react";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from "react";
 
 import classNames from "classnames";
 
@@ -27,10 +32,12 @@ import {
   CodeMaterialInput,
   NameMaterialInput,
   FormTable,
+  PriceTable,
 } from "./Inputs";
 
 export default forwardRef(({ isEdit = false }, ref) => {
   //#region Data
+  const [code, setCode] = useState("");
   const { control, reset, watch, handleSubmit } = useForm();
 
   const { data: response } = useQuery({
@@ -417,27 +424,16 @@ export default forwardRef(({ isEdit = false }, ref) => {
       <CCard style={{ marginBottom: "100px" }}>
         <CCardBody>
           <CRow>
-            <CCol xs="12" md="8" lg="7" xl="6" xxl="5">
+            <CCol xs="12" xxl="4">
               <FormTable control={control} />
+            </CCol>
+
+            <CCol xs="12" xxl="8">
+              <PriceTable code={code} />
             </CCol>
           </CRow>
         </CCardBody>
       </CCard>
-
-      {/* <CRow>
-        <CCol
-          xs="12"
-          className="d-flex justify-content-between"
-          style={{ alignItems: "flex-end" }}
-        >
-          <label className="text-black font-weight-bold">
-            NCC nhiệm giao hàng:
-          </label>
-          <div style={{ width: "70%" }}>
-            <CSelect className="m-0" />
-          </div>
-        </CCol>
-      </CRow> */}
     </>
   );
   //#endregion

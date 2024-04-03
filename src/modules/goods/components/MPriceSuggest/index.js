@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { MForm } from "./MForm";
 import { MTable } from "./MTable";
 
-export const MPriceSuggest = forwardRef((props, ref) => {
+export const MPriceSuggest = forwardRef(({ isShowTable = true }, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
 
@@ -40,7 +40,7 @@ export const MPriceSuggest = forwardRef((props, ref) => {
       >
         <MForm code={code} />
 
-        <MTable code={code} />
+        {isShowTable && <MTable code={code} />}
       </div>
     </CModal>
   );

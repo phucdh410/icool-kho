@@ -1,17 +1,8 @@
 import { useMemo } from "react";
 import { useFieldArray } from "react-hook-form";
-import { CButton, CSelect } from "src/common/components/controls";
+import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { getAll } from "src/common/queries-fn/store.query";
-
-const MOCK = [
-  { code: "UVK", name: "Ung Văn Khiêm" },
-  { code: "XVNT", name: "Xô Viết Nghệ Tĩnh" },
-  { code: "TN", name: "Trần Não" },
-  { code: "MDC", name: "Mạc Đỉnh Chi" },
-  { code: "CCY", name: "Cầu Chữ Y" },
-  { code: "DBT", name: "Dương Bá Trạc" },
-];
 
 export const FormTable = ({ control }) => {
   //#region Data
@@ -20,6 +11,7 @@ export const FormTable = ({ control }) => {
   const {
     fields: list,
     append,
+    replace,
     remove,
   } = useFieldArray({ control, name: "listStores", keyName: "_id" });
 
@@ -34,21 +26,37 @@ export const FormTable = ({ control }) => {
     );
   }, [list, data]);
 
+  const onAddAll = () => {
+    if (list.length === data?.length) {
+      replace([]);
+    } else {
+      const _codes = data?.map((e) => ({ code: e?.code }));
+
+      replace(_codes);
+    }
+  };
+
   const fields = [
     {
       key: "check",
-      label: <div></div>,
+      label: (
+        <div>
+          <CButton color="text" onClick={onAddAll} style={{ padding: 0 }}>
+            Tất cả
+          </CButton>
+        </div>
+      ),
       sorter: false,
     },
     {
       key: "code",
       label: "Mã Chi Nhánh",
-      _style: { minWidth: "175px" },
+      _style: { width: "164px" },
     },
     {
       key: "name",
       label: "Tên Chi Nhánh",
-      _style: { width: "auto", minWidth: "200px", textAlign: "center" },
+      _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
   ];
 
@@ -58,19 +66,22 @@ export const FormTable = ({ control }) => {
         <CButton
           color={check ? "success" : "error"}
           onClick={onAdd(check, code)}
+          style={{ padding: 0 }}
         >
           {check ? "Đã thêm" : "Thêm"}
         </CButton>
       </td>
     ),
+    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
   };
   //#endregion
 
   //#region Event
   const onAdd = (check, code) => () => {
     if (check) {
-      const _index = list.findIndex((e) => e === code);
-      _index && remove(_index);
+      const _index = list.findIndex((e) => e?.code === code);
+
+      remove(_index);
     } else {
       append({ code });
     }

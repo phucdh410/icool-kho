@@ -1,11 +1,33 @@
+import { useRef } from "react";
 import { CTable } from "src/common/components/others";
+import { MPriceSuggest } from "src/modules/goods/components";
 
-export const MTable = ({ code }) => {
-  //#region Data
+export const PriceTable = ({ code }) => {
+  const priceModalRef = useRef();
+
+  const onClick = () => {
+    priceModalRef.current?.open(code);
+  };
+
   const fields = [
     {
       key: "remove",
-      label: "",
+      label: (
+        <button
+          onClick={onClick}
+          style={{
+            color: "red",
+            fontWeight: "700",
+            fontSize: "22px",
+            outline: "none",
+            boxShadow: "none",
+            border: "none",
+            background: "transparent",
+          }}
+        >
+          +
+        </button>
+      ),
       sorter: false,
     },
     {
@@ -48,17 +70,18 @@ export const MTable = ({ code }) => {
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,
   };
-  //#endregion
 
-  //#region Render
   return (
-    <CTable
-      className="selectable"
-      loading={false}
-      data={[]}
-      fields={fields}
-      render={render}
-    />
+    <>
+      <CTable
+        className="selectable"
+        loading={false}
+        data={[]}
+        fields={fields}
+        render={render}
+      />
+
+      <MPriceSuggest ref={priceModalRef} isShowTable={false} />
+    </>
   );
-  //#endregion
 };
