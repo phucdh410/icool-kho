@@ -72,7 +72,7 @@ export const FormTable = ({ control }) => {
         </CButton>
       </td>
     ),
-    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
   };
   //#endregion
 

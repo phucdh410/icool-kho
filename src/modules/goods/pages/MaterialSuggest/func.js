@@ -26,6 +26,7 @@ export const formatPayload = (payload) => {
     complement: payload?.complement,
     time: Number(payload?.time),
     note: payload?.note,
+    accountantNote: payload?.accountantNote,
     allow: Number(payload?.allow),
     allow_central: Number(payload?.allow_central),
     materialLocation: payload?.materialLocation?.value,

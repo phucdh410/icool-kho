@@ -232,6 +232,7 @@ export const MATERIAL_SUGGEST = {
   getAll: `${api}/material_suggestion`,
   create: `${api}/material_suggestion/create`,
   update: `${api}/material_suggestion/update`,
+  getByCode: `${api}/material_suggestion/getByCode`,
   delete: `${api}/material_suggestion/delete`,
   exportExcel: `${api}/material_suggestion/export`,
   createSuggest: `${api}/material_suggestion/price_suggestions/create`,

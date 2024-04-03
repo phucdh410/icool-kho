@@ -1,6 +1,7 @@
+import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
-export const MTable = ({ code }) => {
+export const MTable = ({ code, data }) => {
   //#region Data
   const fields = [
     {
@@ -9,12 +10,12 @@ export const MTable = ({ code }) => {
       sorter: false,
     },
     {
-      key: "vendorId",
+      key: "supplierCode",
       label: "Mã NCC",
       _style: { minWidth: "120px" },
     },
     {
-      key: "name",
+      key: "supplierName",
       label: "Tên NCC",
       _style: { minWidth: "200px", textAlign: "left" },
     },
@@ -41,12 +42,29 @@ export const MTable = ({ code }) => {
   ];
 
   const render = {
-    select: ({ check, code }) => (
+    remove: ({ check, code }) => (
       <td>
-        <button>Xóa</button>
+        <CButton color="danger">Xóa</CButton>
       </td>
     ),
-    name: ({ name }) => <td className="text-left">{name}</td>,
+    files: ({ files }) => (
+      <td>
+        {files?.length > 0 &&
+          files.map((e) => (
+            <a
+              key={e?.id}
+              href={e?.path}
+              target="_blank"
+              rel="noopenner noreferrer"
+            >
+              {e?.filename}
+            </a>
+          ))}
+      </td>
+    ),
+    supplierName: ({ supplierName }) => (
+      <td className="text-left">{supplierName}</td>
+    ),
   };
   //#endregion
 
@@ -55,7 +73,7 @@ export const MTable = ({ code }) => {
     <CTable
       className="selectable"
       loading={false}
-      data={[]}
+      data={data}
       fields={fields}
       render={render}
     />

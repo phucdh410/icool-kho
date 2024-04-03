@@ -120,7 +120,10 @@ export default forwardRef(({ isEdit = false }, ref) => {
               </CRow>
               <CRow style={{ marginTop: "10px" }}>
                 <CCol xs="4">
-                  <CodeMaterialInput control={control} />
+                  <CodeMaterialInput
+                    control={control}
+                    isEdit={isEdit}
+                  />
                   <i style={{ color: "red", fontWeight: 500, fontSize: 16 }}>
                     *Số 0001 chỉ là ví dụ, số mã NVL sẽ được tạo tự động khi lưu
                     vào hệ thống
@@ -202,7 +205,7 @@ export default forwardRef(({ isEdit = false }, ref) => {
                 <CCol xs="4">
                   <Controller
                     control={control}
-                    name="note-2"
+                    name="accountantNote"
                     render={({ field }) => (
                       <CTextarea
                         label="Ghi chú của kế toán"
@@ -330,9 +333,9 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     <CInput
                       readOnly
                       className={styles["exchange_to"]}
-                      placeholder="(Theo DVCT)"
+                      placeholder="(Theo ĐVCT)"
                       tabIndex="-1"
-                      value={watch("unit")}
+                      value={watch("formulaUnit")}
                     />
                   </div>
                 </CCol>
@@ -428,9 +431,11 @@ export default forwardRef(({ isEdit = false }, ref) => {
               <FormTable control={control} />
             </CCol>
 
-            <CCol xs="12" xxl="8">
-              <PriceTable code={code} />
-            </CCol>
+            {isEdit && (
+              <CCol xs="12" xxl="8">
+                <PriceTable code={code} control={control} />
+              </CCol>
+            )}
           </CRow>
         </CCardBody>
       </CCard>

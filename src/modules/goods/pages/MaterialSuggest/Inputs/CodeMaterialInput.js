@@ -2,7 +2,7 @@ import { Controller, useController, useWatch } from "react-hook-form";
 import { CInput } from "_components/controls";
 import { useEffect } from "react";
 
-export const CodeMaterialInput = ({ control }) => {
+export const CodeMaterialInput = ({ control, isEdit }) => {
   //#region Data
   const nganhValue = useWatch({ control, name: "nganh" });
   const nhomValue = useWatch({ control, name: "nhom" });
@@ -16,6 +16,10 @@ export const CodeMaterialInput = ({ control }) => {
   //#endregion
 
   useEffect(() => {
+    if (isEdit) {
+      return;
+    }
+
     let _stringCode = "";
 
     nganhValue?.acronym && (_stringCode += nganhValue.acronym + ".");
@@ -25,7 +29,7 @@ export const CodeMaterialInput = ({ control }) => {
     qldateValue ? (_stringCode += "YES.") : (_stringCode += "NO.");
 
     onChange(_stringCode);
-  }, [nganhValue, nhomValue, loaiValue, vitriValue, qldateValue]);
+  }, [nganhValue, nhomValue, loaiValue, vitriValue, qldateValue, isEdit]);
 
   //#region Render
   return (
@@ -37,7 +41,7 @@ export const CodeMaterialInput = ({ control }) => {
         <CInput
           readOnly
           label="Mã NVL"
-          value={`${value}0001`}
+          value={isEdit ? value : `${value}0001`}
           style={{ marginBottom: "5px" }}
           {..._field}
           required

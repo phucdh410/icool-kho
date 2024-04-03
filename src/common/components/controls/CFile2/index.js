@@ -1,4 +1,4 @@
-import { forwardRef, createRef, useCallback } from "react";
+import { forwardRef, createRef, useCallback, useState } from "react";
 import classNames from "classnames";
 
 import { CFormGroup, CLabel } from "@coreui/react";
@@ -8,12 +8,15 @@ import { fileApi } from "src/apis/file.api";
 const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
   const inputRef = createRef(null);
 
+  const [isUploading, setIsUploading] = useState(false);
+
   const _class = classNames("c-input c-file", className);
 
   const onChange = async (e) => {
     const file = e?.target?.files[0];
 
     if (file) {
+      setIsUploading(true);
       try {
         const res = await fileApi.upload(file);
 
@@ -21,6 +24,8 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
         append(dataFile);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsUploading(false);
       }
     }
   };
@@ -54,7 +59,9 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
         onClick={click}
         className="form-control"
       >
-        <span className={classNames("c-icon")}></span>
+        <span className={classNames("c-icon")}>
+          {isUploading && "Uploading..."}
+        </span>
       </span>
       {fields.length > 0 && (
         <div
@@ -66,8 +73,14 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
           }}
         >
           {fields.map((e) => (
-            <a key={e?.id} href={e?.path} rel="noopener noreferrer">
-              {e?.name}
+            <a
+              key={e?.id}
+              href={e?.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ alignSelf: "start" }}
+            >
+              {e?.originalname}
             </a>
           ))}
         </div>

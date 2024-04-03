@@ -10,6 +10,10 @@ export const createMaterialSuggest = async (body) => {
   return await post(MATERIAL_SUGGEST.create, body, FORM_HEADER_ENCODED);
 };
 
+export const getMaterialSuggestByCode = async (code) => {
+  return await get(`${MATERIAL_SUGGEST.getByCode}/${code}`);
+};
+
 export const updateMaterialSuggest = async (body) => {
   return await post(MATERIAL_SUGGEST.update, body, FORM_HEADER_ENCODED);
 };

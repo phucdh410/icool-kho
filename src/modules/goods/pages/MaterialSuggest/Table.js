@@ -33,12 +33,12 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "don_gia_thap_nhat",
+      key: "price",
       label: "Đơn giá thấp nhất",
       _style: { width: "auto", minWidth: "200px" },
     },
     {
-      key: "don_vi_mua_hang",
+      key: "bought_unit",
       label: "Đơn vị mua hàng",
       _style: { width: "auto", minWidth: "200px" },
     },
@@ -53,7 +53,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "auto", minWidth: "200px" },
     },
     {
-      key: "nha_cung_cap_de_xuat",
+      key: "supplier",
       label: "Nhà cung cấp đề xuất",
       _style: { width: "auto", minWidth: "200px" },
     },
@@ -65,7 +65,9 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
+    price: ({ price }) => <td>{price ? price.toLocaleString() : "Chưa có"}</td>,
     name: ({ name }) => <td className="text-left">{name}</td>,
+    supplier: ({ supplier }) => <td>{supplier ? supplier : "Chưa có"}</td>,
   };
 
   return (
