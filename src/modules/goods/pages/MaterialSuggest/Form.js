@@ -8,7 +8,13 @@ import { Controller, useForm } from "react-hook-form";
 
 import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 
-import { CInput, CCheckbox, CSelect, CNumber } from "_components/controls";
+import {
+  CInput,
+  CCheckbox,
+  CSelect,
+  CNumber,
+  CTextarea,
+} from "_components/controls";
 
 import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
 
@@ -178,7 +184,24 @@ export default forwardRef(({ isEdit = false }, ref) => {
                     control={control}
                     name="note"
                     render={({ field }) => (
-                      <CInput label="Ghi chú" {...field} />
+                      <CTextarea
+                        label="Ghi chú - Lý do chọn"
+                        rows={4}
+                        {...field}
+                      />
+                    )}
+                  />
+                </CCol>
+                <CCol xs="4">
+                  <Controller
+                    control={control}
+                    name="note-2"
+                    render={({ field }) => (
+                      <CTextarea
+                        label="Ghi chú của kế toán"
+                        rows={4}
+                        {...field}
+                      />
                     )}
                   />
                 </CCol>

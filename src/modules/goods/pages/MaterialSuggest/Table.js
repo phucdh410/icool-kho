@@ -33,8 +33,8 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "don_gia_de_xuat",
-      label: "Đơn giá đề xuất",
+      key: "don_gia_thap_nhat",
+      label: "Đơn giá thấp nhất",
       _style: { width: "auto", minWidth: "200px" },
     },
     {

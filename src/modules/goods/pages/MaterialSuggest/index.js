@@ -23,6 +23,119 @@ import { formatPayload } from "./func";
 import { CButton } from "src/common/components/controls";
 import { MPriceSuggest } from "../../components";
 
+const MOCK = [
+  {
+    id: "1",
+    code: "0001",
+    name: "Đồ ăn nhẹ tại chi nhánh 1",
+    don_gia_thap_nhat: 400000,
+    don_vi_mua_hang: "KG",
+    created_by: "Huỳnh Minh Tân",
+    status: 1,
+    nha_cung_cap_de_xuat: "Thuận Hương",
+  },
+  {
+    id: "2",
+    code: "0002",
+    name: "Thực phẩm tươi sống tại chi nhánh 2",
+    don_gia_thap_nhat: 500000,
+    don_vi_mua_hang: "KG",
+    created_by: "Nguyễn Thị Bích",
+    status: 1,
+    nha_cung_cap_de_xuat: "Vissan",
+  },
+  {
+    id: "3",
+    code: "0003",
+    name: "Đồ uống đóng hộp tại chi nhánh 3",
+    don_gia_thap_nhat: 300000,
+    don_vi_mua_hang: "THÙNG",
+    created_by: "Lê Văn Nam",
+    status: 1,
+    nha_cung_cap_de_xuat: "Coca-Cola",
+  },
+  {
+    id: "4",
+    code: "0004",
+    name: "Vật dụng vệ sinh tại chi nhánh 1",
+    don_gia_thap_nhat: 200000,
+    don_vi_mua_hang: "Cái",
+    created_by: "Trần Thị Lan",
+    status: 1,
+    nha_cung_cap_de_xuat: "Unilever",
+  },
+  {
+    id: "5",
+    code: "0005",
+    name: "Dụng cụ văn phòng tại chi nhánh 2",
+    don_gia_thap_nhat: 100000,
+    don_vi_mua_hang: "Hộp",
+    created_by: "Phạm Văn Long",
+    status: 1,
+    nha_cung_cap_de_xuat: "Kokuyo",
+  },
+  {
+    id: "6",
+    code: "0006",
+    name: "Thiết bị điện tử tại chi nhánh 3",
+    don_gia_thap_nhat: 10000000,
+    don_vi_mua_hang: "Cái",
+    created_by: "Đặng Thị Mai",
+    status: 1,
+    nha_cung_cap_de_xuat: "Samsung",
+  },
+  {
+    id: "7",
+    code: "0007",
+    name: "Nội thất văn phòng tại chi nhánh 1",
+    don_gia_thap_nhat: 5000000,
+    don_vi_mua_hang: "Bộ",
+    created_by: "Nguyễn Văn Tùng",
+    status: 1,
+    nha_cung_cap_de_xuat: "Hoà Phát",
+  },
+  {
+    id: "8",
+    code: "0008",
+    name: "Sách báo tạp chí tại chi nhánh 2",
+    don_gia_thap_nhat: 150000,
+    don_vi_mua_hang: "Cuốn",
+    created_by: "Trần Thị Dung",
+    status: 1,
+    nha_cung_cap_de_xuat: "Tiến Thọ",
+  },
+  {
+    id: "9",
+    code: "0009",
+    name: "Đồ chơi trẻ em tại chi nhánh 3",
+    don_gia_thap_nhat: 250000,
+    don_vi_mua_hang: "Cái",
+    created_by: "Lê Thị Hà",
+    status: 1,
+    nha_cung_cap_de_xuat: "Bông Sen",
+  },
+  {
+    id: "10",
+    code: "0010",
+    name: "Đồ chơi trẻ em tại chi nhán2h 3",
+    don_gia_thap_nhat: 250000,
+    don_vi_mua_hang: "Cái",
+    created_by: "Lê Thị Hà",
+    status: 1,
+    nha_cung_cap_de_xuat: "Bông Sen",
+  },
+  {
+    id: "11",
+    code: "0011",
+    name: "Đồ chơi trẻ em tại chi nhánh 12",
+    don_gia_thap_nhat: 250000,
+    don_vi_mua_hang: "Cái",
+    created_by: "Lê Thị Hà",
+    status: 1,
+    nha_cung_cap_de_xuat: "Bông Sen",
+  },
+];
+
 const selectIsLoading = createSelector(
   (state) => state.config,
   ({ isLoading }) => isLoading
@@ -170,7 +283,7 @@ const MaterialList = () => {
               <Table
                 onSelect={onSelect}
                 isSelectAll={isSelectAll}
-                data={data}
+                data={MOCK || data}
                 loading={loading}
               />
             </CCardBody>
