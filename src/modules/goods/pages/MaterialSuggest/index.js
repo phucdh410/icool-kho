@@ -16,10 +16,10 @@ import {
   updateMaterialSuggest,
   removeMaterialSuggest,
   getMaterialSuggestByCode,
+  exportExcelMaterialSuggest,
 } from "src/apis/material_suggest.api";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
-import { exportExcel } from "src/apis/material_industry.api";
 import { formatPayload } from "./func";
 import { CButton } from "src/common/components/controls";
 import { MPriceSuggest } from "../../components";
@@ -129,7 +129,7 @@ const MaterialList = () => {
   };
 
   const onExport = () => {
-    exportExcel(filter);
+    exportExcelMaterialSuggest(filter);
   };
 
   const onSuggest = () => {

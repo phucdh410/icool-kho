@@ -27,7 +27,7 @@ export const removeMaterialSuggest = async (codes) => {
 export const exportExcelMaterialSuggest = async (params) => {
   get(MATERIAL_SUGGEST.exportExcel, {
     params,
-    responseSuggest: "blob",
+    responseType: "blob",
     headers: FORM_HEADER_ENCODED,
   }).then((res) => {
     return fileDownload(res.data, "report.xlsx");
