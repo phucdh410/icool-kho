@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { forwardRef, useImperativeHandle, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   CButton,
@@ -10,9 +10,9 @@ import { getAll as getAllSupplier } from "src/common/queries-fn/supplier.query";
 import { MFileInput } from "./MFileInput";
 import { createPriceSuggest } from "src/apis/material_suggest.api";
 
-export const MForm = ({ code, refetch }) => {
+export const MForm = forwardRef(({ code, refetch }, ref) => {
   //#region Data
-  const { control, handleSubmit, reset, resetField } = useForm({ mode: "all" });
+  const { control, handleSubmit, reset } = useForm({ mode: "all" });
 
   const { data } = getAllSupplier();
 
@@ -41,13 +41,20 @@ export const MForm = ({ code, refetch }) => {
 
         refetch();
         reset();
-        resetField("files", { defaultValue: [] });
       } catch (error) {
         console.log(error);
       }
     })();
   };
+
+  const onClose = () => {
+    reset({ vendorId: "", unit: "", price: "", note: "", files: null });
+  };
   //#endregion
+
+  useImperativeHandle(ref, () => ({
+    close: () => onClose(),
+  }));
 
   //#region Render
   return (
@@ -136,4 +143,6 @@ export const MForm = ({ code, refetch }) => {
     </div>
   );
   //#endregion
-};
+});
+
+MForm.displayName = "MForm";

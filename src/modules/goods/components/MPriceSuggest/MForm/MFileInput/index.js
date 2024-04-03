@@ -10,9 +10,6 @@ export const MFileInput = ({ control }) => {
   });
   //#endregion
 
-  //#region Event
-  //#endregion
-
   //#region Render
   return (
     <CFile2

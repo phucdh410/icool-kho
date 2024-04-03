@@ -1,5 +1,11 @@
 import { CModal } from "@coreui/react";
-import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
+import {
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { MForm } from "./MForm";
 import { MTable } from "./MTable";
 import { getMaterialSuggestByCode } from "src/apis/material_suggest.api";
@@ -8,6 +14,8 @@ import { useQuery } from "react-query";
 export const MPriceSuggest = forwardRef(
   ({ isShowTable = true, refetch }, ref) => {
     //#region Data
+    const formRef = useRef(null);
+
     const [open, setOpen] = useState(false);
 
     const [code, setCode] = useState(null);
@@ -27,7 +35,10 @@ export const MPriceSuggest = forwardRef(
     //#endregion
 
     //#region Event
-    const onClose = () => setOpen(false);
+    const onClose = () => {
+      setOpen(false);
+      formRef.current?.close();
+    };
     //#endregion
 
     useImperativeHandle(ref, () => ({
@@ -55,7 +66,7 @@ export const MPriceSuggest = forwardRef(
             padding: "20px",
           }}
         >
-          <MForm code={code} refetch={refetch || tableRefetch} />
+          <MForm code={code} ref={formRef} refetch={refetch || tableRefetch} />
 
           {isShowTable && <MTable data={suppliers} refetch={tableRefetch} />}
         </div>
