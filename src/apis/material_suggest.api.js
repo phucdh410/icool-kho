@@ -41,3 +41,7 @@ export const createPriceSuggest = async (body) => {
 export const removePriceSuggest = async (id) => {
   return await post(MATERIAL_SUGGEST.deleteSuggest, { id });
 };
+
+export const confirmPriceSuggest = async (id) => {
+  return await post(MATERIAL_SUGGEST.confirm, { id });
+};

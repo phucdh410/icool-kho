@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import { useFieldArray } from "react-hook-form";
 import {
+  confirmPriceSuggest,
   removeMaterialSuggest,
   removePriceSuggest,
 } from "src/apis/material_suggest.api";
+import { Checked, Uncheck } from "src/common/assets/icons";
 import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { MPriceSuggest } from "src/modules/goods/components";
-
-const isBGD = true;
 
 export const PriceTable = ({ code, control, refetch }) => {
   const priceModalRef = useRef();
@@ -26,6 +26,16 @@ export const PriceTable = ({ code, control, refetch }) => {
   const onRemove = (id) => async () => {
     try {
       await removePriceSuggest(id);
+
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onConfirm = (id) => async () => {
+    try {
+      await confirmPriceSuggest(id);
 
       refetch();
     } catch (error) {
@@ -62,7 +72,7 @@ export const PriceTable = ({ code, control, refetch }) => {
     {
       key: "supplierName",
       label: "Tên NCC",
-      _style: { minWidth: "200px", textAlign: "left" },
+      _style: { minWidth: "150px", textAlign: "left" },
     },
     {
       key: "price",
@@ -71,7 +81,7 @@ export const PriceTable = ({ code, control, refetch }) => {
     },
     {
       key: "unit",
-      label: "Đơn vị báo giá",
+      label: "ĐVBG",
       _style: { width: "110px", maxWidth: "110px" },
       sorter: false,
     },
@@ -86,13 +96,25 @@ export const PriceTable = ({ code, control, refetch }) => {
       label: "Ghi Chú",
       _style: { width: "auto", minWidth: "200px" },
     },
-    ...(isBGD && [
-      {
-        key: "operator",
-        label: "Xác nhận BGĐ",
-        _style: { width: "auto" },
-      },
-    ]),
+    {
+      key: "wareChoice",
+      label: "KTT chọn",
+      _style: { width: "auto" },
+      sorter: false,
+    },
+    {
+      key: "accountantChoice",
+      label: "Kế toán chọn",
+      _style: { width: "auto" },
+      sorter: false,
+    },
+    {
+      key: "confirm",
+      label: "Xác nhận BGĐ",
+      _style: { width: "auto" },
+      sorter: false,
+    },
+    ,
   ];
 
   const render = {
@@ -141,13 +163,36 @@ export const PriceTable = ({ code, control, refetch }) => {
     supplierName: ({ supplierName }) => (
       <td className="text-left">{supplierName}</td>
     ),
-    ...(isBGD && {
-      operator: () => (
-        <td>
-          <CButton color="primary">Xác nhận</CButton>
-        </td>
-      ),
-    }),
+    wareChoice: ({ id, wareChoice }) => (
+      <td>
+        <CButton
+          color={wareChoice ? "success" : "primary"}
+          onClick={onConfirm(id)}
+        >
+          Xác nhận
+        </CButton>
+      </td>
+    ),
+    accountantChoice: ({ id, accountantChoice }) => (
+      <td>
+        <CButton
+          color={accountantChoice ? "success" : "primary"}
+          onClick={onConfirm(id)}
+        >
+          Xác nhận
+        </CButton>
+      </td>
+    ),
+    confirm: ({ id, confirm }) => (
+      <td>
+        <CButton
+          color={confirm ? "success" : "primary"}
+          onClick={onConfirm(id)}
+        >
+          Xác nhận
+        </CButton>
+      </td>
+    ),
   };
 
   return (
