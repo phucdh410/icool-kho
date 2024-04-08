@@ -221,6 +221,7 @@ export const PriceTable = ({ code, control, refetch }) => {
         ref={priceModalRef}
         isShowTable={false}
         refetch={refetch}
+        code={code}
       />
     </>
   );

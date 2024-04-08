@@ -238,6 +238,7 @@ export const MATERIAL_SUGGEST = {
   createSuggest: `${api}/material_suggestion/price_suggestions/create`,
   deleteSuggest: `${api}/material_suggestion/price_suggestions/delete`,
   confirm: `${api}/material_suggestion/price_suggestions/confirm`,
+  approve: `${api}/material_suggestion/approval`,
 };
 
 // Nguyên vật liệu

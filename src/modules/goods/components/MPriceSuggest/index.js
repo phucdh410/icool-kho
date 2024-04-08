@@ -12,18 +12,16 @@ import { getMaterialSuggestByCode } from "src/apis/material_suggest.api";
 import { useQuery } from "react-query";
 
 export const MPriceSuggest = forwardRef(
-  ({ isShowTable = true, refetch }, ref) => {
+  ({ isShowTable = true, refetch, code }, ref) => {
     //#region Data
     const formRef = useRef(null);
 
     const [open, setOpen] = useState(false);
 
-    const [code, setCode] = useState(null);
-
     const { data: response, refetch: tableRefetch } = useQuery({
-      queryKey: ["material-suggest-detail"],
+      queryKey: ["material-suggest-detail", code, open],
       queryFn: () => getMaterialSuggestByCode(code),
-      enabled: !!code,
+      enabled: !!code && open,
     });
 
     const suppliers = useMemo(() => {
@@ -42,10 +40,7 @@ export const MPriceSuggest = forwardRef(
     //#endregion
 
     useImperativeHandle(ref, () => ({
-      open: (code) => {
-        setCode(code);
-        setOpen(true);
-      },
+      open: () => setOpen(true),
     }));
 
     //#region Render

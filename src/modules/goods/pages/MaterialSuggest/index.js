@@ -17,6 +17,7 @@ import {
   removeMaterialSuggest,
   getMaterialSuggestByCode,
   exportExcelMaterialSuggest,
+  approveMaterialSuggest,
 } from "src/apis/material_suggest.api";
 import { isSuccess } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
@@ -133,9 +134,21 @@ const MaterialList = () => {
   };
 
   const onSuggest = () => {
-    if (selected.length === 1) {
-      const _code = selected[0]?.code;
-      modalRef.current?.open(_code);
+    modalRef.current?.open();
+  };
+
+  const onApprove = async () => {
+    try {
+      const code = selected[0]?.code;
+
+      await approveMaterialSuggest(code);
+
+      refetch();
+      setStatus(0);
+      ref.current.clear();
+      noti("success", "Thành công");
+    } catch (error) {
+      console.log(error);
     }
   };
   //#endregion
@@ -158,15 +171,26 @@ const MaterialList = () => {
             onSave={onSave}
             onExport={onExport}
             CustomFeatures={
-              <>
-                <CButton
-                  className="btn-primary"
-                  disabled={!(selected?.length === 1 && status !== 2)}
-                  onClick={onSuggest}
-                >
-                  Đề Xuất Giá
-                </CButton>
-              </>
+              status ? (
+                <>
+                  <CButton className="btn-danger" onClick={() => {}}>
+                    Từ chối
+                  </CButton>
+                  <CButton className="btn-primary" onClick={onApprove}>
+                    Duyệt
+                  </CButton>
+                </>
+              ) : (
+                <>
+                  <CButton
+                    className="btn-primary"
+                    disabled={!(selected?.length === 1 && status !== 2)}
+                    onClick={onSuggest}
+                  >
+                    Đề Xuất Giá
+                  </CButton>
+                </>
+              )
             }
           />
         </CCardBody>
@@ -204,7 +228,7 @@ const MaterialList = () => {
         </CCol>
       </CRow>
 
-      <MPriceSuggest ref={modalRef} />
+      <MPriceSuggest ref={modalRef} code={selected?.[0]?.code} />
     </>
   );
 };
