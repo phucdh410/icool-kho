@@ -234,6 +234,8 @@ const navigation = [
       Solution.Create.path,
       Solution.Update.path,
       Solution.Print.path,
+      Solution.Transfer.path,
+      Solution.TransferCreate.path,
     ],
     _children: [
       {
@@ -281,6 +283,30 @@ const navigation = [
           {
             code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
             permission: PERMISSION_VALUE.UPDATE,
+          },
+        ],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Solution.Transfer.name,
+        to: Solution.Transfer.path,
+        childrens: [Solution.Transfer.path],
+        required: [
+          {
+            code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+            permission: PERMISSION_VALUE.READ,
+          },
+        ],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Solution.TransferCreate.name,
+        to: Solution.TransferCreate.path,
+        childrens: [Solution.TransferCreate.path],
+        required: [
+          {
+            code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+            permission: PERMISSION_VALUE.READ,
           },
         ],
       },
@@ -372,7 +398,14 @@ const navigation = [
       { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
       { code: ENTITY_GROUP_CODE.MATERIAL },
     ],
-    childrens: [Material.Category.path, Material.List.path],
+    childrens: [
+      Material.Category.path,
+      Material.List.path,
+      Material.Industry.path,
+      Material.Category.path,
+      Material.Type.path,
+      Material.Suggest.path,
+    ],
     _children: [
       {
         _tag: "CSidebarNavItem",

@@ -104,6 +104,24 @@ export const Solution = {
     name: "In phiếu đề xuất",
     path: "/solution/print",
   },
+  Transfer: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS Phiếu Luân Chuyển",
+    path: "/solution/transfer/list",
+  },
+  TransferCreate: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.CREATE,
+    },
+    icon: "",
+    name: "Tạo Phiếu luân chuyển",
+    path: "/solution/transfer/form",
+  },
 };
 
 export const Import = {
