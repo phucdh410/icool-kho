@@ -25,10 +25,6 @@ const SidebarNavDropdown = ({ children, childrens, required, ...rest }) => {
     "sidebar-dropdown-custom",
     childrens?.find((c) => matchPath(pathname, c)) && "c-active"
   );
-  console.log(rest);
-  console.log(childrens);
-  console.log(childrens?.find((c) => matchPath(pathname, c)));
-  console.log(_class);
 
   const canAccess = useMemo(
     () =>
