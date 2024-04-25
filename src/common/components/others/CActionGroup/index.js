@@ -20,6 +20,7 @@ const ActionGroup = ({
   canPrint,
   onClick,
   hideSaveBtn = false,
+  hideEditBtn = false,
 }) => {
   const click = useCallback((state) => () => onClick(state), [onClick]);
 
@@ -33,14 +34,16 @@ const ActionGroup = ({
       >
         Thêm
       </CButton>
-      <CButton
-        icon={status === 3 ? <XCircle /> : <EditPencil />}
-        disabled={!canEdit}
-        color={status === 3 ? "danger" : "primary"}
-        onClick={click("edit")}
-      >
-        Sửa
-      </CButton>
+      {!hideEditBtn && (
+        <CButton
+          icon={status === 3 ? <XCircle /> : <EditPencil />}
+          disabled={!canEdit}
+          color={status === 3 ? "danger" : "primary"}
+          onClick={click("edit")}
+        >
+          Sửa
+        </CButton>
+      )}
       {!hideSaveBtn && (
         <CButton icon={<Save />} disabled={!canSave} onClick={click("save")}>
           Lưu

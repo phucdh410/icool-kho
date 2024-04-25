@@ -40,8 +40,6 @@ export default ({ isLoading, edit, data, onSubmit }) => {
 
   const [isUpdated, setIsUpdated] = useState(false);
 
-  const [current, setCurrentTab] = useState(false);
-
   const [materials, setMaterials] = useState([]);
 
   const materialSelected = useMemo(
@@ -76,15 +74,10 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   };
 
   const onAdd = () => {
-    current
-      ? setGoods([
-          ...goods,
-          { id: UID("good_"), code: "", quantity: 0, total: 0, note: "" },
-        ])
-      : setMaterials([
-          ...materials,
-          { id: UID("material_"), code: "", quantity: 0, total: 0, note: "" },
-        ]);
+    setMaterials([
+      ...materials,
+      { id: UID("material_"), code: "", quantity: 1, total: 0, note: "" },
+    ]);
   };
 
   const onSave = () => {
@@ -106,9 +99,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   };
 
   const onRemove = () => {
-    current
-      ? setGoods(goods.filter((g) => !g.check))
-      : setMaterials(materials.filter((m) => !m.check));
+    setMaterials(materials.filter((m) => !m.check));
   };
 
   const onCorrectQuantity = () => {
@@ -143,46 +134,17 @@ export default ({ isLoading, edit, data, onSubmit }) => {
             onAdd={onAdd}
             onSave={onSave}
             onRemove={onRemove}
-            canRemove={current ? goodSelected.length : materialSelected.length}
+            canRemove={materialSelected.length}
             onCorrectQuantity={onCorrectQuantity}
           />
         </CCardBody>
       </CCard>
       <CCard>
-        <CCardHeader className="p-0 tabs border-0">
-          <ul className="nav nav-tabs modules">
-            <li className="nav-item">
-              <span
-                className={classNames(
-                  "nav-link text-center px-4",
-                  !current && "active"
-                )}
-                style={{ minWidth: "200px" }}
-                onClick={() => setCurrentTab(false)}
-              >
-                Nguyên Vật Liệu
-              </span>
-            </li>
-            <li className="nav-item">
-              <span
-                className={classNames(
-                  "nav-link text-center px-4",
-                  current && "active"
-                )}
-                style={{ minWidth: "200px" }}
-                onClick={() => setCurrentTab(true)}
-              >
-                Hàng hóa
-              </span>
-            </li>
-          </ul>
-        </CCardHeader>
-        <CCardBody className="px-0 pt-0">
+        <CCardBody className="px-0 pt-4">
           <div className="tab-content">
             <div
               className={classNames(
-                "table-responsive tab-pane fade",
-                !current && "show active"
+                "table-responsive tab-pane fade show active"
               )}
             >
               <Material
@@ -191,20 +153,6 @@ export default ({ isLoading, edit, data, onSubmit }) => {
                 isLoading={isLoading}
                 data={materials}
                 onChange={(data) => setMaterials(data)}
-              />
-            </div>
-            <div
-              className={classNames(
-                "table-responsive tab-pane fade",
-                current && "show active"
-              )}
-            >
-              <Good
-                edit={edit}
-                isLoading={isLoading}
-                storeCode={watch("storeCode")}
-                data={goods}
-                onChange={(data) => setGoods(data)}
               />
             </div>
           </div>

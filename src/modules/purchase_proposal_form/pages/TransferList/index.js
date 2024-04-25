@@ -139,7 +139,6 @@ const TransferList = () => {
         </CCardBody>
       </CCard>
       <CCard>
-        {/* aaaaaa */}
         <CCardHeader></CCardHeader>
         <CCardBody className="px-0 pt-0">
           <Table

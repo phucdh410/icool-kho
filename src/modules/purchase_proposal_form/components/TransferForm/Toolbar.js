@@ -6,7 +6,7 @@ import { CRow, CCol, CCollapse } from "@coreui/react";
 import { CActionGroup } from "_components/others";
 import { CButton, CInput, CSelect, CDate } from "_components/controls";
 
-import CCheckbox from "../../components/Checkbox";
+import CCheckbox from "../Checkbox";
 
 import { getAll } from "../../queries-fn/store.query";
 import { checkSave, checkUpdated } from "src/apis/purchase_proposal_form.api";
@@ -29,7 +29,6 @@ export default ({
   onSave,
   onRemove,
   onCorrectQuantity,
-  hideEditBtn,
 }) => {
   //#region Data
   const [autoSuggest, setAutoSuggest] = useState(false);
@@ -139,39 +138,39 @@ export default ({
               canSave={isSave}
               canEdit={false}
               canRemove={canRemove}
-              hideEditBtn={hideEditBtn}
+              hideEditBtn
             />
           </div>
-          {!edit && (
-            <div>
-              <CButton onClick={correct}>Cập nhật định lượng</CButton>
-            </div>
-          )}
-          <div
-            className={classNames(
-              "btn",
-              "btn-primary",
-              "btn-collapse",
-              "extend",
-              status == 1 && "show"
-            )}
-            onClick={toggleCollapse}
-          ></div>
         </CCol>
       </CRow>
       <CCollapse show={status === 1}>
         <CRow className="mt-3">
-          <CCol xs="12" sm="12" md="4" lg="3" xl="3" xxl="2">
+          <CCol xs="12" sm="12" md="4" lg="2">
             <CInput value={watch("code")} disabled label="Số đơn hàng" />
           </CCol>
-          <CCol xs="12" sm="12" md="4" lg="3" xl="3" xxl="3">
+          <CCol xs="12" sm="12" md="4" lg="2">
             <Controller
-              name="storeCode"
+              name="transfer_date"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => <CDate label="Ngày giao" {...field} />}
+            />
+          </CCol>
+          <CCol xs="12" sm="12" md="12" lg="12" xl="2">
+            <Controller
+              name="reason"
+              control={control}
+              render={({ field }) => <CInput label="Ghi chú" {...field} />}
+            />
+          </CCol>
+          <CCol xs="12" sm="12" md="4" lg="3" xl="3">
+            <Controller
+              name="from_code"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <CSelect
-                  label="Chi nhánh"
+                  label="Chi nhánh chuyển"
                   options={stores}
                   {...field}
                   onChange={onStoreSelect}
@@ -179,49 +178,19 @@ export default ({
               )}
             />
           </CCol>
-          <CCol xs="12" sm="12" md="4" lg="3" xl="2" xxl="2">
+          <CCol xs="12" sm="12" md="4" lg="3" xl="3">
             <Controller
-              name="issueDate"
+              name="to_code"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => <CDate label="Ngày giao" {...field} />}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="12" lg="12" xl="4" xxl="5">
-            <Controller
-              name="reason"
-              control={control}
-              render={({ field }) => <CInput label="Ghi chú" {...field} />}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="6" lg="6" xl="6" xxl="5">
-            <CInput
-              value={watch("storeAddress") || ""}
-              readOnly
-              label="Địa chỉ"
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="6" lg="3" xl="2" xxl="2">
-            <CInput
-              value={watch("storePhone") || ""}
-              readOnly
-              label="Số điện thoại"
-            />
-          </CCol>
-          <CCol
-            xs="12"
-            sm="12"
-            md="12"
-            lg="6"
-            xl="4"
-            xxl="5"
-            className="btn-search"
-          >
-            <CCheckbox
-              value={autoSuggest}
-              disabled={!isUpdated}
-              onChange={toggleAutoSuggest}
-              label="Hệ thống tự động đề xuất Nguyên Vật Liệu"
+              render={({ field }) => (
+                <CSelect
+                  label="Chi nhánh nhận"
+                  options={stores}
+                  {...field}
+                  onChange={onStoreSelect}
+                />
+              )}
             />
           </CCol>
         </CRow>
