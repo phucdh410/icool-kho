@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { money } from "src/utils/funcs";
 
 export default ({ data, ignore, options, onChange, onSelect }) => {
-  const { watch, setValue, getValues, control, handleSubmit } = useForm({
+  const { watch, setValue, getValues, control } = useForm({
     defaultValues: data,
   });
 
