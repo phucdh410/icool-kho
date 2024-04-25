@@ -5,30 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { money } from "src/utils/funcs";
 
-export default ({ data, ignore, options, onChange, onSelect }) => {
-  const { watch, setValue, getValues, control } = useForm({
-    defaultValues: data,
-  });
-
-  const total = useMemo(() => {
-    return watch("price") * watch("quantity") || 0;
-  }, [watch("price"), watch("quantity")]);
-
-  const change = useCallback(({ data }) => {
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
-    onChange(getValues());
-  });
-
-  const onNumberChange = useCallback((value) => {
-    setValue("quantity", value);
-    onChange(getValues());
-  });
-
-  const onNoteChange = useCallback((value) => {
-    setValue("note", value);
-    onChange(getValues());
-  });
-
+export default ({ data, options, onSelect, index }) => {
   return (
     <tr>
       <td className="px-2">
@@ -53,11 +30,8 @@ export default ({ data, ignore, options, onChange, onSelect }) => {
         />
       </td>
       <td className="px-2">
-        <CInput readOnly value={watch("boughtUnit") || ""} />
-      </td>
-      <td className="px-2">
         <Controller
-          name="quantity"
+          name="amount"
           control={control}
           render={({ field }) => (
             <CNumber

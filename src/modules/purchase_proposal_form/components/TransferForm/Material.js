@@ -1,26 +1,16 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import Row from "./Row";
 
 export default ({ materials, data, onChange }) => {
   //#region Data
-  const ignore = useMemo(
-    () => data.filter((d) => d.code !== "").map((d) => d.code),
-    [data]
-  );
+  const [selectedList, setSelectedList] = useState([]);
   //#endregion
 
   //#region Event
-  const change = (index) => (_data) => {
-    const _new = [...data];
-    _new[index] = _data;
-    onChange(_new);
-  };
-
-  const select = (index) => (v) => {
-    const _new = [...data];
-    _new[index] = { ..._new[index], check: v };
-    onChange(_new);
+  const onSelect = (index, checkStatus) => {
+    if (check) {
+    }
   };
   //#endregion
 
@@ -40,9 +30,6 @@ export default ({ materials, data, onChange }) => {
           >
             Tên MH
           </th>
-          <th style={{ width: "10%", minWidth: "150px", paddingRight: "24px" }}>
-            ĐVT
-          </th>
           <th style={{ width: "10%", minWidth: "100px", paddingRight: "24px" }}>
             Số lượng
           </th>
@@ -61,11 +48,9 @@ export default ({ materials, data, onChange }) => {
         {data.map((d, index) => (
           <Row
             key={d.id || d.code}
-            data={d}
             options={materials}
-            ignore={ignore}
-            onChange={change(index)}
             onSelect={select(index)}
+            index={index}
           />
         ))}
       </tbody>
