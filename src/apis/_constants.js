@@ -250,6 +250,12 @@ export const MATERIAL = {
   create: `${api}/materials/create`,
   update: `${api}/materials/update`,
   delete: `${api}/materials/delete`,
+  getTransferMaterials: `${api}/materials/transfer-forms`,
+  createTransfer: `${api}/transfer-forms/create`,
+  updateTransfer: `${api}/transfer-forms/update`,
+  getTransferById: `${api}/transfer-forms/getById`,
+  getAllTransfers: `${api}/transfer-forms`,
+  deleteTransfer: `${api}/transfer-forms/delete`,
 };
 
 export const ROLE = {

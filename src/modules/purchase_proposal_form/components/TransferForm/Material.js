@@ -1,17 +1,34 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import Row from "./Row";
+import { useWatch } from "react-hook-form";
+import { useQuery } from "react-query";
+import { getAllTransferMaterials } from "src/apis/material.api";
 
-export default ({ materials, data, onChange }) => {
+export default ({ control, fields, update }) => {
   //#region Data
-  const [selectedList, setSelectedList] = useState([]);
+  const fromStoreValue = useWatch({ control, name: "store_from" });
+  const toStoreValue = useWatch({ control, name: "store_to" });
+
+  const { data: response, isFetching } = useQuery({
+    queryKey: ["transfer-materials", fromStoreValue, toStoreValue],
+    queryFn: () =>
+      getAllTransferMaterials({
+        storeFrom: fromStoreValue,
+        storeTo: toStoreValue,
+      }),
+    enabled: !!fromStoreValue && !!toStoreValue,
+  });
+
+  const materials = useMemo(
+    () =>
+      response?.data?.map((e) => ({ ...e, label: e?.name, value: e?.id })) ||
+      [],
+    [response]
+  );
   //#endregion
 
   //#region Event
-  const onSelect = (index, checkStatus) => {
-    if (check) {
-    }
-  };
   //#endregion
 
   //#region Render
@@ -22,7 +39,7 @@ export default ({ materials, data, onChange }) => {
           <th
             style={{ width: "50px", paddingLeft: "20px", paddingRight: "24px" }}
           ></th>
-          <th style={{ width: "8%", minWidth: "150px", paddingRight: "24px" }}>
+          <th style={{ width: "8%", minWidth: "250px", paddingRight: "24px" }}>
             Mã MH
           </th>
           <th
@@ -45,14 +62,21 @@ export default ({ materials, data, onChange }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((d, index) => (
-          <Row
-            key={d.id || d.code}
-            options={materials}
-            onSelect={select(index)}
-            index={index}
-          />
-        ))}
+        {!isFetching ? (
+          fields.map((d, index) => (
+            <Row
+              key={d.__id}
+              options={materials}
+              index={index}
+              control={control}
+              update={update}
+            />
+          ))
+        ) : (
+          <tr style={{ height: "200px" }}>
+            <td colSpan={7}></td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

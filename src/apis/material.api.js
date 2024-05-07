@@ -1,57 +1,83 @@
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
+import { map, post, FORM_HEADER_ENCODED, get } from "src/utils/axios";
 
 import { INVENTORY_SLIP, MATERIAL } from "./_constants";
 
 import { Materials } from "_models/material.model";
 
 export const getAll = async (params) => {
-	return await map(({ data }) => data.map((d) => new Materials(d))).get(
-		MATERIAL.getAll,
-		{ params }
-	);
+  return await map(({ data }) => data.map((d) => new Materials(d))).get(
+    MATERIAL.getAll,
+    { params }
+  );
 };
 export const getAllByUser = async ({ storeCode, ...params }) => {
-	return await map(({ data }) => data.map((d) => new Materials(d))).get(
-		`${MATERIAL.getAllByUser}/${storeCode}`,
-		{ params }
-	);
+  return await map(({ data }) => data.map((d) => new Materials(d))).get(
+    `${MATERIAL.getAllByUser}/${storeCode}`,
+    { params }
+  );
 };
 
 export const getAllUnCheckByStore = async (params) => {
-	return await map(({ data }) => data.map((d) => new Materials(d))).get(
-		`${INVENTORY_SLIP.getMaterial}`,
-		{ params }
-	);
+  return await map(({ data }) => data.map((d) => new Materials(d))).get(
+    `${INVENTORY_SLIP.getMaterial}`,
+    { params }
+  );
 };
 
 export const getByGroup = async (code) => {
-	return await map(({ data }) => data.map((d) => new Materials(d))).get(
-		`${MATERIAL.getByGroupCode}/${code}`
-	);
+  return await map(({ data }) => data.map((d) => new Materials(d))).get(
+    `${MATERIAL.getByGroupCode}/${code}`
+  );
 };
 export const getByCode = async (code) =>
-	await map(({ data }) => data).get(`${MATERIAL.getByCode}/${code}`);
+  await map(({ data }) => data).get(`${MATERIAL.getByCode}/${code}`);
 
 export const create = async (data) => {
-	const params = new URLSearchParams();
+  const params = new URLSearchParams();
 
-	Object.keys(data).forEach((key) => params.append(key, data[key]));
+  Object.keys(data).forEach((key) => params.append(key, data[key]));
 
-	return await post(MATERIAL.create, params, FORM_HEADER_ENCODED);
+  return await post(MATERIAL.create, params, FORM_HEADER_ENCODED);
 };
 
 export const update = async (data) => {
-	const params = new URLSearchParams();
+  const params = new URLSearchParams();
 
-	Object.keys(data).forEach((key) => params.append(key, data[key]));
+  Object.keys(data).forEach((key) => params.append(key, data[key]));
 
-	return await post(MATERIAL.update, params, FORM_HEADER_ENCODED);
+  return await post(MATERIAL.update, params, FORM_HEADER_ENCODED);
 };
 
 export const remove = async (codes) => {
-	const params = new URLSearchParams();
+  const params = new URLSearchParams();
 
-	params.append("listCode", codes.join(","));
+  params.append("listCode", codes.join(","));
 
-	return await post(MATERIAL.delete, params, FORM_HEADER_ENCODED);
+  return await post(MATERIAL.delete, params, FORM_HEADER_ENCODED);
+};
+
+export const getAllTransferMaterials = async (params) => {
+  return await get(MATERIAL.getTransferMaterials, { params });
+};
+
+export const createTransfer = async (body) => {
+  return await post(MATERIAL.createTransfer, body);
+};
+
+export const getTransferById = async (id) =>
+  await map(({ data }) => data).get(`${MATERIAL.getTransferById}/${id}`);
+
+export const updateTransfer = async (body) => {
+  return await post(MATERIAL.updateTransfer, body);
+};
+
+export const deleteTransfer = async (id) => {
+  return await post(MATERIAL.deleteTransfer, { id });
+};
+
+export const getAllTransfers = async (params) => {
+  return await map(({ data }) => data.map((d) => d)).get(
+    MATERIAL.getAllTransfers,
+    { params }
+  );
 };

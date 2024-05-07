@@ -1,4 +1,3 @@
-import { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -6,21 +5,12 @@ import { CCard, CCardBody } from "@coreui/react";
 
 import Toolbar from "./Toolbar";
 import Material from "./Material";
-import Dialog from "./Dialog";
 
-import { isSuccess, UID } from "src/utils/funcs";
-import { ERROR_MESSAGE } from "src/configs/constant";
+import { isSuccess } from "src/utils/funcs";
 
-import { getAutoSuggest } from "src/apis/purchase_proposal_form.api";
-import { getAll as getAllMaterials } from "../../queries-fn/material.query";
-
-const MOCK_NVL = [
-  { id: "1", value: "1", label: "Đậu phộng" },
-  { id: "2", value: "2", label: "Bánh phòng tôm" },
-  { id: "3", value: "3", label: "Cá viên chiên" },
-  { id: "4", value: "4", label: "Tôm rang muối ớt" },
-  { id: "5", value: "5", label: "Chả giò" },
-];
+import { createTransfer, updateTransfer } from "src/apis/material.api";
+import { useEffect } from "react";
+import dayjs from "dayjs";
 
 const defaultValues = {
   date: new Date(),
@@ -30,18 +20,25 @@ const defaultValues = {
   materials: [],
 };
 
-export default ({ isLoading, edit, data, onSubmit }) => {
+export default ({ isLoading, edit, data }) => {
   //#region Data
-  const { control, watch, getValues, setValue, clearErrors, handleSubmit } =
-    useForm({
-      mode: "all",
-      defaultValues,
-    });
+  const { control, watch, setValue, reset, handleSubmit } = useForm({
+    mode: "all",
+    defaultValues,
+  });
 
-  const { fields, append, remove, update } = useFieldArray({
+  const { fields, update, append, remove, replace } = useFieldArray({
     control,
     name: "materials",
     keyName: "__id",
+  });
+
+  const watchFieldArray = watch("materials");
+  const controlledFields = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchFieldArray[index],
+    };
   });
   //#endregion
 
@@ -49,25 +46,65 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   const onAdd = () => {
     append({
       material_id: "",
+      check: false,
       code: "",
       amount: 1,
       price: 0,
+      total: 0,
       note: "",
     });
   };
 
   const onSave = () => {
-    clearErrors();
-    handleSubmit(
-      (values) => {
-        console.log(values);
-      },
-      (e) => noti("error", e)
-    )();
+    handleSubmit(async (values) => {
+      if (edit) {
+        const res = await updateTransfer(values);
+        if (isSuccess(res)) {
+          reset(defaultValues);
+          noti("success", "Sửa phiếu luân chuyển thành công!");
+          history.push("/solution/transfer/list");
+        } else {
+          noti("error", "Sửa phiếu luân chuyển không thành công!");
+        }
+      } else {
+        const res = await createTransfer(values);
+        if (isSuccess(res)) {
+          reset(defaultValues);
+          noti("success", "Thêm phiếu luân chuyển thành công!");
+        } else {
+          noti("error", "Thêm phiếu luân chuyển không thành công!");
+        }
+      }
+    })();
   };
 
-  const onRemove = () => {};
+  const onRemove = () => {
+    const listIndex = [];
+    controlledFields.forEach((e, index) => {
+      if (e?.check) {
+        listIndex.push(index);
+      }
+    });
+    remove(listIndex);
+  };
   //#endregion
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        id: data?.id,
+        code: data?.code,
+        date: dayjs(data?.date)?.$d,
+        note: data?.note,
+        store_from: data?.store_from?.code,
+        store_to: data?.store_to?.code,
+      });
+
+      if (data?.materials && data.materials?.length) {
+        replace(data.materials);
+      }
+    }
+  }, [data]);
 
   //#region Render
   return (
@@ -82,14 +119,8 @@ export default ({ isLoading, edit, data, onSubmit }) => {
             onAdd={onAdd}
             onSave={onSave}
             onRemove={onRemove}
+            canRemove
           />
-          <button
-            onClick={() => {
-              console.log(getValues());
-            }}
-          >
-            CLick
-          </button>
         </CCardBody>
       </CCard>
 
@@ -101,7 +132,11 @@ export default ({ isLoading, edit, data, onSubmit }) => {
                 "table-responsive tab-pane fade show active"
               )}
             >
-              <Material edit={edit} isLoading={isLoading} data={fields} />
+              <Material
+                control={control}
+                fields={controlledFields}
+                update={update}
+              />
             </div>
           </div>
         </CCardBody>

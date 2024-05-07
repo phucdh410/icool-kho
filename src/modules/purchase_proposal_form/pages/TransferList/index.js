@@ -16,10 +16,12 @@ import {
 import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
 
 import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { isCentral, isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
 import { setFilter } from "src/common/actions/config.action";
+import { getAllTransfers } from "src/common/queries-fn/material.query";
+import { deleteTransfer } from "src/apis/material.api";
 
 const selectData = createSelector(
   (state) => state.config,
@@ -41,7 +43,7 @@ const TransferList = () => {
 
   const [status, setStatus] = useState(0);
 
-  const { data, set, refetch } = getAll(filters, isLoading, {
+  const { data, set, refetch } = getAllTransfers(filters, isLoading, {
     onSuccess: () => setFetching(false),
   });
 
@@ -86,7 +88,7 @@ const TransferList = () => {
 
   const onEdit = useCallback(() => {
     if (selected.length === 1)
-      history.push(`/solution/form/${selected[0].code}`);
+      history.push(`/solution/transfer/form/${selected[0].id}`);
   });
 
   const onApprove = useCallback((status) => async () => {
@@ -107,7 +109,7 @@ const TransferList = () => {
   const onRemove = useCallback(async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
+      const res = await deleteTransfer(selected?.[0]?.id);
 
       if (isSuccess(res)) {
         refetch();

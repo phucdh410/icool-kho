@@ -1,62 +1,98 @@
-import { useCallback, useMemo } from "react";
+import { useEffect } from "react";
 
 import { CCheckbox, CInput, CSelect, CNumber } from "_components/controls";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useController, useWatch } from "react-hook-form";
 
-import { money } from "src/utils/funcs";
+export default ({ options, control, index, update }) => {
+  //#region Data
+  const amountValue = useWatch({ control, name: `materials.${index}.amount` });
+  const priceValue = useWatch({ control, name: `materials.${index}.price` });
 
-export default ({ data, options, onSelect, index }) => {
+  const {
+    field: { onChange: changeTotal },
+  } = useController({ control, name: `materials.${index}.total` });
+  //#endregion
+
+  //#region Event
+  const onMaterialChange = (option) => {
+    update(index, {
+      check: false,
+      material_id: option?.id,
+      code: option?.code,
+      amount: 1,
+      price: option?.price || 0,
+      total: option?.price || 0,
+      note: "",
+    });
+  };
+  //#endregion
+
+  useEffect(() => {
+    changeTotal(Number(amountValue) * Number(priceValue));
+  }, [amountValue, priceValue]);
+
+  //#region Render
   return (
     <tr>
       <td className="px-2">
-        <CCheckbox value={data.check} onChange={onSelect} />
-      </td>
-      <td className="px-2">
-        <CInput readOnly value={watch("code") || ""} />
+        <Controller
+          control={control}
+          name={`materials.${index}.check`}
+          render={({ field: { value, ...fields } }) => (
+            <CCheckbox value={!!value} {...fields} />
+          )}
+        />
       </td>
       <td className="px-2">
         <Controller
-          name="code"
           control={control}
+          name={`materials.${index}.code`}
+          render={({ field }) => <CInput readOnly {...field} />}
+        />
+      </td>
+      <td className="px-2">
+        <Controller
+          control={control}
+          name={`materials.${index}.material_id`}
           render={({ field }) => (
             <CSelect
               className="text-left"
               options={options}
-              ignore={ignore}
               {...field}
-              onChange={change}
+              onChange={onMaterialChange}
             />
           )}
         />
       </td>
       <td className="px-2">
         <Controller
-          name="amount"
           control={control}
-          render={({ field }) => (
-            <CNumber
-              min="1"
-              max={watch("max") || 2000}
-              {...field}
-              onChange={onNumberChange}
-            />
-          )}
+          name={`materials.${index}.amount`}
+          render={({ field }) => <CNumber min="1" max={2000} {...field} />}
         />
       </td>
       <td className="px-2">
-        <CInput readOnly value={money(watch("price")) || 0} />
-      </td>
-      <td className="px-2">
-        <CInput readOnly value={money(total)} />
+        <Controller
+          control={control}
+          name={`materials.${index}.price`}
+          render={({ field }) => <CNumber readOnly {...field} />}
+        />
       </td>
       <td className="px-2">
         <Controller
-          name="note"
           control={control}
-          defaultValue=""
-          render={({ field }) => <CInput {...field} onChange={onNoteChange} />}
+          name={`materials.${index}.total`}
+          render={({ field }) => <CNumber readOnly {...field} />}
+        />
+      </td>
+      <td className="px-2">
+        <Controller
+          control={control}
+          name={`materials.${index}.note`}
+          render={({ field }) => <CInput {...field} />}
         />
       </td>
     </tr>
   );
+  //#endregion
 };

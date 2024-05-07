@@ -7,6 +7,7 @@ const PurchaseProposalFormPrint = lazy(() => import("./Print"));
 const QuantitativeListPage = lazy(() => import("./QuantitativeList"));
 const TransferListPage = lazy(() => import("./TransferList"));
 const TransferCreatePage = lazy(() => import("./TransferCreate"));
+const TransferUpdatePage = lazy(() => import("./TransferUpdate"));
 
 export {
   PurchaseProposalFormList,
@@ -16,4 +17,5 @@ export {
   QuantitativeListPage,
   TransferListPage,
   TransferCreatePage,
+  TransferUpdatePage,
 };

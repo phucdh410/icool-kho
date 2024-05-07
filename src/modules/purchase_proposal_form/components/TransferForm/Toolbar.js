@@ -49,6 +49,7 @@ export default ({
             <CActionGroup
               onClick={onClick}
               canAdd={true}
+              canSave={true}
               canEdit={false}
               canRemove={canRemove}
               hideEditBtn

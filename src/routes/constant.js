@@ -122,6 +122,15 @@ export const Solution = {
     name: "Tạo Phiếu luân chuyển",
     path: "/solution/transfer/form",
   },
+  TransferUpdate: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.CREATE,
+    },
+    icon: "",
+    name: "Sửa Phiếu luân chuyển",
+    path: "/solution/transfer/form/:id",
+  },
 };
 
 export const Import = {

@@ -10,6 +10,7 @@ import MPreview from "../../components/Preview";
 
 import { isCentral, money } from "../../../../utils/funcs";
 import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
+import dayjs from "dayjs";
 
 const selectStoreCode = createSelector(
   (state) => state.auth,
@@ -100,12 +101,12 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "storeName",
+      key: "store_from",
       label: "Chi nhánh chuyển",
       _style: { width: "250px", minWidth: "250px", textAlign: "start" },
     },
     {
-      key: "storeName",
+      key: "store_to",
       label: "Chi nhánh nhận",
       _style: { width: "250px", minWidth: "250px", textAlign: "start" },
     },
@@ -115,12 +116,12 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "created_at",
+      key: "created_date",
       label: "Ngày tạo",
       _style: { width: "150px", minWidth: "150px" },
     },
     {
-      key: "creator",
+      key: "created_by",
       label: "Người tạo",
       _style: { width: "200px", minWidth: "200px" },
     },
@@ -133,7 +134,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       },
     },
     {
-      key: "reason",
+      key: "note",
       label: "Ghi chú",
       _style: { width: "auto", minWidth: "350px", textAlign: "start" },
     },
@@ -156,10 +157,15 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         </a>
       </td>
     ),
-    total: ({ total }) => <td className="text-right">{money(total)}</td>,
     status: ({ status }) => mapStatus(status),
-    storeName: ({ storeName }) => <td className="text-left">{storeName}</td>,
-    reason: ({ reason }) => <td className="text-left">{reason}</td>,
+    created_date: ({ created_date }) => (
+      <td>{dayjs(created_date).format("DD/MM/YYYY")}</td>
+    ),
+    store_from: ({ store_from }) => (
+      <td className="text-left">{store_from?.name}</td>
+    ),
+    store_to: ({ store_to }) => <td className="text-left">{store_to?.name}</td>,
+    note: ({ note }) => <td className="text-left">{note}</td>,
   };
 
   return (

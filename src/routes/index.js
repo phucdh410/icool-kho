@@ -28,6 +28,7 @@ import {
   PurchaseProposalFormPrint,
   TransferListPage,
   TransferCreatePage,
+  TransferUpdatePage,
 } from "_modules/purchase_proposal_form/pages";
 
 import {
@@ -256,6 +257,11 @@ const routes = [
     ...Solution.TransferCreate,
     exact: true,
     component: TransferCreatePage,
+  },
+  {
+    ...Solution.TransferUpdate,
+    exact: true,
+    component: TransferUpdatePage,
   },
   //#endregion
   //#region MATERIALS

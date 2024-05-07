@@ -11,54 +11,54 @@ import DatePicker from "react-datepicker";
 import { Calendar } from "_assets/icons";
 
 const CustomInput = forwardRef(
-	({ value, onClick, invalid, onChange, ...rest }, ref) => (
-		<>
-			<CInput
-				innerRef={ref}
-				onClick={onClick}
-				value={value}
-				onChange={onChange}
-				invalid={invalid}
-				autoComplete="off"
-				{...rest}
-			/>
-			<Calendar onClick={onClick} className="c-icon" />
-		</>
-	)
+  ({ value, onClick, invalid, onChange, ...rest }, ref) => (
+    <>
+      <CInput
+        innerRef={ref}
+        onClick={onClick}
+        value={value}
+        onChange={onChange}
+        invalid={invalid}
+        autoComplete="off"
+        {...rest}
+      />
+      <Calendar onClick={onClick} className="c-icon" />
+    </>
+  )
 );
 
 const InputDate = ({ label, onChange, className, value, ...rest }, ref) => {
-	const _class = classNames("c-input-date", className);
+  const _class = classNames("c-input-date", className);
 
-	const formatedDate = useMemo(
-		() => moment(value).format("DD/MM/yyyy"),
-		[value]
-	);
+  const formatedDate = useMemo(
+    () => moment(value).format("DD/MM/yyyy"),
+    [value]
+  );
 
-	return (
-		<CFormGroup className={_class}>
-			{label && (
-				<CLabel>
-					{label} {rest.required && <span className="text-danger">*</span>}
-				</CLabel>
-			)}
-			{rest.readOnly ? (
-				<CInput value={formatedDate} {...rest} />
-			) : (
-				<DatePicker
-					ref={ref}
-					selected={value}
-					onChange={onChange}
-					timeInputLabel={label}
-					dateFormat="dd/MM/yyyy"
-					placeholderText={rest.placeholder}
-					customInput={<CustomInput invalid={rest.invalid} />}
-					autoComplete="off"
-					{...rest}
-				/>
-			)}
-		</CFormGroup>
-	);
+  return (
+    <CFormGroup className={_class}>
+      {label && (
+        <CLabel>
+          {label} {rest.required && <span className="text-danger">*</span>}
+        </CLabel>
+      )}
+      {rest.readOnly ? (
+        <CInput value={formatedDate} {...rest} />
+      ) : (
+        <DatePicker
+          ref={ref}
+          selected={value}
+          onChange={onChange}
+          timeInputLabel={label}
+          dateFormat="dd/MM/yyyy"
+          placeholderText={rest.placeholder}
+          customInput={<CustomInput invalid={rest.invalid} />}
+          autoComplete="off"
+          {...rest}
+        />
+      )}
+    </CFormGroup>
+  );
 };
 
 export default forwardRef(InputDate);
