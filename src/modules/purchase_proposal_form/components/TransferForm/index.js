@@ -11,6 +11,7 @@ import { isSuccess } from "src/utils/funcs";
 import { createTransfer, updateTransfer } from "src/apis/material.api";
 import { useEffect } from "react";
 import dayjs from "dayjs";
+import { history } from "src/App";
 
 const defaultValues = {
   date: new Date(),

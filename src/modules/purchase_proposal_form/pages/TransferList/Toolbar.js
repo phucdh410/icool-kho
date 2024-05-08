@@ -76,7 +76,7 @@ export default ({
               canAdd={false}
               canSave={false}
               canEdit={selectedNo === 1}
-              canRemove={!!selectedNo}
+              canRemove={selectedNo === 1}
             />
           </div>
           <div>
