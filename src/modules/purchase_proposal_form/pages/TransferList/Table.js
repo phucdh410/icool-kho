@@ -50,38 +50,22 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Others
   const mapStatus = (status) => {
     switch (status) {
-      case -3:
+      case 0:
         return (
-          <td className="pr-4 font-weight-medium text-center text-danger">
+          <td className="pr-4 font-weight-medium text-center text-warning">
             Mới tạo
           </td>
         );
-      case -2:
-      case -1:
+      case 1:
+        return (
+          <td className="pr-4 font-weight-medium text-center text-success">
+            Đã xác nhận
+          </td>
+        );
+      default:
         return (
           <td className="pr-4 font-weight-medium text-center text-danger">
             Từ chối
-          </td>
-        );
-      case 1:
-        if (isCentral(storeCode)) {
-          return (
-            <td className="pr-4 font-weight-medium text-center text-warning">
-              Chờ xác nhận
-            </td>
-          );
-        }
-      case 2:
-        return (
-          <td className="pr-4 font-weight-medium text-center text-success">
-            Đã duyệt
-          </td>
-        );
-
-      default:
-        return (
-          <td className="pr-4 font-weight-medium text-center text-warning">
-            {isCentral(storeCode) ? "Chờ duyệt" : "Mới tạo"}
           </td>
         );
     }
@@ -111,7 +95,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "250px", minWidth: "250px", textAlign: "start" },
     },
     {
-      key: "status",
+      key: "approved_status",
       label: "Trạng thái",
       _style: { width: "200px", minWidth: "200px" },
     },
@@ -157,7 +141,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         </a>
       </td>
     ),
-    status: ({ status }) => mapStatus(status),
+    approved_status: ({ approved_status }) => mapStatus(approved_status),
     created_date: ({ created_date }) => (
       <td>{dayjs(created_date).format("DD/MM/YYYY")}</td>
     ),
