@@ -111,6 +111,7 @@ const routes = [
     component: InventoryCheckUpdate,
   },
   //#endregion
+
   //#region SLIP || Danh sách tồn kho
   {
     ...Inventory.Slip.List,
@@ -169,7 +170,25 @@ const routes = [
     component: InventoryCancelUpdate,
   },
   //#endregion
+
+  //#region Return || Trả hàng
+  {
+    ...Inventory.Return.List,
+    exact: true,
+    component: InventoryReturnList,
+  },
+  {
+    ...Inventory.Return.Create,
+    exact: true,
+    component: InventoryReturnCreate,
+  },
+  {
+    ...Inventory.Return.Update,
+    exact: true,
+    component: InventoryReturnUpdate,
+  },
   //#endregion
+
   //#region EXPORT
   {
     ...Export.List,
@@ -192,6 +211,7 @@ const routes = [
     component: ExportPrint,
   },
   //#endregion
+
   //#region IMPORT
   {
     ...Import.Material.List,
@@ -215,6 +235,7 @@ const routes = [
     component: ImportPrint,
   },
   //#endregion
+
   //#region USER
   {
     ...Profile["_"],
@@ -222,6 +243,7 @@ const routes = [
     component: MProfile,
   },
   //#endregion
+
   //#region PURCHASE PROPOSAL FORM
   {
     ...Solution.Quantitative,
@@ -264,6 +286,7 @@ const routes = [
     component: TransferUpdatePage,
   },
   //#endregion
+
   //#region MATERIALS
   {
     ...Material.Industry,
@@ -291,6 +314,7 @@ const routes = [
     component: MaterialComponent,
   },
   //#endregion
+
   //#region PERMISSION
   {
     ...Permission.Group,
@@ -308,6 +332,7 @@ const routes = [
     component: ConfigurationPermission,
   },
   //#endregion
+
   //#region Summary
   {
     ...Summary.Export,
