@@ -81,3 +81,7 @@ export const getAllTransfers = async (params) => {
     { params }
   );
 };
+
+export const updateTransferStatus = async (body) => {
+  return await post(MATERIAL.confirmTransfer, body);
+};

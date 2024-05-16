@@ -18,7 +18,6 @@ import { filter as filterFunc } from "src/utils/funcs";
 import { Can } from "src/utils/ability";
 
 export default ({
-  isApproving,
   isLoading,
   filter,
   status,
@@ -96,7 +95,7 @@ export default ({
                 className="btn-fill"
                 color="danger"
                 disabled={selectedNo !== 1}
-                onClick={onApprove(false)}
+                onClick={onApprove(2)}
                 icon={<XCircleFill />}
               >
                 Từ chối
@@ -110,7 +109,7 @@ export default ({
                 className="btn-fill"
                 color="success"
                 disabled={selectedNo !== 1}
-                onClick={onApprove(true)}
+                onClick={onApprove(1)}
                 icon={<TickCircleFill />}
               >
                 Xác nhận

@@ -256,6 +256,7 @@ export const MATERIAL = {
   getTransferById: `${api}/transfer-forms/getById`,
   getAllTransfers: `${api}/transfer-forms`,
   deleteTransfer: `${api}/transfer-forms/delete`,
+  confirmTransfer: `${api}/transfer-forms/confirm`,
 };
 
 export const ROLE = {

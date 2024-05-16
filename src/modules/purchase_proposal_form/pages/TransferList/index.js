@@ -21,7 +21,7 @@ import { isCentral, isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
 import { setFilter } from "src/common/actions/config.action";
 import { getAllTransfers } from "src/common/queries-fn/material.query";
-import { deleteTransfer } from "src/apis/material.api";
+import { deleteTransfer, updateTransferStatus } from "src/apis/material.api";
 
 const selectData = createSelector(
   (state) => state.config,
@@ -91,20 +91,22 @@ const TransferList = () => {
       history.push(`/solution/transfer/form/${selected[0].id}`);
   });
 
-  const onApprove = useCallback((status) => async () => {
+  const onApprove = (approved_status) => async () => {
     setFetching(true);
-    const res = await mutation.mutateAsync({
-      code: selected.map((s) => s.code),
-      status,
+    const res = await updateTransferStatus({
+      code: selected[0]?.code,
+      id: selected[0]?.id,
+      approved_status,
     });
-
     if (isSuccess(res)) {
       noti("success", res.message);
+      setFetching(false);
       refetch();
     } else {
-      setFetching(false);
+      noti("error", "Phiếu này đã bị từ chối/xác nhận.");
     }
-  });
+    setFetching(false);
+  };
 
   const onRemove = useCallback(async () => {
     const allow = await fireDelete();
@@ -126,7 +128,6 @@ const TransferList = () => {
       <CCard className="toolbar sticky">
         <CCardBody>
           <Toolbar
-            isApproving={mutation.isLoading}
             isLoading={isFetching}
             filter={filters}
             status={status}
