@@ -21,8 +21,8 @@ import { profile } from "src/apis/auth.api";
 
 import { setUser, setPermission, logout } from "_common/actions/auth.action";
 import { isEmpty } from "./utils/funcs";
-import { onMessageListener, requestPermission } from "./firebase";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { FirebaseRoot } from "src/firebase";
 
 export const history = createBrowserHistory();
 
@@ -57,18 +57,9 @@ const App = () => {
     }
   }, [profile]);
 
-  useEffect(() => {
-    requestPermission();
-    const unsubscribe = onMessageListener().then((payload) => {
-      toast((t) => <CNotification t={payload} />);
-    });
-    return () => {
-      unsubscribe.catch((err) => console.log("failed: ", err));
-    };
-  }, []);
-
   return (
     <Suspense fallback={<></>}>
+      <FirebaseRoot />
       <Router history={history}>
         <Switch>
           <AnonymusRoute
