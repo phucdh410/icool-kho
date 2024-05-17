@@ -22,3 +22,4 @@ export {
   CTable,
 };
 export * from "./CTag";
+export * from "./CNotification";
