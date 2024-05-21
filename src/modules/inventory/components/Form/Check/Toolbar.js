@@ -104,21 +104,6 @@ export default ({
         <CRow className="mt-3">
           <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
             <Controller
-              name="wareCode"
-              control={control}
-              render={({ field }) => (
-                <CSelect
-                  options={warehouses}
-                  label="Kho kiểm"
-                  required
-                  {...field}
-                  onChange={onSelectWarehouse}
-                />
-              )}
-            />
-          </CCol>
-          <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
-            <Controller
               name="createdBy"
               control={control}
               render={({ field }) => (
@@ -142,6 +127,21 @@ export default ({
                   label="Ngày kiểm"
                   required
                   {...field}
+                />
+              )}
+            />
+          </CCol>
+          <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
+            <Controller
+              name="wareCode"
+              control={control}
+              render={({ field }) => (
+                <CSelect
+                  options={warehouses}
+                  label="Kho kiểm"
+                  required
+                  {...field}
+                  onChange={onSelectWarehouse}
                 />
               )}
             />
