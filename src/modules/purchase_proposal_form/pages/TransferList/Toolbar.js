@@ -95,7 +95,7 @@ export default ({
                 className="btn-fill"
                 color="danger"
                 disabled={selectedNo !== 1}
-                onClick={onApprove(2)}
+                onClick={onApprove(-1)}
                 icon={<XCircleFill />}
               >
                 Từ chối
