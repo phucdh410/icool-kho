@@ -13,6 +13,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { logout } from "_common/actions/auth.action";
 import { cancel } from "src/utils/axios";
+import avt from "./profile.png";
 
 function LayoutAccount() {
   //#region Datas
@@ -36,7 +37,7 @@ function LayoutAccount() {
     >
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
-          <CImg className="c-avatar-img" src={user?.avatar} alt={user?.email} />
+          <CImg className="c-avatar-img" src={avt} alt={user?.email} />
         </div>
         <span>{user?.name || ""}</span>
       </CDropdownToggle>
