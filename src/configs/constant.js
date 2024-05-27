@@ -136,6 +136,10 @@ export const SUCCESS_MESSAGE = {
     CREATE: "Tạo phiếu kiểm kho thành công",
     UPDATE: "Cập nhật phiếu kiểm kho thành công",
   },
+  INVENTORY_RETURN: {
+    CREATE: "Tạo phiếu trả hàng thành công",
+    UPDATE: "Cập nhật phiếu trả hàng thành công",
+  },
   IMPORT: {
     CREATE: "Tạo phiếu nhập hàng thành công",
     UPDATE: "Cập nhật phiếu nhập hàng thành công",
