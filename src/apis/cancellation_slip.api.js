@@ -89,12 +89,6 @@ export const getPreview = async (code) =>
     `${CANCELLATION_SLIP.getPreview}/${code}`
   );
 
-export const update = async (data) => {
-  const form = createCancellationForm(data);
-
-  return await post(`${CANCELLATION_SLIP.update}`, form, FORM_HEADER_FORMDATA);
-};
-
 export const approve = async ({
   materials,
   code,
@@ -129,7 +123,13 @@ export const cancelApi = {
   create_material: async (body) => {
     return await post(`${api}/cancellation_slips/create/materials`, body);
   },
+  update_material: async (body) => {
+    return await post(`${api}/cancellation_slips/update/materials`, body);
+  },
   save_create: async (body) => {
     return await post(`${api}/cancellation_slips/create`, body);
+  },
+  save_update: async (body) => {
+    return await post(`${api}/cancellation_slips/update`, body);
   },
 };

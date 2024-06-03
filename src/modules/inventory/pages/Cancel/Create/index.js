@@ -26,19 +26,17 @@ const InventoryCancelCreate = () => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const payload = {
-        wareCode: data?.wareCode,
-        note: data?.note,
-        date: data?.date,
-        material_ids: data?.materials?.map((e) => e.id),
-      };
-      await cancelApi.save_create(payload);
-
+    const payload = {
+      wareCode: data?.wareCode,
+      note: data?.note,
+      date: data?.date,
+      material_ids: data?.materials?.map((e) => e.id),
+    };
+    const res = await cancelApi.save_create(payload);
+    if (res) {
       history.push("/inventory-cancel/list");
       noti("success", SUCCESS_MESSAGE.INVENTORY_CANCEL.UPDATE);
-    } catch (error) {
-      console.log("🚀 ~ onSubmit ~ error:", error);
+    } else {
       noti("error", ERROR_MESSAGE.INVENTORY_CANCEL.UPDATE);
     }
   };

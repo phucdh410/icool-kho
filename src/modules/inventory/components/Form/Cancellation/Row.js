@@ -71,6 +71,7 @@ export default ({ data, warehouse, onSelect }) => {
         <div className="d-flex">
           {watch("files")?.map((f, index) => (
             <span
+              key={f?.id + new Date()}
               className="c-icon file"
               style={{ cursor: "pointer" }}
               onClick={() => onFileClick(f, index)}

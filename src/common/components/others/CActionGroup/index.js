@@ -21,6 +21,8 @@ const ActionGroup = ({
   onClick,
   hideSaveBtn = false,
   hideEditBtn = false,
+  hidePrintBtn = false,
+  otherFeatures,
 }) => {
   const click = useCallback((state) => () => onClick(state), [onClick]);
 
@@ -57,9 +59,12 @@ const ActionGroup = ({
       >
         Xóa
       </CButton>
-      <CButton icon={<Print />} disabled={!canPrint} onClick={click("print")}>
-        In
-      </CButton>
+      {!hidePrintBtn && (
+        <CButton icon={<Print />} disabled={!canPrint} onClick={click("print")}>
+          In
+        </CButton>
+      )}
+      {otherFeatures}
     </>
   );
 };

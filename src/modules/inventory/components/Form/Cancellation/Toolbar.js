@@ -1,4 +1,11 @@
-import { useCallback, forwardRef, useImperativeHandle, useEffect } from "react";
+import {
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 
 import classNames from "classnames";
 
@@ -23,6 +30,7 @@ import { getAll as getAllMaterials } from "../../../queries-fn/material.query";
 
 import { uploadApi } from "src/apis/upload.api";
 import { cancelApi } from "src/apis/cancellation_slip.api";
+import { EditPencil } from "src/common/assets/icons";
 
 export default forwardRef(
   (
@@ -38,7 +46,7 @@ export default forwardRef(
       onStatusChange,
       selectedNo,
       onAdd,
-      onEdit,
+      onEdit: editRow,
       onApprove,
       onSave,
       onRemove,
@@ -46,6 +54,8 @@ export default forwardRef(
     ref
   ) => {
     //#region Data
+    const [canEditNVL, setCanEditNVL] = useState(false);
+
     const { data: warehouses } = getAllWarehouse({}, isLoading);
     const { data: materials } = getAllMaterials(
       { storeCode: watch("storeCode") },
@@ -55,8 +65,11 @@ export default forwardRef(
     const {
       control: formControl,
       setValue: setFormValue,
+      reset,
       handleSubmit,
     } = useForm();
+
+    const fileRef = useRef(null);
     //#endregion
 
     //#region Event
@@ -64,6 +77,36 @@ export default forwardRef(
       () => onStatusChange(1),
       [onStatusChange]
     );
+
+    const onEdit = () => {
+      setCanEditNVL(true);
+
+      const selectedMaterial = selectedMaterials?.[0];
+
+      setFormValue("id", selectedMaterial?.id);
+      setFormValue("name", selectedMaterial?.name);
+      setFormValue("code", selectedMaterial?.code);
+      setFormValue("wareQ", selectedMaterial?.wareQ);
+      setFormValue("wareUnit", selectedMaterial?.wareUnit);
+      setFormValue("price", selectedMaterial?.price);
+      setFormValue("reason", selectedMaterial?.reason);
+      setFormValue("files", selectedMaterial?.files);
+    };
+
+    const resetRow = () => {
+      reset({
+        id: "",
+        name: "",
+        code: "",
+        price: 0,
+        wareQ: 0,
+        wareUnit: "",
+        reason: "",
+        files: [],
+      });
+      setCanEditNVL(false);
+      fileRef.current?.clearList();
+    };
 
     const submit = handleSubmit(
       async (d) => {
@@ -77,6 +120,7 @@ export default forwardRef(
             files: d?.files?.map((e) => e?.id),
           };
           const res = await cancelApi.create_material(payload);
+          resetRow();
           onAdd({ ...res?.data });
         } catch (error) {
           noti("error", error?.message || "Lỗi");
@@ -94,6 +138,8 @@ export default forwardRef(
             return onSave();
           case "remove":
             return onRemove();
+          case "edit":
+            return onEdit();
         }
       },
       [submit, onEdit, onSave, onRemove]
@@ -127,6 +173,24 @@ export default forwardRef(
         noti("error", error?.message || "Lỗi");
       }
     };
+
+    const saveEdit = () => {
+      handleSubmit(async (value) => {
+        try {
+          const payload = {
+            ...value,
+            vat: 0,
+            files: value?.files?.map((e) => e?.id),
+          };
+          await cancelApi.update_material(payload);
+          resetRow();
+          editRow(value);
+        } catch (error) {
+          console.log(error);
+          noti("error", error?.message || "Lỗi");
+        }
+      })();
+    };
     //#endregion
 
     useImperativeHandle(ref, () => ({ setValue: setFormValue }));
@@ -148,9 +212,22 @@ export default forwardRef(
                 onClick={onClick}
                 canAdd={true}
                 canSave={true}
-                canEdit={false}
+                canEdit={selectedNo === 1 && !canEditNVL}
                 canRemove={!!selectedNo && status !== 3}
+                hidePrintBtn
                 status={status}
+                otherFeatures={
+                  <>
+                    <CButton
+                      icon={<EditPencil />}
+                      disabled={!canEditNVL}
+                      color="primary"
+                      onClick={saveEdit}
+                    >
+                      Cập nhật NVL
+                    </CButton>
+                  </>
+                }
               />
             </div>
             {edit && (
@@ -276,6 +353,7 @@ export default forwardRef(
                     multiple={false}
                     max="2"
                     {..._field}
+                    ref={fileRef}
                     value={value}
                     onChange={onFileUpload(value, onChange)}
                   />

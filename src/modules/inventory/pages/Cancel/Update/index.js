@@ -6,7 +6,7 @@ import Form from "../../../components/Form/Cancellation";
 import { getByCode } from "_common/queries-fn/inventory-cancel.query";
 import { createSelector } from "reselect";
 
-import { update } from "src/apis/cancellation_slip.api";
+import { cancelApi } from "src/apis/cancellation_slip.api";
 
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
@@ -24,14 +24,19 @@ const InventoryCancelCreate = ({ match: { params } }) => {
   // #endregion
 
   const onSubmit = async (data) => {
-    const res = await update({ code: params.code, ...data });
+    const res = await cancelApi.save_update({
+      code: params.code,
+      wareCode: data?.wareCode,
+      note: data?.note,
+      date: data?.date,
+      material_ids: data?.materials?.map((e) => e.id),
+    });
 
-    if (res.exitcode == 200) {
-      // save created id
+    if (res) {
       history.push("/inventory-cancel/list");
       noti("success", SUCCESS_MESSAGE.INVENTORY_CANCEL.UPDATE);
     } else {
-      noti("error", ERROR_MESSAGE.INVENTORY_CANCEL.UPDATE);
+      noti("error", error?.message || ERROR_MESSAGE.INVENTORY_CANCEL.UPDATE);
     }
   };
 

@@ -1,5 +1,11 @@
-import { forwardRef, createRef, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import {
+  forwardRef,
+  createRef,
+  useCallback,
+  useEffect,
+  useState,
+  useImperativeHandle,
+} from "react";
 import classNames from "classnames";
 
 import { CFormGroup, CLabel } from "@coreui/react";
@@ -42,6 +48,10 @@ const File = (
   );
 
   useEffect(() => setFiles(value), [value]);
+
+  useImperativeHandle(ref, () => ({
+    clearList: () => setFiles([]),
+  }));
 
   return (
     <CFormGroup className={_class}>
