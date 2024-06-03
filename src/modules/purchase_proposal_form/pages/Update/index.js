@@ -13,39 +13,39 @@ import { isSuccess } from "src/utils/funcs";
 import { correctPurchaseProposal } from "src/common/correctDataFunctionFormUnitAndPrice";
 
 const selectIsLoading = createSelector(
-	(state) => state.config,
-	({ isLoading }) => isLoading
+  (state) => state.config,
+  ({ isLoading }) => isLoading
 );
 
 const PurchaseProposalFormUpdate = ({ match: { params } }) => {
-	//#region Data
-	const isLoading = useSelector(selectIsLoading);
+  //#region Data
+  const isLoading = useSelector(selectIsLoading);
 
-	const { data, refetch } = getByCode(params.code, isLoading);
-	//#endregion
+  const { data, refetch } = getByCode(params.code, isLoading);
+  //#endregion
 
-	//#region Event
-	const onSubmit = async (data) => {
-		const _data = correctPurchaseProposal(data);
+  //#region Event
+  const onSubmit = async (data) => {
+    const _data = correctPurchaseProposal(data);
 
-		const res = await update(_data);
+    const res = await update(_data);
 
-		if (isSuccess(res)) {
-			refetch();
-			history.push("/solution/list");
-			noti("success", SUCCESS_MESSAGE.PURCHASE_PROPOSAL_FORM.UPDATE);
-		} else {
-			noti("error", ERROR_MESSAGE.PURCHASE_PROPOSAL_FORM.UPDATE);
-		}
-	};
+    if (isSuccess(res)) {
+      refetch();
+      history.push("/solution/list");
+      noti("success", SUCCESS_MESSAGE.PURCHASE_PROPOSAL_FORM.UPDATE);
+    } else {
+      noti("error", ERROR_MESSAGE.PURCHASE_PROPOSAL_FORM.UPDATE);
+    }
+  };
 
-	//#endregion
+  //#endregion
 
-	//#region Render
-	return (
-		<Form isLoading={isLoading} edit={true} data={data} onSubmit={onSubmit} />
-	);
-	//#endregion
+  //#region Render
+  return (
+    <Form isLoading={isLoading} edit={true} data={data} onSubmit={onSubmit} />
+  );
+  //#endregion
 };
 
 export default PurchaseProposalFormUpdate;

@@ -10,19 +10,19 @@ export default ({ data, warehouse, onSelect }) => {
     defaultValues: data,
   });
 
-  const status = useMemo(
-    () =>
-      data.approvedStatus ? (
-        data.responsible == 2 ? (
-          <span className="text-success font-weight-bold">Kho trung tâm</span>
-        ) : (
-          <span className="text-success font-weight-bold">{warehouse}</span>
-        )
-      ) : (
-        <span className="text-danger font-weight-bold">Chưa xác nhận</span>
-      ),
-    [data.approvedStatus, warehouse]
-  );
+  // const status = useMemo(
+  //   () =>
+  //     data.approvedStatus ? (
+  //       data.responsible == 2 ? (
+  //         <span className="text-success font-weight-bold">Kho trung tâm</span>
+  //       ) : (
+  //         <span className="text-success font-weight-bold">{warehouse}</span>
+  //       )
+  //     ) : (
+  //       <span className="text-danger font-weight-bold">Chưa xác nhận</span>
+  //     ),
+  //   [data.approvedStatus, warehouse]
+  // );
   //#endregion
 
   //#region Event
@@ -63,7 +63,7 @@ export default ({ data, warehouse, onSelect }) => {
           disabled
         />
       </td>
-      <td>{status}</td>
+      {/* <td>{status}</td> */}
       <td>
         <CInput value={watch("reason")} disabled />
       </td>

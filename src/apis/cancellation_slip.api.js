@@ -20,38 +20,7 @@ import {
 
 import { format } from "src/utils/moment";
 
-const createCancellationForm = (data) => {
-  const form = new FormData();
-
-  let files = [];
-
-  const materials = data.materials.map((d) => {
-    return {
-      code: d.code,
-      ware_q: d.wareQ,
-      ware_unit: d.wareUnit,
-      price: d.price,
-      total: d.price * d.wareQ,
-      vat: 0,
-      sum: d.price * d.wareQ,
-      reason: d.reason,
-      files: d.files.map((f) =>
-        typeof f === "string" ? f : (files.push(f), f.name)
-      ),
-    };
-  });
-
-  if (data.code) form.append("code", data.code);
-  form.append("ware_id", data.wareCode);
-  form.append("cuahang_id", data.storeCode);
-  form.append("note", data.note);
-  form.append("date", moment().format("yyyy-MM-DD"));
-  form.append("materials", JSON.stringify(materials));
-
-  files.forEach((f) => form.append("files", f));
-
-  return form;
-};
+const { api } = global;
 
 export const getAll = async (params) =>
   await map(({ data }) => data.map((d) => new CancellationSlips(d))).get(
@@ -120,12 +89,6 @@ export const getPreview = async (code) =>
     `${CANCELLATION_SLIP.getPreview}/${code}`
   );
 
-export const create = async (data) => {
-  const form = createCancellationForm(data);
-
-  return await post(`${CANCELLATION_SLIP.create}`, form, FORM_HEADER_FORMDATA);
-};
-
 export const update = async (data) => {
   const form = createCancellationForm(data);
 
@@ -160,4 +123,13 @@ export const remove = async (codes) => {
   params.append("listCode", codes.join(","));
 
   return await post(`${CANCELLATION_SLIP.delete}`, params, FORM_HEADER_ENCODED);
+};
+
+export const cancelApi = {
+  create_material: async (body) => {
+    return await post(`${api}/cancellation_slips/create/materials`, body);
+  },
+  save_create: async (body) => {
+    return await post(`${api}/cancellation_slips/create`, body);
+  },
 };
