@@ -111,7 +111,7 @@ export default ({
                   options={
                     warehouses && warehouses.length > 2
                       ? [{ value: "", label: "Tất cả" }, ...warehouses]
-                      : warehouses
+                      : []
                   }
                   placeholder="Tất cả"
                   {...field}
@@ -140,7 +140,7 @@ export default ({
               name="date"
               control={control}
               defaultValue=""
-              render={({ field }) => <CDate label="Ngày trả" {...field} />}
+              render={({ field }) => <CDate label="Ngày hủy" {...field} />}
             />
           </CCol>
           <CCol

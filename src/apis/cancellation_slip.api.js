@@ -1,13 +1,6 @@
 import fileDownload from "js-file-download";
 
-import moment from "moment";
-
-import {
-  map,
-  post,
-  FORM_HEADER_FORMDATA,
-  FORM_HEADER_ENCODED,
-} from "src/utils/axios";
+import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
 
 import { CANCELLATION_SLIP } from "./_constants";
 

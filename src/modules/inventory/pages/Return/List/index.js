@@ -9,7 +9,7 @@ import Table from "./Table";
 import Toolbar from "./Toolbar";
 
 import { getAll } from "_common/queries-fn/inventory-return.query";
-import { toExcel, remove } from "src/apis/return_slip.api";
+import { remove } from "src/apis/return_slip.api";
 
 import { history } from "src/App";
 import { fireDelete, fireSuccess } from "src/utils/alert";
@@ -18,12 +18,8 @@ import { setFilter } from "src/common/actions/config.action";
 
 const selectData = createSelector(
   (state) => state.config,
-  (state) => state.auth,
   (state) => state.inventoryReturn,
-  ({ isLoading }, { wareCode }, { filters }) => ({
-    isLoading,
-    filters: { ...filters, wareCode: filters?.wareCode ?? wareCode },
-  })
+  ({ isLoading }, { filters }) => ({ isLoading, filters })
 );
 
 const InventoryReturn = ({}) => {
@@ -40,25 +36,9 @@ const InventoryReturn = ({}) => {
   const selected = useMemo(() => data?.filter((d) => d.check) || []);
 
   //#render Events
-  const select = useCallback(
-    (code, v) =>
-      set(
-        data?.map((d) =>
-          code === -1 || d.code === code ? { ...d, check: v } : d
-        )
-      ),
-    [data]
-  );
-  const onStatusChange = useCallback(
-    (_status) => setStatus(_status === status ? 0 : _status),
-    [status]
-  );
-
-  const onSearch = useCallback((data) => dispatch(setFilter(data)), []);
-
   const onEdit = useCallback(async () => {
     const code = data.find((d) => d.check).code;
-    history.push(`/inventory-check/form/${code}`);
+    history.push(`/inventory-return/form/${code}`);
   }, [data]);
 
   const onRemove = useCallback(async () => {
@@ -75,7 +55,19 @@ const InventoryReturn = ({}) => {
     }
   }, [selected, refetch]);
 
-  const onExport = useCallback(async (data) => await toExcel(data), []);
+  const select = (code, v) =>
+    set(
+      data?.map((d) =>
+        code === -1 || d.code === code ? { ...d, check: v } : d
+      )
+    );
+
+  const onStatusChange = useCallback(
+    (_status) => setStatus(_status === status ? 0 : _status),
+    [status]
+  );
+
+  const onSearch = useCallback((data) => dispatch(setFilter(data)), []);
   //#endregion
 
   return (
@@ -90,7 +82,6 @@ const InventoryReturn = ({}) => {
             onEdit={onEdit}
             onRemove={onRemove}
             onSearch={onSearch}
-            onExport={onExport}
           />
         </CCardBody>
       </CCard>

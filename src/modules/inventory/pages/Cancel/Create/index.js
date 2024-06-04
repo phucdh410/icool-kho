@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 
 import Form from "../../../components/Form/Cancellation";
 
-import { cancelApi, create } from "src/apis/cancellation_slip.api";
+import { cancelApi } from "src/apis/cancellation_slip.api";
 
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
@@ -32,7 +32,9 @@ const InventoryCancelCreate = () => {
       date: data?.date,
       material_ids: data?.materials?.map((e) => e.id),
     };
+
     const res = await cancelApi.save_create(payload);
+
     if (res) {
       history.push("/inventory-cancel/list");
       noti("success", SUCCESS_MESSAGE.INVENTORY_CANCEL.UPDATE);
@@ -41,7 +43,7 @@ const InventoryCancelCreate = () => {
     }
   };
 
-  return <Form onSubmit={onSubmit} data={data} />;
+  return <Form edit={false} onSubmit={onSubmit} data={data} />;
 };
 
 export default InventoryCancelCreate;

@@ -42,8 +42,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   );
 
   const selectedMaterials = useMemo(
-    () => materials?.map((m) => m) ?? [],
-    // () => materials?.map((m) => m.code) ?? [],
+    () => materials?.filter((m) => m.check) ?? [],
     [materials]
   );
   //#endregion
@@ -59,7 +58,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   const onAdd = (d) => setMaterials([...materials, { id: UID(), ...d }]);
 
   const onEdit = (d) => {
-    const _index = materials.findIndex((e) => selected[0]?.id === d?.id);
+    const _index = materials.findIndex((e) => e?.id === d?.id);
     if (_index === -1) return;
     const newMaterials = [...materials];
     newMaterials[_index] = d;
@@ -101,7 +100,6 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   };
 
   const onRemove = () => setMaterials(materials.filter((m) => !m.check));
-
   //#endregion
 
   useEffect(() => {

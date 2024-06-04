@@ -1,10 +1,10 @@
 import React from "react";
+import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 
 import Form from "../../../components/Form/Cancellation";
 
 import { getByCode } from "_common/queries-fn/inventory-cancel.query";
-import { createSelector } from "reselect";
 
 import { cancelApi } from "src/apis/cancellation_slip.api";
 
@@ -40,7 +40,7 @@ const InventoryCancelCreate = ({ match: { params } }) => {
     }
   };
 
-  return <Form edit onSubmit={onSubmit} data={data} />;
+  return <Form edit isLoading={isLoading} onSubmit={onSubmit} data={data} />;
 };
 
 export default InventoryCancelCreate;

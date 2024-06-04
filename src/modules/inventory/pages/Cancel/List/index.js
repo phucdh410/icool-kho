@@ -104,7 +104,12 @@ const InventoryCancel = ({}) => {
       <CCard>
         <CCardHeader></CCardHeader>
         <CCardBody className="px-0 pt-0">
-          <Table isSelectAll={isSelectAll} data={data} onSelect={onSelect} />
+          <Table
+            loading={isLoading}
+            isSelectAll={isSelectAll}
+            data={data}
+            onSelect={onSelect}
+          />
         </CCardBody>
       </CCard>
     </>

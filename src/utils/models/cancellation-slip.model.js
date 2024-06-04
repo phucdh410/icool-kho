@@ -23,7 +23,7 @@ export class CancellationSlips extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      createdDate: format(createdDate, "DD/MM/yyyy HH:mm:ss"),
+      createdDate: format(createdDate, "DD/MM/YYYY"),
       date: format(date),
       note: note,
       sum: sum,
@@ -45,6 +45,7 @@ export class CancellationSlip extends Base {
     vat,
     total,
     materials,
+    wareName,
     ...rest
   }) {
     super(rest);
@@ -58,6 +59,7 @@ export class CancellationSlip extends Base {
       sum: sum,
       vat: vat,
       total: total,
+      wareName: wareName,
       materials: materials.map((m) => new CancellationSlipMaterials(m)),
     });
   }
