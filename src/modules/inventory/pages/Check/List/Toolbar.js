@@ -128,7 +128,7 @@ export default ({
                   label="Kho"
                   options={
                     warehouses && warehouses.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...warehouses]
+                      ? [{ value: "all", label: "Tất cả" }, ...warehouses]
                       : warehouses
                   }
                   placeholder="Tất cả"

@@ -129,6 +129,8 @@ export const INVENTORY_SLIP = {
   update: `${api}/inventory_slips/update`,
   approve: `${api}/inventory_slips/approve`,
   delete: `${api}/inventory_slips/delete`,
+
+  getUnFulfilled: `${api}/inventory_slips/getUnFulfilled`,
 };
 
 // Phiểu trả hàng

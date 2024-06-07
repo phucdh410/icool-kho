@@ -33,8 +33,6 @@ export default ({
     watch("storeCode"),
     !watch("storeCode")
   );
-
-  const [materialGroup, setMaterialGroup] = useState();
   //#endregion
 
   //#region Event
@@ -42,7 +40,6 @@ export default ({
 
   const selectMaterialGroup = useCallback(
     ({ value }) => {
-      setMaterialGroup(value);
       onMaterialGroupSelect(value);
     },
     [onMaterialGroupSelect]

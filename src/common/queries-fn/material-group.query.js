@@ -12,7 +12,7 @@ export const getForRole = (isLoading = false, options = {}) =>
 
 export const getAll = (params, isLoading = false, options = {}) =>
   createQuery(["material-groups", params], () => api.getAll(params), {
-    enabled: !isLoading && Object.keys(params)?.length > 0,
+    enabled: !isLoading,
     ...options,
   });
 
