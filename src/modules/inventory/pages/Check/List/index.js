@@ -133,13 +133,19 @@ const InventoryCheck = () => {
       </CCard>
       <CCard>
         <CCardHeader></CCardHeader>
-        <p
-          style={{ paddingInline: "16px", color: "#F26464", fontSize: "16px" }}
-        >
-          <i>Thông báo:</i>&nbsp;Còn chi nhánh&nbsp;
-          <span style={{ fontWeight: 500 }}>{chua_kiem_store_list}</span>&nbsp;
-          chưa kiểm kho
-        </p>
+        {chua_kiem_store_list && (
+          <p
+            style={{
+              paddingInline: "16px",
+              color: "#F26464",
+              fontSize: "16px",
+            }}
+          >
+            <i>Thông báo:</i>&nbsp;Còn chi nhánh&nbsp;
+            <span style={{ fontWeight: 500 }}>{chua_kiem_store_list}</span>
+            &nbsp; chưa kiểm kho
+          </p>
+        )}
         <CCardBody className="px-0 pt-0">
           <Table
             loading={isLoading}
