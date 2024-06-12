@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 
-import { CBadge } from "@coreui/react";
 import { CCheckbox } from "_components/controls";
 import { CTable, CPagination } from "_components/others";
 

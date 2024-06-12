@@ -7,6 +7,7 @@ import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 import Toolbar from "./Toolbar";
 import Table from "./Table";
 
+import { getAll } from "_common/queries-fn/inventory-check.query";
 import { remove, approve, getUnFulfilled } from "src/apis/inventory_slip.api";
 
 import { history } from "src/App";
@@ -14,9 +15,6 @@ import { fireDelete, fireSuccess } from "src/utils/alert";
 import { setFilter } from "src/common/actions/config.action";
 import { NAME } from "../../../reducers/inventory-check";
 import { useQuery } from "react-query";
-import { kiemKhoApi } from "src/1/apis/kiemkho.api";
-import { useSetQueryData } from "src/1/hooks/query";
-import { format } from "src/utils/moment";
 
 const selectData = createSelector(
   (state) => state.config,
@@ -28,14 +26,6 @@ const selectData = createSelector(
   })
 );
 
-const remapData = (_data) => {
-  return _data.map((e) => ({
-    ...e,
-    checked: format(e?.checked),
-    status: e?.approvedStatus,
-  }));
-};
-
 const InventoryCheck = () => {
   const dispatch = useDispatch();
   //#region Data
@@ -45,16 +35,16 @@ const InventoryCheck = () => {
 
   const [status, setStatus] = useState(0);
 
-  const { data, refetch } = useQuery({
-    queryKey: ["kiem-kho", filters],
-    queryFn: () => kiemKhoApi.getAll(filters),
-    select: (dataResponse) =>
-      remapData(
-        Array.isArray(dataResponse) ? dataResponse : dataResponse?.data?.data
-      ),
+  const { data, set, refetch } = getAll(filters, isLoading, {
+    onSuccess: () => setFetching(false),
   });
 
-  const { setQueryData } = useSetQueryData(["kiem-kho", filters]);
+  const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
+
+  const selected = useMemo(
+    () => (isFetching ? [] : data?.filter((d) => d.check) || []),
+    [data, isFetching]
+  );
 
   const { data: response } = useQuery({
     queryKey: ["unfulfilled"],
@@ -66,19 +56,12 @@ const InventoryCheck = () => {
       return response.data.map((e) => e.name).join(", ");
     } else return "";
   }, [response]);
-
-  const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
-
-  const selected = useMemo(
-    () => (isFetching ? [] : data?.filter((d) => d.check) || []),
-    [data, isFetching]
-  );
   //#endregion
 
   //#region Events
   const select = useCallback(
     (code, v) =>
-      setQueryData(
+      set(
         data?.map((d) =>
           code === -1 || d.code === code ? { ...d, check: v } : d
         )
@@ -167,7 +150,7 @@ const InventoryCheck = () => {
           <Table
             loading={isLoading}
             isSelectAll={isSelectAll}
-            data={data || []}
+            data={data}
             onSelect={select}
           />
         </CCardBody>
