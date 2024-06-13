@@ -422,6 +422,24 @@ export const Material = {
     name: "DS đề xuất nguyên vật liệu",
     path: "/material/suggest",
   },
+  MatHang: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Mặt hàng",
+    path: "/material/items",
+  },
+  CreateDanhMucHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh mục hàng hóa",
+    path: "/material/items/form",
+  },
 };
 
 export const Good = {

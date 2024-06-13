@@ -442,6 +442,20 @@ const navigation = [
         childrens: [Material.List.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: Material.MatHang.name,
+        to: Material.MatHang.path,
+        childrens: [Material.MatHang.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Material.CreateDanhMucHangHoa.name,
+        to: Material.CreateDanhMucHangHoa.path,
+        childrens: [Material.CreateDanhMucHangHoa.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
+      },
     ],
   },
   {

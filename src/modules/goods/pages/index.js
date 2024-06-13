@@ -10,10 +10,16 @@ const MaterialSuggest = lazy(() => import("./MaterialSuggest"));
 
 const MaterialIndustryList = lazy(() => import("./MaterialIndustryList"));
 
+const MatHang = lazy(() => import("./MatHang"));
+
+const CreateDanhMucHangHoa = lazy(() => import("./CreateDanhMucHangHoa"));
+
 export {
   Material,
   MaterialGroup,
   MaterialType,
   MaterialSuggest,
   MaterialIndustryList,
+  MatHang,
+  CreateDanhMucHangHoa,
 };

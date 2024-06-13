@@ -18,6 +18,8 @@ import {
   MaterialIndustryList,
   MaterialType,
   MaterialSuggest,
+  MatHang,
+  CreateDanhMucHangHoa,
 } from "_modules/goods/pages";
 
 import {
@@ -312,6 +314,16 @@ const routes = [
     ...Material.List,
     exact: true,
     component: MaterialComponent,
+  },
+  {
+    ...Material.MatHang,
+    exact: true,
+    component: MatHang,
+  },
+  {
+    ...Material.CreateDanhMucHangHoa,
+    exact: true,
+    component: CreateDanhMucHangHoa,
   },
   //#endregion
 
