@@ -2,8 +2,17 @@ import { CCard, CCardBody } from "@coreui/react";
 import { Toolbar } from "./Toolbar";
 import { FormTable } from "./FormTable";
 import { FormInput } from "./FormInput";
+import { useForm } from "react-hook-form";
 
 const CreateDanhMucHangHoa = () => {
+  //#region Data
+  const { control } = useForm({ mode: "all" });
+  //#endregion
+
+  //#region Event
+  //#endregion
+
+  //#region Render
   return (
     <>
       <CCard className="toolbar sticky">
@@ -25,30 +34,13 @@ const CreateDanhMucHangHoa = () => {
       </CCard>
       <CCard>
         <CCardBody>
-          <FormInput />
+          <FormInput control={control} />
         </CCardBody>
       </CCard>
-      <CCard>
-        <CCardBody className="px-0 pt-0">
-          <div className="table-responsive">
-            <FormTable
-            // storeCode={watch("storeCode")}
-            // date={watch("checked")}
-            // amounts={amounts}
-            // data={materials}
-            // inputData={inputData}
-            // isSelectAll={isSelectAll}
-            // onAmountChange={onAmountChange}
-            // onInputRowChange={onInputRowChange}
-            // onChange={onChange}
-            // quantity={summary.quantity}
-            // total={summary.total}
-            />
-          </div>
-        </CCardBody>
-      </CCard>
+      <FormTable control={control} />
     </>
   );
+  //#endregion
 };
 
 export default CreateDanhMucHangHoa;
