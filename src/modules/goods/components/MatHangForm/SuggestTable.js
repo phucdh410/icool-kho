@@ -1,5 +1,6 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { useFieldArray } from "react-hook-form";
+import { Controller, useFieldArray } from "react-hook-form";
+import { CInput, CNumber, CTextarea } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
 export const SuggestTable = ({ control }) => {
@@ -21,19 +22,6 @@ export const SuggestTable = ({ control }) => {
   //#endregion
 
   const fields = [
-    {
-      key: "action",
-      label: (
-        <button
-          onClick={onAddRow}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full !outline-none !border-none hover:bg-slate-100 hover:bg-opacity-50"
-        >
-          <i className="fa-regular fa-circle-plus text-2xl text-[#053C7F]"></i>
-        </button>
-      ),
-      _style: { textAlign: "center", width: "140px" },
-      sorter: false,
-    },
     {
       key: "code",
       label: "Mã NVL",
@@ -58,16 +46,6 @@ export const SuggestTable = ({ control }) => {
   ];
 
   const render = {
-    action: (item, index) => (
-      <td>
-        <button
-          onClick={onRemoveRow(index)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full !outline-none !border-none hover:bg-slate-100 hover:bg-opacity-50"
-        >
-          <i className="fa-solid fa-trash-can-xmark text-2xl text-[#F26464]"></i>
-        </button>
-      </td>
-    ),
     code: () => (
       <td>
         <CSelect options={[]} />
@@ -91,17 +69,133 @@ export const SuggestTable = ({ control }) => {
   //#region Render
   return (
     <>
-      <CCard>
-        <CCardBody className="px-0 pt-3">
-          <div className="table-responsive">
-            <CTable fields={fields} data={materials} render={render} />
-          </div>
-        </CCardBody>
-      </CCard>
+      <div className="flex gap-5">
+        <div className="basis-2/3">
+          <CCard>
+            <CCardBody className="px-0 pt-3">
+              <div className="table-responsive">
+                <CTable fields={fields} data={materials} render={render} />
+              </div>
+            </CCardBody>
+          </CCard>
+        </div>
 
-      <div className="mt-3 flex items-center gap-3 font-bold text-xl">
-        <span>Tổng cost từ NVL:</span>
-        <span>{(50000).toLocaleString("vi-VN")}</span>
+        <div className="basis-1/3">
+          <CCard>
+            <CCardBody>
+              <div className="flex flex-col gap-2">
+                <Controller
+                  name="tong_cost"
+                  control={control}
+                  render={({ field }) => (
+                    <CNumber label="Tổng cost từ NVL:" required {...field} />
+                  )}
+                />
+                <Controller
+                  name="gia_ban_ngay_thuong"
+                  control={control}
+                  render={({ field }) => (
+                    <CNumber label="Giá bán ngày thường:" required {...field} />
+                  )}
+                />
+                <Controller
+                  name="gia_ban_ngay_le"
+                  control={control}
+                  render={({ field }) => (
+                    <CNumber label="Giá bán ngày lễ:" required {...field} />
+                  )}
+                />
+                <Controller
+                  name="rate"
+                  control={control}
+                  render={({ field }) => (
+                    <CNumber
+                      label="Tỷ lệ giá thường/lễ:"
+                      readOnly
+                      required
+                      {...field}
+                    />
+                  )}
+                />
+                <Controller
+                  name="vat"
+                  control={control}
+                  render={({ field }) => (
+                    <CNumber label="Phần trăm xuất VAT:" required {...field} />
+                  )}
+                />
+              </div>
+            </CCardBody>
+          </CCard>
+        </div>
+      </div>
+
+      <div className="flex gap-3 !mt-5 !mb-20">
+        <div className="basis-[20%]">
+          <CCard>
+            <CCardBody>
+              <Controller
+                name="ghi_chu"
+                control={control}
+                render={({ field }) => (
+                  <CTextarea label="Ghi chú người đề xuất giá" {...field} />
+                )}
+              />
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="basis-[20%]">
+          <CCard>
+            <CCardBody>
+              <Controller
+                name="ghi_chu"
+                control={control}
+                render={({ field }) => (
+                  <CTextarea label="Ghi chú TBP KTT" {...field} />
+                )}
+              />
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="basis-[20%]">
+          <CCard>
+            <CCardBody>
+              <Controller
+                name="ghi_chu"
+                control={control}
+                render={({ field }) => (
+                  <CTextarea label="Ghi chú kế toán" {...field} />
+                )}
+              />
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="basis-[20%]">
+          <CCard>
+            <CCardBody>
+              <Controller
+                name="ghi_chu"
+                control={control}
+                render={({ field }) => (
+                  <CTextarea label="Ghi chú Kiểm soát nội bộ" {...field} />
+                )}
+              />
+            </CCardBody>
+          </CCard>
+        </div>
+        <div className="basis-[20%]">
+          <CCard>
+            <CCardBody>
+              <Controller
+                name="ghi_chu"
+                control={control}
+                render={({ field }) => (
+                  <CTextarea label="Ghi chú Ban Giám đốc" {...field} />
+                )}
+              />
+            </CCardBody>
+          </CCard>
+        </div>
       </div>
     </>
   );

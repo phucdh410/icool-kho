@@ -8,8 +8,8 @@ import {
 
 export const GroupInput = ({ control }) => {
   return (
-    <div className="flex flex-col gap-[20px]">
-      <div className="flex items-end gap-[20px]">
+    <div className="flex flex-col gap-5">
+      <div className="flex items-end gap-5">
         <div className="basis-[20%]">
           <Controller
             name="nganh_hang_hoa"
@@ -69,7 +69,7 @@ export const GroupInput = ({ control }) => {
         </div>
       </div>
 
-      <div className="flex items-start gap-[20px]">
+      <div className="flex items-start gap-5">
         <div className="basis-[20%]">
           <Controller
             name="ma_hang_hoa"
