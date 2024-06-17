@@ -14,6 +14,8 @@ const MatHang = lazy(() => import("./MatHang"));
 
 const CreateDanhMucHangHoa = lazy(() => import("./CreateDanhMucHangHoa"));
 
+const DeXuatGiaMatHang = lazy(() => import("./DeXuatGiaMatHang"));
+
 export {
   Material,
   MaterialGroup,
@@ -22,4 +24,5 @@ export {
   MaterialIndustryList,
   MatHang,
   CreateDanhMucHangHoa,
+  DeXuatGiaMatHang,
 };

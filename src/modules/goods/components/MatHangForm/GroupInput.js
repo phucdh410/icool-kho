@@ -1,7 +1,12 @@
 import { Controller } from "react-hook-form";
-import { CInput, CSelect, CTextarea } from "src/common/components/controls";
+import {
+  C1Upload,
+  CInput,
+  CSelect,
+  CTextarea,
+} from "src/common/components/controls";
 
-export const FormInput = ({ control }) => {
+export const GroupInput = ({ control }) => {
   return (
     <div className="flex flex-col gap-[20px]">
       <div className="flex items-end gap-[20px]">
@@ -35,7 +40,7 @@ export const FormInput = ({ control }) => {
           />
         </div>
 
-        <div className="flex-1">
+        <div className="basis-[20%]">
           <Controller
             name="chu_ngu"
             control={control}
@@ -44,7 +49,7 @@ export const FormInput = ({ control }) => {
             )}
           />
         </div>
-        <div className="flex-1">
+        <div className="basis-[20%]">
           <Controller
             name="vi_ngu"
             control={control}
@@ -53,7 +58,7 @@ export const FormInput = ({ control }) => {
             )}
           />
         </div>
-        <div className="flex-1">
+        <div className="basis-[20%]">
           <Controller
             name="bo_sung"
             control={control}
@@ -65,7 +70,7 @@ export const FormInput = ({ control }) => {
       </div>
 
       <div className="flex items-start gap-[20px]">
-        <div className="basis-[25%]">
+        <div className="basis-[20%]">
           <Controller
             name="ma_hang_hoa"
             control={control}
@@ -90,12 +95,20 @@ export const FormInput = ({ control }) => {
             )}
           />
         </div>
-        <div className="basis-[35%]">
+        <div className="basis-[20%]">
           <Controller
             name="ghi_chu"
             control={control}
             render={({ field }) => <CTextarea label="Ghi chú" {...field} />}
           />
+        </div>
+        <div className="basis-[20%]">
+          <C1Upload label="Hình ảnh hàng hóa" required />
+          {/* <Controller
+            name="ghi_chu"
+            control={control}
+            render={({ field }) => <CTextarea label="Ghi chú" {...field} />}
+          /> */}
         </div>
       </div>
     </div>

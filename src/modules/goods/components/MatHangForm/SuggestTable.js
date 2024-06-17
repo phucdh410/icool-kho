@@ -1,10 +1,8 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { useState } from "react";
 import { useFieldArray } from "react-hook-form";
-import { CInput, CNumber, CSelect } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
-export const FormTable = ({ control }) => {
+export const SuggestTable = ({ control }) => {
   //#region Data
   const {
     fields: materials,
@@ -17,8 +15,8 @@ export const FormTable = ({ control }) => {
     append({ code: "", name: "", group: "", amount: 1, don_vi_tinh: "" });
   };
 
-  const onRemoveRow = () => {
-    setIsAdding(false);
+  const onRemoveRow = (index) => () => {
+    remove(index);
   };
   //#endregion
 
@@ -60,10 +58,10 @@ export const FormTable = ({ control }) => {
   ];
 
   const render = {
-    action: () => (
+    action: (item, index) => (
       <td>
         <button
-          onClick={onRemoveRow}
+          onClick={onRemoveRow(index)}
           className="inline-flex h-10 w-10 items-center justify-center rounded-full !outline-none !border-none hover:bg-slate-100 hover:bg-opacity-50"
         >
           <i className="fa-solid fa-trash-can-xmark text-2xl text-[#F26464]"></i>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 10000,
 });
@@ -23,10 +23,38 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+axiosInstance.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export const methods = {
   get: async (url, options = {}) => {
     try {
       return await axiosInstance.get(url, { ...options });
+    } catch (error) {
+      throw error;
+    }
+  },
+  post: async (url, body, options = {}) => {
+    try {
+      return await axiosInstance.post(url, body, { ...options });
+    } catch (error) {
+      throw error;
+    }
+  },
+  put: async (url, body, options = {}) => {
+    try {
+      return await axiosInstance.put(url, body, { ...options });
+    } catch (error) {
+      throw error;
+    }
+  },
+  delete: async (url, options = {}) => {
+    try {
+      return await axiosInstance.delete(url, { ...options });
     } catch (error) {
       throw error;
     }

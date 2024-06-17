@@ -440,6 +440,15 @@ export const Material = {
     name: "Danh mục hàng hóa",
     path: "/material/items/form",
   },
+  DeXuatGiaMatHang: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Đề xuất giá",
+    path: "/material/items/price-suggest",
+  },
 };
 
 export const Good = {

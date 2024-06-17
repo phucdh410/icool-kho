@@ -20,6 +20,7 @@ import {
   MaterialSuggest,
   MatHang,
   CreateDanhMucHangHoa,
+  DeXuatGiaMatHang,
 } from "_modules/goods/pages";
 
 import {
@@ -324,6 +325,11 @@ const routes = [
     ...Material.CreateDanhMucHangHoa,
     exact: true,
     component: CreateDanhMucHangHoa,
+  },
+  {
+    ...Material.DeXuatGiaMatHang,
+    exact: true,
+    component: DeXuatGiaMatHang,
   },
   //#endregion
 

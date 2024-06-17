@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { MatHangForm } from "../../components";
 
-const CreateDanhMucHangHoa = () => {
+const DeXuatGiaMatHang = () => {
   //#region Data
   const { control } = useForm({ mode: "all" });
   //#endregion
@@ -10,8 +10,8 @@ const CreateDanhMucHangHoa = () => {
   //#endregion
 
   //#region Render
-  return <MatHangForm control={control} />;
+  return <MatHangForm control={control} isSuggest />;
   //#endregion
 };
 
-export default CreateDanhMucHangHoa;
+export default DeXuatGiaMatHang;

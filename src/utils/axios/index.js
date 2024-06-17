@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosInstance } from "src/1/axios";
 import { store } from "src/store";
 
 const CancelToken = axios.CancelToken;
@@ -82,7 +83,14 @@ export function map(cb, _default = null) {
 
 // set Authentication Token-Based
 export function setAuthToken(token) {
-  if (token) axios.defaults.headers.common["x-access-token"] = token;
+  if (token) {
+    axios.defaults.headers.common["x-access-token"] = token;
+
+    axiosInstance.defaults.headers.common["x-access-token"] = token;
+  }
   // Apply to every request
-  else delete axios.defaults.headers.common["x-access-token"]; // Delete auth header
+  else {
+    delete axios.defaults.headers.common["x-access-token"]; // Delete auth header
+    delete axiosInstance.defaults.headers.common["x-access-token"];
+  }
 }
