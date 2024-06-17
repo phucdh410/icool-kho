@@ -405,6 +405,8 @@ const navigation = [
       Material.Category.path,
       Material.Type.path,
       Material.Suggest.path,
+      Material.MatHang.path,
+      Material.CreateDanhMucHangHoa.path,
     ],
     _children: [
       {

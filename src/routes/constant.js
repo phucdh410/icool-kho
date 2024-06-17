@@ -429,7 +429,7 @@ export const Material = {
     },
     icon: "",
     name: "Mặt hàng",
-    path: "/material/items",
+    path: "/material/items/list",
   },
   CreateDanhMucHangHoa: {
     required: {
