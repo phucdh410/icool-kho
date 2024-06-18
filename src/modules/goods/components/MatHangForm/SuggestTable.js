@@ -7,12 +7,16 @@ import {
   useWatch,
 } from "react-hook-form";
 import {
-  CInput,
   CNumber,
   CNumberInput,
   CTextarea,
 } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
+
+const calculateFormula = (gia_thuong, gia_le) => {
+  const ty_gia = gia_le / gia_thuong;
+  return (ty_gia - 1) * 100;
+};
 
 export const SuggestTable = ({ control }) => {
   //#region Data
@@ -84,7 +88,7 @@ export const SuggestTable = ({ control }) => {
 
   useEffect(() => {
     if (gia_ban_ngay_le) {
-      onRateChange(((gia_ban_ngay_thuong || 0) / gia_ban_ngay_le) * 100);
+      onRateChange(calculateFormula(gia_ban_ngay_thuong, gia_ban_ngay_le));
     }
   }, [gia_ban_ngay_thuong, gia_ban_ngay_le]);
 
