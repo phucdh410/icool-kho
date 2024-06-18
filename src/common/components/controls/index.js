@@ -10,6 +10,7 @@ import CSelect from "./CSelect";
 import CSelectMulti from "./CSelectMulti";
 import CTextarea from "./CTextarea";
 import { C1Upload } from "./C1Upload";
+import { CNumberInput } from "./CNumberInput";
 
 export {
   CButton,
@@ -24,6 +25,7 @@ export {
   CTextarea,
   CFile2,
   C1Upload,
+  CNumberInput,
 };
 
 export * from "./CSwitch";

@@ -1,25 +1,38 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { Controller, useFieldArray } from "react-hook-form";
-import { CInput, CNumber, CTextarea } from "src/common/components/controls";
+import { useEffect } from "react";
+import {
+  Controller,
+  useController,
+  useFieldArray,
+  useWatch,
+} from "react-hook-form";
+import {
+  CInput,
+  CNumber,
+  CNumberInput,
+  CTextarea,
+} from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
 export const SuggestTable = ({ control }) => {
   //#region Data
+  const { fields: materials } = useFieldArray({
+    control,
+    name: "materials",
+    keyName: "__id",
+  });
+  const gia_ban_ngay_thuong = useWatch({
+    control,
+    name: "gia_ban_ngay_thuong",
+  });
+  const gia_ban_ngay_le = useWatch({
+    control,
+    name: "gia_ban_ngay_le",
+  });
+
   const {
-    fields: materials,
-    append,
-    remove,
-  } = useFieldArray({ control, name: "materials", keyName: "__id" });
-
-  //#region Event
-  const onAddRow = () => {
-    append({ code: "", name: "", group: "", amount: 1, don_vi_tinh: "" });
-  };
-
-  const onRemoveRow = (index) => () => {
-    remove(index);
-  };
-  //#endregion
+    field: { onChange: onRateChange },
+  } = useController({ control, name: "rate" });
 
   const fields = [
     {
@@ -66,6 +79,15 @@ export const SuggestTable = ({ control }) => {
   };
   //#endregion
 
+  //#region Event
+  //#endregion
+
+  useEffect(() => {
+    if (gia_ban_ngay_le) {
+      onRateChange(((gia_ban_ngay_thuong || 0) / gia_ban_ngay_le) * 100);
+    }
+  }, [gia_ban_ngay_thuong, gia_ban_ngay_le]);
+
   //#region Render
   return (
     <>
@@ -88,29 +110,42 @@ export const SuggestTable = ({ control }) => {
                   name="tong_cost"
                   control={control}
                   render={({ field }) => (
-                    <CNumber label="Tổng cost từ NVL:" required {...field} />
+                    <CNumberInput
+                      label="Tổng cost từ NVL:"
+                      required
+                      {...field}
+                    />
                   )}
                 />
                 <Controller
                   name="gia_ban_ngay_thuong"
                   control={control}
                   render={({ field }) => (
-                    <CNumber label="Giá bán ngày thường:" required {...field} />
+                    <CNumberInput
+                      label="Giá bán ngày thường:"
+                      required
+                      {...field}
+                    />
                   )}
                 />
                 <Controller
                   name="gia_ban_ngay_le"
                   control={control}
                   render={({ field }) => (
-                    <CNumber label="Giá bán ngày lễ:" required {...field} />
+                    <CNumberInput
+                      label="Giá bán ngày lễ:"
+                      required
+                      {...field}
+                    />
                   )}
                 />
                 <Controller
                   name="rate"
                   control={control}
                   render={({ field }) => (
-                    <CNumber
+                    <CNumberInput
                       label="Tỷ lệ giá thường/lễ:"
+                      currency="%"
                       readOnly
                       required
                       {...field}
@@ -121,7 +156,12 @@ export const SuggestTable = ({ control }) => {
                   name="vat"
                   control={control}
                   render={({ field }) => (
-                    <CNumber label="Phần trăm xuất VAT:" required {...field} />
+                    <CNumberInput
+                      label="Phần trăm xuất VAT:"
+                      currency="%"
+                      required
+                      {...field}
+                    />
                   )}
                 />
               </div>
