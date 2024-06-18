@@ -42,44 +42,33 @@ export const SuggestTable = ({ control }) => {
     {
       key: "code",
       label: "Mã NVL",
+      sorter: false,
     },
     {
       key: "name",
       label: "Tên NVL",
       _style: { textAlign: "left" },
+      sorter: false,
     },
     {
       key: "group",
       label: "Nhóm NVL",
+      sorter: false,
     },
     {
       key: "amount",
       label: "Số lượng",
+      sorter: false,
     },
     {
       key: "don_vi_tinh",
       label: "ĐVT lưu kho",
+      sorter: false,
     },
   ];
 
   const render = {
-    code: () => (
-      <td>
-        <CSelect options={[]} />
-      </td>
-    ),
-    name: () => (
-      <td>
-        <CSelect options={[]} />
-      </td>
-    ),
-    group: ({ group }) => <td>{group}</td>,
-    amount: ({ amount }) => (
-      <td>
-        <CNumber />
-      </td>
-    ),
-    don_vi_tinh: ({ don_vi_tinh }) => <td>{don_vi_tinh}</td>,
+    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
   };
   //#endregion
 
