@@ -30,36 +30,36 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
     {
       key: "name",
       label: "Tên Hàng Hóa",
-      _style: { width: "auto", minWidth: "150px", textAlign: "center" },
+      _style: { width: "auto", minWidth: "200px", textAlign: "center" },
     },
     {
-      key: "tong_cost",
+      key: "cost",
       label: "Tổng giá trị giá cost",
-      _style: { width: "auto", minWidth: "200px" },
+      _style: { width: "auto", minWidth: "220px" },
     },
     {
-      key: "don_vi_tinh",
+      key: "unit",
       label: "Đơn vị tính",
-      _style: { width: "140px", minWidth: "140px" },
+      _style: { width: "140px", minWidth: "180px" },
     },
     {
-      key: "created_by",
+      key: "proposer",
       label: "Người đề xuất",
       _style: { width: "auto", minWidth: "200px" },
     },
     {
-      key: "status",
+      key: "approved_status",
       label: "Trạng thái",
       _style: { width: "auto", minWidth: "140px" },
     },
     {
-      key: "gia_ban_thuong",
+      key: "price",
       label: "Giá bán thường",
       _style: { width: "auto", minWidth: "200px" },
     },
     {
-      key: "gia_ban_le",
-      label: "Giá bán lẻ",
+      key: "holiday_price",
+      label: "Giá ngày lễ",
       _style: { width: "auto", minWidth: "200px" },
     },
     {

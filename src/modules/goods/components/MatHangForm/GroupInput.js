@@ -1,4 +1,7 @@
-import { Controller } from "react-hook-form";
+import { useEffect, useMemo, useState } from "react";
+import { Controller, useController, useWatch } from "react-hook-form";
+import { useQuery } from "react-query";
+import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import {
   C1Upload,
   CInput,
@@ -7,19 +10,55 @@ import {
 } from "src/common/components/controls";
 
 export const GroupInput = ({ control }) => {
+  //#region Data
+  const { data: industries } = useQuery({
+    queryKey: ["nganh-hang"],
+    queryFn: () => deXuatHangHoaApi.getNganhHang(),
+    select: (res) =>
+      res?.data?.data?.map((e) => ({
+        value: e?.code,
+        label: e?.name,
+        groups: e?.groups?.map((el) => ({ value: el?.code, label: el?.name })),
+      })),
+  });
+
+  const industryValue = useWatch({ control, name: "industry" });
+
+  const {
+    field: { onChange: changeGroup },
+  } = useController({ control, name: "group" });
+
+  const groups = useMemo(() => {
+    if (industryValue && industryValue?.groups) {
+      return industryValue.groups;
+    } else {
+      return [];
+    }
+  }, [industryValue]);
+  //#endregion
+
+  //#region Event
+  const onIndustryChange = (changeCb) => (selectedOption) => {
+    changeCb(selectedOption);
+    changeGroup(null);
+  };
+  //#endregion
+
+  //#region Render
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-end gap-5">
         <div className="basis-[20%]">
           <Controller
-            name="nganh_hang_hoa"
+            name="industry"
             control={control}
-            render={({ field }) => (
+            render={({ field: { onChange, ..._field } }) => (
               <CSelect
-                options={[]}
+                options={industries ?? []}
                 label="Ngành hàng hóa:"
                 required
-                {...field}
+                {..._field}
+                onChange={onIndustryChange(onChange)}
               />
             )}
           />
@@ -27,11 +66,11 @@ export const GroupInput = ({ control }) => {
 
         <div className="basis-[20%]">
           <Controller
-            name="nhom_hang_hoa"
+            name="group"
             control={control}
             render={({ field }) => (
               <CSelect
-                options={[]}
+                options={groups ?? []}
                 label="Nhóm hàng hóa:"
                 required
                 {...field}
@@ -42,7 +81,7 @@ export const GroupInput = ({ control }) => {
 
         <div className="basis-[20%]">
           <Controller
-            name="chu_ngu"
+            name="subject"
             control={control}
             render={({ field }) => (
               <CInput label="Tên hàng hóa" placeholder="Chủ ngữ" {...field} />
@@ -51,7 +90,7 @@ export const GroupInput = ({ control }) => {
         </div>
         <div className="basis-[20%]">
           <Controller
-            name="vi_ngu"
+            name="predicate"
             control={control}
             render={({ field }) => (
               <CInput label="" placeholder="Vị ngữ" {...field} />
@@ -60,7 +99,7 @@ export const GroupInput = ({ control }) => {
         </div>
         <div className="basis-[20%]">
           <Controller
-            name="bo_sung"
+            name="complement"
             control={control}
             render={({ field }) => (
               <CInput label="" placeholder="Bổ sung" {...field} />
@@ -72,7 +111,7 @@ export const GroupInput = ({ control }) => {
       <div className="flex items-start gap-5">
         <div className="basis-[20%]">
           <Controller
-            name="ma_hang_hoa"
+            name="code"
             control={control}
             render={({ field }) => (
               <CInput label="Mã hàng hóa" readOnly {...field} />
@@ -81,14 +120,14 @@ export const GroupInput = ({ control }) => {
         </div>
         <div className="basis-[20%]">
           <Controller
-            name="don_vi_tinh"
+            name="unit"
             control={control}
             render={({ field }) => <CInput label="Đơn Vị Tính" {...field} />}
           />
         </div>
         <div className="basis-[20%]">
           <Controller
-            name="dinh_muc_mon_cho"
+            name="standard"
             control={control}
             render={({ field }) => (
               <CInput label="Định mức món cho" {...field} />
@@ -97,20 +136,22 @@ export const GroupInput = ({ control }) => {
         </div>
         <div className="basis-[20%]">
           <Controller
-            name="ghi_chu"
+            name="note"
             control={control}
             render={({ field }) => <CTextarea label="Ghi chú" {...field} />}
           />
         </div>
         <div className="basis-[20%]">
-          <C1Upload label="Hình ảnh hàng hóa" required />
-          {/* <Controller
-            name="ghi_chu"
+          <Controller
             control={control}
-            render={({ field }) => <CTextarea label="Ghi chú" {...field} />}
-          /> */}
+            name="file"
+            render={({ field: { ref, ..._field } }) => (
+              <C1Upload label="Hình ảnh hàng hóa" required {..._field} />
+            )}
+          />
         </div>
       </div>
     </div>
   );
+  //#endregion
 };

@@ -13,7 +13,11 @@ axiosInstance.interceptors.request.use(
         if (req.params[key] instanceof Date) {
           req.params[key] = dayjs(req.params[key]).format("YYYY-MM-DD");
         }
-        if (req.params[key] === "all") {
+        if (
+          req.params[key] === "all" ||
+          req.params[key] === "" ||
+          typeof req.params[key] === "undefined"
+        ) {
           delete req.params[key];
         }
       });

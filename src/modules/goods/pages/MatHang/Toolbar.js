@@ -73,7 +73,11 @@ export default ({
               do={PERMISSION_VALUE.CREATE}
               on={ENTITY_GROUP_CODE.INVENTORY_SLIP}
             >
-              <CButton to="/inventory-check/form" className="btn-fill">
+              <CButton
+                to="/inventory-check/form"
+                className="btn-fill"
+                disabled={selectedNo !== 1}
+              >
                 Đề xuất giá
               </CButton>
             </Can>

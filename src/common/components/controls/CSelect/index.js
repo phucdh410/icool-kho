@@ -1,4 +1,4 @@
-import { useCallback, forwardRef, useMemo, useEffect } from "react";
+import { useCallback, forwardRef, useMemo } from "react";
 import classNames from "classnames";
 
 import RSelect from "react-select";
@@ -13,7 +13,7 @@ const selectTheme = (theme) => ({
 });
 
 function Select(
-  { label, onChange, className, value, options, ignore, ...rest },
+  { label, onChange, className, value, options, ignore, display, ...rest },
   ref
 ) {
   const _class = classNames("c-input c-select", className);
@@ -44,7 +44,11 @@ function Select(
         </CLabel>
       )}
       {rest.readOnly ? (
-        <CInput className="c-input" value={_value?.label ?? ""} {...rest} />
+        <CInput
+          className="c-input"
+          value={(display ? _value?.[display] : _value?.label) ?? ""}
+          {...rest}
+        />
       ) : (
         <RSelect
           ref={ref}
@@ -57,6 +61,7 @@ function Select(
           theme={selectTheme}
           onChange={change}
           classNamePrefix="react-select"
+          getOptionLabel={display ? (option) => option[display] : undefined}
           {...rest}
         />
       )}

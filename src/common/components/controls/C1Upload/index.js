@@ -33,7 +33,13 @@ const validateFileType = (file, accept = "image/*") => {
   return isValidType;
 };
 
-export const C1Upload = ({ label, required, accept = "image/*" }) => {
+export const C1Upload = ({
+  label,
+  required,
+  accept = "image/*",
+  value,
+  onChange,
+}) => {
   //#region Data
   const inputRef = useRef(null);
   //#endregion
@@ -52,7 +58,7 @@ export const C1Upload = ({ label, required, accept = "image/*" }) => {
         try {
           const res = await fileApi.upload(file);
 
-          console.log("🚀 ~ onFileChange ~ res:", res);
+          onChange(res?.data?.data);
         } catch (error) {
           console.log(error);
           noti("error", "Upload lỗi!");
@@ -87,13 +93,21 @@ export const C1Upload = ({ label, required, accept = "image/*" }) => {
           multiple={false}
         />
         <div className="flex flex-1 items-center input-file-wrapper h-[inherit] border-t border-l border-b border-[#D7D7D7] rounded-s-md !pl-3 pr-8">
-          <i className="fa-regular fa-cloud-arrow-up text-lg pr-2"></i>
-          <span
-            onClick={onClick}
-            className="text-[#B3B3B3] text-base cursor-pointer"
-          >
-            Tải file lên
-          </span>
+          {value ? (
+            <span className="font-medium whitespace-nowrap text-ellipsis overflow-hidden">
+              {value?.originalname}
+            </span>
+          ) : (
+            <>
+              <i className="fa-regular fa-cloud-arrow-up text-lg pr-2"></i>
+              <span
+                onClick={onClick}
+                className="text-[#B3B3B3] text-base cursor-pointer"
+              >
+                Tải file lên
+              </span>
+            </>
+          )}
         </div>
         <button
           onClick={onClick}

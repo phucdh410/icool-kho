@@ -1,19 +1,17 @@
 import { useState, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "reselect";
 
 import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 
 import Toolbar from "./Toolbar";
 import Table from "./Table";
 
-import { remove, approve, getUnFulfilled } from "src/apis/inventory_slip.api";
+import { remove, approve } from "src/apis/inventory_slip.api";
 
 import { history } from "src/App";
 import { fireDelete, fireSuccess } from "src/utils/alert";
 import { setFilter } from "src/common/actions/config.action";
 import { useQuery } from "react-query";
-import { kiemKhoApi } from "src/1/apis/kiemkho.api";
+import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { format } from "src/utils/moment";
 
@@ -36,15 +34,15 @@ const InventoryCheck = () => {
   const [status, setStatus] = useState(0);
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["kiem-kho", filters],
-    queryFn: () => kiemKhoApi.getAll(filters),
+    queryKey: ["mat-hang", filters],
+    queryFn: () => deXuatHangHoaApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
         Array.isArray(dataResponse) ? dataResponse : dataResponse?.data?.data
       ),
   });
 
-  const { setQueryData } = useSetQueryData(["kiem-kho", filters]);
+  const { setQueryData } = useSetQueryData(["mat-hang", filters]);
 
   const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
 
