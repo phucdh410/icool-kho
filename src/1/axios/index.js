@@ -30,6 +30,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (res) => res,
   (error) => {
+    console.log("🚀 ~ error:", error);
     return Promise.reject(error);
   }
 );

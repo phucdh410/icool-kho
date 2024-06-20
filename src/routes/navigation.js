@@ -6,6 +6,7 @@ import {
   Material,
   Permission,
   Summary,
+  HangHoa,
 } from "./constant";
 
 import {
@@ -389,9 +390,10 @@ const navigation = [
       },
     ],
   },
+  //#region Nguyên vật liệu
   {
     _tag: "CSidebarNavDropdown",
-    name: "Danh Mục Hàng Hóa",
+    name: "Danh Mục Nguyên Vật Liệu",
     route: "/material",
     icon: <MaterialIcon className="c-sidebar-nav-icon" />,
     required: [
@@ -405,8 +407,6 @@ const navigation = [
       Material.Category.path,
       Material.Type.path,
       Material.Suggest.path,
-      Material.MatHang.path,
-      Material.CreateDanhMucHangHoa.path,
     ],
     _children: [
       {
@@ -444,22 +444,59 @@ const navigation = [
         childrens: [Material.List.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
       },
+    ],
+  },
+  //#endregion
+
+  //#region Hàng hóa
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Danh Mục Hàng Hóa",
+    route: "/goods",
+    icon: <MaterialIcon className="c-sidebar-nav-icon" />,
+    required: [
+      { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
+      { code: ENTITY_GROUP_CODE.MATERIAL },
+    ],
+    childrens: [
+      HangHoa.Industry.path,
+      HangHoa.Group.path,
+      HangHoa.MatHang.path,
+      HangHoa.CreateDanhMucHangHoa.path,
+    ],
+    _children: [
       {
         _tag: "CSidebarNavItem",
-        name: Material.MatHang.name,
-        to: Material.MatHang.path,
-        childrens: [Material.MatHang.path],
+        name: HangHoa.Industry.name,
+        to: HangHoa.Industry.path,
+        childrens: [HangHoa.Industry.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: HangHoa.Group.name,
+        to: HangHoa.Group.path,
+        childrens: [HangHoa.Group.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: HangHoa.MatHang.name,
+        to: HangHoa.MatHang.path,
+        childrens: [HangHoa.MatHang.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
       },
       {
         _tag: "CSidebarNavItem",
-        name: Material.CreateDanhMucHangHoa.name,
-        to: Material.CreateDanhMucHangHoa.path,
-        childrens: [Material.CreateDanhMucHangHoa.path],
+        name: HangHoa.CreateDanhMucHangHoa.name,
+        to: HangHoa.CreateDanhMucHangHoa.path,
+        childrens: [HangHoa.CreateDanhMucHangHoa.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
       },
     ],
   },
+  //#endregion
+
   {
     _tag: "CSidebarNavDropdown",
     name: "Phân quyển",

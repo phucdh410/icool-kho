@@ -376,6 +376,7 @@ export const Inventory = {
   },
 };
 
+//#region Nguyên vật liệu
 export const Material = {
   List: {
     required: {
@@ -450,6 +451,57 @@ export const Material = {
     path: "/material/items/price-suggest",
   },
 };
+//#endregion
+
+//#region Hàng hóa
+export const HangHoa = {
+  Industry: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS ngành hàng hóa",
+    path: "/goods/industries",
+  },
+  Group: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS nhóm hàng hóa",
+    path: "/goods/groups",
+  },
+  MatHang: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS mặt hàng",
+    path: "/goods/list",
+  },
+  CreateDanhMucHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Tạo đề xuất hàng hóa",
+    path: "/goods/form",
+  },
+  DeXuatGiaMatHang: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Đề xuất giá",
+    path: "/goods/price-suggest",
+  },
+};
+//#endregion
 
 export const Good = {
   List: {

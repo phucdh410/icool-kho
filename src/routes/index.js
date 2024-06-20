@@ -7,6 +7,7 @@ import {
   Import,
   Permission,
   Summary,
+  HangHoa,
 } from "./constant";
 
 //#region Imports
@@ -18,10 +19,15 @@ import {
   MaterialIndustryList,
   MaterialType,
   MaterialSuggest,
+} from "_modules/goods/pages";
+
+import {
+  NganhHangHoa,
+  NhomHangHoa,
   MatHang,
   CreateDanhMucHangHoa,
   DeXuatGiaMatHang,
-} from "_modules/goods/pages";
+} from "_modules/hang_hoa/pages";
 
 import {
   QuantitativeListPage,
@@ -290,7 +296,7 @@ const routes = [
   },
   //#endregion
 
-  //#region MATERIALS
+  //#region Nguyên vật liệu
   {
     ...Material.Industry,
     exact: true,
@@ -316,18 +322,31 @@ const routes = [
     exact: true,
     component: MaterialComponent,
   },
+  //#endregion
+
+  //#region Hàng hóa
   {
-    ...Material.MatHang,
+    ...HangHoa.Industry,
+    exact: true,
+    component: NganhHangHoa,
+  },
+  {
+    ...HangHoa.Group,
+    exact: true,
+    component: NhomHangHoa,
+  },
+  {
+    ...HangHoa.MatHang,
     exact: true,
     component: MatHang,
   },
   {
-    ...Material.CreateDanhMucHangHoa,
+    ...HangHoa.CreateDanhMucHangHoa,
     exact: true,
     component: CreateDanhMucHangHoa,
   },
   {
-    ...Material.DeXuatGiaMatHang,
+    ...HangHoa.DeXuatGiaMatHang,
     exact: true,
     component: DeXuatGiaMatHang,
   },
