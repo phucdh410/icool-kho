@@ -20,9 +20,7 @@ export default ({ onSearch }) => {
   return (
     <CRow>
       <CCol xs="12">
-        <h5 className="text-icool-blue text-center">
-          DANH SÁCH NHÓM NGUYÊN VẬT LIỆU
-        </h5>
+        <h5 className="text-icool-blue text-center">DANH SÁCH NHÓM HÀNG HÓA</h5>
       </CCol>
       <CCol xs="12" sm="6" md="4" lg="4" xl="3" style={{ maxWidth: "250px" }}>
         <Controller
@@ -46,7 +44,7 @@ export default ({ onSearch }) => {
           defaultValue=""
           render={({ field }) => (
             <CInput
-              label="Mã Nhóm NVL"
+              label="Mã Nhóm Hàng Hóa"
               placeholder="Lọc theo mã nhóm"
               {...field}
             />
@@ -60,7 +58,7 @@ export default ({ onSearch }) => {
           defaultValue=""
           render={({ field }) => (
             <CInput
-              label="Tên Nhóm NVL"
+              label="Tên Nhóm Hàng Hóa"
               placeholder="Lọc theo tên nhóm"
               {...field}
             />

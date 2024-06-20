@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import classNames from "classnames";
 
 import { CCard, CCardHeader, CCardBody, CRow, CCol } from "@coreui/react";
 
@@ -9,32 +8,36 @@ import Search from "./Search";
 import Table from "./Table";
 import Form from "./Form";
 
-import { getAll } from "_common/queries-fn/material-group.query";
-import {
-  create,
-  exportExcel,
-  remove,
-  update,
-} from "src/apis/material_group.api";
-import classNames from "classnames";
-import { isSuccess } from "src/utils/funcs";
-import { ERROR_MESSAGE } from "src/configs/constant";
+import { nhomHangHoaApi } from "src/1/apis/nhom_hang_hoa.api";
 
-const selectIsLoading = createSelector(
-  (state) => state.config,
-  ({ isLoading }) => isLoading
-);
+import { isSuccess } from "src/utils/funcs";
+import { useQuery } from "react-query";
+import { useSetQueryData } from "src/1/hooks/query";
+import { format } from "src/utils/moment";
+
+const remapData = (_data) => {
+  return _data.map((e) => ({
+    ...e,
+    checked: format(e?.checked),
+  }));
+};
 
 const NhomHangHoa = () => {
   const ref = useRef();
-  //#region Data
-  const isLoading = useSelector(selectIsLoading);
 
+  //#region Data
   const [status, setStatus] = useState(0);
 
-  const [filter, setFilter] = useState({});
+  const [filters, setFilters] = useState({});
 
-  const { data, isLoading: loading, refetch, set } = getAll(filter, isLoading);
+  const { data, refetch, isFetching } = useQuery({
+    queryKey: ["nhom-hang-hoa", filters],
+    queryFn: () => nhomHangHoaApi.getAll(filters),
+    select: (response) =>
+      remapData(Array.isArray(response) ? response : response?.data?.data),
+  });
+
+  const { setQueryData } = useSetQueryData(["nhom-hang-hoa", filters]);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.check) ?? false,
@@ -46,7 +49,7 @@ const NhomHangHoa = () => {
 
   //#region Events
   const onSelect = (code, value) => {
-    set(
+    setQueryData(
       data && data?.length > 0
         ? data.map((d) =>
             code === -1 || d.code === code ? { ...d, check: value } : d
@@ -83,30 +86,29 @@ const NhomHangHoa = () => {
   };
 
   const onSearch = (where) => {
-    setFilter(where);
+    setFilters(where);
   };
 
   const onSave = () => {
-    ref.current.handleSubmit(
-      async (d) => {
-        const func = status === 3 ? update : create;
-        const res = await func(d);
+    ref.current.handleSubmit(async (values) => {
+      try {
+        const func =
+          status === 3 ? nhomHangHoaApi.update : nhomHangHoaApi.create;
 
-        if (isSuccess(res)) {
-          refetch();
-          setStatus(0);
-          ref.current.clear();
-          noti("success", "Thành công");
-        } else {
-          noti("error", ERROR_MESSAGE.NVL.REQUIRED);
-        }
-      },
-      (e) => {}
-    )();
+        await func(values);
+
+        refetch();
+        setStatus(0);
+        ref.current.clear();
+        noti("success", "Thành công");
+      } catch (error) {
+        noti("error", "Lỗi");
+      }
+    })();
   };
 
   const onRemove = async () => {
-    const res = await remove(selected.map((c) => c.code));
+    const res = await nhomHangHoaApi.remove(selected.map((c) => c.code));
 
     if (isSuccess(res)) {
       refetch();
@@ -114,7 +116,11 @@ const NhomHangHoa = () => {
   };
 
   const onExport = () => {
-    exportExcel(filter);
+    try {
+      nhomHangHoaApi.exportExcel(filters);
+    } catch (error) {
+      noti("error", "Export excel không thành công!");
+    }
   };
   //#endregion
 
@@ -156,7 +162,7 @@ const NhomHangHoa = () => {
                 onSelect={onSelect}
                 isSelectAll={isSelectAll}
                 data={data}
-                loading={loading}
+                loading={isFetching}
               />
             </CCardBody>
           </CCard>

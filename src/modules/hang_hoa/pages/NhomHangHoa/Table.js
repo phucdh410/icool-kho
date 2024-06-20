@@ -34,16 +34,16 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
     },
     {
       key: "industryCode",
-      label: "Mã Ngành NVL",
+      label: "Mã Ngành Hàng Hóa",
       _style: { minWidth: "175px" },
     },
     {
       key: "industryName",
-      label: "Tên Ngành NVL",
+      label: "Tên Ngành Hàng Hóa",
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "createdBy",
+      key: "created_by",
       label: "Người đề xuất",
       _style: { minWidth: "150px" },
     },
@@ -53,7 +53,7 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
       _style: { width: "140px", minWidth: "140px" },
     },
     {
-      key: "active",
+      key: "status",
       label: "Trạng Thái",
       _style: { width: "auto", minWidth: "200px" },
     },

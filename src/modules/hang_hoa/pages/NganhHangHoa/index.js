@@ -1,7 +1,5 @@
 import { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
 
 import { CRow, CCol, CCard, CCardBody, CCardHeader } from "@coreui/react";
 

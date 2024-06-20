@@ -6,7 +6,6 @@ import { CActionGroup } from "_components/others";
 export default ({
   status,
   selectedNo,
-  toggleStatus,
   onAdd,
   onEdit,
   onSave,
@@ -48,7 +47,6 @@ export default ({
             canSave={canSave}
             canEdit={selectedNo === 1 && status !== 2}
             canRemove={selectedNo === 1 && status !== 2}
-            // canRemove={!!selectedNo && !status}
           />
           <CButton
             className="btn-fill"
