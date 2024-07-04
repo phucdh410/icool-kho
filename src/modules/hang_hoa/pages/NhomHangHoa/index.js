@@ -108,7 +108,7 @@ const NhomHangHoa = () => {
   };
 
   const onRemove = async () => {
-    const res = await nhomHangHoaApi.remove(selected.map((c) => c.code));
+    const res = await nhomHangHoaApi.remove({ id: selected[0]?.id });
 
     if (isSuccess(res)) {
       refetch();

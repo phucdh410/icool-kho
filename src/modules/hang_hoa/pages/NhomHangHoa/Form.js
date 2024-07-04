@@ -5,7 +5,8 @@ import { Controller, useController, useForm } from "react-hook-form";
 import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
 
 import { CInput, CSelect, CSwitch } from "_components/controls";
-import { getAll } from "_common/queries-fn/material-industry.query";
+import { useQuery } from "react-query";
+import { nganhHangHoaApi } from "src/1/apis/nganh_hang_hoa.api";
 
 export default forwardRef(({}, ref) => {
   //#region Data
@@ -18,7 +19,11 @@ export default forwardRef(({}, ref) => {
     field: { onChange: changeName },
   } = useController({ control, name: "industryName" });
 
-  const { data } = getAll({ name: "", code: "" });
+  const { data } = useQuery({
+    queryKey: ["nganh-hang-hoa"],
+    queryFn: () => nganhHangHoaApi.getAll(),
+    select: (response) => response?.data?.data,
+  });
 
   const industryCodes = useMemo(() => {
     if (data && data?.length > 0) {
@@ -33,14 +38,10 @@ export default forwardRef(({}, ref) => {
   }, [data]);
   //#endregion
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      handleSubmit,
-      clear: (data = {}) => reset(data),
-    }),
-    []
-  );
+  useImperativeHandle(ref, () => ({
+    handleSubmit,
+    clear: (data = {}) => reset(data),
+  }));
 
   //#region Render
   return (
@@ -55,7 +56,7 @@ export default forwardRef(({}, ref) => {
                 rules={{ required: true }}
                 render={({ field: { onChange, ..._field } }) => (
                   <CSelect
-                    label="Mã Ngành NVL"
+                    label="Mã Ngành Hàng Hóa"
                     options={industryCodes}
                     onChange={(selectedOpt) => {
                       onChange(selectedOpt?.value);
@@ -74,7 +75,7 @@ export default forwardRef(({}, ref) => {
                 rules={{ required: true }}
                 render={({ field: { onChange, ..._field } }) => (
                   <CSelect
-                    label="Tên Ngành NVL"
+                    label="Tên Ngành Hàng Hóa"
                     options={industryNames}
                     onChange={(selectedOpt) => {
                       onChange(selectedOpt?.value);
@@ -92,7 +93,7 @@ export default forwardRef(({}, ref) => {
                 name="code"
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <CInput label="Mã Nhóm NVL" {...field} required />
+                  <CInput label="Mã Nhóm Hàng Hóa" {...field} required />
                 )}
               />
             </CCol>
@@ -102,7 +103,7 @@ export default forwardRef(({}, ref) => {
                 name="name"
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <CInput label="Tên Nhóm NVL" {...field} required />
+                  <CInput label="Tên Nhóm Hàng Hóa" {...field} required />
                 )}
               />
             </CCol>
@@ -112,7 +113,7 @@ export default forwardRef(({}, ref) => {
                 name="acronym"
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <CInput label="Viết tắt Nhóm NVL" {...field} required />
+                  <CInput label="Viết tắt Nhóm Hàng Hóa" {...field} required />
                 )}
               />
             </CCol>

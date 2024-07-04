@@ -15,7 +15,7 @@ export default ({ onSearch }) => {
     clearTimeout(_timeout);
     _timeout = setTimeout(() => onSearch(getValues()), 500);
     return () => clearTimeout(_timeout);
-  }, [watch("code"), watch("name")]);
+  }, [watch("status"), watch("code"), watch("name")]);
 
   return (
     <CRow>

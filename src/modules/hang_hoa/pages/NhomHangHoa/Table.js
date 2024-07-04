@@ -43,7 +43,7 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
       _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
-      key: "created_by",
+      key: "createdBy",
       label: "Người đề xuất",
       _style: { minWidth: "150px" },
     },
@@ -53,7 +53,7 @@ const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
       _style: { width: "140px", minWidth: "140px" },
     },
     {
-      key: "status",
+      key: "active",
       label: "Trạng Thái",
       _style: { width: "auto", minWidth: "200px" },
     },
