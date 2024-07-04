@@ -1,0 +1,57 @@
+#c-table-phuc {
+  width: 100%;
+
+  thead {
+    background-color: #d0e5ff;
+    font-weight: 500;
+
+    th {
+      vertical-align: middle;
+      overflow: hidden;
+      padding: 0.75rem;
+      border-top: 1px solid;
+      border-top-color: #d8dbe0;
+      font-size: 16px;
+      text-align: center;
+
+      &[align="center"] {
+        text-align: center;
+      }
+      &[align="left"] {
+        text-align: left;
+      }
+      &[align="right"] {
+        text-align: right;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgba(0, 0, 21, 0.075);
+      }
+
+      &:last-of-type {
+        border-bottom: 1px solid;
+        border-bottom-color: #d8dbe0;
+      }
+
+      td {
+        padding: 0.75rem;
+        text-align: center;
+        font-size: 16px;
+
+        &[align="center"] {
+          text-align: center;
+        }
+        &[align="left"] {
+          text-align: left;
+        }
+        &[align="right"] {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

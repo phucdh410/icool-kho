@@ -1,15 +1,14 @@
 import { CCard, CCardBody } from "@coreui/react";
 import { Toolbar } from "./Toolbar";
 import { GroupInput } from "./GroupInput";
-import { Table } from "./Table";
 import { SuggestTable } from "./SuggestTable";
 
-export const MatHangForm = ({ control, isSuggest }) => {
+export const MatHangForm = ({ control, isSubmitting, onSubmit, isSuggest }) => {
   return (
     <>
       <CCard className="toolbar sticky">
         <CCardBody>
-          <Toolbar />
+          <Toolbar canAdd loading={isSubmitting} onSumbit={onSubmit} />
         </CCardBody>
       </CCard>
       <CCard>
@@ -18,9 +17,10 @@ export const MatHangForm = ({ control, isSuggest }) => {
         </CCardBody>
       </CCard>
       {isSuggest ? (
-        <SuggestTable control={control} />
+        <>Price table</>
       ) : (
-        <Table control={control} />
+        // <SuggestTable control={control} />
+        <SuggestTable control={control} />
       )}
     </>
   );

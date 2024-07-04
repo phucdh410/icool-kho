@@ -5,10 +5,8 @@ import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 import Toolbar from "./Toolbar";
 import Table from "./Table";
 
-import { remove, approve } from "src/apis/inventory_slip.api";
-
 import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { setFilter } from "src/common/actions/config.action";
 import { useQuery } from "react-query";
 import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
@@ -70,44 +68,31 @@ const InventoryCheck = () => {
 
   const onSearch = useCallback((data) => dispatch(setFilter(NAME, data)), []);
 
-  const onApproved = useCallback(async () => {
-    setFetching(true);
-    const res = await approve({
-      code: selected.map((m) => m.code),
-      status: 1,
-    });
-
-    if (res.exitcode === 200) {
-      refetch();
-    } else {
-      setFetching(false);
-    }
-  }, [selected]);
+  const onApproved = useCallback(async () => {}, [selected]);
 
   const onEdit = useCallback(async () => {
     const code = data.find((d) => d.check).code;
     history.push(`/inventory-check/form/${code}`);
   }, [data]);
 
-  const onRemove = useCallback(async () => {
+  const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
-
-      if (res.exitcode == 200) {
+      try {
+        await deXuatHangHoaApi.delete({ id: selected?.[0]?.id });
         refetch();
         fireSuccess();
-      } else {
+      } catch (error) {
         fireError();
       }
     }
-  }, [selected, refetch]);
+  };
 
   const onExport = useCallback(async () => {
     // await toExcel(data);
   }, []);
 
-  const onAdd = () => history.push("/material/items/form");
+  const onAdd = () => history.push("/goods/form");
   //#endregion
 
   return (

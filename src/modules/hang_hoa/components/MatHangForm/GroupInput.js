@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Controller, useController, useWatch } from "react-hook-form";
 import { useQuery } from "react-query";
 import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
+import { nganhHangHoaApi } from "src/1/apis/nganh_hang_hoa.api";
+import { nhomHangHoaApi } from "src/1/apis/nhom_hang_hoa.api";
 import {
   C1Upload,
   CInput,
@@ -9,32 +11,41 @@ import {
   CTextarea,
 } from "src/common/components/controls";
 
-export const GroupInput = ({ control }) => {
+export const GroupInput = ({ control, isEdit }) => {
   //#region Data
+  const industry_code = useWatch({ control, name: "industry_code" });
+  const group_id = useWatch({ control, name: "group_id" });
+
   const { data: industries } = useQuery({
     queryKey: ["nganh-hang"],
-    queryFn: () => deXuatHangHoaApi.getNganhHang(),
+    queryFn: () => nganhHangHoaApi.getAll({ status: 1 }),
     select: (res) =>
       res?.data?.data?.map((e) => ({
         value: e?.code,
         label: e?.name,
-        groups: e?.groups?.map((el) => ({ value: el?.code, label: el?.name })),
+        acronym: e?.acronym,
       })),
   });
 
-  const industryValue = useWatch({ control, name: "industry" });
+  const { data: groups } = useQuery({
+    queryKey: ["nhom-hang", industry_code],
+    queryFn: () => nhomHangHoaApi.getAll({ status: 1, industry_code }),
+    enabled: !!industry_code,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        value: e?.id,
+        label: e?.name,
+        acronym: e?.acronym,
+      })),
+  });
 
   const {
     field: { onChange: changeGroup },
-  } = useController({ control, name: "group" });
+  } = useController({ control, name: "group_id" });
 
-  const groups = useMemo(() => {
-    if (industryValue && industryValue?.groups) {
-      return industryValue.groups;
-    } else {
-      return [];
-    }
-  }, [industryValue]);
+  const {
+    field: { onChange: onCodeChange },
+  } = useController({ control, name: "code" });
   //#endregion
 
   //#region Event
@@ -44,13 +55,28 @@ export const GroupInput = ({ control }) => {
   };
   //#endregion
 
+  useEffect(() => {
+    if (isEdit) return;
+
+    let result = "";
+
+    if (industry_code) {
+      if (group_id) {
+        result = industry_code?.acronym + "." + group_id?.acronym;
+      } else {
+        result = industry_code?.acronym;
+      }
+    }
+    onCodeChange(result);
+  }, [isEdit, industry_code, group_id]);
+
   //#region Render
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-end gap-5">
         <div className="basis-[20%]">
           <Controller
-            name="industry"
+            name="industry_code"
             control={control}
             render={({ field: { onChange, ..._field } }) => (
               <CSelect
@@ -66,7 +92,7 @@ export const GroupInput = ({ control }) => {
 
         <div className="basis-[20%]">
           <Controller
-            name="group"
+            name="group_id"
             control={control}
             render={({ field }) => (
               <CSelect

@@ -1,10 +1,16 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { Controller, useFieldArray } from "react-hook-form";
+import {
+  Controller,
+  useController,
+  useFieldArray,
+  useWatch,
+} from "react-hook-form";
 import { useQuery } from "react-query";
 import { CNumber, CSelect } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { PTable } from "src/1/common/components/others";
 
 export const Table = ({ control }) => {
   //#region Data
@@ -12,24 +18,43 @@ export const Table = ({ control }) => {
     fields: materials,
     append,
     remove,
+    update,
   } = useFieldArray({ control, name: "materials", keyName: "__id" });
+  console.log("🚀 ~ Table ~ materials:", materials);
+
+  const watchMaterials = useWatch({ control, name: "materials" });
+  const currentMaterials = useMemo(() => {
+    return materials.map((field, index) => ({
+      ...field,
+      ...watchMaterials[index],
+    }));
+  }, [materials, watchMaterials]);
+  console.log("🚀 ~ Table ~ currentMaterials:", currentMaterials);
 
   const { data: material_options } = useQuery({
     queryKey: ["materials"],
     queryFn: () => nguyenVatLieuApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, value: e?.code })),
+      response?.data?.data?.map((e) => ({ ...e, value: e?.id })),
   });
 
-  //#region Event
   const onAddRow = () => {
-    append({ code: "", name: "", group: "", amount: 1, don_vi_tinh: "" });
+    append({ nvl_id: "", price: 0, quantity: 1, ware_unit: "" });
   };
 
   const onRemoveRow = (index) => () => {
     remove(index);
   };
-  //#endregion
+
+  const onSelectMaterial = (index, onChange) => (selectedOption) => {
+    update(index, {
+      nvl_id: selectedOption,
+      quantity: 1,
+      ware_unit: selectedOption?.wareUnit,
+      price: selectedOption?.price,
+    });
+    onChange(selectedOption);
+  };
 
   const fields = [
     {
@@ -46,7 +71,7 @@ export const Table = ({ control }) => {
       sorter: false,
     },
     {
-      key: "code",
+      key: "nvl_id",
       label: "Mã NVL",
     },
     {
@@ -59,11 +84,15 @@ export const Table = ({ control }) => {
       label: "Nhóm NVL",
     },
     {
-      key: "amount",
+      key: "quantity",
       label: "Số lượng",
     },
     {
-      key: "wareUnit",
+      key: "price",
+      label: "Giá",
+    },
+    {
+      key: "ware_unit",
       label: "ĐVT lưu kho",
     },
   ];
@@ -79,14 +108,15 @@ export const Table = ({ control }) => {
         </button>
       </td>
     ),
-    code: (item, index) => (
+    nvl_id: (item, index) => (
       <td>
         <Controller
           control={control}
-          name={`materials.${index}.code`}
-          render={({ field }) => (
+          name={`materials.${index}.nvl_id`}
+          render={({ field: { onChange, ..._field } }) => (
             <CSelect
-              {...field}
+              {..._field}
+              onChange={onSelectMaterial(index, onChange)}
               options={material_options ?? []}
               display="code"
             />
@@ -98,10 +128,11 @@ export const Table = ({ control }) => {
       <td>
         <Controller
           control={control}
-          name={`materials.${index}.code`}
-          render={({ field }) => (
+          name={`materials.${index}.nvl_id`}
+          render={({ field: { onChange, ..._field } }) => (
             <CSelect
-              {...field}
+              {..._field}
+              onChange={onSelectMaterial(index, onChange)}
               options={material_options ?? []}
               display="name"
             />
@@ -113,7 +144,7 @@ export const Table = ({ control }) => {
       <td>
         <Controller
           control={control}
-          name={`materials.${index}.code`}
+          name={`materials.${index}.nvl_id`}
           render={({ field }) => (
             <CSelect
               {...field}
@@ -125,16 +156,21 @@ export const Table = ({ control }) => {
         />
       </td>
     ),
-    amount: ({ amount }) => (
-      <td>
-        <CNumber />
-      </td>
-    ),
-    wareUnit: (item, index) => (
+    quantity: (item, index) => (
       <td>
         <Controller
           control={control}
-          name={`materials.${index}.code`}
+          name={`materials.${index}.quantity`}
+          render={({ field }) => <CNumber {...field} />}
+        />
+      </td>
+    ),
+    price: ({ price }) => <td>{(price ?? 0)?.toLocaleString("vi-VN")}</td>,
+    ware_unit: (item, index) => (
+      <td>
+        <Controller
+          control={control}
+          name={`materials.${index}.nvl_id`}
           render={({ field }) => (
             <CSelect
               {...field}
@@ -147,7 +183,24 @@ export const Table = ({ control }) => {
       </td>
     ),
   };
+
+  const totalCost = useMemo(() => {
+    return (
+      currentMaterials?.reduce(
+        (prev, cur) => prev + (cur?.price * cur?.quantity ?? 0),
+        0
+      ) ?? 0
+    );
+  }, [currentMaterials]);
+
+  const {
+    field: { onChange: onCostChange },
+  } = useController({ control, name: "cost" });
   //#endregion
+
+  useEffect(() => {
+    onCostChange(totalCost);
+  }, [totalCost]);
 
   //#region Render
   return (
@@ -162,8 +215,14 @@ export const Table = ({ control }) => {
 
       <div className="mt-3 flex items-center gap-3 font-bold text-xl">
         <span>Tổng cost từ NVL:</span>
-        {/* cost */}
-        <span>{(50000).toLocaleString("vi-VN")}</span>
+
+        <Controller
+          control={control}
+          name="cost"
+          render={({ field: { value } }) => (
+            <span>{value.toLocaleString("vi-VN")}</span>
+          )}
+        />
       </div>
     </>
   );
