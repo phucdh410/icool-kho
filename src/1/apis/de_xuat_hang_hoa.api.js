@@ -7,9 +7,12 @@ export const deXuatHangHoaApi = {
   create: async (body) => {
     return await methods.post("/goods_suggestion/create", body);
   },
-  // getNganhHang: async () => {
-  //   return await methods.get("/goods/industries");
-  // },
+  getByCode: async (code) => {
+    return await methods.get(`/goods_suggestion/getByCode/${code}`);
+  },
+  update: async (body) => {
+    return await methods.post("/goods_suggestion/update", body);
+  },
   delete: async (body) => {
     return await methods.post("/goods_suggestion/delete", body);
   },

@@ -491,6 +491,15 @@ export const HangHoa = {
     name: "Tạo đề xuất hàng hóa",
     path: "/goods/form",
   },
+  UpdateDanhMucHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa đề xuất hàng hóa",
+    path: "/goods/form/:code",
+  },
   DeXuatGiaMatHang: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,

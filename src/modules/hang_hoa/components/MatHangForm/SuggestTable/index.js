@@ -32,7 +32,7 @@ export const SuggestTable = ({ control }) => {
     queryKey: ["materials"],
     queryFn: () => nguyenVatLieuApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ ...e, value: e?.id })),
+      response?.data?.data?.map((e) => ({ ...e, value: e?.code })),
   });
 
   const onAddRow = () => {

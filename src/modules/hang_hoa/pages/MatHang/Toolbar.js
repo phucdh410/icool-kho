@@ -1,13 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-
 import { Controller, useForm } from "react-hook-form";
 import { CRow, CCol, CCollapse } from "@coreui/react";
 
-import { CInput, CButton, CSelect, CDate } from "_components/controls";
+import { CButton, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import { filter } from "src/utils/funcs";
@@ -25,7 +22,6 @@ export default ({
   onApproved,
   onRemove,
   onSearch,
-  isLoading,
   onAdd,
 }) => {
   //#region Data
@@ -64,7 +60,7 @@ export default ({
               canAdd
               canSave={false}
               canEdit={selectedNo == 1}
-              canRemove={selectedNo}
+              canRemove={selectedNo == 1}
               canPrint={false}
             />
           </div>

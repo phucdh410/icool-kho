@@ -26,6 +26,7 @@ import {
   NhomHangHoa,
   MatHang,
   CreateDanhMucHangHoa,
+  UpdateDanhMucHangHoa,
   DeXuatGiaMatHang,
 } from "_modules/hang_hoa/pages";
 
@@ -344,6 +345,11 @@ const routes = [
     ...HangHoa.CreateDanhMucHangHoa,
     exact: true,
     component: CreateDanhMucHangHoa,
+  },
+  {
+    ...HangHoa.UpdateDanhMucHangHoa,
+    exact: true,
+    component: UpdateDanhMucHangHoa,
   },
   {
     ...HangHoa.DeXuatGiaMatHang,

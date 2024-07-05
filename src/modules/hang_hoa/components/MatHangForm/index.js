@@ -3,17 +3,28 @@ import { Toolbar } from "./Toolbar";
 import { GroupInput } from "./GroupInput";
 import { SuggestTable } from "./SuggestTable";
 
-export const MatHangForm = ({ control, isSubmitting, onSubmit, isSuggest }) => {
+export const MatHangForm = ({
+  control,
+  isSubmitting,
+  onSubmit,
+  isEdit = false,
+  isSuggest,
+}) => {
   return (
     <>
       <CCard className="toolbar sticky">
         <CCardBody>
-          <Toolbar canAdd loading={isSubmitting} onSumbit={onSubmit} />
+          <Toolbar
+            canAdd={!isEdit}
+            canSave={isEdit}
+            loading={isSubmitting}
+            onSumbit={onSubmit}
+          />
         </CCardBody>
       </CCard>
       <CCard>
         <CCardBody>
-          <GroupInput control={control} />
+          <GroupInput isEdit={isEdit} control={control} />
         </CCardBody>
       </CCard>
       {isSuggest ? (

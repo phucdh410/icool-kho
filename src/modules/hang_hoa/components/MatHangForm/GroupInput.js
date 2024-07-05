@@ -33,7 +33,7 @@ export const GroupInput = ({ control, isEdit }) => {
     enabled: !!industry_code,
     select: (response) =>
       response?.data?.data?.map((e) => ({
-        value: e?.id,
+        value: e?.code,
         label: e?.name,
         acronym: e?.acronym,
       })),
@@ -78,31 +78,45 @@ export const GroupInput = ({ control, isEdit }) => {
           <Controller
             name="industry_code"
             control={control}
-            render={({ field: { onChange, ..._field } }) => (
-              <CSelect
-                options={industries ?? []}
-                label="Ngành hàng hóa:"
-                required
-                {..._field}
-                onChange={onIndustryChange(onChange)}
-              />
-            )}
+            render={({ field: { onChange, ..._field } }) =>
+              isEdit ? (
+                <CInput label="Ngành hàng hóa:" disabled required {..._field} />
+              ) : (
+                <CSelect
+                  options={industries ?? []}
+                  label="Ngành hàng hóa:"
+                  required
+                  {..._field}
+                  onChange={onIndustryChange(onChange)}
+                />
+              )
+            }
           />
         </div>
 
         <div className="basis-[20%]">
-          <Controller
-            name="group_id"
-            control={control}
-            render={({ field }) => (
-              <CSelect
-                options={groups ?? []}
-                label="Nhóm hàng hóa:"
-                required
-                {...field}
-              />
-            )}
-          />
+          {isEdit ? (
+            <Controller
+              name="group_name"
+              control={control}
+              render={({ field }) => (
+                <CInput label="Nhóm hàng hóa:" disabled required {...field} />
+              )}
+            />
+          ) : (
+            <Controller
+              name="group_id"
+              control={control}
+              render={({ field }) => (
+                <CSelect
+                  options={groups ?? []}
+                  label="Nhóm hàng hóa:"
+                  required
+                  {...field}
+                />
+              )}
+            />
+          )}
         </div>
 
         <div className="basis-[20%]">
@@ -140,7 +154,7 @@ export const GroupInput = ({ control, isEdit }) => {
             name="code"
             control={control}
             render={({ field }) => (
-              <CInput label="Mã hàng hóa" readOnly {...field} />
+              <CInput label="Mã hàng hóa" disabled {...field} />
             )}
           />
         </div>

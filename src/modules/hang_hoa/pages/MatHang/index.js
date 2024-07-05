@@ -72,7 +72,7 @@ const InventoryCheck = () => {
 
   const onEdit = useCallback(async () => {
     const code = data.find((d) => d.check).code;
-    history.push(`/inventory-check/form/${code}`);
+    history.push(`/goods/form/${code}`);
   }, [data]);
 
   const onRemove = async () => {

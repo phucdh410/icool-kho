@@ -36,8 +36,6 @@ const CreateDanhMucHangHoa = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        // console.log(values);
-
         const payload = {
           ...values,
           name: values?.name
@@ -46,7 +44,7 @@ const CreateDanhMucHangHoa = () => {
           group_id: values.group_id?.value,
           file: values.file?.id,
           materials: values.materials.map((e) => ({
-            nvl_id: e?.nvl_id?.id,
+            nvl_id: e?.nvl_id?.value,
             quantity: e?.quantity,
             ware_unit: e?.ware_unit,
           })),
