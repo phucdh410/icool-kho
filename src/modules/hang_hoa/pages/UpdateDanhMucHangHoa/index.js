@@ -39,12 +39,14 @@ const UpdateDanhMucHangHoa = () => {
       unit: "",
       standard: "",
       file: "",
-      materials: [],
       cost: 0,
+      note: "",
+      proposer_note: "",
       ware_note: "",
       accountant_note: "",
       ic_note: "",
       operator_note: "",
+      materials: [],
     },
   });
   //#endregion
@@ -81,6 +83,7 @@ const UpdateDanhMucHangHoa = () => {
   useEffect(() => {
     if (data) {
       reset({
+        ...data,
         id: data?.id,
         industry_code: data?.industryName,
         group_id: data?.group?.code,

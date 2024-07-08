@@ -40,9 +40,11 @@ export const PTable = ({ children, ...props }) => {
 
   //#region Render
   return (
-    <table ref={tableRef} id="c-table-phuc" {...props}>
-      {children}
-    </table>
+    <div id="c-table-phuc-container" className="overflow-auto block">
+      <table ref={tableRef} id="c-table-phuc" {...props}>
+        {children}
+      </table>
+    </div>
   );
   //#endregion
 };

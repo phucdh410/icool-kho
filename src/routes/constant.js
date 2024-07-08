@@ -507,7 +507,7 @@ export const HangHoa = {
     },
     icon: "",
     name: "Đề xuất giá",
-    path: "/goods/price-suggest",
+    path: "/goods/price-suggest/:code",
   },
 };
 //#endregion

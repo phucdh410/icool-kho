@@ -23,6 +23,7 @@ export default ({
   onRemove,
   onSearch,
   onAdd,
+  selectedItem,
 }) => {
   //#region Data
   const { control, handleSubmit } = useForm({
@@ -70,7 +71,7 @@ export default ({
               on={ENTITY_GROUP_CODE.INVENTORY_SLIP}
             >
               <CButton
-                to="/inventory-check/form"
+                to={`/goods/price-suggest/${selectedItem?.code}`}
                 className="btn-fill"
                 disabled={selectedNo !== 1}
               >

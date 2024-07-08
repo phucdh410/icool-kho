@@ -22,12 +22,14 @@ const CreateDanhMucHangHoa = () => {
       unit: "",
       standard: "",
       file: "",
-      materials: [],
       cost: 0,
+      note: "",
+      proposer_note: "",
       ware_note: "",
       accountant_note: "",
       ic_note: "",
       operator_note: "",
+      materials: [],
     },
   });
   //#endregion

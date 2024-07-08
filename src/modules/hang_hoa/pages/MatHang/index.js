@@ -110,6 +110,7 @@ const InventoryCheck = () => {
             onRemove={onRemove}
             onSearch={onSearch}
             onExport={onExport}
+            selectedItem={selected?.[0]}
           />
         </CCardBody>
       </CCard>

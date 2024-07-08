@@ -2,6 +2,7 @@ import { CCard, CCardBody } from "@coreui/react";
 import { Toolbar } from "./Toolbar";
 import { GroupInput } from "./GroupInput";
 import { SuggestTable } from "./SuggestTable";
+import { PriceTable } from "./PriceTable";
 
 export const MatHangForm = ({
   control,
@@ -28,9 +29,8 @@ export const MatHangForm = ({
         </CCardBody>
       </CCard>
       {isSuggest ? (
-        <>Price table</>
+        <PriceTable control={control} />
       ) : (
-        // <SuggestTable control={control} />
         <SuggestTable control={control} />
       )}
     </>
