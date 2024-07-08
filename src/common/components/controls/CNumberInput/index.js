@@ -17,6 +17,7 @@ const allowedKeys = [
   "Backspace",
   "ArrowUp",
   "ArrowDown",
+  "Tab",
 ];
 
 export const CNumberInput = forwardRef(
