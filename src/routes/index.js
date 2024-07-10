@@ -103,8 +103,56 @@ const routes = [
     from: "/",
     redirect: Inventory.Slip.List.path,
   },
-  //#region INVENTORY
-  //#region CHECK || Kiểm kho
+
+  //#region Báo cáo
+  {
+    ...Summary.Export,
+    exact: true,
+    component: ExportSummary,
+  },
+  {
+    ...Summary.ExportDetail,
+    exact: true,
+    component: ExportDetailSummary,
+  },
+  {
+    ...Summary.Import,
+    exact: true,
+    component: ImportSummary,
+  },
+  {
+    ...Summary.Cancellation,
+    exact: true,
+    component: CancellationSummary,
+  },
+  {
+    ...Summary.CancellationDetail,
+    exact: true,
+    component: CancellationDetailSummary,
+  },
+  {
+    ...Summary.ImportDetail,
+    exact: true,
+    component: ImportDetailSummary,
+  },
+  {
+    ...Summary.Inventory,
+    exact: true,
+    component: InventorySummary,
+  },
+  {
+    ...Summary.InventoryAdjustment,
+    exact: true,
+    component: InventoryAdjustmentSummary,
+  },
+  {
+    ...Summary.Order,
+    exact: true,
+    component: OrderSummary,
+  },
+  //#endregion
+
+  //#region Kiểm kho
   {
     ...Inventory.Check.List,
     exact: true,
@@ -122,14 +170,14 @@ const routes = [
   },
   //#endregion
 
-  //#region SLIP || Danh sách tồn kho
+  //#region Danh sách tồn kho
   {
     ...Inventory.Slip.List,
     exact: true,
     component: InventorySlip,
     //#endregion
   },
-  //#region || Tồn kho tức thời
+  //#region Tồn kho tức thời
   {
     ...Inventory.Slip.Instant,
     exact: true,
@@ -137,7 +185,7 @@ const routes = [
   },
   //#endregion
 
-  //#region ADJUSMENT || Điều chỉnh lượng tồn kho
+  //#region Điều chỉnh lượng tồn kho
   {
     ...Inventory.Adjustment.List,
     exact: true,
@@ -145,7 +193,7 @@ const routes = [
   },
   //#endregion
 
-  //#region RETURN || Trả hàng
+  //#region Trả hàng
   {
     ...Inventory.Return.List,
     exact: true,
@@ -163,7 +211,7 @@ const routes = [
   },
   //#endregion
 
-  //#region CANCEL || Hủy hàng
+  //#region Hủy hàng
   {
     ...Inventory.Cancel.List,
     exact: true,
@@ -181,7 +229,7 @@ const routes = [
   },
   //#endregion
 
-  //#region Return || Trả hàng
+  //#region Trả hàng
   {
     ...Inventory.Return.List,
     exact: true,
@@ -199,7 +247,7 @@ const routes = [
   },
   //#endregion
 
-  //#region EXPORT
+  //#region Xuất hàng
   {
     ...Export.List,
     exact: true,
@@ -222,7 +270,7 @@ const routes = [
   },
   //#endregion
 
-  //#region IMPORT
+  //#region Nhập hàng
   {
     ...Import.Material.List,
     exact: true,
@@ -246,7 +294,7 @@ const routes = [
   },
   //#endregion
 
-  //#region USER
+  //#region Người dùng
   {
     ...Profile["_"],
     exact: true,
@@ -254,7 +302,7 @@ const routes = [
   },
   //#endregion
 
-  //#region PURCHASE PROPOSAL FORM
+  //#region Phiếu đề xuất
   {
     ...Solution.Quantitative,
     exact: true,
@@ -358,7 +406,7 @@ const routes = [
   },
   //#endregion
 
-  //#region PERMISSION
+  //#region Phân quyền
   {
     ...Permission.Group,
     exact: true,
@@ -373,54 +421,6 @@ const routes = [
     ...Permission.Configuration,
     exact: true,
     component: ConfigurationPermission,
-  },
-  //#endregion
-
-  //#region Summary
-  {
-    ...Summary.Export,
-    exact: true,
-    component: ExportSummary,
-  },
-  {
-    ...Summary.ExportDetail,
-    exact: true,
-    component: ExportDetailSummary,
-  },
-  {
-    ...Summary.Import,
-    exact: true,
-    component: ImportSummary,
-  },
-  {
-    ...Summary.Cancellation,
-    exact: true,
-    component: CancellationSummary,
-  },
-  {
-    ...Summary.CancellationDetail,
-    exact: true,
-    component: CancellationDetailSummary,
-  },
-  {
-    ...Summary.ImportDetail,
-    exact: true,
-    component: ImportDetailSummary,
-  },
-  {
-    ...Summary.Inventory,
-    exact: true,
-    component: InventorySummary,
-  },
-  {
-    ...Summary.InventoryAdjustment,
-    exact: true,
-    component: InventoryAdjustmentSummary,
-  },
-  {
-    ...Summary.Order,
-    exact: true,
-    component: OrderSummary,
   },
   //#endregion
 ];

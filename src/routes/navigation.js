@@ -28,6 +28,7 @@ import {
 } from "src/configs/constant";
 
 const navigation = [
+  //#region Báo cáo
   {
     _tag: "CSidebarNavDropdown",
     name: "Báo cáo",
@@ -124,6 +125,9 @@ const navigation = [
       },
     ],
   },
+  //#endregion
+
+  //#region Tồn kho
   {
     _tag: "CSidebarNavDropdown",
     name: "Tồn kho",
@@ -210,6 +214,9 @@ const navigation = [
       },
     ],
   },
+  //#endregion
+
+  //#region Phiếu đề xuất
   {
     _tag: "CSidebarNavDropdown",
     name: "Phiếu đề xuất",
@@ -313,6 +320,9 @@ const navigation = [
       },
     ],
   },
+  //#endregion
+
+  //#region Xuất hàng
   {
     _tag: "CSidebarNavDropdown",
     name: "Xuất hàng",
@@ -357,6 +367,9 @@ const navigation = [
       },
     ],
   },
+  //#endregion
+
+  //#region Nhập hàng
   {
     _tag: "CSidebarNavDropdown",
     name: "Nhập hàng",
@@ -390,6 +403,8 @@ const navigation = [
       },
     ],
   },
+  //#endregion
+
   //#region Nguyên vật liệu
   {
     _tag: "CSidebarNavDropdown",
@@ -497,6 +512,7 @@ const navigation = [
   },
   //#endregion
 
+  //#region Phân quyền
   {
     _tag: "CSidebarNavDropdown",
     name: "Phân quyển",
@@ -532,6 +548,7 @@ const navigation = [
       },
     ],
   },
+  //#endregion
 ];
 
 export default navigation;

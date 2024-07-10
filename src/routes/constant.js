@@ -55,201 +55,102 @@ export const Profile = {
   },
 };
 
-export const Solution = {
-  Quantitative: {
+//#region Báo cáo
+export const Summary = {
+  Order: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      code: SUMMARY_GROUP_CODE.ALL,
       permission: PERMISSION_VALUE.READ,
     },
-    reducer: PURCHASE_PROPOSAL_FORM_REDUCER,
+    reducer: SUMMARY_ORDER_REDUCER,
     icon: "",
-    name: "DS phiếu cập nhật định lượng",
-    path: "/solution/quantitative-list",
+    name: "Tổng Hợp Đặt Hàng",
+    path: "/summary/order",
   },
-  List: {
+  Import: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      code: SUMMARY_GROUP_CODE.ALL,
       permission: PERMISSION_VALUE.READ,
     },
-    reducer: PURCHASE_PROPOSAL_FORM_REDUCER,
+    reducer: SUMMARY_IMPORT_REDUCER,
     icon: "",
-    name: "DS phiếu đề xuất",
-    path: "/solution/list",
+    name: "Tổng Hợp Nhập Hàng",
+    path: "/summary/import",
   },
-  Create: {
+  ImportDetail: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
-      permission: PERMISSION_VALUE.CREATE,
-    },
-    icon: "",
-    name: "Tạo phiếu đề xuất",
-    path: "/solution/form",
-  },
-  Update: {
-    required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
-      permission: PERMISSION_VALUE.UPDATE,
-    },
-    icon: "",
-    name: "Sửa phiếu đề xuất",
-    path: "/solution/form/:code",
-  },
-  Print: {
-    required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      code: SUMMARY_GROUP_CODE.ALL,
       permission: PERMISSION_VALUE.READ,
     },
-    reducer: PURCHASE_PROPOSAL_FORM_PRINT_REDUCER,
+    reducer: SUMMARY_IMPORT_DETAIL_REDUCER,
     icon: "",
-    name: "In phiếu đề xuất",
-    path: "/solution/print",
+    name: "Chi Tiết Nhập Hàng",
+    path: "/summary/import-detail",
   },
-  Transfer: {
+  Export: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      code: SUMMARY_GROUP_CODE.ALL,
       permission: PERMISSION_VALUE.READ,
     },
+    reducer: SUMMARY_EXPORT_REDUCER,
     icon: "",
-    name: "DS Phiếu Luân Chuyển",
-    path: "/solution/transfer/list",
+    name: "Tổng Hợp Xuất Hàng",
+    path: "/summary/export",
   },
-  TransferCreate: {
+  ExportDetail: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
-      permission: PERMISSION_VALUE.CREATE,
+      code: SUMMARY_GROUP_CODE.ALL,
+      permission: PERMISSION_VALUE.READ,
     },
+    reducer: SUMMARY_EXPORT_DETAIL_REDUCER,
     icon: "",
-    name: "Tạo Phiếu luân chuyển",
-    path: "/solution/transfer/form",
+    name: "Chi Tiết Xuất Hàng",
+    path: "/summary/export-detail",
   },
-  TransferUpdate: {
+  Cancellation: {
     required: {
-      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
-      permission: PERMISSION_VALUE.CREATE,
+      code: SUMMARY_GROUP_CODE.ALL,
+      permission: PERMISSION_VALUE.READ,
     },
+    reducer: SUMMARY_CANCELLATION_REDUCER,
     icon: "",
-    name: "Sửa Phiếu luân chuyển",
-    path: "/solution/transfer/form/:id",
+    name: "Tổng Hợp Hủy Hàng",
+    path: "/summary/cancellation",
+  },
+  CancellationDetail: {
+    required: {
+      code: SUMMARY_GROUP_CODE.ALL,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: SUMMARY_CANCELLATION_DETAIL_REDUCER,
+    icon: "",
+    name: "Chi Tiết Hủy Hàng",
+    path: "/summary/cancellation-detail",
+  },
+  Inventory: {
+    required: {
+      code: SUMMARY_GROUP_CODE.ALL,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: SUMMARY_INVENTORY_REDUCER,
+    icon: "",
+    name: "Tổng Hợp Kiểm Kho",
+    path: "/summary/inventory",
+  },
+  InventoryAdjustment: {
+    required: {
+      code: SUMMARY_GROUP_CODE.ALL,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: SUMMARY_INVENTORY_ADJUSTMENT_REDUCER,
+    icon: "",
+    name: "Điều chỉnh lượng tồn kho",
+    path: "/summary/inventory-adjustment",
   },
 };
+//#endregion
 
-export const Import = {
-  Material: {
-    List: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.READ,
-      },
-      reducer: IMPORT_REDUCER,
-      icon: "",
-      name: "DS phiếu nhập",
-      path: "/import/list",
-    },
-    Create: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.CREATE,
-      },
-      icon: "",
-      name: "Tạo phiếu nhập nguyên vật liệu",
-      path: "/import/form",
-    },
-    Update: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.UPDATE,
-      },
-      icon: "",
-      name: "Sửa phiếu nhập nguyên vật liệu",
-      path: "/import/form/:code",
-    },
-    Print: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.READ,
-      },
-      reducer: IMPORT_PRINT_REDUCER,
-      icon: "",
-      name: "In phiếu nhập",
-      path: "/import/print",
-    },
-  },
-  Good: {
-    List: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.READ,
-      },
-      icon: "",
-      name: "DS bán thành phẩm",
-      path: "/import-good/list",
-    },
-    Create: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.CREATE,
-      },
-      icon: "",
-      name: "Tạo phiếu nhập bán thành phẩm",
-      path: "/import-good/form",
-    },
-    Update: {
-      required: {
-        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
-        permission: PERMISSION_VALUE.UPDATE,
-      },
-      icon: "",
-      name: "Sửa phiếu nhập bán thành phẩm",
-      path: "/import-good/form/:code",
-    },
-  },
-};
-
-export const Export = {
-  List: {
-    required: {
-      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
-      permission: PERMISSION_VALUE.READ,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
-    },
-    reducer: EXPORT_REDUCER,
-    icon: "",
-    name: "DS phiếu xuất hàng",
-    path: "/export/list",
-  },
-  Create: {
-    required: {
-      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
-      permission: PERMISSION_VALUE.CREATE,
-      store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
-    },
-    icon: "",
-    name: "Tạo phiếu xuất hàng",
-    path: "/export/form",
-  },
-  Update: {
-    required: {
-      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
-      permission: PERMISSION_VALUE.UPDATE,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
-    },
-    icon: "",
-    name: "Sửa phiếu xuất hàng",
-    path: "/export/form/:code",
-  },
-  Print: {
-    required: {
-      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
-      permission: PERMISSION_VALUE.UPDATE,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
-    },
-    reducer: EXPORT_PRINT_REDUCER,
-    icon: "",
-    name: "In phiếu xuất hàng",
-    path: "/export/print",
-  },
-};
-
+//#region Tồn kho
 export const Inventory = {
   Check: {
     List: {
@@ -375,6 +276,208 @@ export const Inventory = {
     },
   },
 };
+//#endregion
+
+//#region Phiếu đề xuất
+export const Solution = {
+  Quantitative: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: PURCHASE_PROPOSAL_FORM_REDUCER,
+    icon: "",
+    name: "DS phiếu cập nhật định lượng",
+    path: "/solution/quantitative-list",
+  },
+  List: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: PURCHASE_PROPOSAL_FORM_REDUCER,
+    icon: "",
+    name: "DS phiếu đề xuất",
+    path: "/solution/list",
+  },
+  Create: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.CREATE,
+    },
+    icon: "",
+    name: "Tạo phiếu đề xuất",
+    path: "/solution/form",
+  },
+  Update: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.UPDATE,
+    },
+    icon: "",
+    name: "Sửa phiếu đề xuất",
+    path: "/solution/form/:code",
+  },
+  Print: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.READ,
+    },
+    reducer: PURCHASE_PROPOSAL_FORM_PRINT_REDUCER,
+    icon: "",
+    name: "In phiếu đề xuất",
+    path: "/solution/print",
+  },
+  Transfer: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS Phiếu Luân Chuyển",
+    path: "/solution/transfer/list",
+  },
+  TransferCreate: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.CREATE,
+    },
+    icon: "",
+    name: "Tạo Phiếu luân chuyển",
+    path: "/solution/transfer/form",
+  },
+  TransferUpdate: {
+    required: {
+      code: ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM,
+      permission: PERMISSION_VALUE.CREATE,
+    },
+    icon: "",
+    name: "Sửa Phiếu luân chuyển",
+    path: "/solution/transfer/form/:id",
+  },
+};
+//#endregion
+
+//#region Xuất hàng
+export const Export = {
+  List: {
+    required: {
+      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
+      permission: PERMISSION_VALUE.READ,
+      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
+    },
+    reducer: EXPORT_REDUCER,
+    icon: "",
+    name: "DS phiếu xuất hàng",
+    path: "/export/list",
+  },
+  Create: {
+    required: {
+      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
+      permission: PERMISSION_VALUE.CREATE,
+      store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
+    },
+    icon: "",
+    name: "Tạo phiếu xuất hàng",
+    path: "/export/form",
+  },
+  Update: {
+    required: {
+      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
+      permission: PERMISSION_VALUE.UPDATE,
+      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
+    },
+    icon: "",
+    name: "Sửa phiếu xuất hàng",
+    path: "/export/form/:code",
+  },
+  Print: {
+    required: {
+      code: ENTITY_GROUP_CODE.EXPORT_SLIP,
+      permission: PERMISSION_VALUE.UPDATE,
+      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
+    },
+    reducer: EXPORT_PRINT_REDUCER,
+    icon: "",
+    name: "In phiếu xuất hàng",
+    path: "/export/print",
+  },
+};
+//#endregion
+
+//#region Nhập hàng
+export const Import = {
+  Material: {
+    List: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.READ,
+      },
+      reducer: IMPORT_REDUCER,
+      icon: "",
+      name: "DS phiếu nhập",
+      path: "/import/list",
+    },
+    Create: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.CREATE,
+      },
+      icon: "",
+      name: "Tạo phiếu nhập nguyên vật liệu",
+      path: "/import/form",
+    },
+    Update: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.UPDATE,
+      },
+      icon: "",
+      name: "Sửa phiếu nhập nguyên vật liệu",
+      path: "/import/form/:code",
+    },
+    Print: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.READ,
+      },
+      reducer: IMPORT_PRINT_REDUCER,
+      icon: "",
+      name: "In phiếu nhập",
+      path: "/import/print",
+    },
+  },
+  Good: {
+    List: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.READ,
+      },
+      icon: "",
+      name: "DS bán thành phẩm",
+      path: "/import-good/list",
+    },
+    Create: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.CREATE,
+      },
+      icon: "",
+      name: "Tạo phiếu nhập bán thành phẩm",
+      path: "/import-good/form",
+    },
+    Update: {
+      required: {
+        code: ENTITY_GROUP_CODE.PURCHASE_SLIP,
+        permission: PERMISSION_VALUE.UPDATE,
+      },
+      icon: "",
+      name: "Sửa phiếu nhập bán thành phẩm",
+      path: "/import-good/form/:code",
+    },
+  },
+};
+//#endregion
 
 //#region Nguyên vật liệu
 export const Material = {
@@ -512,18 +615,7 @@ export const HangHoa = {
 };
 //#endregion
 
-export const Good = {
-  List: {
-    required: {
-      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
-      permission: PERMISSION_VALUE.READ,
-    },
-    icon: "",
-    name: "DS bán thành phẩm",
-    path: "/good/list",
-  },
-};
-
+//#region Phân quyền
 export const Permission = {
   User: {
     required: {
@@ -562,96 +654,16 @@ export const Permission = {
     path: "/permission/configuration",
   },
 };
+//#endregion
 
-export const Summary = {
-  Export: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_EXPORT_REDUCER,
-    icon: "",
-    name: "Tổng Hợp Xuất Hàng",
-    path: "/summary/export",
-  },
-  ExportDetail: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_EXPORT_DETAIL_REDUCER,
-    icon: "",
-    name: "Chi Tiết Xuất Hàng",
-    path: "/summary/export-detail",
-  },
-  Import: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_IMPORT_REDUCER,
-    icon: "",
-    name: "Tổng Hợp Nhập Hàng",
-    path: "/summary/import",
-  },
-  ImportDetail: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_IMPORT_DETAIL_REDUCER,
-    icon: "",
-    name: "Chi Tiết Nhập Hàng",
-    path: "/summary/import-detail",
-  },
-  Cancellation: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_CANCELLATION_REDUCER,
-    icon: "",
-    name: "Tổng Hợp Hủy Hàng",
-    path: "/summary/cancellation",
-  },
-  CancellationDetail: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_CANCELLATION_DETAIL_REDUCER,
-    icon: "",
-    name: "Chi Tiết Hủy Hàng",
-    path: "/summary/cancellation-detail",
-  },
-  Inventory: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_INVENTORY_REDUCER,
-    icon: "",
-    name: "Tổng Hợp Kiểm Kho",
-    path: "/summary/inventory",
-  },
-  InventoryAdjustment: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_INVENTORY_ADJUSTMENT_REDUCER,
-    icon: "",
-    name: "Điều chỉnh lượng tồn kho",
-    path: "/summary/inventory-adjustment",
-  },
-  Order: {
-    required: {
-      code: SUMMARY_GROUP_CODE.ALL,
-      permission: PERMISSION_VALUE.READ,
-    },
-    reducer: SUMMARY_ORDER_REDUCER,
-    icon: "",
-    name: "Tổng Hợp Đặt Hàng",
-    path: "/summary/order",
-  },
-};
+// export const Good = {
+//   List: {
+//     required: {
+//       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+//       permission: PERMISSION_VALUE.READ,
+//     },
+//     icon: "",
+//     name: "DS bán thành phẩm",
+//     path: "/good/list",
+//   },
+// };
