@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { Controller, useForm } from "react-hook-form";
 import { CRow, CCol, CCollapse } from "@coreui/react";
 
-import { CButton, CSelect } from "_components/controls";
+import { CButton, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import { filter } from "src/utils/funcs";
@@ -131,13 +131,7 @@ export default ({
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CSelect
-                  label="Mã Hàng Hóa"
-                  options={[]}
-                  placeholder="Tất cả"
-                  {...field}
-                  onChange={(v) => field.onChange(v.value)}
-                />
+                <CInput label="Mã Hàng Hóa" placeholder="Tất cả" {...field} />
               )}
             />
           </CCol>
@@ -147,13 +141,7 @@ export default ({
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <CSelect
-                  label="Tên Hàng Hóa"
-                  options={[]}
-                  placeholder="Tất cả"
-                  {...field}
-                  onChange={(v) => field.onChange(v.value)}
-                />
+                <CInput label="Tên Hàng Hóa" placeholder="Tất cả" {...field} />
               )}
             />
           </CCol>

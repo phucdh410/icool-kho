@@ -66,7 +66,7 @@ const InventoryCheck = () => {
     [status]
   );
 
-  const onSearch = useCallback((data) => dispatch(setFilter(NAME, data)), []);
+  const onSearch = (data) => setFilters(data);
 
   const onApproved = useCallback(async () => {}, [selected]);
 
