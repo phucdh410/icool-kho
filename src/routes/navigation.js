@@ -7,6 +7,7 @@ import {
   Permission,
   Summary,
   HangHoa,
+  Menu,
 } from "./constant";
 
 import {
@@ -507,6 +508,29 @@ const navigation = [
         to: HangHoa.CreateDanhMucHangHoa.path,
         childrens: [HangHoa.CreateDanhMucHangHoa.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
+      },
+    ],
+  },
+  //#endregion
+
+  //#region Menu
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Danh mục Menu",
+    route: "/menus",
+    icon: <MaterialIcon className="c-sidebar-nav-icon" />,
+    required: [
+      { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
+      { code: ENTITY_GROUP_CODE.MATERIAL },
+    ],
+    childrens: [Menu.DanhSachMenu.path, Menu.TaoMenu.path, Menu.SuaMenu.path],
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: Menu.DanhSachMenu.name,
+        to: Menu.DanhSachMenu.path,
+        childrens: [Menu.DanhSachMenu.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],
   },

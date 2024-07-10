@@ -615,6 +615,38 @@ export const HangHoa = {
 };
 //#endregion
 
+//#region Hàng hóa
+export const Menu = {
+  DanhSachMenu: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh sách menu",
+    path: "/menus/list",
+  },
+  TaoMenu: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Tạo menu",
+    path: "/menus/form",
+  },
+  SuaMenu: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa menu",
+    path: "/menus/form/:code",
+  },
+};
+//#endregion
+
 //#region Phân quyền
 export const Permission = {
   User: {

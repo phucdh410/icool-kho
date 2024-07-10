@@ -8,6 +8,7 @@ import {
   Permission,
   Summary,
   HangHoa,
+  Menu,
 } from "./constant";
 
 //#region Imports
@@ -87,6 +88,8 @@ import {
   OrderSummary,
   CancellationDetailSummary,
 } from "_modules/summary/pages";
+
+import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 
 //#endregion
 
@@ -403,6 +406,24 @@ const routes = [
     ...HangHoa.DeXuatGiaMatHang,
     exact: true,
     component: DeXuatGiaMatHang,
+  },
+  //#endregion
+
+  //#region Menu
+  {
+    ...Menu.DanhSachMenu,
+    exact: true,
+    component: DanhSachMenuPage,
+  },
+  {
+    ...Menu.TaoMenu,
+    exact: true,
+    component: NhomHangHoa,
+  },
+  {
+    ...Menu.SuaMenu,
+    exact: true,
+    component: NhomHangHoa,
   },
   //#endregion
 

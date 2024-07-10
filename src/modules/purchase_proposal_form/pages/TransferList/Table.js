@@ -1,26 +1,15 @@
 import { useState, useCallback } from "react";
 
-import { createSelector } from "reselect";
-import { useSelector } from "react-redux";
-
 import { CCheckbox } from "_components/controls";
 import { CTable, CPagination } from "_components/others";
 
 import MPreview from "../../components/Preview";
 
-import { isCentral, money } from "../../../../utils/funcs";
 import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
 import dayjs from "dayjs";
 
-const selectStoreCode = createSelector(
-  (state) => state.auth,
-  ({ storeCode }) => storeCode
-);
-
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data
-  const storeCode = useSelector(selectStoreCode);
-
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
   const [preview, setPreview] = useState(null);

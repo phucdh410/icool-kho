@@ -4,38 +4,30 @@ import { Controller, useForm } from "react-hook-form";
 
 import { CRow, CCol, CCollapse } from "@coreui/react";
 
-import { CSelect, CDate, CButton } from "_components/controls";
+import { CButton, CSelect, CDate, CInput } from "_components/controls";
 import { CActionGroup } from "_components/others";
-import { Magnifying, XCircleFill, TickCircleFill } from "_assets/icons";
-import {
-  ENTITY_GROUP_CODE,
-  PERMISSION_VALUE,
-  STATUS_OPTIONS,
-} from "src/configs/constant";
+import { Magnifying, XCircleFill } from "_assets/icons";
+import { STATUS_OPTIONS } from "src/configs/constant";
 
-import { getAll } from "../../queries-fn/store.query";
 import { filter as filterFunc } from "src/utils/funcs";
-import { Can } from "src/utils/ability";
 
-export default ({
-  isLoading,
-  filter,
+export const ListToolbar = ({
+  params,
   status,
-  selectedNo,
   toggleStatus,
+  canAdd,
+  canSave,
+  canRemove,
   onAdd,
   onEdit,
-  onApprove,
   onRemove,
   onSearch,
+  selected,
 }) => {
   //#region Data
-
-  const { control, handleSubmit, setValue } = useForm({
-    defaultValues: filter,
+  const { control, handleSubmit } = useForm({
+    defaultValues: params,
   });
-
-  const { data: stores } = getAll({}, isLoading);
   //#endregion
 
   //#region Event
@@ -50,10 +42,6 @@ export default ({
       case "print":
         return;
     }
-  };
-
-  const onStoreChange = ({ value }) => {
-    setValue("storeCode", value);
   };
 
   const search = handleSubmit(
@@ -72,49 +60,29 @@ export default ({
           <div>
             <CActionGroup
               onClick={onClick}
-              canAdd={false}
-              canSave={false}
-              canEdit={selectedNo === 1}
-              canRemove={selectedNo === 1}
+              canAdd={canAdd}
+              canSave={canSave}
+              canRemove={canRemove}
             />
           </div>
           <div>
-            <Can
-              do={PERMISSION_VALUE.APPROVE}
-              on={ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM}
+            <CButton
+              className="btn-fill"
+              color="danger"
+              disabled={selected.length !== 1}
+              onClick={() => {}}
+              icon={<XCircleFill />}
             >
-              <Can
-                do={PERMISSION_VALUE.CREATE}
-                on={ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM}
-              >
-                <CButton className="btn-fill" to="/solution/transfer/form">
-                  Tạo Phiếu luân chuyển
-                </CButton>
-              </Can>
-              <CButton
-                className="btn-fill"
-                color="danger"
-                disabled={selectedNo !== 1}
-                onClick={onApprove(-1)}
-                icon={<XCircleFill />}
-              >
-                Từ chối
-              </CButton>
-            </Can>
-            <Can
-              do={PERMISSION_VALUE.APPROVE}
-              on={ENTITY_GROUP_CODE.PURCHASE_PROPOSAL_FORM}
+              Ngưng
+            </CButton>
+            <CButton
+              className="btn-fill"
+              color="success"
+              onClick={() => {}}
+              icon={<i className="text-[20px] fa-regular fa-circle-plus"></i>}
             >
-              <CButton
-                className="btn-fill"
-                color="success"
-                disabled={selectedNo !== 1}
-                onClick={onApprove(1)}
-                icon={<TickCircleFill />}
-              >
-                Xác nhận
-              </CButton>
-            </Can>
+              Thêm Hàng Hóa
+            </CButton>
           </div>
           <div
             className={classNames(
@@ -132,6 +100,15 @@ export default ({
         <CRow className="mt-3 justify-content-lg-end justify-content-xxl-end">
           <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
             <Controller
+              name="code"
+              control={control}
+              render={({ field }) => (
+                <CInput label="Code:" placeholder="Tất cả" {...field} />
+              )}
+            />
+          </CCol>
+          <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
+            <Controller
               name="status"
               control={control}
               render={({ field }) => (
@@ -141,59 +118,30 @@ export default ({
                   options={STATUS_OPTIONS}
                   {...field}
                   onChange={({ value }) => field.onChange(value)}
-                ></CSelect>
+                />
               )}
             />
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
             <Controller
-              name="startAt"
+              name="start_at"
               control={control}
               render={({ field }) => <CDate label="Từ ngày: " {...field} />}
             />
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
             <Controller
-              name="endAt"
+              name="end_at"
               control={control}
               render={({ field }) => <CDate label="Đến ngày: " {...field} />}
             />
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
             <Controller
-              name="storeCode"
+              name="date"
               control={control}
               render={({ field }) => (
-                <CSelect
-                  label="Chi nhánh chuyển: "
-                  placeholder="Tất cả"
-                  options={
-                    stores && stores.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...stores]
-                      : stores
-                  }
-                  {...field}
-                  onChange={onStoreChange}
-                />
-              )}
-            />
-          </CCol>
-          <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
-            <Controller
-              name="storeCode"
-              control={control}
-              render={({ field }) => (
-                <CSelect
-                  label="Chi nhánh nhận: "
-                  placeholder="Tất cả"
-                  options={
-                    stores && stores.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...stores]
-                      : stores
-                  }
-                  {...field}
-                  onChange={onStoreChange}
-                />
+                <CDate label="Ngày áp dụng: " {...field} />
               )}
             />
           </CCol>

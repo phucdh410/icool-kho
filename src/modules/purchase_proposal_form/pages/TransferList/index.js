@@ -8,16 +8,9 @@ import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 import Table from "./Table";
 import Toolbar from "./Toolbar";
 
-import {
-  approver,
-  getAll,
-} from "_common/queries-fn/purchase-proposal-form.query";
-
-import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
-
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
-import { isCentral, isSuccess } from "src/utils/funcs";
+import { isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
 import { setFilter } from "src/common/actions/config.action";
 import { getAllTransfers } from "src/common/queries-fn/material.query";
@@ -37,7 +30,7 @@ const selectData = createSelector(
 const TransferList = () => {
   const dispatch = useDispatch();
   //#region Data
-  const { isLoading, storeCode, filters } = useSelector(selectData);
+  const { isLoading, filters } = useSelector(selectData);
 
   const [isFetching, setFetching] = useState();
 
@@ -46,8 +39,6 @@ const TransferList = () => {
   const { data, set, refetch } = getAllTransfers(filters, isLoading, {
     onSuccess: () => setFetching(false),
   });
-
-  const mutation = approver(isCentral(storeCode) ? confirm : approve);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.status || d.check),
@@ -58,7 +49,6 @@ const TransferList = () => {
     () => (isFetching ? [] : data?.filter((d) => !d.status && d.check) || []),
     [isFetching, data]
   );
-
   //#endregion
 
   //#region Event
