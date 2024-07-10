@@ -90,6 +90,7 @@ import {
 } from "_modules/summary/pages";
 
 import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
+import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
 
 //#endregion
 
@@ -418,7 +419,7 @@ const routes = [
   {
     ...Menu.TaoMenu,
     exact: true,
-    component: NhomHangHoa,
+    component: TaoMenuPage,
   },
   {
     ...Menu.SuaMenu,
