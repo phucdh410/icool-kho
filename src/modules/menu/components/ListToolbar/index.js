@@ -7,7 +7,7 @@ import { CRow, CCol, CCollapse } from "@coreui/react";
 import { CButton, CSelect, CDate, CInput } from "_components/controls";
 import { CActionGroup } from "_components/others";
 import { Magnifying, XCircleFill } from "_assets/icons";
-import { STATUS_OPTIONS } from "src/configs/constant";
+import { MENU_STATUS_OPTIONS } from "../../constants";
 
 import { filter as filterFunc } from "src/utils/funcs";
 
@@ -115,7 +115,7 @@ export const ListToolbar = ({
                 <CSelect
                   label="Trạng thái: "
                   placeholder="Tất cả"
-                  options={STATUS_OPTIONS}
+                  options={MENU_STATUS_OPTIONS}
                   {...field}
                   onChange={({ value }) => field.onChange(value)}
                 />

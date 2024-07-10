@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useState } from "react";
-import { mapWeekday } from "../../func";
+import { mapStatusText, mapWeekday } from "../../func";
 import { CPagination, CTable } from "src/common/components/others";
 import { CCheckbox } from "src/common/components/controls";
 
@@ -73,11 +73,12 @@ export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
         />
       </td>
     ),
+    name: ({ name }) => <td className="text-left">{name}</td>,
+    status: ({ status }) => <td>{mapStatusText(status)}</td>,
     created_date: ({ created_date }) => (
       <td>{dayjs(created_date).format("DD/MM/YYYY HH:mm:ss")}</td>
     ),
     date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
-    name: ({ name }) => <td className="text-left">{name}</td>,
     from: ({ from, to }) => (
       <td>{`${mapWeekday(from)} -> ${mapWeekday(to)}`}</td>
     ),

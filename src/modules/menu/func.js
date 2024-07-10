@@ -1,13 +1,16 @@
-const weekdays = {
-  2: "Thứ 2",
-  3: "Thứ 3",
-  4: "Thứ 4",
-  5: "Thứ 5",
-  6: "Thứ 6",
-  7: "Thứ 7",
-  8: "Chủ nhật",
-};
+import { WEEKDAYS } from "./constants";
 
 export const mapWeekday = (dayNumber = 2) => {
-  return weekdays[dayNumber];
+  return WEEKDAYS[dayNumber];
+};
+
+export const mapStatusText = (statusNum = 1) => {
+  switch (statusNum) {
+    case 2:
+      return <span className="font-medium text-[#00B83E]">Áp dụng</span>;
+    case 3:
+      return <span className="font-medium text-[#FE0808]">Ngưng</span>;
+    default:
+      return <span className="font-medium text-[#053C7F]">Mới tạo</span>;
+  }
 };
