@@ -14,7 +14,7 @@ import { CNumberInput, CTextarea } from "src/common/components/controls";
 
 const calculateFormula = (gia_thuong, gia_le) => {
   const ty_gia = gia_le / gia_thuong;
-  return (ty_gia - 1) * 100;
+  return ((ty_gia - 1) * 100).toFixed(2).replace(/\.00$/, "");
 };
 
 export const PriceTable = ({ control }) => {
