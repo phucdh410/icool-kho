@@ -582,7 +582,7 @@ export const HangHoa = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "DS mặt hàng",
+    name: "DS đề xuất hàng hóa",
     path: "/goods/list",
   },
   CreateDanhMucHangHoa: {
