@@ -23,6 +23,7 @@ export const ListToolbar = ({
   onRemove,
   onSearch,
   selected,
+  onAddHH,
 }) => {
   //#region Data
   const { control, handleSubmit } = useForm({
@@ -78,7 +79,7 @@ export const ListToolbar = ({
             <CButton
               className="btn-fill"
               color="success"
-              onClick={() => {}}
+              onClick={onAddHH}
               icon={<i className="text-[20px] fa-regular fa-circle-plus"></i>}
             >
               Thêm Hàng Hóa

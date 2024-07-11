@@ -7,7 +7,7 @@ import { menuApi } from "src/1/apis/menu.api";
 
 const TaoMenuPage = () => {
   //#region Data
-  const { control, handleSubmit, reset, getValues } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     mode: "all",
     defaultValues,
     resolver,
@@ -39,7 +39,6 @@ const TaoMenuPage = () => {
   //#region Render
   return (
     <>
-      <button onClick={() => console.log(getValues())}>Log</button>
       <MenuForm onSubmit={onSubmit} control={control} />
     </>
   );

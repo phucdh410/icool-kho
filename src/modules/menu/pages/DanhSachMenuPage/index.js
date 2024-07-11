@@ -1,7 +1,7 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { menuApi } from "src/1/apis/menu.api";
-import { ListToolbar, MenuTable } from "../../components";
-import { useMemo, useState } from "react";
+import { AddGoodsModal, ListToolbar, MenuTable } from "../../components";
+import { useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { filter } from "src/utils/funcs";
@@ -10,6 +10,7 @@ import { history } from "src/App";
 import { fireError, fireSuccess } from "src/utils/alert";
 
 const DanhSachMenuPage = () => {
+  const addModalRef = useRef(null);
   //#region Data
   const [status, setStatus] = useState(0);
 
@@ -68,6 +69,10 @@ const DanhSachMenuPage = () => {
       }
     }
   };
+
+  const onAddHH = () => {
+    addModalRef.current?.open();
+  };
   //#endregion
 
   //#region Render
@@ -86,6 +91,7 @@ const DanhSachMenuPage = () => {
             onRemove={onRemove}
             onSearch={onSearch}
             selected={selected}
+            onAddHH={onAddHH}
           />
         </CCardBody>
       </CCard>
@@ -100,6 +106,8 @@ const DanhSachMenuPage = () => {
           />
         </CCardBody>
       </CCard>
+
+      <AddGoodsModal ref={addModalRef} />
     </>
   );
   //#endregion

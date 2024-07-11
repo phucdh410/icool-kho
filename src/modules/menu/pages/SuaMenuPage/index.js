@@ -18,7 +18,7 @@ const TaoMenuPage = () => {
     enabled: !!params?.id,
   });
 
-  const { control, handleSubmit, reset, getValues } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     mode: "all",
     defaultValues,
     resolver,
@@ -56,7 +56,6 @@ const TaoMenuPage = () => {
   //#region Render
   return (
     <>
-      <button onClick={() => console.log(getValues())}>Log</button>
       <MenuForm onSubmit={onSubmit} control={control} />
     </>
   );
