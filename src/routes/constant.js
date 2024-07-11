@@ -576,13 +576,22 @@ export const HangHoa = {
     name: "DS nhóm hàng hóa",
     path: "/goods/groups",
   },
-  MatHang: {
+  DeXuatMatHang: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
     name: "DS đề xuất hàng hóa",
+    path: "/goods/suggest-list",
+  },
+  MatHang: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS mặt hàng",
     path: "/goods/list",
   },
   CreateDanhMucHangHoa: {

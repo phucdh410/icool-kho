@@ -33,7 +33,6 @@
   text-decoration: none;
 
   &.btn {
-
     i,
     .c-icon,
     svg {
@@ -50,7 +49,7 @@
       svg {
         margin: 0 !important;
 
-        &+span {
+        & + span {
           display: none;
         }
       }
@@ -74,6 +73,18 @@
           color: $color-white;
           background-color: $btn-border-action;
           border: 1px solid $btn-border-action;
+        }
+
+        &-warning {
+          color: $color-white;
+          background-color: #f2d364;
+          border: 1px solid #f2d364;
+        }
+
+        &-success {
+          color: $color-white;
+          background-color: #228732;
+          border: 1px solid #228732;
         }
       }
     }
@@ -127,7 +138,7 @@
       margin: 0 !important;
     }
 
-    svg+span {
+    svg + span {
       display: none;
     }
   }

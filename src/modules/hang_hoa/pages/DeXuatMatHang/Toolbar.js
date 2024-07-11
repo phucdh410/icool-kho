@@ -12,7 +12,6 @@ import { Magnifying } from "_assets/icons";
 
 import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "src/configs/constant";
 import { Can } from "src/utils/ability";
-import { GOODS_STATUS_OPTIONS } from "../../constants";
 
 export default ({
   filter: _filter,
@@ -67,32 +66,30 @@ export default ({
             />
           </div>
           <div>
-            <CButton
-              to={`/goods/price-suggest/${selectedItem?.code}`}
-              className="btn-fill"
-              color="warning"
-              disabled={selectedNo !== 1}
+            <Can
+              do={PERMISSION_VALUE.CREATE}
+              on={ENTITY_GROUP_CODE.INVENTORY_SLIP}
             >
-              Điều chỉnh giá hàng hóa
-            </CButton>
-
-            <CButton
-              className="btn-fill"
-              color="success"
-              onClick={onApproved}
-              disabled={selectedNo !== 1}
+              <CButton
+                to={`/goods/price-suggest/${selectedItem?.code}`}
+                className="btn-fill"
+                disabled={selectedNo !== 1}
+              >
+                Đề xuất giá
+              </CButton>
+            </Can>
+            <Can
+              do={PERMISSION_VALUE.APPROVE}
+              on={ENTITY_GROUP_CODE.INVENTORY_SLIP}
             >
-              Thêm vào Menu
-            </CButton>
-
-            <CButton
-              className="btn-fill"
-              color="danger"
-              disabled={selectedNo !== 1}
-              onClick={() => {}}
-            >
-              Ngưng
-            </CButton>
+              <CButton
+                className="btn-fill"
+                disabled={!selectedNo}
+                onClick={onApproved}
+              >
+                Xác nhận
+              </CButton>
+            </Can>
           </div>
           <div
             className={classNames(
@@ -110,13 +107,17 @@ export default ({
         <CRow className="mt-3 justify-content-xxl-end">
           <CCol xs="3" md="2">
             <Controller
-              name="status"
+              name="approvedStatus"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <CSelect
                   label="Trạng thái"
-                  options={GOODS_STATUS_OPTIONS}
+                  options={[
+                    { value: "", label: "Tất cả" },
+                    { value: 0, label: "Chưa duyệt" },
+                    { value: 1, label: "Đã duyệt" },
+                  ]}
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

@@ -477,6 +477,7 @@ const navigation = [
     childrens: [
       HangHoa.Industry.path,
       HangHoa.Group.path,
+      HangHoa.DeXuatMatHang.path,
       HangHoa.MatHang.path,
       HangHoa.CreateDanhMucHangHoa.path,
     ],
@@ -494,6 +495,13 @@ const navigation = [
         to: HangHoa.Group.path,
         childrens: [HangHoa.Group.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: HangHoa.DeXuatMatHang.name,
+        to: HangHoa.DeXuatMatHang.path,
+        childrens: [HangHoa.DeXuatMatHang.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL }],
       },
       {
         _tag: "CSidebarNavItem",

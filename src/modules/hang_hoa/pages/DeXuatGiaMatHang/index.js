@@ -72,7 +72,7 @@ const DeXuatGiaMatHang = () => {
 
         noti("success", "Cập nhật đề xuất giá hàng hóa thành công!");
         reset();
-        history.push("/goods/list");
+        history.push("/goods/suggest-list");
       } catch (error) {
         noti("error", error?.message);
       }

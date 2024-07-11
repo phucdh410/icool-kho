@@ -56,7 +56,7 @@ const CreateDanhMucHangHoa = () => {
 
         noti("success", "Tạo đề xuất hàng hóa thành công!");
         reset();
-        history.push("/goods/list");
+        history.push("/goods/suggest-list");
       } catch (error) {
         noti("error", error?.message);
       }

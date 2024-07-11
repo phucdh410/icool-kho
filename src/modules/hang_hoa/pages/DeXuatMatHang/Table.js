@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 
 import { CCheckbox } from "_components/controls";
 import { CTable, CPagination } from "_components/others";
-import { mapGoodsStatusText } from "../../funcs";
 
 export default ({ isSelectAll, data, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
@@ -49,7 +48,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "auto", minWidth: "200px" },
     },
     {
-      key: "status",
+      key: "approved_status",
       label: "Trạng thái",
       _style: { width: "auto", minWidth: "140px" },
     },
@@ -76,7 +75,6 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    status: ({ status }) => <td>{mapGoodsStatusText(status)}</td>,
   };
 
   return (

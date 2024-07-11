@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useState } from "react";
-import { mapStatusText, mapWeekday } from "../../func";
+import { mapStatusText, mapWeekday } from "../../funcs";
 import { CPagination, CTable } from "src/common/components/others";
 import { CCheckbox } from "src/common/components/controls";
 
