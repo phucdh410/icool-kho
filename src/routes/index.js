@@ -91,6 +91,7 @@ import {
 
 import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
+import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 
 //#endregion
 
@@ -424,7 +425,7 @@ const routes = [
   {
     ...Menu.SuaMenu,
     exact: true,
-    component: NhomHangHoa,
+    component: SuaMenuPage,
   },
   //#endregion
 

@@ -4,9 +4,20 @@ import { MenuForm } from "../../components";
 import { history } from "src/App";
 import dayjs from "dayjs";
 import { menuApi } from "src/1/apis/menu.api";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { useEffect } from "react";
 
 const TaoMenuPage = () => {
   //#region Data
+  const params = useParams();
+
+  const { data: detailResponse } = useQuery({
+    queryKey: ["detail-menu", params?.id],
+    queryFn: () => menuApi.getById(params?.id),
+    enabled: !!params?.id,
+  });
+
   const { control, handleSubmit, reset, getValues } = useForm({
     mode: "all",
     defaultValues,
@@ -23,9 +34,9 @@ const TaoMenuPage = () => {
           date: dayjs(values?.date).format("YYYY-MM-DD"),
         };
 
-        await menuApi.create(payload);
+        await menuApi.update(params?.id, payload);
 
-        noti("success", "Tạo menu thành công!");
+        noti("success", "Sửa menu thành công!");
         reset();
 
         history.push("/menus/list");
@@ -35,6 +46,12 @@ const TaoMenuPage = () => {
     })();
   };
   //#endregion
+
+  useEffect(() => {
+    if (detailResponse) {
+      reset(detailResponse);
+    }
+  }, [detailResponse]);
 
   //#region Render
   return (

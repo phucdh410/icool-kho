@@ -13,4 +13,7 @@ export const menuApi = {
   remove: async (code) => {
     return await methods.delete(`/menu/${code}`);
   },
+  getById: async (id) => {
+    return await methods.get(`/menu/getById/${id}`);
+  },
 };
