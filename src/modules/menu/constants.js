@@ -24,3 +24,8 @@ export const WEEKDAYS = {
   7: "Thứ 7",
   8: "Chủ nhật",
 };
+
+export const PRICE_TYPES_OPTIONS = [
+  { value: "normal", label: "Giá bán ngày thường" },
+  { value: "holiday", label: "Giá bán ngày lễ" },
+];

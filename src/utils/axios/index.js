@@ -84,13 +84,13 @@ export function map(cb, _default = null) {
 // set Authentication Token-Based
 export function setAuthToken(token) {
   if (token) {
-    axios.defaults.headers.common["x-access-token"] = token;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    axiosInstance.defaults.headers.common["x-access-token"] = token;
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
   // Apply to every request
   else {
-    delete axios.defaults.headers.common["x-access-token"]; // Delete auth header
-    delete axiosInstance.defaults.headers.common["x-access-token"];
+    delete axios.defaults.headers.common["Authorization"]; // Delete auth header
+    delete axiosInstance.defaults.headers.common["Authorization"];
   }
 }

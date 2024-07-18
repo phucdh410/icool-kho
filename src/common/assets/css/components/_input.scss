@@ -62,4 +62,14 @@ html:not([dir="rtl"]) .form-control.is-invalid {
   .c-button {
     margin-top: 5px;
   }
+
+  .input-wrapper {
+    input {
+      background-color: white !important;
+      &:disabled,
+      &:read-only {
+        background-color: #f6f7f7 !important;
+      }
+    }
+  }
 }

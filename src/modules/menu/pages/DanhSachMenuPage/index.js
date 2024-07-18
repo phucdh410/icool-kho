@@ -71,7 +71,8 @@ const DanhSachMenuPage = () => {
   };
 
   const onAddHH = () => {
-    addModalRef.current?.open();
+    const selectedItem = selected?.[0];
+    addModalRef.current?.open(selectedItem?.id, selectedItem?.name);
   };
   //#endregion
 

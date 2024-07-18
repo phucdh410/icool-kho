@@ -16,4 +16,10 @@ export const menuApi = {
   getById: async (id) => {
     return await methods.get(`/menu/getById/${id}`);
   },
+  updateGoodsToMenu: async (id, body) => {
+    return await methods.put(`/menu/updateGoods/${id}`, body);
+  },
+  getGoodsInMenu: async (id) => {
+    return await methods.get(`/menu/getGoodsById/${id}`);
+  },
 };

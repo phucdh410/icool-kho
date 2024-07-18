@@ -79,6 +79,7 @@ export const ListToolbar = ({
             <CButton
               className="btn-fill"
               color="success"
+              disabled={selected.length !== 1}
               onClick={onAddHH}
               icon={<i className="text-[20px] fa-regular fa-circle-plus"></i>}
             >
