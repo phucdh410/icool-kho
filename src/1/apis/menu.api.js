@@ -7,11 +7,11 @@ export const menuApi = {
   create: async (body) => {
     return await methods.post("/menu", body);
   },
-  update: async (code, body) => {
-    return await methods.put(`/menu/${code}`, body);
+  update: async (id, body) => {
+    return await methods.put(`/menu/${id}`, body);
   },
-  remove: async (code) => {
-    return await methods.delete(`/menu/${code}`);
+  remove: async (id) => {
+    return await methods.delete(`/menu/${id}`);
   },
   getById: async (id) => {
     return await methods.get(`/menu/getById/${id}`);

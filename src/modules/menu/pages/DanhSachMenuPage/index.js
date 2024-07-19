@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
-import { fireError, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 
 const DanhSachMenuPage = () => {
   const addModalRef = useRef(null);
@@ -60,7 +60,7 @@ const DanhSachMenuPage = () => {
     const allow = await fireDelete();
     if (allow) {
       try {
-        await menuApi.remove(selected?.[0]?.code);
+        await menuApi.remove(selected?.[0]?.id);
         refetch();
         fireSuccess();
       } catch (error) {

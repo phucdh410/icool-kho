@@ -33,7 +33,7 @@ export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
     {
       key: "name",
       label: "Tên menu",
-      _style: { width: "250px", minWidth: "250px", textAlign: "start" },
+      _style: { width: "350px", minWidth: "350px", textAlign: "start" },
     },
     {
       key: "status",
@@ -53,7 +53,7 @@ export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
     {
       key: "date",
       label: "Ngày áp dụng",
-      _style: { width: "200px", minWidth: "200px" },
+      _style: { width: "200px", minWidth: "170px" },
     },
     {
       key: "from",
@@ -66,11 +66,7 @@ export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
   const render = {
     select: ({ code, status, check }) => (
       <td>
-        <CCheckbox
-          value={check}
-          onChange={select(code)}
-          disabled={status || status === -3}
-        />
+        <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,
