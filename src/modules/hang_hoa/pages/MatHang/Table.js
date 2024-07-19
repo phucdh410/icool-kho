@@ -31,7 +31,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
     {
       key: "name",
       label: "Tên Hàng Hóa",
-      _style: { width: "auto", minWidth: "200px", textAlign: "center" },
+      _style: { width: "auto", minWidth: "200px", textAlign: "left" },
     },
     {
       key: "cost",
@@ -44,7 +44,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "140px", minWidth: "180px" },
     },
     {
-      key: "proposer",
+      key: "created_by",
       label: "Người đề xuất",
       _style: { width: "auto", minWidth: "200px" },
     },
@@ -77,6 +77,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       </td>
     ),
     status: ({ status }) => <td>{mapGoodsStatusText(status)}</td>,
+    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
   };
 
   return (

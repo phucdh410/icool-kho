@@ -16,11 +16,8 @@ export default ({
   status,
   selectedNo,
   toggleStatus,
-  onEdit,
   onAddToMenu,
-  onRemove,
   onSearch,
-  onAdd,
   selectedItem,
 }) => {
   //#region Data
@@ -36,17 +33,6 @@ export default ({
     (d) => onSearch(filter(d)),
     (e) => noti("error", e)
   );
-
-  const onClick = (state) => {
-    switch (state) {
-      case "add":
-        return onAdd();
-      case "edit":
-        return onEdit();
-      case "remove":
-        return onRemove();
-    }
-  };
   //#endregion
 
   return (
@@ -55,11 +41,10 @@ export default ({
         <CCol xs="12" className="action">
           <div>
             <CActionGroup
-              onClick={onClick}
-              canAdd
+              canAdd={false}
               canSave={false}
-              canEdit={selectedNo == 1}
-              canRemove={selectedNo == 1}
+              canEdit={false}
+              canRemove={false}
               canPrint={false}
             />
           </div>
@@ -77,7 +62,7 @@ export default ({
               className="btn-fill"
               color="success"
               onClick={onAddToMenu}
-              // disabled={selectedNo !== 1}
+              disabled={selectedNo !== 1}
             >
               Thêm vào Menu
             </CButton>

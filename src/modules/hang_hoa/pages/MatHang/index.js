@@ -7,12 +7,12 @@ import Table from "./Table";
 
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
-import { setFilter } from "src/common/actions/config.action";
 import { useQuery } from "react-query";
 import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { format } from "src/utils/moment";
 import { AddToMenuModal } from "../../components";
+import { hangHoaApi } from "src/1/apis/hang_hoa.api";
 
 const remapData = (_data) => {
   return _data.map((e) => ({
@@ -36,7 +36,7 @@ const InventoryCheck = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["mat-hang", filters],
-    queryFn: () => deXuatHangHoaApi.getAll(filters),
+    queryFn: () => hangHoaApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
         Array.isArray(dataResponse) ? dataResponse : dataResponse?.data?.data
@@ -72,32 +72,8 @@ const InventoryCheck = () => {
   const onSearch = (data) => setFilters(data);
 
   const onAddToMenu = () => {
-    modalRef.current?.open();
+    modalRef.current?.open(selected?.[0]);
   };
-
-  const onEdit = useCallback(async () => {
-    const code = data.find((d) => d.check).code;
-    history.push(`/goods/form/${code}`);
-  }, [data]);
-
-  const onRemove = async () => {
-    const allow = await fireDelete();
-    if (allow) {
-      try {
-        await deXuatHangHoaApi.delete({ id: selected?.[0]?.id });
-        refetch();
-        fireSuccess();
-      } catch (error) {
-        fireError();
-      }
-    }
-  };
-
-  const onExport = useCallback(async () => {
-    // await toExcel(data);
-  }, []);
-
-  const onAdd = () => history.push("/goods/form");
   //#endregion
 
   return (
@@ -109,12 +85,8 @@ const InventoryCheck = () => {
             status={status}
             selectedNo={selected.length}
             toggleStatus={onStatusChange}
-            onAdd={onAdd}
-            onEdit={onEdit}
             onAddToMenu={onAddToMenu}
-            onRemove={onRemove}
             onSearch={onSearch}
-            onExport={onExport}
             selectedItem={selected?.[0]}
           />
         </CCardBody>
