@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 
 import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 
@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { format } from "src/utils/moment";
+import { AddToMenuModal } from "../../components";
 
 const remapData = (_data) => {
   return _data.map((e) => ({
@@ -22,6 +23,8 @@ const remapData = (_data) => {
 };
 
 const InventoryCheck = () => {
+  const modalRef = useRef(null);
+
   //#region Data
   const [filters, setFilters] = useState({
     status: "",
@@ -68,7 +71,9 @@ const InventoryCheck = () => {
 
   const onSearch = (data) => setFilters(data);
 
-  const onApproved = useCallback(async () => {}, [selected]);
+  const onAddToMenu = () => {
+    modalRef.current?.open();
+  };
 
   const onEdit = useCallback(async () => {
     const code = data.find((d) => d.check).code;
@@ -106,7 +111,7 @@ const InventoryCheck = () => {
             toggleStatus={onStatusChange}
             onAdd={onAdd}
             onEdit={onEdit}
-            onApproved={onApproved}
+            onAddToMenu={onAddToMenu}
             onRemove={onRemove}
             onSearch={onSearch}
             onExport={onExport}
@@ -126,6 +131,8 @@ const InventoryCheck = () => {
           />
         </CCardBody>
       </CCard>
+
+      <AddToMenuModal ref={modalRef} />
     </>
   );
 };

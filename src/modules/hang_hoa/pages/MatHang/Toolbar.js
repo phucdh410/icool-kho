@@ -9,9 +9,6 @@ import { CActionGroup } from "_components/others";
 
 import { filter } from "src/utils/funcs";
 import { Magnifying } from "_assets/icons";
-
-import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "src/configs/constant";
-import { Can } from "src/utils/ability";
 import { GOODS_STATUS_OPTIONS } from "../../constants";
 
 export default ({
@@ -20,7 +17,7 @@ export default ({
   selectedNo,
   toggleStatus,
   onEdit,
-  onApproved,
+  onAddToMenu,
   onRemove,
   onSearch,
   onAdd,
@@ -79,8 +76,8 @@ export default ({
             <CButton
               className="btn-fill"
               color="success"
-              onClick={onApproved}
-              disabled={selectedNo !== 1}
+              onClick={onAddToMenu}
+              // disabled={selectedNo !== 1}
             >
               Thêm vào Menu
             </CButton>
