@@ -1,5 +1,5 @@
 import { CModal } from "@coreui/react";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { menuApi } from "src/1/apis/menu.api";
@@ -11,16 +11,23 @@ export const AddToMenuModal = forwardRef((props, ref) => {
   //#region Data
   const [open, setOpen] = useState(false);
 
+  const [isHoliday, setIsHoliday] = useState("normal");
+  const [currentMenu, setCurrentMenu] = useState(null);
+
   const { control, reset, handleSubmit } = useForm({
     mode: "all",
-    defaultValues: { good_id: "", menu_ids: [] },
+    defaultValues: { menu_ids: [] },
   });
 
   const { data: menu_options } = useQuery({
     queryKey: ["menu-list"],
     queryFn: () => menuApi.getAll(),
     select: (response) =>
-      response?.data?.data?.map((e) => ({ value: e?.id, label: e?.name })),
+      response?.data?.data?.map((e) => ({
+        ...e,
+        value: e?.id,
+        label: e?.name,
+      })),
   });
   //#endregion
 
@@ -30,6 +37,12 @@ export const AddToMenuModal = forwardRef((props, ref) => {
     setOpen(false);
   };
   //#endregion
+
+  useEffect(() => {
+    if (menu_options && menu_options?.length > 0) {
+      setCurrentMenu(menu_options[0]);
+    }
+  }, [menu_options]);
 
   useImperativeHandle(ref, () => ({
     open: () => setOpen(true),
@@ -46,11 +59,13 @@ export const AddToMenuModal = forwardRef((props, ref) => {
       <div className="p-4 min-w-[800px] flex flex-col gap-3">
         <div className="flex flex-row items-center gap-5 max-w-[700px]">
           <CSelect
+            value={currentMenu}
             options={menu_options ?? []}
             label="Chọn menu"
             className="flex-1"
           />
           <CSelect
+            value={isHoliday}
             options={PRICE_TYPES_OPTIONS ?? []}
             label="Giá bán"
             className="flex-1"
