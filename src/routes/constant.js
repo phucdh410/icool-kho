@@ -651,7 +651,7 @@ export const Menu = {
     },
     icon: "",
     name: "Sửa menu",
-    path: "/menus/form/:code",
+    path: "/menus/form/:id",
   },
 };
 //#endregion

@@ -16,6 +16,7 @@ export const ListToolbar = ({
   status,
   toggleStatus,
   canAdd,
+  canEdit,
   canSave,
   canRemove,
   onAdd,
@@ -63,6 +64,7 @@ export const ListToolbar = ({
               onClick={onClick}
               canAdd={canAdd}
               canSave={canSave}
+              canEdit={canEdit}
               canRemove={canRemove}
             />
           </div>

@@ -15,6 +15,7 @@ const TaoMenuPage = () => {
   const { data: detailResponse } = useQuery({
     queryKey: ["detail-menu", params?.id],
     queryFn: () => menuApi.getById(params?.id),
+    select: (response) => response?.data?.data,
     enabled: !!params?.id,
   });
 
@@ -49,7 +50,13 @@ const TaoMenuPage = () => {
 
   useEffect(() => {
     if (detailResponse) {
-      reset(detailResponse);
+      reset({
+        ...detailResponse,
+        status: detailResponse?.status ?? 1,
+        holiday: !!detailResponse?.holiday,
+        date: dayjs(detailResponse?.date).toDate(),
+        stores: detailResponse?.stores?.map((e) => e?.store_code || e?.code),
+      });
     }
   }, [detailResponse]);
 

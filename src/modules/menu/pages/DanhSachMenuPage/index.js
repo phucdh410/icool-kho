@@ -52,8 +52,8 @@ const DanhSachMenuPage = () => {
   const onAdd = () => history.push("/menus/form");
 
   const onEdit = () => {
-    const code = data.find((e) => e.check)?.code;
-    history.push(`/menus/form/${code}`);
+    const id = data.find((e) => e.check)?.id;
+    history.push(`/menus/form/${id}`);
   };
 
   const onRemove = async () => {
@@ -85,6 +85,7 @@ const DanhSachMenuPage = () => {
             status={status}
             toggleStatus={onStatusChange}
             canAdd
+            canEdit={selected?.length === 1}
             canRemove={selected?.length === 1}
             onAdd={onAdd}
             onEdit={onEdit}
