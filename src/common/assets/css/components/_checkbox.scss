@@ -6,7 +6,7 @@
 
   input {
     &:checked {
-      &~label.custom-control-label {
+      & ~ label.custom-control-label {
         color: $color-blue;
 
         &::before {
@@ -15,7 +15,7 @@
         }
 
         &::after {
-          display: inline;
+          display: inline !important;
         }
       }
     }
@@ -23,7 +23,7 @@
     &:disabled {
       pointer-events: none;
 
-      &~label.custom-control-label {
+      & ~ label.custom-control-label {
         color: $color-blue;
 
         &::before {
@@ -56,7 +56,7 @@
 
       &::after {
         cursor: pointer;
-        background: url('../../icons/tick.svg') no-repeat;
+        background: url("../../icons/tick.svg") no-repeat;
         background-size: contain;
         display: none;
         left: -13px !important;

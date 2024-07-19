@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { CTable, CPagination, CDialog } from "_components/others";
 import { useQuery } from "react-query";
 import { hangHoaApi } from "src/1/apis/hang_hoa.api";
@@ -38,22 +38,35 @@ export const AddGoodsModal = forwardRef((props, ref) => {
 
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
-  const isSelectAll = useMemo(
-    () => data?.every((d) => d.check) ?? false,
+  // const isSelectAll = useMemo(
+  //   () => data?.every((d) => d.check) ?? false,
+  //   [data]
+  // );
+
+  const normalSelected = useMemo(
+    () => data?.filter((e) => e.check === "normal") ?? [],
+    [data]
+  );
+  const holidaySelected = useMemo(
+    () => data?.filter((e) => e.check === "holiday") ?? [],
     [data]
   );
 
-  const selected = useMemo(() => data?.filter((e) => e.check) ?? [], [data]);
+  const isHoliday = useMemo(
+    () => watch("normal_or_holiday") === "holiday",
+    [watch("normal_or_holiday")]
+  );
   //#endregion
 
   //#region Event
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
+        let goods = isHoliday ? holidaySelected : normalSelected;
+
         const payload = {
-          normal_or_holiday:
-            values?.normal_or_holiday === "normal" ? false : true,
-          goods_ids: selected?.map((e) => e?.id),
+          normal_or_holiday: isHoliday ? true : false,
+          goods_ids: goods.map((e) => e?.id),
         };
         await menuApi.updateGoodsToMenu(values?.id, payload);
 
@@ -65,12 +78,22 @@ export const AddGoodsModal = forwardRef((props, ref) => {
     })();
   };
 
-  const onSelect = (code, value) =>
+  const onSelect = (code, value) => {
+    let _value = value;
+    if (value) {
+      if (isHoliday) {
+        _value = "holiday";
+      } else {
+        _value = "normal";
+      }
+    }
+
     setQueryData(
       data.map((d) =>
-        code === -1 || d.code === code ? { ...d, check: value } : d
+        code === -1 || d.code === code ? { ...d, check: _value } : d
       )
     );
+  };
 
   const onClose = () => {
     setOpen(false);
@@ -87,21 +110,28 @@ export const AddGoodsModal = forwardRef((props, ref) => {
       onSelect(code, v);
 
   const onTypeChange = (changeCb) => (selectedOption) => {
-    select()(false);
     changeCb(selectedOption?.value);
   };
   //#endregion
 
   useImperativeHandle(ref, () => ({
-    open: async (id, name, type) => {
+    open: async (id, name) => {
       try {
         const res = await menuApi.getGoodsInMenu(id);
 
         if (res?.data?.data) {
-          const stringCodes = res.data.data.map((e) => e?.code);
+          const normalCodes = res.data.data?.normal?.map((e) => e?.code);
+          const holidayCodes = res.data.data?.holiday.map((e) => e?.code);
 
           setQueryData(
-            data.map((e) => ({ ...e, check: stringCodes.includes(e?.code) }))
+            data.map((e) => ({
+              ...e,
+              check: normalCodes?.includes(e?.code)
+                ? "normal"
+                : holidayCodes?.includes(e?.code)
+                ? "holiday"
+                : false,
+            }))
           );
         }
       } catch (error) {
@@ -111,7 +141,7 @@ export const AddGoodsModal = forwardRef((props, ref) => {
         reset({
           id,
           menu_name: name,
-          normal_or_holiday: type ? "holiday" : "normal",
+          normal_or_holiday: "normal",
           goods_ids: [],
         });
         setOpen(true);
@@ -123,7 +153,8 @@ export const AddGoodsModal = forwardRef((props, ref) => {
   const fields = [
     {
       key: "select",
-      label: <CCheckbox value={isSelectAll} onChange={select()} />,
+      // label: <CCheckbox value={isSelectAll} onChange={select()} />,
+      label: "",
       sorter: false,
     },
     {
@@ -156,7 +187,11 @@ export const AddGoodsModal = forwardRef((props, ref) => {
   const render = {
     select: ({ check, code }) => (
       <td>
-        <CCheckbox value={check} onChange={select(code)} />
+        <CCheckbox
+          value={check}
+          onChange={select(code)}
+          disabled={check && watch("normal_or_holiday") !== check}
+        />
       </td>
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,
