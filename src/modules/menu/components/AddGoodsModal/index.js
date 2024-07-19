@@ -27,12 +27,6 @@ export const AddGoodsModal = forwardRef((props, ref) => {
     },
   });
 
-  const { fields: formFields, replace } = useFieldArray({
-    control,
-    name: "goods_ids",
-    keyName: "__id",
-  });
-
   const { data, isFetching } = useQuery({
     queryKey: ["goods-list"],
     queryFn: () => hangHoaApi.getAll(),
@@ -99,7 +93,7 @@ export const AddGoodsModal = forwardRef((props, ref) => {
   //#endregion
 
   useImperativeHandle(ref, () => ({
-    open: async (id, name) => {
+    open: async (id, name, type) => {
       try {
         const res = await menuApi.getGoodsInMenu(id);
 
@@ -112,11 +106,12 @@ export const AddGoodsModal = forwardRef((props, ref) => {
         }
       } catch (error) {
         console.error(error);
+        select()(false);
       } finally {
         reset({
           id,
           menu_name: name,
-          price_type: "normal",
+          normal_or_holiday: type ? "holiday" : "normal",
           goods_ids: [],
         });
         setOpen(true);

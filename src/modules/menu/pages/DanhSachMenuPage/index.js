@@ -72,7 +72,11 @@ const DanhSachMenuPage = () => {
 
   const onAddHH = () => {
     const selectedItem = selected?.[0];
-    addModalRef.current?.open(selectedItem?.id, selectedItem?.name);
+    addModalRef.current?.open(
+      selectedItem?.id,
+      selectedItem?.name,
+      selectedItem?.normal_or_holiday
+    );
   };
   //#endregion
 
