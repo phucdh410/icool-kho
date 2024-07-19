@@ -1,10 +1,9 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { menuApi } from "src/1/apis/menu.api";
 import { AddGoodsModal, ListToolbar, MenuTable } from "../../components";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useQuery } from "react-query";
-import { filter } from "src/utils/funcs";
 import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
 import { fireError, fireSuccess } from "src/utils/alert";
@@ -24,7 +23,7 @@ const DanhSachMenuPage = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["menu-list", params],
-    queryFn: () => menuApi.getAll(filter(params)),
+    queryFn: () => menuApi.getAll(params),
     select: (response) =>
       Array.isArray(response) ? response : response?.data?.data,
   });
