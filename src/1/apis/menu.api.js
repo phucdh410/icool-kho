@@ -22,4 +22,7 @@ export const menuApi = {
   getGoodsInMenu: async (id) => {
     return await methods.get(`/menu/getGoodsById/${id}`);
   },
+  updateStatus: async (id, body) => {
+    return await methods.put(`/menu/status/${id}`, body);
+  },
 };

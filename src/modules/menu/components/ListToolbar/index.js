@@ -24,7 +24,11 @@ export const ListToolbar = ({
   onRemove,
   onSearch,
   selected,
+  onStartMenu,
+  onStopMenu,
   onAddHH,
+  canStart,
+  canStop,
 }) => {
   //#region Data
   const { control, handleSubmit } = useForm({
@@ -70,10 +74,17 @@ export const ListToolbar = ({
           </div>
           <div>
             <CButton
+              onClick={onStartMenu}
+              disabled={!canStart}
+              icon={<i className="text-[20px] fa-solid fa-flag-checkered"></i>}
+            >
+              Áp dụng
+            </CButton>
+            <CButton
               className="btn-fill"
               color="danger"
-              disabled={selected.length !== 1}
-              onClick={() => {}}
+              onClick={onStopMenu}
+              disabled={!canStop}
               icon={<XCircleFill />}
             >
               Ngưng

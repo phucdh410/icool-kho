@@ -69,6 +69,26 @@ const DanhSachMenuPage = () => {
     }
   };
 
+  const onStartMenu = async () => {
+    try {
+      await menuApi.updateStatus(selected?.[0]?.id, { status: 2 });
+      refetch();
+      noti("success", "Áp dụng menu thành công!");
+    } catch (error) {
+      noti("error", error?.message || "Lỗi");
+    }
+  };
+
+  const onStopMenu = async () => {
+    try {
+      await menuApi.updateStatus(selected?.[0]?.id, { status: 3 });
+      refetch();
+      noti("success", "Ngưng chạy menu thành công!");
+    } catch (error) {
+      noti("error", error?.message || "Lỗi");
+    }
+  };
+
   const onAddHH = () => {
     const selectedItem = selected?.[0];
     addModalRef.current?.open(selectedItem?.id, selectedItem?.name);
@@ -92,7 +112,11 @@ const DanhSachMenuPage = () => {
             onRemove={onRemove}
             onSearch={onSearch}
             selected={selected}
+            onStartMenu={onStartMenu}
+            onStopMenu={onStopMenu}
             onAddHH={onAddHH}
+            canStart={selected?.length === 1 && selected[0]?.status !== 2}
+            canStop={selected?.length === 1 && selected[0]?.status === 2}
           />
         </CCardBody>
       </CCard>
