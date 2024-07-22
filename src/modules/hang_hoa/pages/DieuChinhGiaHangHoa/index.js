@@ -2,24 +2,24 @@ import { useForm } from "react-hook-form";
 import { MatHangForm } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
+import { hangHoaApi } from "src/1/apis/hang_hoa.api";
 import { history } from "src/App";
 import { useEffect } from "react";
 
-const DeXuatGiaHangHoa = () => {
+const DieuChinhGiaHangHoa = () => {
   //#region Data
   const params = useParams();
 
   const { data, isError } = useQuery({
-    queryKey: ["chi-tiet-de-xuat-hang-hoa", params?.code],
-    queryFn: () => deXuatHangHoaApi.getByCode(params?.code),
+    queryKey: ["chi-tiet-hang-hoa", params?.code],
+    queryFn: () => hangHoaApi.getByCode(params?.code),
     enabled: !!params?.code,
     select: (response) => response?.data?.data,
   });
 
   if (isError) {
     noti("error", "Không thể lấy thông tin đề xuất này!");
-    history.replace("/goods/sugges-list");
+    history.replace("/goods/list");
   }
 
   const {
@@ -128,4 +128,4 @@ const DeXuatGiaHangHoa = () => {
   //#endregion
 };
 
-export default DeXuatGiaHangHoa;
+export default DieuChinhGiaHangHoa;

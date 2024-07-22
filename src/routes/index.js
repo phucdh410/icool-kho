@@ -30,6 +30,7 @@ import {
   UpdateDanhMucHangHoa,
   DeXuatGiaMatHang,
   DeXuatMatHang,
+  DieuChinhGiaHangHoa,
 } from "_modules/hang_hoa/pages";
 
 import {
@@ -411,9 +412,14 @@ const routes = [
     component: UpdateDanhMucHangHoa,
   },
   {
-    ...HangHoa.DeXuatGiaMatHang,
+    ...HangHoa.DeXuatGiaHangHoa,
     exact: true,
     component: DeXuatGiaMatHang,
+  },
+  {
+    ...HangHoa.DieuChinhGiaHangHoa,
+    exact: true,
+    component: DieuChinhGiaHangHoa,
   },
   //#endregion
 

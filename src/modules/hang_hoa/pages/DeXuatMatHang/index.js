@@ -7,7 +7,6 @@ import Table from "./Table";
 
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
-import { setFilter } from "src/common/actions/config.action";
 import { useQuery } from "react-query";
 import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
@@ -21,7 +20,7 @@ const remapData = (_data) => {
   }));
 };
 
-const InventoryCheck = () => {
+const DeXuatHangHoa = () => {
   //#region Data
   const [filters, setFilters] = useState({
     status: "",
@@ -32,7 +31,7 @@ const InventoryCheck = () => {
   const [status, setStatus] = useState(0);
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: ["mat-hang", filters],
+    queryKey: ["danh-sach-de-xuat-hang-hoa", filters],
     queryFn: () => deXuatHangHoaApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
@@ -40,7 +39,10 @@ const InventoryCheck = () => {
       ),
   });
 
-  const { setQueryData } = useSetQueryData(["mat-hang", filters]);
+  const { setQueryData } = useSetQueryData([
+    "danh-sach-de-xuat-hang-hoa",
+    filters,
+  ]);
 
   const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
 
@@ -130,4 +132,4 @@ const InventoryCheck = () => {
   );
 };
 
-export default InventoryCheck;
+export default DeXuatHangHoa;

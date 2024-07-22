@@ -612,7 +612,7 @@ export const HangHoa = {
     name: "Sửa đề xuất hàng hóa",
     path: "/goods/form/:code",
   },
-  DeXuatGiaMatHang: {
+  DeXuatGiaHangHoa: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
@@ -620,6 +620,15 @@ export const HangHoa = {
     icon: "",
     name: "Đề xuất giá",
     path: "/goods/price-suggest/:code",
+  },
+  DieuChinhGiaHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Điều chỉnh giá",
+    path: "/goods/price-update/:code",
   },
 };
 //#endregion

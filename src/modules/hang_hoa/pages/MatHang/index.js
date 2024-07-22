@@ -5,10 +5,7 @@ import { CCard, CCardHeader, CCardBody } from "@coreui/react";
 import Toolbar from "./Toolbar";
 import Table from "./Table";
 
-import { history } from "src/App";
-import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { useQuery } from "react-query";
-import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { format } from "src/utils/moment";
 import { AddToMenuModal } from "../../components";
@@ -34,8 +31,8 @@ const InventoryCheck = () => {
 
   const [status, setStatus] = useState(0);
 
-  const { data, refetch, isFetching } = useQuery({
-    queryKey: ["mat-hang", filters],
+  const { data, isFetching } = useQuery({
+    queryKey: ["danh-sach-hang-hoa", filters],
     queryFn: () => hangHoaApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
@@ -43,7 +40,7 @@ const InventoryCheck = () => {
       ),
   });
 
-  const { setQueryData } = useSetQueryData(["mat-hang", filters]);
+  const { setQueryData } = useSetQueryData(["danh-sach-hang-hoa", filters]);
 
   const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
 

@@ -14,6 +14,8 @@ const UpdateDanhMucHangHoa = lazy(() => import("./UpdateDanhMucHangHoa"));
 
 const DeXuatGiaMatHang = lazy(() => import("./DeXuatGiaMatHang"));
 
+const DieuChinhGiaHangHoa = lazy(() => import("./DieuChinhGiaHangHoa"));
+
 export {
   NganhHangHoa,
   NhomHangHoa,
@@ -22,4 +24,5 @@ export {
   CreateDanhMucHangHoa,
   UpdateDanhMucHangHoa,
   DeXuatGiaMatHang,
+  DieuChinhGiaHangHoa,
 };

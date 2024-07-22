@@ -10,4 +10,7 @@ export const hangHoaApi = {
   updateMenuByGoodsCode: async (code, body) => {
     return await methods.put(`/goods/updateMenuByGoodsCode/${code}`, body);
   },
+  getByCode: async (code) => {
+    return await methods.get(`/goods/${code}`);
+  },
 };

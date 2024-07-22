@@ -50,7 +50,7 @@ export default ({
           </div>
           <div>
             <CButton
-              to={`/goods/price-suggest/${selectedItem?.code}`}
+              to={`/goods/price-update/${selectedItem?.code}`}
               className="btn-fill"
               color="warning"
               disabled={selectedNo !== 1}
