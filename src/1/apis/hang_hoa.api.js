@@ -13,4 +13,7 @@ export const hangHoaApi = {
   getByCode: async (code) => {
     return await methods.get(`/goods/${code}`);
   },
+  updatePrice: async (code, body) => {
+    return await methods.put(`/goods/updatePrice/${code}`, body);
+  },
 };

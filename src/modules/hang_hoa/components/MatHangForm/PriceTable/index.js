@@ -17,7 +17,7 @@ const calculateFormula = (gia_thuong, gia_le) => {
   return ((ty_gia - 1) * 100).toFixed(2).replace(/\.00$/, "");
 };
 
-export const PriceTable = ({ control }) => {
+export const PriceTable = ({ control, isPriceEdit }) => {
   //#region Data
   const { fields: materials } = useFieldArray({
     control,
@@ -158,73 +158,75 @@ export const PriceTable = ({ control }) => {
         </div>
       </div>
 
-      <div className="flex gap-3 !mt-5 !mb-20">
-        <div className="basis-[20%]">
-          <CCard>
-            <CCardBody>
-              <Controller
-                name="proposer_note"
-                control={control}
-                render={({ field }) => (
-                  <CTextarea label="Ghi chú người đề xuất giá" {...field} />
-                )}
-              />
-            </CCardBody>
-          </CCard>
+      {!isPriceEdit && (
+        <div className="flex gap-3 !mt-5 !mb-20">
+          <div className="basis-[20%]">
+            <CCard>
+              <CCardBody>
+                <Controller
+                  name="proposer_note"
+                  control={control}
+                  render={({ field }) => (
+                    <CTextarea label="Ghi chú người đề xuất giá" {...field} />
+                  )}
+                />
+              </CCardBody>
+            </CCard>
+          </div>
+          <div className="basis-[20%]">
+            <CCard>
+              <CCardBody>
+                <Controller
+                  name="ware_note"
+                  control={control}
+                  render={({ field }) => (
+                    <CTextarea label="Ghi chú TBP KTT" {...field} />
+                  )}
+                />
+              </CCardBody>
+            </CCard>
+          </div>
+          <div className="basis-[20%]">
+            <CCard>
+              <CCardBody>
+                <Controller
+                  name="accountant_note"
+                  control={control}
+                  render={({ field }) => (
+                    <CTextarea label="Ghi chú kế toán" {...field} />
+                  )}
+                />
+              </CCardBody>
+            </CCard>
+          </div>
+          <div className="basis-[20%]">
+            <CCard>
+              <CCardBody>
+                <Controller
+                  name="ic_note"
+                  control={control}
+                  render={({ field }) => (
+                    <CTextarea label="Ghi chú Kiểm soát nội bộ" {...field} />
+                  )}
+                />
+              </CCardBody>
+            </CCard>
+          </div>
+          <div className="basis-[20%]">
+            <CCard>
+              <CCardBody>
+                <Controller
+                  name="operator_note"
+                  control={control}
+                  render={({ field }) => (
+                    <CTextarea label="Ghi chú Ban Giám đốc" {...field} />
+                  )}
+                />
+              </CCardBody>
+            </CCard>
+          </div>
         </div>
-        <div className="basis-[20%]">
-          <CCard>
-            <CCardBody>
-              <Controller
-                name="ware_note"
-                control={control}
-                render={({ field }) => (
-                  <CTextarea label="Ghi chú TBP KTT" {...field} />
-                )}
-              />
-            </CCardBody>
-          </CCard>
-        </div>
-        <div className="basis-[20%]">
-          <CCard>
-            <CCardBody>
-              <Controller
-                name="accountant_note"
-                control={control}
-                render={({ field }) => (
-                  <CTextarea label="Ghi chú kế toán" {...field} />
-                )}
-              />
-            </CCardBody>
-          </CCard>
-        </div>
-        <div className="basis-[20%]">
-          <CCard>
-            <CCardBody>
-              <Controller
-                name="ic_note"
-                control={control}
-                render={({ field }) => (
-                  <CTextarea label="Ghi chú Kiểm soát nội bộ" {...field} />
-                )}
-              />
-            </CCardBody>
-          </CCard>
-        </div>
-        <div className="basis-[20%]">
-          <CCard>
-            <CCardBody>
-              <Controller
-                name="operator_note"
-                control={control}
-                render={({ field }) => (
-                  <CTextarea label="Ghi chú Ban Giám đốc" {...field} />
-                )}
-              />
-            </CCardBody>
-          </CCard>
-        </div>
-      </div>
+      )}
     </>
   );
 

@@ -18,7 +18,7 @@ const DieuChinhGiaHangHoa = () => {
   });
 
   if (isError) {
-    noti("error", "Không thể lấy thông tin đề xuất này!");
+    noti("error", "Không thể lấy thông tin hàng hóa này!");
     history.replace("/goods/list");
   }
 
@@ -55,24 +55,17 @@ const DieuChinhGiaHangHoa = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        const payload = {
-          ...values,
-          name: values?.name
-            ? values.name
-            : values.subject + " " + values.predicate + " " + values.complement,
-          file: values.file?.id,
-          materials: values.materials.map((e) => ({
-            nvl_id: e?.nvl_id?.value,
-            quantity: e?.quantity,
-            ware_unit: e?.ware_unit,
-          })),
-        };
+        const { price, holiday_price, vat } = values;
 
-        await deXuatHangHoaApi.update(payload);
+        await hangHoaApi.updatePrice(params?.code, {
+          price,
+          holiday_price,
+          vat,
+        });
 
-        noti("success", "Cập nhật đề xuất giá hàng hóa thành công!");
+        noti("success", "Cập nhật giá hàng hóa thành công!");
         reset();
-        history.push("/goods/suggest-list");
+        history.push("/goods/list");
       } catch (error) {
         noti("error", error?.message);
       }
@@ -123,6 +116,7 @@ const DieuChinhGiaHangHoa = () => {
       onSubmit={onSubmit}
       isEdit
       isSuggest
+      isPriceEdit
     />
   );
   //#endregion

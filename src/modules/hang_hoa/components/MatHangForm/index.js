@@ -10,6 +10,7 @@ export const MatHangForm = ({
   onSubmit,
   isEdit = false,
   isSuggest,
+  isPriceEdit = false,
 }) => {
   return (
     <>
@@ -25,11 +26,15 @@ export const MatHangForm = ({
       </CCard>
       <CCard>
         <CCardBody>
-          <GroupInput isEdit={isEdit} control={control} />
+          <GroupInput
+            isEdit={isEdit}
+            control={control}
+            isPriceEdit={isPriceEdit}
+          />
         </CCardBody>
       </CCard>
       {isSuggest ? (
-        <PriceTable control={control} />
+        <PriceTable control={control} isPriceEdit={isPriceEdit} />
       ) : (
         <SuggestTable control={control} />
       )}

@@ -39,6 +39,7 @@ export const C1Upload = ({
   accept = "image/*",
   value,
   onChange,
+  disabled,
 }) => {
   //#region Data
   const inputRef = useRef(null);
@@ -86,6 +87,7 @@ export const C1Upload = ({
         <input
           ref={inputRef}
           onChange={onFileChange}
+          disabled={disabled}
           type="file"
           hidden
           id="c-1upload"
@@ -111,6 +113,7 @@ export const C1Upload = ({
         </div>
         <button
           onClick={onClick}
+          disabled={disabled}
           className="text-white bg-[#117DB7] h-[inherit] !border-none !outline-none rounded-e-md font-semibold px-3 tracking-wide"
         >
           Upload

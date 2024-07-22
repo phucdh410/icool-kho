@@ -10,7 +10,7 @@ import {
   CTextarea,
 } from "src/common/components/controls";
 
-export const GroupInput = ({ control, isEdit }) => {
+export const GroupInput = ({ control, isEdit, isPriceEdit }) => {
   //#region Data
   const industry_code = useWatch({ control, name: "industry_code" });
   const group_id = useWatch({ control, name: "group_id" });
@@ -123,7 +123,12 @@ export const GroupInput = ({ control, isEdit }) => {
             name="subject"
             control={control}
             render={({ field }) => (
-              <CInput label="Tên hàng hóa" placeholder="Chủ ngữ" {...field} />
+              <CInput
+                label="Tên hàng hóa"
+                placeholder="Chủ ngữ"
+                disabled={isPriceEdit}
+                {...field}
+              />
             )}
           />
         </div>
@@ -132,7 +137,12 @@ export const GroupInput = ({ control, isEdit }) => {
             name="predicate"
             control={control}
             render={({ field }) => (
-              <CInput label="" placeholder="Vị ngữ" {...field} />
+              <CInput
+                label=""
+                placeholder="Vị ngữ"
+                disabled={isPriceEdit}
+                {...field}
+              />
             )}
           />
         </div>
@@ -141,7 +151,12 @@ export const GroupInput = ({ control, isEdit }) => {
             name="complement"
             control={control}
             render={({ field }) => (
-              <CInput label="" placeholder="Bổ sung" {...field} />
+              <CInput
+                label=""
+                placeholder="Bổ sung"
+                disabled={isPriceEdit}
+                {...field}
+              />
             )}
           />
         </div>
@@ -161,7 +176,9 @@ export const GroupInput = ({ control, isEdit }) => {
           <Controller
             name="unit"
             control={control}
-            render={({ field }) => <CInput label="Đơn Vị Tính" {...field} />}
+            render={({ field }) => (
+              <CInput label="Đơn Vị Tính" disabled={isPriceEdit} {...field} />
+            )}
           />
         </div>
         <div className="basis-[20%]">
@@ -169,7 +186,11 @@ export const GroupInput = ({ control, isEdit }) => {
             name="standard"
             control={control}
             render={({ field }) => (
-              <CInput label="Định mức món cho" {...field} />
+              <CInput
+                label="Định mức món cho"
+                disabled={isPriceEdit}
+                {...field}
+              />
             )}
           />
         </div>
@@ -177,7 +198,9 @@ export const GroupInput = ({ control, isEdit }) => {
           <Controller
             name="note"
             control={control}
-            render={({ field }) => <CTextarea label="Ghi chú" {...field} />}
+            render={({ field }) => (
+              <CTextarea label="Ghi chú" disabled={isPriceEdit} {...field} />
+            )}
           />
         </div>
         <div className="basis-[20%]">
@@ -185,7 +208,12 @@ export const GroupInput = ({ control, isEdit }) => {
             control={control}
             name="file"
             render={({ field: { ref, ..._field } }) => (
-              <C1Upload label="Hình ảnh hàng hóa" required {..._field} />
+              <C1Upload
+                label="Hình ảnh hàng hóa"
+                required
+                disabled={isPriceEdit}
+                {..._field}
+              />
             )}
           />
         </div>
