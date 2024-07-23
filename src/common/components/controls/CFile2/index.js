@@ -63,8 +63,12 @@ const CFile2 = (
         onClick={click}
         className="form-control"
       >
-        <span className={classNames("c-icon")}>
+        {/* <span className={classNames("c-icon")}>
           {isUploading && "Uploading..."}
+        </span> */}
+        <span className="flex items-center gap-2 h-full">
+          <i className="fa-regular fa-cloud-arrow-up"></i>
+          {isUploading ? "Uploading..." : "Upload"}
         </span>
       </span>
       {fields.length > 0 && (
@@ -78,14 +82,14 @@ const CFile2 = (
         >
           {fields.map((e, index) => (
             <div
-              className="self-start flex flex-row gap-1 items-center"
+              className="self-start flex flex-row gap-1 items-center justify-between"
               key={e?.id}
             >
               <a
                 href={e?.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-left"
+                className="text-left whitespace-nowrap text-ellipsis overflow-hidden max-w-[130px]"
               >
                 {e?.originalname}
               </a>
