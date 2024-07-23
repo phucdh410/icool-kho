@@ -708,14 +708,14 @@ export const Permission = {
 
 //#region Nhà cung cấp
 export const NhaCungCap = {
-  ThemNhaCungCap: {
+  ThemDeXuatNhaCungCap: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Thêm nhà cung cấp",
-    path: "/supplier/create",
+    name: "Thêm đề xuất nhà cung cấp",
+    path: "/supplier-suggest/create",
   },
 };
 //#endregion

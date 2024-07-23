@@ -29,3 +29,4 @@ export {
 };
 
 export * from "./CSwitch";
+export * from "./CRating";

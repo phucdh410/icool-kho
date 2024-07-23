@@ -4,10 +4,11 @@ import { object } from "yup";
 
 export const defaultValues = {
   code: "",
-  ky_danh_gia: 1,
+  cycle: 1,
   year: dayjs().year(),
   note: "",
-  date: dayjs().toDate(),
+  evaluation_date: dayjs().toDate(),
+  suppliers: [],
 };
 
 export const resolver = yupResolver(object({}));

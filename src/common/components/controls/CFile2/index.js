@@ -1,11 +1,14 @@
-import { forwardRef, createRef, useCallback, useState } from "react";
+import React, { forwardRef, createRef, useCallback, useState } from "react";
 import classNames from "classnames";
 
 import { CFormGroup, CLabel } from "@coreui/react";
 
 import { fileApi } from "src/apis/file.api";
 
-const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
+const CFile2 = (
+  { fields, append, remove, label, className, value, ...rest },
+  ref
+) => {
   const inputRef = createRef(null);
 
   const [isUploading, setIsUploading] = useState(false);
@@ -73,16 +76,26 @@ const CFile2 = ({ fields, append, label, className, value, ...rest }, ref) => {
             gap: "4px",
           }}
         >
-          {fields.map((e) => (
-            <a
+          {fields.map((e, index) => (
+            <div
+              className="self-start flex flex-row gap-1 items-center"
               key={e?.id}
-              href={e?.path}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ alignSelf: "start" }}
             >
-              {e?.originalname}
-            </a>
+              <a
+                href={e?.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-left"
+              >
+                {e?.originalname}
+              </a>
+              {remove && (
+                <i
+                  onClick={remove(index)}
+                  className="fa-regular fa-delete-left fa-lg cursor-pointer hover:text-red-600"
+                ></i>
+              )}
+            </div>
           ))}
         </div>
       )}

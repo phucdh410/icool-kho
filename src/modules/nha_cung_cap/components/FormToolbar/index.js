@@ -1,18 +1,22 @@
 import { CCol, CRow } from "@coreui/react";
 import { Controller } from "react-hook-form";
-import {
-  CDate,
-  CInput,
-  CSelect,
-  CTextarea,
-} from "src/common/components/controls";
+import { CDate, CInput, CSelect } from "src/common/components/controls";
 import { CActionGroup } from "src/common/components/others";
 import { KY_DANH_GIA_OPTIONS, YEAR_OPTIONS } from "../../constants";
 
-export const FormToolbar = ({ control }) => {
+export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
   //#region Event
   const onClick = (keyAction) => {
-    console.log("🚀 ~ onClick ~ keyAction:", keyAction);
+    switch (keyAction) {
+      case "add":
+        return onAddSupplier();
+      default:
+        return onSubmit();
+    }
+  };
+
+  const onSelectChange = (changeCb) => (selectedOption) => {
+    changeCb(selectedOption?.value);
   };
   //#endregion
 
@@ -42,10 +46,11 @@ export const FormToolbar = ({ control }) => {
         />
         <Controller
           control={control}
-          name="ky_danh_gia"
-          render={({ field }) => (
+          name="cycle"
+          render={({ field: { onChange, ..._field } }) => (
             <CSelect
-              {...field}
+              {..._field}
+              onChange={onSelectChange(onChange)}
               className="flex-1 max-w-[150px]"
               label="Kỳ đánh giá"
               options={KY_DANH_GIA_OPTIONS ?? []}
@@ -55,9 +60,10 @@ export const FormToolbar = ({ control }) => {
         <Controller
           control={control}
           name="year"
-          render={({ field }) => (
+          render={({ field: { onChange, ..._field } }) => (
             <CSelect
-              {...field}
+              {..._field}
+              onChange={onSelectChange(onChange)}
               className="flex-1 max-w-[150px]"
               label="Năm"
               options={YEAR_OPTIONS ?? []}
@@ -66,7 +72,7 @@ export const FormToolbar = ({ control }) => {
         />
         <Controller
           control={control}
-          name="date"
+          name="evaluation_date"
           render={({ field }) => (
             <CDate
               {...field}

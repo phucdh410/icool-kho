@@ -96,7 +96,7 @@ import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 
-import ThemNhaCungCap from "_modules/nha_cung_cap/pages/ThemNhaCungCap";
+import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
 
 //#endregion
 
@@ -464,9 +464,9 @@ const routes = [
 
   //#region Nhà cung cấp
   {
-    ...NhaCungCap.ThemNhaCungCap,
+    ...NhaCungCap.ThemDeXuatNhaCungCap,
     exact: true,
-    component: ThemNhaCungCap,
+    component: ThemDeXuatNhaCungCap,
   },
   //#endregion
 ];

@@ -1,6 +1,6 @@
 import { WEEKDAYS } from "./constants";
 
-export const mapWeekday = (dayNumber = 2) => {
+export const mapWeekday = (dayNumber = 1) => {
   return WEEKDAYS[dayNumber];
 };
 

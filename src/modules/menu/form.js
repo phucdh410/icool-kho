@@ -7,8 +7,8 @@ export const defaultValues = {
   status: 1,
   date: dayjs().toDate(),
   holiday: false,
-  from: 2,
-  to: 6,
+  from: 1,
+  to: 5,
   stores: [],
 };
 
