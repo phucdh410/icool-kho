@@ -9,6 +9,7 @@ import {
   Summary,
   HangHoa,
   Menu,
+  NhaCungCap,
 } from "./constant";
 
 //#region Imports
@@ -94,6 +95,8 @@ import {
 import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
+
+import ThemNhaCungCap from "_modules/nha_cung_cap/pages/ThemNhaCungCap";
 
 //#endregion
 
@@ -456,6 +459,14 @@ const routes = [
     ...Permission.Configuration,
     exact: true,
     component: ConfigurationPermission,
+  },
+  //#endregion
+
+  //#region Nhà cung cấp
+  {
+    ...NhaCungCap.ThemNhaCungCap,
+    exact: true,
+    component: ThemNhaCungCap,
   },
   //#endregion
 ];

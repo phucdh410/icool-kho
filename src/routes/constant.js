@@ -633,7 +633,7 @@ export const HangHoa = {
 };
 //#endregion
 
-//#region Hàng hóa
+//#region Menu
 export const Menu = {
   DanhSachMenu: {
     required: {
@@ -706,14 +706,16 @@ export const Permission = {
 };
 //#endregion
 
-// export const Good = {
-//   List: {
-//     required: {
-//       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
-//       permission: PERMISSION_VALUE.READ,
-//     },
-//     icon: "",
-//     name: "DS bán thành phẩm",
-//     path: "/good/list",
-//   },
-// };
+//#region Nhà cung cấp
+export const NhaCungCap = {
+  ThemNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Thêm nhà cung cấp",
+    path: "/supplier/create",
+  },
+};
+//#endregion
