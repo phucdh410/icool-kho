@@ -1,10 +1,9 @@
 import { forwardRef, useCallback, useMemo, useState } from "react";
-
 import classNames from "classnames";
 
-import { CInput, CFormGroup, CLabel } from "@coreui/react";
+import { CFormGroup, CInput, CLabel } from "@coreui/react";
 
-import { EyeOpen, EyeClose, XCircleFill } from "_assets/icons";
+import { EyeClose, EyeOpen, XCircleFill } from "_assets/icons";
 
 function Input({ label, onChange, className, value, type, ...rest }, ref) {
   const [isShow, setShow] = useState(false);

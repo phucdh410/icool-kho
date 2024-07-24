@@ -1,17 +1,20 @@
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { CTable, CPagination, CDialog } from "_components/others";
 import { useQuery } from "react-query";
+
 import { hangHoaApi } from "src/1/apis/hang_hoa.api";
+import { menuApi } from "src/1/apis/menu.api";
+import { useSetQueryData } from "src/1/hooks/query";
 import {
   CButton,
   CCheckbox,
   CInput,
   CSelect,
 } from "src/common/components/controls";
-import { useSetQueryData } from "src/1/hooks/query";
+
+import { CDialog,CPagination, CTable } from "_components/others";
+
 import { PRICE_TYPES_OPTIONS } from "../../constants";
-import { menuApi } from "src/1/apis/menu.api";
 
 export const AddGoodsModal = forwardRef((props, ref) => {
   //#region Data

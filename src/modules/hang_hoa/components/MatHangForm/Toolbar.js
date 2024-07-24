@@ -1,4 +1,5 @@
 import { CCol, CRow } from "@coreui/react";
+
 import { CActionGroup } from "src/common/components/others";
 
 export const Toolbar = ({ loading, canAdd, canSave, onSumbit }) => {

@@ -1,103 +1,93 @@
-import {
-  Solution,
-  Profile,
-  Material,
-  Inventory,
-  Export,
-  Import,
-  Permission,
-  Summary,
-  HangHoa,
-  Menu,
-  NhaCungCap,
-} from "./constant";
-
 //#region Imports
 import { Profile as MProfile } from "_modules/auth/pages";
-
-import {
-  MaterialGroup,
-  Material as MaterialComponent,
-  MaterialIndustryList,
-  MaterialType,
-  MaterialSuggest,
-} from "_modules/goods/pages";
-
-import {
-  NganhHangHoa,
-  NhomHangHoa,
-  MatHang,
-  CreateDanhMucHangHoa,
-  UpdateDanhMucHangHoa,
-  DeXuatGiaMatHang,
-  DeXuatMatHang,
-  DieuChinhGiaHangHoa,
-} from "_modules/hang_hoa/pages";
-
-import {
-  QuantitativeListPage,
-  PurchaseProposalFormList,
-  PurchaseProposalFormCreate,
-  PurchaseProposalFormUpdate,
-  PurchaseProposalFormPrint,
-  TransferListPage,
-  TransferCreatePage,
-  TransferUpdatePage,
-} from "_modules/purchase_proposal_form/pages";
-
-import {
-  InventoryCheck,
-  InventoryCheckCreate,
-  InventoryCheckUpdate,
-  InventorySlip,
-  InventoryInstant,
-  InventoryAdjustmentList,
-  InventoryReturnList,
-  InventoryReturnCreate,
-  InventoryReturnUpdate,
-  InventoryCancelList,
-  InventoryCancelCreate,
-  InventoryCancelUpdate,
-} from "_modules/inventory/pages";
-
 import {
   ExportCreate,
   ExportList,
-  ExportUpdate,
   ExportPrint,
+  ExportUpdate,
 } from "_modules/export/pages";
-
+import {
+  Material as MaterialComponent,
+  MaterialGroup,
+  MaterialIndustryList,
+  MaterialSuggest,
+  MaterialType,
+} from "_modules/goods/pages";
+import {
+  CreateDanhMucHangHoa,
+  DeXuatGiaMatHang,
+  DeXuatMatHang,
+  DieuChinhGiaHangHoa,
+  MatHang,
+  NganhHangHoa,
+  NhomHangHoa,
+  UpdateDanhMucHangHoa,
+} from "_modules/hang_hoa/pages";
 import {
   ImportCreate,
   ImportList,
   ImportPrint,
   ImportUpdate,
 } from "_modules/import/pages";
-
 import {
+  InventoryAdjustmentList,
+  InventoryCancelCreate,
+  InventoryCancelList,
+  InventoryCancelUpdate,
+  InventoryCheck,
+  InventoryCheckCreate,
+  InventoryCheckUpdate,
+  InventoryInstant,
+  InventoryReturnCreate,
+  InventoryReturnList,
+  InventoryReturnUpdate,
+  InventorySlip,
+} from "_modules/inventory/pages";
+import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
+import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
+import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
+import DanhSachDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachDeXuatNhaCungCap";
+import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
+import {
+  ConfigurationPermission,
   GroupPermission,
   SlipPermission,
-  ConfigurationPermission,
 } from "_modules/permission/pages";
-
 import {
-  CancellationSummary,
-  ImportSummary,
-  ImportDetailSummary,
-  ExportSummary,
-  ExportDetailSummary,
-  InventorySummary,
-  InventoryAdjustmentSummary,
-  OrderSummary,
+  PurchaseProposalFormCreate,
+  PurchaseProposalFormList,
+  PurchaseProposalFormPrint,
+  PurchaseProposalFormUpdate,
+  QuantitativeListPage,
+  TransferCreatePage,
+  TransferListPage,
+  TransferUpdatePage,
+} from "_modules/purchase_proposal_form/pages";
+import {
   CancellationDetailSummary,
+  CancellationSummary,
+  ExportDetailSummary,
+  ExportSummary,
+  ImportDetailSummary,
+  ImportSummary,
+  InventoryAdjustmentSummary,
+  InventorySummary,
+  OrderSummary,
 } from "_modules/summary/pages";
 
-import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
-import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
-import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
-
-import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
-import DanhSachDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachDeXuatNhaCungCap";
+import {
+  Export,
+  HangHoa,
+  Import,
+  Inventory,
+  Material,
+  Menu,
+  NhaCungCap,
+  Permission,
+  Profile,
+  Solution,
+  Summary,
+} from "./constant";
 
 //#endregion
 

@@ -1,7 +1,8 @@
-import { Controller, useController, useWatch } from "react-hook-form";
-import { CInput, CSelect } from "_components/controls";
-import { getAll as getAllMaterialGroups } from "_common/queries-fn/material-group.query";
 import { useMemo } from "react";
+import { Controller, useController, useWatch } from "react-hook-form";
+
+import { getAll as getAllMaterialGroups } from "_common/queries-fn/material-group.query";
+import { CInput, CSelect } from "_components/controls";
 
 export const GroupInput = ({ control, isEdit, materialGroupName }) => {
   const nganhValue = useWatch({ control, name: "nganh" });

@@ -1,5 +1,5 @@
-import { correctMaterial } from "./material.correct";
 import { correctGood } from "./good.correct";
+import { correctMaterial } from "./material.correct";
 
 export const correctPurchaseProposal = (data) => {
 	data["total"] = 0;

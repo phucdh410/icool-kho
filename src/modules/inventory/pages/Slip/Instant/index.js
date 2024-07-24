@@ -1,18 +1,18 @@
-import { useState, useCallback } from "react";
-
+import { useCallback,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+
+import { toExcelByWareCodeAndDate } from "src/apis/backlog_slip.api";
+import { setFilter } from "src/common/actions/config.action";
+
+import { getInstants } from "_common/queries-fn/inventory-slip.query";
+
+import { NAME } from "../../../reducers/inventory-slip-instant";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-
-import { getInstants } from "_common/queries-fn/inventory-slip.query";
-import { toExcelByWareCodeAndDate } from "src/apis/backlog_slip.api";
-
-import { NAME } from "../../../reducers/inventory-slip-instant";
-import { setFilter } from "src/common/actions/config.action";
 
 const selectData = createSelector(
 	(state) => state.config,

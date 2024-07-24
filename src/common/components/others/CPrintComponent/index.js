@@ -1,6 +1,6 @@
-import "./index.scss";
-
 import { CCard, CCardBody } from "@coreui/react";
+
+import "./index.scss";
 
 export default ({ children }) => {
 	return (

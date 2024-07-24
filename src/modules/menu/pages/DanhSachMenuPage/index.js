@@ -1,12 +1,15 @@
-import { CCard, CCardBody, CCardHeader } from "@coreui/react";
-import { menuApi } from "src/1/apis/menu.api";
-import { AddGoodsModal, ListToolbar, MenuTable } from "../../components";
 import { useMemo, useRef, useState } from "react";
-import dayjs from "dayjs";
 import { useQuery } from "react-query";
+import dayjs from "dayjs";
+
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+
+import { menuApi } from "src/1/apis/menu.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
+
+import { AddGoodsModal, ListToolbar, MenuTable } from "../../components";
 
 const DanhSachMenuPage = () => {
   const addModalRef = useRef(null);

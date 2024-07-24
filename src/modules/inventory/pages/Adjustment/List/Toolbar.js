@@ -1,10 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
-import { CRow, CCol } from "@coreui/react";
 
-import { CInput, CButton, CSelect, CDate } from "_components/controls";
+import { CCol,CRow } from "@coreui/react";
 
 import { filter } from "src/utils/funcs";
+
 import { Magnifying } from "_assets/icons";
+import { CButton, CDate,CInput, CSelect } from "_components/controls";
 
 export default ({ warehouses, filter: _filter, onSearch }) => {
 	//#region Data

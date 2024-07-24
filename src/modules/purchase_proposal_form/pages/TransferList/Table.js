@@ -1,12 +1,11 @@
-import { useState, useCallback } from "react";
-
-import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
-
-import MPreview from "../../components/Preview";
+import { useCallback,useState } from "react";
+import dayjs from "dayjs";
 
 import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
-import dayjs from "dayjs";
+import { CCheckbox } from "_components/controls";
+import { CPagination,CTable } from "_components/others";
+
+import MPreview from "../../components/Preview";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data

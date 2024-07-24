@@ -1,4 +1,7 @@
 import { Controller } from "react-hook-form";
+import { useQuery } from "react-query";
+
+import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
 import {
   CCheckbox,
   CInput,
@@ -6,9 +9,8 @@ import {
   CSelectMulti,
 } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
+
 import { FilesCell } from "./FilesCell";
-import { useQuery } from "react-query";
-import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
 
 export const FormTable = ({ control, dataTable }) => {
   //#region Data

@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
-import classNames from "classnames";
 import { Controller } from "react-hook-form";
+import classNames from "classnames";
 
-import { CRow, CCol, CCollapse } from "@coreui/react";
-import { CActionGroup } from "_components/others";
-import { CButton, CInput, CSelect, CDate } from "_components/controls";
+import { CCol, CCollapse,CRow } from "@coreui/react";
 
-import CCheckbox from "../../components/Checkbox";
-
-import { getAll } from "../../queries-fn/store.query";
 import { checkSave, checkUpdated } from "src/apis/purchase_proposal_form.api";
 import { isSuccess } from "src/utils/funcs";
 import { format } from "src/utils/moment";
+
+import { CButton, CDate,CInput, CSelect } from "_components/controls";
+import { CActionGroup } from "_components/others";
+
+import CCheckbox from "../../components/Checkbox";
+import { getAll } from "../../queries-fn/store.query";
 
 export default ({
   edit,

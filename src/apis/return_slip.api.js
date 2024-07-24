@@ -1,14 +1,13 @@
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
-import { RETURN_SLIP } from "./_constants";
-
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
 import { format } from "src/utils/moment";
 
 import {
   ReturnSlip,
-  ReturnSlips,
   ReturnSlipPreview,
+  ReturnSlips,
 } from "../utils/models/return_slip.model";
+
+import { RETURN_SLIP } from "./_constants";
 
 const { api } = global;
 

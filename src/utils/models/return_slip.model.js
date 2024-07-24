@@ -1,11 +1,10 @@
-import Base from "./base.model";
+import { format, toDate } from "src/utils/moment";
 
+import Base from "./base.model";
 import {
   ReturnSlipMaterials,
   ReturnSlipPreviewMaterials,
 } from "./material.model";
-
-import { format, toDate } from "src/utils/moment";
 
 export class ReturnSlips extends Base {
   constructor({

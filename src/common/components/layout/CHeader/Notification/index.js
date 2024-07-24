@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { ReactComponent as NotiIcon } from "./notification.svg";
 
+import { ReactComponent as NotiIcon } from "./notification.svg";
 import { NotificationContainer } from "./NotificationContainer";
 
 import "./styles.scss";

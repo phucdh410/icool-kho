@@ -1,17 +1,18 @@
 import { useMemo } from "react";
-import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
-
-import { getAll as getAllStores } from "../../queries-fn/store.query";
+import { setFilter } from "src/common/actions/config.action";
 
 import { getAllReport } from "_common/queries-fn/purchase-proposal-form.query";
-import { setFilter } from "src/common/actions/config.action";
+
+import { getAll as getAllStores } from "../../queries-fn/store.query";
 import { NAME } from "../../reducers/order";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
 	(state) => state.config,

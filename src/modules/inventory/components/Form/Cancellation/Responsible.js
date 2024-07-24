@@ -5,17 +5,16 @@ import {
   useImperativeHandle,
   useState,
 } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { CCard, CCardBody, CRow, CCol } from "@coreui/react";
+import { CCard, CCardBody, CCol,CRow } from "@coreui/react";
 
+import { approve } from "src/apis/cancellation_slip.api";
+import { CButton, CSelect,CTextarea } from "src/common/components/controls";
 import { CDialog } from "src/common/components/others";
-import { CButton, CTextarea, CSelect } from "src/common/components/controls";
+import { CENTRAL_WAREHOUSE, ERROR_MESSAGE } from "src/configs/constant";
 
 import { getResponsible } from "../../../queries-fn/responsible.query";
-import { approve } from "src/apis/cancellation_slip.api";
-import { CENTRAL_WAREHOUSE, ERROR_MESSAGE } from "src/configs/constant";
 
 const initial = {
   responsible: "",

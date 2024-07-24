@@ -1,19 +1,21 @@
-import "../../../assets/css/add-user.scss";
-
 import { forwardRef, useImperativeHandle } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import {
 	CCard,
 	CCardBody,
-	CCardHeader,
 	CCardFooter,
-	CRow,
+	CCardHeader,
 	CCol,
+	CRow,
 } from "@coreui/react";
-import { CInput, CButton } from "_components/controls";
-import { CDialog } from "_components/others";
+
 import { ERROR_MESSAGE } from "src/configs/constant";
+
+import { CButton,CInput } from "_components/controls";
+import { CDialog } from "_components/others";
+
+import "../../../assets/css/add-user.scss";
 
 const initialState = {
 	code: "",

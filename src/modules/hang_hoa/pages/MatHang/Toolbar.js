@@ -1,14 +1,15 @@
 import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { Controller, useForm } from "react-hook-form";
-import { CRow, CCol, CCollapse } from "@coreui/react";
+import { CCol, CCollapse,CRow } from "@coreui/react";
 
+import { filter } from "src/utils/funcs";
+
+import { Magnifying } from "_assets/icons";
 import { CButton, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
-import { filter } from "src/utils/funcs";
-import { Magnifying } from "_assets/icons";
 import { GOODS_STATUS_OPTIONS } from "../../constants";
 
 export default ({

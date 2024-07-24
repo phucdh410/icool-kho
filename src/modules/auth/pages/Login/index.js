@@ -1,19 +1,18 @@
-import "../../assets/css/login.scss";
-
-import { useState, useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback, useEffect,useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 import { CContainer, CForm, CInputGroup } from "@coreui/react";
-import { CInput, CCheckbox, CButton } from "_components/controls";
 
-import { login, setUser, setPermission } from "_common/actions/auth.action";
 import { profile } from "src/apis/auth.api";
-
 import { history } from "src/App";
 
 import img from "_assets/images/login-image.webp";
 import logo from "_assets/images/logo-icool.webp";
+import { login, setPermission,setUser } from "_common/actions/auth.action";
+import { CButton,CCheckbox, CInput } from "_components/controls";
+
+import "../../assets/css/login.scss";
 
 const Login = () => {
   //#region Datas

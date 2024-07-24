@@ -1,4 +1,3 @@
-import { CCard, CCardBody } from "@coreui/react";
 import { useEffect } from "react";
 import {
   Controller,
@@ -6,6 +5,9 @@ import {
   useFieldArray,
   useWatch,
 } from "react-hook-form";
+
+import { CCard, CCardBody } from "@coreui/react";
+
 import {
   CNumber,
   CNumberInput,

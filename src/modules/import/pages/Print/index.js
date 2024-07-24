@@ -1,20 +1,21 @@
-import "../../assets/css/print.scss";
-
-import { useState, useCallback, useMemo, useRef } from "react";
-
+import { useCallback, useMemo, useRef,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+
+import { setFilter } from "src/common/actions/config.action";
+
+import { getAll } from "_common/queries-fn/purchase-slip.query";
+
+import MPrintDialog from "../../components/PrintDialog";
+import MPrintByGroupDialog from "../../components/PrintDialog/PrintByGroup";
+import { NAME } from "../../reducers/import-print";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-import MPrintDialog from "../../components/PrintDialog";
-import MPrintByGroupDialog from "../../components/PrintDialog/PrintByGroup";
 
-import { getAll } from "_common/queries-fn/purchase-slip.query";
-import { NAME } from "../../reducers/import-print";
-import { setFilter } from "src/common/actions/config.action";
+import "../../assets/css/print.scss";
 
 const selectData = createSelector(
 	(state) => state.config,

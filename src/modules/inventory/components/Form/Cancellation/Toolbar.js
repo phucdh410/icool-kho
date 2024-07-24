@@ -1,36 +1,33 @@
 import {
-  useCallback,
   forwardRef,
-  useImperativeHandle,
+  useCallback,
   useEffect,
-  useState,
+  useImperativeHandle,
   useRef,
+  useState,
 } from "react";
-
+import { Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { Controller } from "react-hook-form";
+import { CCol, CCollapse,CRow } from "@coreui/react";
 
-import { useForm } from "react-hook-form";
+import { cancelApi } from "src/apis/cancellation_slip.api";
+import { uploadApi } from "src/apis/upload.api";
+import { EditPencil } from "src/common/assets/icons";
 
-import { CRow, CCol, CCollapse } from "@coreui/react";
-
-import { CActionGroup } from "_components/others";
 import {
-  CInput,
-  CSelect,
-  CNumber,
-  CFile,
   CButton,
   CDate,
+  CFile,
+  CInput,
+  CNumber,
+  CSelect,
 } from "_components/controls";
+import { CActionGroup } from "_components/others";
 
-import { getAll as getAllWarehouse } from "../../../queries-fn/warehouse.query";
 import { getAll as getAllMaterials } from "../../../queries-fn/material.query";
-
-import { uploadApi } from "src/apis/upload.api";
-import { cancelApi } from "src/apis/cancellation_slip.api";
-import { EditPencil } from "src/common/assets/icons";
+import { getAll as getAllWarehouse } from "../../../queries-fn/warehouse.query";
 
 export default forwardRef(
   (

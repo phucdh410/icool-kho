@@ -1,16 +1,16 @@
 import fileDownload from "js-file-download";
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
 
-import { EXPORT_SLIP } from "./_constants";
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
+import { format } from "src/utils/moment";
 
 import {
-	ExportSlips,
 	ExportSlip,
 	ExportSlipPreview,
+	ExportSlips,
 	ExprotFormPrints,
 } from "_models/export-slip.model";
 
-import { format } from "src/utils/moment";
+import { EXPORT_SLIP } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data.map((d) => new ExportSlips(d))).get(

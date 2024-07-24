@@ -1,12 +1,12 @@
 import { forwardRef, useImperativeHandle, useMemo } from "react";
-
 import { Controller, useController, useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
+
+import { nganhHangHoaApi } from "src/1/apis/nganh_hang_hoa.api";
 
 import { CInput, CSelect, CSwitch } from "_components/controls";
-import { useQuery } from "react-query";
-import { nganhHangHoaApi } from "src/1/apis/nganh_hang_hoa.api";
 
 export default forwardRef(({}, ref) => {
   //#region Data

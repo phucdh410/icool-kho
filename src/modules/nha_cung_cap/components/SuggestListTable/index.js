@@ -1,7 +1,8 @@
-import dayjs from "dayjs";
 import { useState } from "react";
-import { CPagination, CTable } from "src/common/components/others";
+import dayjs from "dayjs";
+
 import { CCheckbox } from "src/common/components/controls";
+import { CPagination, CTable } from "src/common/components/others";
 
 export const SuggestListTable = ({
   data = [],

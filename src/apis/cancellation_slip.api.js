@@ -1,17 +1,16 @@
 import fileDownload from "js-file-download";
 
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
-import { CANCELLATION_SLIP } from "./_constants";
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
+import { format } from "src/utils/moment";
 
 import {
-  CancellationSlips,
   CancellationSlip,
   CancellationSlipPreview,
   CancellationSlipResponsible,
+  CancellationSlips,
 } from "../utils/models/cancellation-slip.model";
 
-import { format } from "src/utils/moment";
+import { CANCELLATION_SLIP } from "./_constants";
 
 const { api } = global;
 

@@ -1,5 +1,6 @@
-import { getAllFunction } from "_common/queries-fn/permissions.query";
 import { FORM_GROUP } from "src/configs/constant";
+
+import { getAllFunction } from "_common/queries-fn/permissions.query";
 
 import Row from "./Row";
 

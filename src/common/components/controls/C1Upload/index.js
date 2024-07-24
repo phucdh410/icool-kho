@@ -1,4 +1,5 @@
 import { useRef } from "react";
+
 import { fileApi } from "src/1/apis/file.api";
 
 const validateFileType = (file, accept = "image/*") => {

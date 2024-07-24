@@ -1,20 +1,21 @@
-import { useState, useCallback, useMemo } from "react";
+import { useCallback, useMemo,useState } from "react";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
+import { approve, getUnFulfilled,remove } from "src/apis/inventory_slip.api";
+import { history } from "src/App";
+import { setFilter } from "src/common/actions/config.action";
+import { fireDelete, fireSuccess } from "src/utils/alert";
 
 import { getAll } from "_common/queries-fn/inventory-check.query";
-import { remove, approve, getUnFulfilled } from "src/apis/inventory_slip.api";
 
-import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import { setFilter } from "src/common/actions/config.action";
 import { NAME } from "../../../reducers/inventory-check";
-import { useQuery } from "react-query";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
   (state) => state.config,

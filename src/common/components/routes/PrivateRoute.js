@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { Route, useLocation } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
+import { Route, useLocation } from "react-router-dom";
 import { createSelector } from "reselect";
 
 import { pushToTab } from "_common/actions/config.action";

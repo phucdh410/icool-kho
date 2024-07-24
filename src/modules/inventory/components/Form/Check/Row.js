@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CInput, CNumber, CCheckbox } from "_components/controls";
-
 import { isFloatByUnit, money } from "src/utils/funcs";
+
+import { CCheckbox,CInput, CNumber } from "_components/controls";
 
 export default ({ isLoading, data, amount, onSelect, onChange }) => {
 	const { control, watch, setValue, getValues } = useForm({

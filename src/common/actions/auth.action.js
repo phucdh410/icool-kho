@@ -1,4 +1,7 @@
 import { login as loginApi } from "src/apis/auth.api";
+import { history } from "src/App";
+import { setAuthToken } from "src/utils/axios";
+
 import {
   CLEAR_TABS,
   SET_AUTHENTICATE,
@@ -6,9 +9,6 @@ import {
   SET_PERMISSION,
   SET_TABS,
 } from "./_types";
-
-import { setAuthToken } from "src/utils/axios";
-import { history } from "src/App";
 
 const setAuthenticate = (token = null) => ({
   type: SET_AUTHENTICATE,

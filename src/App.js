@@ -1,28 +1,25 @@
-import "_assets/css/main.scss";
-
 import { Suspense, useEffect } from "react";
-
-import { Router, Switch, Route } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Route,Router, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import jwtDecode from "jwt-decode";
 import { createSelector } from "reselect";
 
-import jwtDecode from "jwt-decode";
+import { profile } from "src/apis/auth.api";
+import { FirebaseRoot } from "src/firebase";
+import { setAuthToken } from "src/utils/axios";
 
-import { PrivateRoute, AnonymusRoute } from "_components/routes";
+import { logout,setPermission, setUser } from "_common/actions/auth.action";
 import { MainLayout } from "_components/layout";
 import { CNotification } from "_components/others";
-
+import { AnonymusRoute,PrivateRoute } from "_components/routes";
 import { Login } from "_modules/auth/pages";
 import { E404 } from "_modules/error/pages";
 
-import { setAuthToken } from "src/utils/axios";
-import { profile } from "src/apis/auth.api";
-
-import { setUser, setPermission, logout } from "_common/actions/auth.action";
 import { isEmpty } from "./utils/funcs";
-import { Toaster } from "react-hot-toast";
-import { FirebaseRoot } from "src/firebase";
+
+import "_assets/css/main.scss";
 
 export const history = createBrowserHistory();
 

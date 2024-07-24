@@ -4,29 +4,25 @@ import React, {
 	useImperativeHandle,
 	useMemo,
 } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { PlusCircle, Trash } from "_assets/icons";
-
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
-
-import { CButton, CInput, CSelect, CNumber } from "_components/controls";
-
-import { Can } from "src/utils/ability";
-
-import MaterialTable from "./MaterialTable";
 
 import {
 	ENTITY_GROUP_CODE,
 	ERROR_MESSAGE,
 	PERMISSION_VALUE,
 } from "src/configs/constant";
+import { Can } from "src/utils/ability";
+import { isFloatByUnit } from "src/utils/funcs";
 
+import { PlusCircle, Trash } from "_assets/icons";
 import { getMaterials } from "_common/queries-fn/inventory-adjustment.query";
+import { CButton, CInput, CNumber,CSelect } from "_components/controls";
+
 import { getAll as getAllMaterials } from "../../../../queries-fn/material.query";
 
-import { isFloatByUnit } from "src/utils/funcs";
+import MaterialTable from "./MaterialTable";
 
 const initial = {
 	code: "",

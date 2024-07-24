@@ -1,8 +1,8 @@
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
-import { CONFIGURATION } from "./_constants";
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
 
 import { Configurations } from "../utils/models/configuration.model";
+
+import { CONFIGURATION } from "./_constants";
 
 export const getAllSlips = async (params) =>
 	await map(({ data }) => data.map((d) => new Configurations(d))).get(

@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { MatHangForm } from "../../components";
-import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
-import { history } from "src/App";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+
+import { deXuatHangHoaApi } from "src/1/apis/de_xuat_hang_hoa.api";
+import { history } from "src/App";
+
+import { MatHangForm } from "../../components";
 
 const UpdateDanhMucHangHoa = () => {
   //#region Data

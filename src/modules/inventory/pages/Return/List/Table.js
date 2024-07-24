@@ -1,13 +1,12 @@
 import { useCallback, useState } from "react";
 
-import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
-
-import MPreview from "../../../components/Preview/Return";
+import { money } from "src/utils/funcs/";
 
 import { getByCode } from "_common/queries-fn/inventory-return.query";
+import { CCheckbox } from "_components/controls";
+import { CPagination,CTable } from "_components/others";
 
-import { money } from "src/utils/funcs/";
+import MPreview from "../../../components/Preview/Return";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data

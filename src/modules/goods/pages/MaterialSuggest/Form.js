@@ -1,39 +1,37 @@
-import styles from "../../assets/material.module.scss";
-
 import React, {
   forwardRef,
   useImperativeHandle,
   useMemo,
   useState,
 } from "react";
-
+import { Controller, useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import classNames from "classnames";
 
-import { Controller, useForm } from "react-hook-form";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
+import { getConfigs } from "src/apis/config.api";
+import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
 
 import {
-  CInput,
   CCheckbox,
-  CSelect,
+  CInput,
   CNumber,
+  CSelect,
   CTextarea,
 } from "_components/controls";
 
-import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
-
-import { useQuery } from "react-query";
-import { getConfigs } from "src/apis/config.api";
 import {
+  CodeMaterialInput,
+  FormTable,
   GroupInput,
   IndustryInput,
-  TypeInput,
-  CodeMaterialInput,
   NameMaterialInput,
-  FormTable,
   PriceTable,
+  TypeInput,
 } from "./Inputs";
+
+import styles from "../../assets/material.module.scss";
 
 export default forwardRef(({ isEdit = false, refetch }, ref) => {
   //#region Data

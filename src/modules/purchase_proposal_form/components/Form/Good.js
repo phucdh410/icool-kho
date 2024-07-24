@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
-import Row from "./GoodRow";
-
 import { getAll } from "../../queries-fn/good.query";
+
+import Row from "./GoodRow";
 
 export default ({ edit, isLoading, data, storeCode, onChange }) => {
 	//#region Date

@@ -1,11 +1,12 @@
 import { useCallback, useState } from "react";
 
-import { CCard, CCardBody, CRow, CCol } from "@coreui/react";
-import { CInput } from "_components/controls";
-import { CDialog, CLoading, CTable, CPagination } from "_components/others";
+import { CCard, CCardBody, CCol,CRow } from "@coreui/react";
 
-import { format } from "src/utils/moment";
 import { money } from "src/utils/funcs";
+import { format } from "src/utils/moment";
+
+import { CInput } from "_components/controls";
+import { CDialog, CLoading, CPagination,CTable } from "_components/others";
 
 export default ({ code, getter, onClose }) => {
 	const { data, isLoading } = getter(code);

@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 
-import { getAllReportDetail } from "_common/queries-fn/purchase-slip.query";
-
 import { money, UID } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import { Ban } from "_assets/icons";
+import { getAllReportDetail } from "_common/queries-fn/purchase-slip.query";
 
 export default ({ filter }) => {
 	//#region Data

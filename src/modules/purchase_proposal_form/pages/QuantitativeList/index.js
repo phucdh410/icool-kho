@@ -1,32 +1,30 @@
-import { useState, useCallback, useMemo, useRef } from "react";
-
+import { useCallback, useMemo, useRef,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
 
-import Table from "./Table";
-import Toolbar from "./Toolbar";
+import {
+  approve,
+  confirm,
+  handleQuantitative,
+  removeQuantitative,
+} from "src/apis/purchase_proposal_form.api";
+import { setFilter } from "src/common/actions/config.action";
+import { fireError, fireSuccess } from "src/utils/alert";
+import { isCentral, isSuccess } from "src/utils/funcs";
+import { format } from "src/utils/moment";
 
 import {
   approver,
   getAllQuantitative,
 } from "_common/queries-fn/purchase-proposal-form.query";
 
-import {
-  approve,
-  confirm,
-  removeQuantitative,
-  handleQuantitative,
-} from "src/apis/purchase_proposal_form.api";
-
-import { fireError, fireSuccess } from "src/utils/alert";
-import { isCentral, isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
-import { setFilter } from "src/common/actions/config.action";
 
 import { MQuantitativeDialog } from "./Dialog";
-import { format } from "src/utils/moment";
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
   (state) => state.config,

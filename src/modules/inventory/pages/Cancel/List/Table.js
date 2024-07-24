@@ -1,13 +1,12 @@
 import { useCallback, useRef, useState } from "react";
 
-import { CCheckbox } from "_components/controls";
-import { CTable, CPagination, CImagePreview } from "_components/others";
-
-import Preview from "../../../components/Preview/Cancellation";
+import { money } from "src/utils/funcs";
 
 import { getByCode } from "_common/queries-fn/inventory-cancel.query";
+import { CCheckbox } from "_components/controls";
+import { CImagePreview,CPagination, CTable } from "_components/others";
 
-import { money } from "src/utils/funcs";
+import Preview from "../../../components/Preview/Cancellation";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   const previewRef = useRef();

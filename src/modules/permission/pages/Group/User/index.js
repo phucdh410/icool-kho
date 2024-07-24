@@ -1,8 +1,7 @@
+import { PlusCircle } from "_assets/icons";
 import { CButton } from "_components/controls";
 
 import Row from "./Row";
-
-import { PlusCircle } from "_assets/icons";
 
 export default ({ status, employees, onAddEmployees, onRemoveEmployees }) => {
 	//#region Data

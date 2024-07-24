@@ -1,7 +1,8 @@
-import { Controller, useController, useWatch } from "react-hook-form";
-import { CInput, CSelect } from "_components/controls";
-import { getAllMaterialTypes } from "_common/queries-fn/material-type.query";
 import { useMemo } from "react";
+import { Controller, useController, useWatch } from "react-hook-form";
+
+import { getAllMaterialTypes } from "_common/queries-fn/material-type.query";
+import { CInput, CSelect } from "_components/controls";
 
 export const TypeInput = ({ control, isEdit, materialTypeName }) => {
   const nhomValue = useWatch({ control, name: "nhom" });

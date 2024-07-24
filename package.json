@@ -9,7 +9,8 @@
     "start": "set PORT=3333 && react-app-rewired start",
     "build": "react-app-rewired build && compress-cra",
     "serve": "serve -s build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,5 @@
-import { CButton } from "_components/controls";
-
 import { MinusCircle } from "_assets/icons";
+import { CButton } from "_components/controls";
 
 export default ({ disabled, code, name, onRemove }) => {
 	return (

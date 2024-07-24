@@ -2,11 +2,11 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import {
+	PUSH_NOTI,
+	REMOVE_NOTI,
 	SET_LOADING,
 	SET_SIDEBAR,
 	SET_TABS,
-	PUSH_NOTI,
-	REMOVE_NOTI,
 } from "_common/actions/_types";
 
 const initialState = {

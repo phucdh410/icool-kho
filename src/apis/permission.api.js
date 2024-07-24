@@ -1,8 +1,8 @@
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
-import { PERMISSION } from "./_constants";
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
 
 import { Permissions } from "_models/permission.model";
+
+import { PERMISSION } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data.map((d) => new Permissions(d))).get(

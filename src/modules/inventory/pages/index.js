@@ -25,16 +25,16 @@ const InventoryCancelCreate = lazy(() => import("./Cancel/Create"));
 const InventoryCancelUpdate = lazy(() => import("./Cancel/Update"));
 
 export {
+	InventoryAdjustmentList,
+	InventoryCancelCreate,
+	InventoryCancelList,
+	InventoryCancelUpdate,
 	InventoryCheck,
 	InventoryCheckCreate,
 	InventoryCheckUpdate,
-	InventorySlip,
 	InventoryInstant,
-	InventoryAdjustmentList,
-	InventoryReturnList,
 	InventoryReturnCreate,
+	InventoryReturnList,
 	InventoryReturnUpdate,
-	InventoryCancelList,
-	InventoryCancelCreate,
-	InventoryCancelUpdate,
+	InventorySlip,
 };

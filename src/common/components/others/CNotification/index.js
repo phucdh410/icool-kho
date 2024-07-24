@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+
 import "./styles.scss";
 
 export const CNotification = ({ t }) => {

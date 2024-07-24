@@ -1,5 +1,5 @@
-import { CTable } from "_components/others";
 import { CCheckbox } from "_components/controls";
+import { CTable } from "_components/others";
 
 export default ({ isLoading, data, isSelectAll, onSelect }) => {
 	//#region Event

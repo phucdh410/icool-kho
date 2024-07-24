@@ -1,6 +1,8 @@
-import { FORM_HEADER_ENCODED } from "src/utils/axios";
-import { methods } from "../axios";
 import fileDownload from "js-file-download";
+
+import { FORM_HEADER_ENCODED } from "src/utils/axios";
+
+import { methods } from "../axios";
 
 export const nganhHangHoaApi = {
   getAll: async (params) => {

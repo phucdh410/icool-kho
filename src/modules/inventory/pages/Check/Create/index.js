@@ -2,15 +2,14 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import Form from "../../../components/Form/Check";
-
 import { create } from "src/apis/inventory_slip.api";
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import { isSuccess } from "src/utils/funcs";
 
 import { correctInventoryCheck } from "_common/correctDataFunctionFormUnitAndPrice";
 
-import { isSuccess } from "src/utils/funcs";
+import Form from "../../../components/Form/Check";
 
 const selectCurrentUser = createSelector(
 	(state) => state.auth,

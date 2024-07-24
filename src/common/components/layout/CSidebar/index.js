@@ -1,26 +1,24 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 import {
   CCreateElement,
   CSidebar,
-  CSidebarNav,
   CSidebarBrand,
-  CSidebarNavDivider,
   CSidebarMinimizer,
+  CSidebarNav,
+  CSidebarNavDivider,
 } from "@coreui/react";
-
-import CSidebarNavDropdown from "./CSidebarNavDropdown";
-import CSidebarNavTitle from "./CSidebarNavTitle";
-import CSidebarNavItem from "./CSidebarNavItem";
-
-import { createSelector } from "reselect";
-
-import { toggleSidebar as toggleSidebarAction } from "_common/actions/config.action";
 
 import navigation from "src/routes/navigation";
 
 import logo from "_assets/images/180x180.png";
+import { toggleSidebar as toggleSidebarAction } from "_common/actions/config.action";
+
+import CSidebarNavDropdown from "./CSidebarNavDropdown";
+import CSidebarNavItem from "./CSidebarNavItem";
+import CSidebarNavTitle from "./CSidebarNavTitle";
 
 const selectIsShow = createSelector(
   (state) => state.config,

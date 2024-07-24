@@ -1,13 +1,13 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useCallback, useEffect,useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
-
-import { UID } from "src/utils/funcs";
 import { ERROR_MESSAGE } from "src/configs/constant";
+import { UID } from "src/utils/funcs";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const MForm = ({ isLoading, edit, data, onSubmit }) => {
   //#region Data

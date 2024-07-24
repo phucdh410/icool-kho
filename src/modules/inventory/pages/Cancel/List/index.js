@@ -1,21 +1,21 @@
-import { useState, useCallback, useMemo } from "react";
-
+import { useCallback, useMemo,useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+
+import { remove } from "src/apis/cancellation_slip.api";
+import { history } from "src/App";
+import { setFilter } from "src/common/actions/config.action";
+import { fireDelete, fireSuccess } from "src/utils/alert";
+
+import { getAll } from "_common/queries-fn/inventory-cancel.query";
+
+import { NAME } from "../../../reducers/inventory-cancel";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-
-import { getAll } from "_common/queries-fn/inventory-cancel.query";
-import { remove } from "src/apis/cancellation_slip.api";
-
-import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import { setFilter } from "src/common/actions/config.action";
-import { NAME } from "../../../reducers/inventory-cancel";
-import { useDispatch } from "react-redux";
 
 const selectData = createSelector(
   (state) => state.config,

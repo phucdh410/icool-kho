@@ -1,9 +1,8 @@
 import { map, put } from "src/utils/axios";
-
-import { AUTH } from "./_constants";
-
 import { Authenticate } from "src/utils/models/auth.model";
 import { UserProfile } from "src/utils/models/user.model";
+
+import { AUTH } from "./_constants";
 
 export async function login(username, password) {
 	return await map(({ data }) => {

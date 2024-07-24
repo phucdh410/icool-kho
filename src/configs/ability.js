@@ -1,8 +1,8 @@
+import { Ability, AbilityBuilder } from "@casl/ability";
 import { subscribeAfter } from "redux-subscribe-action";
 
-import { Ability, AbilityBuilder } from "@casl/ability";
-
 import { store } from "src/store";
+
 import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "./constant";
 
 export const ability = new Ability();

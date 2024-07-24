@@ -1,13 +1,11 @@
 import { useCallback } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
 import { CToast, CToaster, CToastHeader } from "@coreui/react";
 
+import { TickCircleFill, WarningCircleFill,XCircleFill } from "_assets/icons";
 import { removeNoti } from "_common/actions/config.action";
-
-import { XCircleFill, TickCircleFill, WarningCircleFill } from "_assets/icons";
 
 const selectNotification = createSelector(
 	(state) => state.config,

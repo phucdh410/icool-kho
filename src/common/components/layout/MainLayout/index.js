@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
-import CSidebar from "../CSidebar";
 import CHeader from "../CHeader";
 import CRoutes from "../CRoutes";
+import CSidebar from "../CSidebar";
 import CToast from "../CToast";
 
 const MainLayout = () => (

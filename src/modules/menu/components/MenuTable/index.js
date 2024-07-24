@@ -1,8 +1,10 @@
-import dayjs from "dayjs";
 import { useState } from "react";
-import { mapStatusText, mapWeekday } from "../../funcs";
-import { CPagination, CTable } from "src/common/components/others";
+import dayjs from "dayjs";
+
 import { CCheckbox } from "src/common/components/controls";
+import { CPagination, CTable } from "src/common/components/others";
+
+import { mapStatusText, mapWeekday } from "../../funcs";
 
 export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
   //#region Data

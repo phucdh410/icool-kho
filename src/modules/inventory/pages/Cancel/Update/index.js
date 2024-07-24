@@ -1,15 +1,14 @@
 import React from "react";
-import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
-import Form from "../../../components/Form/Cancellation";
+import { cancelApi } from "src/apis/cancellation_slip.api";
+import { history } from "src/App";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 
 import { getByCode } from "_common/queries-fn/inventory-cancel.query";
 
-import { cancelApi } from "src/apis/cancellation_slip.api";
-
-import { history } from "src/App";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import Form from "../../../components/Form/Cancellation";
 
 const selectIsLoading = createSelector(
   (state) => state.config,

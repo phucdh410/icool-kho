@@ -1,17 +1,17 @@
-import "../../assets/css/print.scss";
-
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
-import { CRow, CCol } from "@coreui/react";
-import { CDialog, CPrintComponent } from "_components/others";
-import { CButton } from "_components/controls";
-
-import Header from "./Header";
-import Table from "./Table";
-import Footer from "./Footer";
+import { CCol,CRow } from "@coreui/react";
 
 import { getForPrint } from "_common/queries-fn/purchase-slip.query";
+import { CButton } from "_components/controls";
+import { CDialog, CPrintComponent } from "_components/others";
+
+import Footer from "./Footer";
+import Header from "./Header";
+import Table from "./Table";
+
+import "../../assets/css/print.scss";
 
 const PrintDialog = forwardRef(({ paperSize }, ref) => {
 	//#region Data

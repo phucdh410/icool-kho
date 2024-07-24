@@ -1,7 +1,8 @@
 import axios from "axios";
 
-import { logout } from "_common/actions/auth.action";
 import { store } from "src/store";
+
+import { logout } from "_common/actions/auth.action";
 
 axios.interceptors.response.use(
 	function (response) {

@@ -1,10 +1,12 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { getAllSlips } from "_common/queries-fn/configuration.query";
+
 import { updateSlip } from "src/apis/configuration.api";
+import { isSuccess } from "src/utils/funcs";
+
+import { getAllSlips } from "_common/queries-fn/configuration.query";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-import { isSuccess } from "src/utils/funcs";
 
 const SlipPermission = () => {
 	//#region Data

@@ -1,19 +1,18 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import classNames from "classnames";
 
-import { CCard, CCardHeader, CCardBody, CRow, CCol } from "@coreui/react";
-
-import Toolbar from "./Toolbar";
-import Search from "./Search";
-import Table from "./Table";
-import Form from "./Form";
+import { CCard, CCardBody, CCardHeader, CCol,CRow } from "@coreui/react";
 
 import { nhomHangHoaApi } from "src/1/apis/nhom_hang_hoa.api";
-
-import { isSuccess } from "src/utils/funcs";
-import { useQuery } from "react-query";
 import { useSetQueryData } from "src/1/hooks/query";
+import { isSuccess } from "src/utils/funcs";
 import { format } from "src/utils/moment";
+
+import Form from "./Form";
+import Search from "./Search";
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const remapData = (_data) => {
   return _data.map((e) => ({

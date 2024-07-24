@@ -1,8 +1,8 @@
-import { useCallback, forwardRef, useMemo } from "react";
+import { forwardRef, useCallback, useMemo } from "react";
+import RSelect from "react-select";
 import classNames from "classnames";
 
-import RSelect from "react-select";
-import { CFormGroup, CLabel, CInput } from "@coreui/react";
+import { CFormGroup, CInput,CLabel } from "@coreui/react";
 
 const selectTheme = (theme) => ({
   ...theme,

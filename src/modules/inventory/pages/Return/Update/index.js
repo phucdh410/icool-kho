@@ -1,14 +1,13 @@
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import Form from "../../../components/Form/Return";
-
 import { returnApi } from "src/apis/return_slip.api";
+import { history } from "src/App";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 
 import { getByCode } from "_common/queries-fn/inventory-return.query";
 
-import { history } from "src/App";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import Form from "../../../components/Form/Return";
 
 const selectIsLoading = createSelector(
   (state) => state.config,

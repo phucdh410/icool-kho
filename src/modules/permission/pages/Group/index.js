@@ -1,29 +1,29 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import classNames from "classnames";
-
+import { useCallback, useEffect,useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import classNames from "classnames";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody, CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
-import User from "./User";
-import AddUser from "./AddUser";
+import { update } from "src/apis/permission.api";
+import { create, remove } from "src/apis/role.api";
+import * as api from "src/apis/role.api";
+import { correctPermission } from "src/common/correctDataFunctionFormUnitAndPrice";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import { fireDelete, fireSuccess } from "src/utils/alert";
+import { isSuccess } from "src/utils/funcs";
+import { get as getQuery, set as setQuery } from "src/utils/react-query";
+
+import { getAll } from "_common/queries-fn/role.query";
+
 import AddGroup from "./AddGroup";
+import AddUser from "./AddUser";
 import Function from "./Function";
 import MaterialsGroups from "./MaterialGroups";
 import Report from "./Report";
-
-import { create, remove } from "src/apis/role.api";
-import { getAll } from "_common/queries-fn/role.query";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import * as api from "src/apis/role.api";
-import { isSuccess } from "src/utils/funcs";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
-import { correctPermission } from "src/common/correctDataFunctionFormUnitAndPrice";
-import { update } from "src/apis/permission.api";
-import { get as getQuery, set as setQuery } from "src/utils/react-query";
+import Table from "./Table";
+import Toolbar from "./Toolbar";
+import User from "./User";
 
 const selectIsLoading = createSelector(
   (state) => state.config,

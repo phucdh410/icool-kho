@@ -11,13 +11,13 @@ const InventoryAdjustmentSummary = lazy(() => import("./InventoryAdjustment"));
 const OrderSummary = lazy(() => import("./Order"));
 
 export {
-	CancellationSummary,
-	CancellationDetailSummary,
-	ExportSummary,
-	ExportDetailSummary,
-	ImportSummary,
-	ImportDetailSummary,
-	InventorySummary,
-	InventoryAdjustmentSummary,
-	OrderSummary,
+  CancellationDetailSummary,
+  CancellationSummary,
+  ExportDetailSummary,
+  ExportSummary,
+  ImportDetailSummary,
+  ImportSummary,
+  InventoryAdjustmentSummary,
+  InventorySummary,
+  OrderSummary,
 };

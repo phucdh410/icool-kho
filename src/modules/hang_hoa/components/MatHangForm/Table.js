@@ -1,4 +1,4 @@
-import { CCard, CCardBody } from "@coreui/react";
+import { useEffect, useMemo } from "react";
 import {
   Controller,
   useController,
@@ -6,11 +6,13 @@ import {
   useWatch,
 } from "react-hook-form";
 import { useQuery } from "react-query";
+
+import { CCard, CCardBody } from "@coreui/react";
+
+import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
+import { PTable } from "src/1/common/components/others";
 import { CNumber, CSelect } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
-import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
-import { useEffect, useMemo } from "react";
-import { PTable } from "src/1/common/components/others";
 
 export const Table = ({ control }) => {
   //#region Data

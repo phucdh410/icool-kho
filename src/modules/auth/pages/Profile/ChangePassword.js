@@ -1,9 +1,9 @@
 import React from "react";
+import { Controller,useForm } from "react-hook-form";
 
-import { useForm, Controller } from "react-hook-form";
+import { CCard, CCardBody, CCardHeader, CCol,CRow } from "@coreui/react";
 
-import { CCard, CCardBody, CCardHeader, CRow, CCol } from "@coreui/react";
-import { CInput, CButton } from "_components/controls";
+import { CButton,CInput } from "_components/controls";
 
 export default function ({ user }) {
   //#region Datas

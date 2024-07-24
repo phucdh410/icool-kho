@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { CModal, CModalHeader, CModalBody, CModalFooter } from "@coreui/react";
+import { CModal, CModalBody, CModalFooter,CModalHeader } from "@coreui/react";
 
 export default function Dialog({
 	innerRef,

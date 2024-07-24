@@ -1,8 +1,7 @@
 import { useMutation } from "react-query";
 
-import createQuery from "src/utils/react-query/createQuery";
-
 import * as api from "src/apis/material_industry.api";
+import createQuery from "src/utils/react-query/createQuery";
 
 export const getAll = (params, isLoading = false, options = {}) => {
   return createQuery(["industries", params], () => api.getAll(params), {

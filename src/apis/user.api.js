@@ -1,8 +1,8 @@
-import { map, get } from "src/utils/axios";
-
-import { USER } from "./_constants";
+import { get,map } from "src/utils/axios";
 
 import { Users } from "_models/user.model";
+
+import { USER } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data?.map((d) => new Users(d))).get(

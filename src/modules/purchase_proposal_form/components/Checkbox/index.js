@@ -1,7 +1,7 @@
-import "../../assets/css/checkbox.scss";
-
-import { useState, forwardRef } from "react";
+import { forwardRef,useState } from "react";
 import classNames from "classnames";
+
+import "../../assets/css/checkbox.scss";
 
 const Checkbox = ({ label, onChange, className, disabled, ...rest }, ref) => {
 	const [checked, setChecked] = useState(false);

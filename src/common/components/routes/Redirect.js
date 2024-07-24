@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { useEffect } from "react";
-import { logout } from "src/common/actions/auth.action";
 
 import { history } from "src/App";
+import { logout } from "src/common/actions/auth.action";
 import { ENTITY_GROUP_CODE } from "src/configs/constant";
 
 const selectPermissions = createSelector(

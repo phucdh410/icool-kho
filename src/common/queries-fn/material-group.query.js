@@ -1,8 +1,7 @@
 import { useMutation } from "react-query";
 
-import createQuery from "src/utils/react-query/createQuery";
-
 import * as api from "src/apis/material_group.api";
+import createQuery from "src/utils/react-query/createQuery";
 
 export const getForRole = (isLoading = false, options = {}) =>
   createQuery(["material-groups", "permission"], () => api.getForRole(), {

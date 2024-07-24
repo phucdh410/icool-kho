@@ -1,7 +1,6 @@
+import moment from "moment";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
-import moment from "moment";
 
 import { CLEAR_TABS, SET_FILTER } from "_common/actions/_types";
 

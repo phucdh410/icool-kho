@@ -1,4 +1,3 @@
-import { CModal } from "@coreui/react";
 import {
   forwardRef,
   useImperativeHandle,
@@ -6,10 +5,14 @@ import {
   useRef,
   useState,
 } from "react";
+import { useQuery } from "react-query";
+
+import { CModal } from "@coreui/react";
+
+import { getMaterialSuggestByCode } from "src/apis/material_suggest.api";
+
 import { MForm } from "./MForm";
 import { MTable } from "./MTable";
-import { getMaterialSuggestByCode } from "src/apis/material_suggest.api";
-import { useQuery } from "react-query";
 
 export const MPriceSuggest = forwardRef(
   ({ isShowTable = true, refetch, code }, ref) => {

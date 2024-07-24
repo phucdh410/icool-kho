@@ -1,33 +1,33 @@
 import {
-  Solution,
-  Inventory,
-  Import,
-  Export,
-  Material,
-  Permission,
-  Summary,
-  HangHoa,
-  Menu,
-  NhaCungCap,
-} from "./constant";
-
-import {
-  Inventory as InventoryIcon,
-  Solution as SolutionIcon,
-  Export as ExportIcon,
-  Import as ImportIcon,
-  Material as MaterialIcon,
-  Permission as PermissionIcon,
-  Summary as SummaryIcon,
-} from "_assets/icons";
-
-import {
   CENTRAL_KITCHEN,
   CENTRAL_WAREHOUSE,
   ENTITY_GROUP_CODE,
   PERMISSION_VALUE,
   SUMMARY_GROUP_CODE,
 } from "src/configs/constant";
+
+import {
+  Export as ExportIcon,
+  Import as ImportIcon,
+  Inventory as InventoryIcon,
+  Material as MaterialIcon,
+  Permission as PermissionIcon,
+  Solution as SolutionIcon,
+  Summary as SummaryIcon,
+} from "_assets/icons";
+
+import {
+  Export,
+  HangHoa,
+  Import,
+  Inventory,
+  Material,
+  Menu,
+  NhaCungCap,
+  Permission,
+  Solution,
+  Summary,
+} from "./constant";
 
 const navigation = [
   //#region Báo cáo

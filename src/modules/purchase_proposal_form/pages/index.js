@@ -10,12 +10,12 @@ const TransferCreatePage = lazy(() => import("./TransferCreate"));
 const TransferUpdatePage = lazy(() => import("./TransferUpdate"));
 
 export {
-  PurchaseProposalFormList,
   PurchaseProposalFormCreate,
-  PurchaseProposalFormUpdate,
+  PurchaseProposalFormList,
   PurchaseProposalFormPrint,
+  PurchaseProposalFormUpdate,
   QuantitativeListPage,
-  TransferListPage,
   TransferCreatePage,
+  TransferListPage,
   TransferUpdatePage,
 };

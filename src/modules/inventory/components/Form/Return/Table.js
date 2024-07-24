@@ -1,8 +1,8 @@
-import Row from "./Row";
-
 import { CCheckbox } from "_components/controls";
 
 import { getAll } from "../../../queries-fn/material-group.query";
+
+import Row from "./Row";
 
 export default ({ data, warehouse, isSelectAll, onChange }) => {
   //#region Data

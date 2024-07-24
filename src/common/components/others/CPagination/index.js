@@ -2,9 +2,10 @@ import { useCallback } from "react";
 import PropTypes from "prop-types";
 
 import { CPagination } from "@coreui/react";
-import { CSelect } from "_components/controls";
 
 import { PAGINATIONOPTIONS } from "src/configs/constant";
+
+import { CSelect } from "_components/controls";
 
 const Pagination = ({ page, total, limit, onPaginationChange }) => {
 	const changeLimit = useCallback(

@@ -6,4 +6,4 @@ const SlipPermission = lazy(() => import("./Slip"));
 
 const ConfigurationPermission = lazy(() => import("./Configuration"));
 
-export { GroupPermission, SlipPermission, ConfigurationPermission };
+export { ConfigurationPermission,GroupPermission, SlipPermission };

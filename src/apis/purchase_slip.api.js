@@ -1,17 +1,16 @@
 import fileDownload from "js-file-download";
 
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
-import { PURCHASE_SLIP } from "./_constants";
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
+import { format } from "src/utils/moment";
 
 import {
-	PurchaseSlips,
+	ImportFormPrints,
 	PurchaseSlip,
 	PurchaseSlipPreview,
-	ImportFormPrints,
+	PurchaseSlips,
 } from "_models/purchase-slip.model";
 
-import { format } from "src/utils/moment";
+import { PURCHASE_SLIP } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data.map((d) => new PurchaseSlips(d)) ?? []).get(

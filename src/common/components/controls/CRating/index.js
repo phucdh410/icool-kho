@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { forwardRef, useState } from "react";
+import classNames from "classnames";
 
 export const CRating = forwardRef(
   ({ value = 1, onChange, max = 10, disabled = false }, ref) => {

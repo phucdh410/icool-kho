@@ -1,5 +1,4 @@
 import { CCheckbox } from "_components/controls";
-
 import { PERMISSION_VALUE } from "_configs/constant";
 
 export default ({ code, name, value, onChange }) => {

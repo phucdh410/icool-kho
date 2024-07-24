@@ -1,16 +1,15 @@
 import fileDownload from "js-file-download";
 
-import { map, post, FORM_HEADER_ENCODED, get } from "src/utils/axios";
-
-import { INVENTORY_SLIP } from "./_constants";
+import { FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
+import { format } from "src/utils/moment";
 
 import {
-  InventorySlips,
   InventorySlip,
   InventorySlipPreview,
+  InventorySlips,
 } from "_models/inventory-slip.model";
 
-import { format } from "src/utils/moment";
+import { INVENTORY_SLIP } from "./_constants";
 
 export const getAll = async (params) =>
   await map(({ data }) => data.map((d) => new InventorySlips(d))).get(

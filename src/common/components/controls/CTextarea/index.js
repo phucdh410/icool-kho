@@ -1,8 +1,7 @@
 import { forwardRef, useCallback, useMemo } from "react";
-
 import classNames from "classnames";
 
-import { CTextarea, CFormGroup, CLabel } from "@coreui/react";
+import { CFormGroup, CLabel,CTextarea } from "@coreui/react";
 
 function Input({ label, onChange, className, value, type, ...rest }, ref) {
 	const _class = classNames("c-input", className);

@@ -1,16 +1,14 @@
-import styles from "../../assets/material.module.scss";
-
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
-
+import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { Controller, useForm } from "react-hook-form";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
-
-import { CInput, CCheckbox, CSelect, CNumber } from "_components/controls";
+import { CCheckbox, CInput, CNumber,CSelect } from "_components/controls";
 
 import { getAll } from "../../queries-fn/material-group.query";
+
+import styles from "../../assets/material.module.scss";
 
 export default forwardRef(({}, ref) => {
 	const { control, reset, setValue, watch, handleSubmit } = useForm();

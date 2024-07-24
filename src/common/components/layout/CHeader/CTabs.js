@@ -1,16 +1,14 @@
 import React from "react";
-
 import { useDispatch, useSelector } from "react-redux";
+import { matchPath, NavLink, useLocation } from "react-router-dom";
+import classNames from "classnames";
 import { createSelector } from "reselect";
 
-import classNames from "classnames";
-import { NavLink, matchPath, useLocation } from "react-router-dom";
+import { history } from "src/App";
 
 import { X } from "_assets/icons";
 
 import { removeFromTab } from "../../../actions/config.action";
-
-import { history } from "src/App";
 
 const selectTabs = createSelector(
   (state) => state.config,

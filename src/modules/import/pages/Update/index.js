@@ -2,16 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import MForm from "../../components/Form";
-
-import { getByCode } from "_common/queries-fn/purchase-slip.query";
 import { update } from "src/apis/purchase_slip.api";
 import { history } from "src/App";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
-
 import { correctImport } from "src/common/correctDataFunctionFormUnitAndPrice";
-
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 import { isSuccess } from "src/utils/funcs";
+
+import { getByCode } from "_common/queries-fn/purchase-slip.query";
+
+import MForm from "../../components/Form";
 
 const selectIsLoading = createSelector(
 	(state) => state.config,

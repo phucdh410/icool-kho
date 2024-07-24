@@ -1,7 +1,7 @@
-import { CRow, CCol } from "@coreui/react";
+import { CCol,CRow } from "@coreui/react";
 
-import { CActionGroup } from "_components/others";
 import { CButton } from "_components/controls";
+import { CActionGroup } from "_components/others";
 
 export default ({
   status,

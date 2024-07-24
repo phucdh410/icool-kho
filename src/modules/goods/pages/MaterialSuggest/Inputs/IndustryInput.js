@@ -1,7 +1,9 @@
-import { Controller, useController } from "react-hook-form";
-import { CInput, CSelect } from "_components/controls";
-import { getAll as getAllMaterialIndustries } from "src/common/queries-fn/material-industry.query";
 import { useMemo } from "react";
+import { Controller, useController } from "react-hook-form";
+
+import { getAll as getAllMaterialIndustries } from "src/common/queries-fn/material-industry.query";
+
+import { CInput, CSelect } from "_components/controls";
 
 export const IndustryInput = ({ control, isEdit, industryName }) => {
   const { data: dataIndustry } = getAllMaterialIndustries({ code: "" });

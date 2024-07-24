@@ -1,4 +1,4 @@
-import { CRow, CCol } from "@coreui/react";
+import { CCol,CRow } from "@coreui/react";
 
 import { CActionGroup } from "_components/others";
 

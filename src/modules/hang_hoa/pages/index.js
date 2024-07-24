@@ -17,12 +17,12 @@ const DeXuatGiaMatHang = lazy(() => import("./DeXuatGiaMatHang"));
 const DieuChinhGiaHangHoa = lazy(() => import("./DieuChinhGiaHangHoa"));
 
 export {
+  CreateDanhMucHangHoa,
+  DeXuatGiaMatHang,
+  DeXuatMatHang,
+  DieuChinhGiaHangHoa,
+  MatHang,
   NganhHangHoa,
   NhomHangHoa,
-  DeXuatMatHang,
-  MatHang,
-  CreateDanhMucHangHoa,
   UpdateDanhMucHangHoa,
-  DeXuatGiaMatHang,
-  DieuChinhGiaHangHoa,
 };

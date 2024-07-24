@@ -1,18 +1,19 @@
-import { useMemo, useRef, useCallback } from "react";
-import { createSelector } from "reselect";
+import { useCallback,useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 import { CCard, CCardBody } from "@coreui/react";
+
+import { setFilter } from "src/common/actions/config.action";
 import { CImagePreview } from "src/common/components/others";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
+import { getDetailReport } from "_common/queries-fn/inventory-cancel.query";
 
 import { getAll as getAllStores } from "../../queries-fn/store.query";
-
-import { getDetailReport } from "_common/queries-fn/inventory-cancel.query";
-import { setFilter } from "src/common/actions/config.action";
 import { NAME } from "../../reducers/cancellation-detail";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
 	(state) => state.config,

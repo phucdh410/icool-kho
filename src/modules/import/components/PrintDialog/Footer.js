@@ -1,4 +1,4 @@
-import { CRow, CCol, CCardText } from "@coreui/react";
+import { CCardText,CCol, CRow } from "@coreui/react";
 
 import { money, spell } from "src/utils/funcs";
 

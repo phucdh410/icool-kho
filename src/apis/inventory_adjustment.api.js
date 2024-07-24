@@ -1,21 +1,20 @@
 import fileDownload from "js-file-download";
+
 import {
-	map,
-	post,
 	FORM_HEADER_ENCODED,
 	FORM_HEADER_FORMDATA,
+	map,
+	post,
 } from "src/utils/axios";
-
-import { INVENTORY_ADJUSTMENT } from "./_constants";
+import { format } from "src/utils/moment";
 
 import {
-	InventoryAdjustments,
 	InventoryAdjustment,
+	InventoryAdjustments,
 } from "_models/inventory-adjustment.model";
-
 import { InventoryAdjustmentMaterials } from "_models/material.model";
 
-import { format } from "src/utils/moment";
+import { INVENTORY_ADJUSTMENT } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data.map((d) => new InventoryAdjustments(d))).get(

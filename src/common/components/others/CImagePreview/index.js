@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 import { CCard, CCardBody } from "@coreui/react";
+
 import { CDialog } from "_components/others";
 
 const ImagePreview = (props, ref) => {

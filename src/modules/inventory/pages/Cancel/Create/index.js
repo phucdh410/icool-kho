@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import Form from "../../../components/Form/Cancellation";
-
 import { cancelApi } from "src/apis/cancellation_slip.api";
-
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+
+import Form from "../../../components/Form/Cancellation";
 
 const selectCurrentUser = createSelector(
   (state) => state.auth,

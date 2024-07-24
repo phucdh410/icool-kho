@@ -1,20 +1,20 @@
-import { useState, useCallback, useMemo } from "react";
-
+import { useCallback, useMemo,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+
+import { deleteTransfer, updateTransferStatus } from "src/apis/material.api";
+import { history } from "src/App";
+import { setFilter } from "src/common/actions/config.action";
+import { getAllTransfers } from "src/common/queries-fn/material.query";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
+import { isSuccess } from "src/utils/funcs";
+
+import { NAME } from "../../reducers/purchase-proposal-form";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-
-import { history } from "src/App";
-import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
-import { isSuccess } from "src/utils/funcs";
-import { NAME } from "../../reducers/purchase-proposal-form";
-import { setFilter } from "src/common/actions/config.action";
-import { getAllTransfers } from "src/common/queries-fn/material.query";
-import { deleteTransfer, updateTransferStatus } from "src/apis/material.api";
 
 const selectData = createSelector(
   (state) => state.config,

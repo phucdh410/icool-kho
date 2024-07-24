@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 
-import Row from "./Row";
 import { CCheckbox } from "_components/controls";
 
 import { getAll } from "../../queries-fn/material.query";
+
+import Row from "./Row";
 
 export default ({
 	edit,

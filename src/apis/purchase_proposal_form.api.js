@@ -1,19 +1,17 @@
 import fileDownload from "js-file-download";
 
-import { map, get, post, FORM_HEADER_ENCODED, _delete } from "src/utils/axios";
-
+import { _delete,FORM_HEADER_ENCODED, get, map, post } from "src/utils/axios";
+import { generate } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import {
-  PurchaseProposalForms,
   PurchaseProposalForm,
   PurchaseProposalFormPreview,
   PurchaseProposalFormPrints,
+  PurchaseProposalForms,
 } from "_models/purchase-proposal-form.model";
 
 import { PURCHASE_PROPOSAL_FORM } from "./_constants";
-
-import { generate } from "src/utils/funcs";
 
 export const getAll = async (params) =>
   await map(({ data }) => data.map((d) => new PurchaseProposalForms(d))).get(

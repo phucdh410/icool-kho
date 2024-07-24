@@ -1,4 +1,5 @@
 import moment from "moment";
+
 import { CCardSubtitle, CCardText, CCol, CRow } from "@coreui/react";
 
 export default ({ name, data }) => {

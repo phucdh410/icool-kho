@@ -1,16 +1,15 @@
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import Form from "../../../components/Form/Check";
-
 import { update } from "src/apis/inventory_slip.api";
-import { getByCode } from "_common/queries-fn/inventory-check.query";
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import { isSuccess } from "src/utils/funcs";
 
 import { correctInventoryCheck } from "_common/correctDataFunctionFormUnitAndPrice";
+import { getByCode } from "_common/queries-fn/inventory-check.query";
 
-import { isSuccess } from "src/utils/funcs";
+import Form from "../../../components/Form/Check";
 
 const selectIsLoading = createSelector(
 	(state) => state.config,

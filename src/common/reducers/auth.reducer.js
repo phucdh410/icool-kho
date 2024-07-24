@@ -2,8 +2,8 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import {
-	SET_CURRENT_USER,
 	SET_AUTHENTICATE,
+	SET_CURRENT_USER,
 	SET_PERMISSION,
 } from "_common/actions/_types";
 

@@ -1,8 +1,8 @@
-import { useMemo, useState, useCallback } from "react";
+import { useCallback,useMemo, useState } from "react";
 
 import { CTooltip } from "@coreui/react";
-import { CTable, CPagination } from "src/common/components/others";
 
+import { CPagination,CTable } from "src/common/components/others";
 import { getShortNameStore } from "src/utils/funcs";
 
 export default ({ loading, data, stores }) => {

@@ -1,7 +1,8 @@
-import { map, post, FORM_HEADER_ENCODED, _delete, get } from "src/utils/axios";
+import fileDownload from "js-file-download";
+
+import { _delete, FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
 
 import { MATERIAL_SUGGEST } from "./_constants";
-import fileDownload from "js-file-download";
 
 export const getAllMaterialSuggests = async (params) =>
   await map(({ data }) => data).get(MATERIAL_SUGGEST.getAll, { params });

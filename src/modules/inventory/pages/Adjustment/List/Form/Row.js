@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { CCheckbox } from "_components/controls";
 
 export default ({ data, onSelect }) => {

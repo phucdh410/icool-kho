@@ -1,13 +1,14 @@
-import "../../assets/css/profile.scss";
-
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback,useEffect, useRef, useState } from "react";
+import { Controller,useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
 
-import { CCard, CCardBody, CRow, CCol, CImg, CCardHeader } from "@coreui/react";
-import { CInput, CSelect, CDate, CButton } from "_components/controls";
+import { CCard, CCardBody, CCardHeader,CCol, CImg, CRow } from "@coreui/react";
+
+import { CButton,CDate, CInput, CSelect } from "_components/controls";
 
 import MChangePassword from "./ChangePassword";
+
+import "../../assets/css/profile.scss";
 
 const Profile = () => {
   //#region Datas

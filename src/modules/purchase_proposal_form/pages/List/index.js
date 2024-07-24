@@ -1,25 +1,24 @@
-import { useState, useCallback, useMemo } from "react";
-
+import { useCallback, useMemo,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardHeader, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCardHeader } from "@coreui/react";
 
-import Table from "./Table";
-import Toolbar from "./Toolbar";
+import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
+import { history } from "src/App";
+import { setFilter } from "src/common/actions/config.action";
+import { fireDelete, fireSuccess } from "src/utils/alert";
+import { isCentral, isSuccess } from "src/utils/funcs";
 
 import {
   approver,
   getAll,
 } from "_common/queries-fn/purchase-proposal-form.query";
 
-import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
-
-import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import { isCentral, isSuccess } from "src/utils/funcs";
 import { NAME } from "../../reducers/purchase-proposal-form";
-import { setFilter } from "src/common/actions/config.action";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
   (state) => state.config,

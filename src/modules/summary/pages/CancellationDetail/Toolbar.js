@@ -1,14 +1,13 @@
 import React, { useCallback } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { CRow, CCol } from "@coreui/react";
-import { Magnifying } from "_assets/icons";
-import { CButton, CDate, CSelect, CSelectMulti } from "_components/controls";
-
-import { filter as filterFn } from "src/utils/funcs";
+import { CCol,CRow } from "@coreui/react";
 
 import { exportReportDetail } from "src/apis/cancellation_slip.api";
+import { filter as filterFn } from "src/utils/funcs";
+
+import { Magnifying } from "_assets/icons";
+import { CButton, CDate, CSelect, CSelectMulti } from "_components/controls";
 
 export default ({ filter, stores, onSearch }) => {
 	//#region Data

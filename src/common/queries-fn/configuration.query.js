@@ -1,6 +1,5 @@
-import createQuery from "src/utils/react-query/createQuery";
-
 import * as api from "src/apis/configuration.api";
+import createQuery from "src/utils/react-query/createQuery";
 
 export const getAllSlips = (params, isLoading = false, options = {}) =>
 	createQuery(

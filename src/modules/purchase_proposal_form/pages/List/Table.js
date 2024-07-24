@@ -1,15 +1,13 @@
-import { useState, useCallback } from "react";
-
-import { createSelector } from "reselect";
+import { useCallback,useState } from "react";
 import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
+import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
 import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
-
-import MPreview from "../../components/Preview";
+import { CPagination,CTable } from "_components/others";
 
 import { isCentral, money } from "../../../../utils/funcs";
-import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
+import MPreview from "../../components/Preview";
 
 const selectStoreCode = createSelector(
 	(state) => state.auth,

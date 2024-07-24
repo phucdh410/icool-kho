@@ -18,8 +18,8 @@ import { ReactComponent as Last } from "./last.svg";
 import { ReactComponent as Magnifying } from "./magnifying.svg";
 import { ReactComponent as Material } from "./material.svg";
 import { ReactComponent as MinusCircle } from "./minus-circle.svg";
-import { ReactComponent as NextStroke } from "./next-stroke.svg";
 import { ReactComponent as Next } from "./next.svg";
+import { ReactComponent as NextStroke } from "./next-stroke.svg";
 import { ReactComponent as Permission } from "./permission.svg";
 import { ReactComponent as PlusCircle } from "./plus-circle.svg";
 import { ReactComponent as Prev } from "./prev.svg";
@@ -61,13 +61,13 @@ export {
 	Magnifying,
 	Material,
 	MinusCircle,
-	Print,
-	Report,
-	NextStroke,
 	Next,
+	NextStroke,
 	Permission,
 	PlusCircle,
 	Prev,
+	Print,
+	Report,
 	Save,
 	Solution,
 	SorterAsc,

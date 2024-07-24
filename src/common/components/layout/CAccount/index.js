@@ -1,18 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import CIcon from "@coreui/icons-react";
 import {
-  CDropdown,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownItem,
-  CImg,
   CBadge,
+  CDropdown,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CImg,
 } from "@coreui/react";
 
-import CIcon from "@coreui/icons-react";
-import { logout } from "_common/actions/auth.action";
 import { cancel } from "src/utils/axios";
+
+import { logout } from "_common/actions/auth.action";
+
 import avt from "./profile.png";
 
 function LayoutAccount() {

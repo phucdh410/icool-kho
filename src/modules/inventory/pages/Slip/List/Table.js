@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
-import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
-
 import { money } from "src/utils/funcs";
+
+import { CCheckbox } from "_components/controls";
+import { CPagination,CTable } from "_components/others";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
 	const [paginate, setPaginate] = useState({ page: 1, limit: 10 });

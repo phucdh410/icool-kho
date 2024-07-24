@@ -1,12 +1,12 @@
-import { useState, useCallback } from "react";
+import { useCallback,useState } from "react";
 
-import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
-
-import MQuantitativePreview from "../../components/QuantitativePreview";
+import { format } from "src/utils/moment";
 
 import { getQuantitativePreview } from "_common/queries-fn/purchase-proposal-form.query";
-import { format } from "src/utils/moment";
+import { CCheckbox } from "_components/controls";
+import { CPagination,CTable } from "_components/others";
+
+import MQuantitativePreview from "../../components/QuantitativePreview";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data

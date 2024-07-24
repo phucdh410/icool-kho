@@ -1,16 +1,17 @@
 import { useCallback, useState } from "react";
-import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
-import { CCard, CCardBody, CRow, CCol } from "@coreui/react";
+import { CCard, CCardBody, CCol,CRow } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import MaterialTable from "./MaterialsTable";
-import GroupTable from "./GroupTable";
+import { setFilter } from "src/common/actions/config.action";
 
 import { getAll as getAllGroup } from "../../queries-fn/material-group.query";
-import { setFilter } from "src/common/actions/config.action";
 import { NAME } from "../../reducers/export-detail";
+
+import GroupTable from "./GroupTable";
+import MaterialTable from "./MaterialsTable";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
 	(state) => state.auth,

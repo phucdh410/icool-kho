@@ -1,5 +1,6 @@
-import { CCheckbox, CInput } from "_components/controls";
 import { money } from "src/utils/funcs";
+
+import { CCheckbox, CInput } from "_components/controls";
 
 export default ({ data, onSelect }) => {
   //#region Render

@@ -1,16 +1,17 @@
 import React from "react";
-import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import { Controller, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import classNames from "classnames";
+import { createSelector } from "reselect";
 
-import { CRow, CCol, CCollapse } from "@coreui/react";
-import { CButton, CInput, CSelect, CDate } from "_components/controls";
-import { CActionGroup } from "_components/others";
-import { Magnifying } from "_assets/icons";
+import { CCol, CCollapse,CRow } from "@coreui/react";
 
-import { filter as filterFn } from "src/utils/funcs";
 import { STATUS_OPTIONS } from "src/configs/constant";
+import { filter as filterFn } from "src/utils/funcs";
+
+import { Magnifying } from "_assets/icons";
+import { CButton, CDate,CInput, CSelect } from "_components/controls";
+import { CActionGroup } from "_components/others";
 
 import { getAll } from "../../queries-fn/store.query";
 

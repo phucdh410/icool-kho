@@ -1,14 +1,14 @@
 // https://reactdatepicker.com/#example-custom-input
-import "react-datepicker/dist/react-datepicker.css";
-
 import { forwardRef, useMemo } from "react";
+import DatePicker from "react-datepicker";
 import classNames from "classnames";
 import moment from "moment";
 
-import { CFormGroup, CLabel, CInput } from "@coreui/react";
-import DatePicker from "react-datepicker";
+import { CFormGroup, CInput,CLabel } from "@coreui/react";
 
 import { Calendar } from "_assets/icons";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const CustomInput = forwardRef(
   ({ value, onClick, invalid, onChange, ...rest }, ref) => (

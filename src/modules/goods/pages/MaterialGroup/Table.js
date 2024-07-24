@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CTable, CPagination, CTag } from "_components/others";
+import { CPagination, CTable, CTag } from "_components/others";
 
 const MaterialGroupTable = ({ data, isSelectAll, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });

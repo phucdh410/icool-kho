@@ -1,11 +1,10 @@
 import { forwardRef, useImperativeHandle, useMemo } from "react";
-
 import { Controller, useController, useForm } from "react-hook-form";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
 
-import { CInput, CSelect, CSwitch } from "_components/controls";
 import { getAll } from "_common/queries-fn/material-industry.query";
+import { CInput, CSelect, CSwitch } from "_components/controls";
 
 export default forwardRef(({}, ref) => {
   //#region Data

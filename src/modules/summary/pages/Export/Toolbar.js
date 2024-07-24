@@ -1,14 +1,14 @@
 import React, { useCallback } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { CRow, CCol } from "@coreui/react";
+import { CCol,CRow } from "@coreui/react";
+
+import { exportReport } from "src/apis/export_slip.api";
+import { filter as filterFn } from "src/utils/funcs";
+
 import { Magnifying } from "_assets/icons";
 import { CButton, CDate, CSelectMulti } from "_components/controls";
 
-import { filter as filterFn } from "src/utils/funcs";
-
-import { exportReport } from "src/apis/export_slip.api";
 import { getAll as getAllStore } from "../../queries-fn/store.query";
 
 export default ({ filter, selected, onSearch, groups }) => {

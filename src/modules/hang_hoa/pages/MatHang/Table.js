@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { useCallback,useState } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CTable, CPagination } from "_components/others";
+import { CPagination,CTable } from "_components/others";
+
 import { mapGoodsStatusText } from "../../funcs";
 
 export default ({ isSelectAll, data, onSelect, loading }) => {

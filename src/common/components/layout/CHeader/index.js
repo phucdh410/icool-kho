@@ -2,13 +2,14 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CHeader, CToggler, CHeaderNav, CSubheader } from "@coreui/react";
-
-import CAccount from "../CAccount";
-import { Notification } from "./Notification";
-import CTabs from "./CTabs";
+import { CHeader, CHeaderNav, CSubheader,CToggler } from "@coreui/react";
 
 import { toggleSidebar as toggleSidebarAction } from "_common/actions/config.action";
+
+import CAccount from "../CAccount";
+
+import CTabs from "./CTabs";
+import { Notification } from "./Notification";
 
 const selectIsShow = createSelector(
   (state) => state.config,

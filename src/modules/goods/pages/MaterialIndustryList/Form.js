@@ -1,8 +1,7 @@
 import { forwardRef, useImperativeHandle } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
 
 import { CInput, CSwitch } from "_components/controls";
 

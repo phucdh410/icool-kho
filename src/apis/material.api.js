@@ -1,8 +1,8 @@
-import { map, post, FORM_HEADER_ENCODED, get } from "src/utils/axios";
-
-import { INVENTORY_SLIP, MATERIAL } from "./_constants";
+import { FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
 
 import { Materials } from "_models/material.model";
+
+import { INVENTORY_SLIP, MATERIAL } from "./_constants";
 
 export const getAll = async (params) => {
   return await map(({ data }) => data.map((d) => new Materials(d))).get(

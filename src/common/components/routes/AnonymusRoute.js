@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { Route } from "react-router-dom";
-
 import { useSelector } from "react-redux";
+import { Route } from "react-router-dom";
 import { createSelector } from "reselect";
 
 import { history } from "src/App";

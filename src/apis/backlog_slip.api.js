@@ -1,11 +1,11 @@
 import fileDownload from "js-file-download";
-import { map, get } from "src/utils/axios";
+
+import { get,map } from "src/utils/axios";
+import { format } from "src/utils/moment";
+
+import { BacklogSlipInstants,BacklogSlips } from "_models/backlog-slip.model";
 
 import { BACKLOG_SLIP } from "./_constants";
-
-import { BacklogSlips, BacklogSlipInstants } from "_models/backlog-slip.model";
-
-import { format } from "src/utils/moment";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data?.map((d) => new BacklogSlips(d)) || []).get(

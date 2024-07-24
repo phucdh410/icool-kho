@@ -1,9 +1,10 @@
-import { map, post, FORM_HEADER_ENCODED, get } from "src/utils/axios";
+import fileDownload from "js-file-download";
 
-import { MATERIAL_GROUP } from "./_constants";
+import { FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
 
 import { MaterialGroups } from "_models/material-group.model";
-import fileDownload from "js-file-download";
+
+import { MATERIAL_GROUP } from "./_constants";
 
 export const getForRole = async () =>
   await map(({ data }) => data).get(MATERIAL_GROUP.getForRole);

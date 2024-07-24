@@ -1,20 +1,19 @@
-import {
-  SET_LOADING,
-  SET_SIDEBAR,
-  SET_TABS,
-  PUSH_NOTI,
-  REMOVE_NOTI,
-  SET_FILTER,
-  CLEAR_TABS,
-} from "./_types";
-
 import { matchPath } from "react-router-dom";
 
+import { history } from "src/App";
 import routes from "src/routes/index";
 
 import { ability } from "_configs/ability";
 
-import { history } from "src/App";
+import {
+  CLEAR_TABS,
+  PUSH_NOTI,
+  REMOVE_NOTI,
+  SET_FILTER,
+  SET_LOADING,
+  SET_SIDEBAR,
+  SET_TABS,
+} from "./_types";
 
 export const toggleLoading = (isLoading) => (dispatch) => {
   dispatch({

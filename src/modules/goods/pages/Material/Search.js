@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { CRow, CCol } from "@coreui/react";
+import { CCol,CRow } from "@coreui/react";
 
 import { CInput } from "_components/controls";
 

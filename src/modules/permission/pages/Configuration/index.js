@@ -1,23 +1,22 @@
-import { useRef, useMemo, useState, useCallback, useEffect } from "react";
-
-import classNames from "classnames";
-
-import { createSelector } from "reselect";
+import { useCallback, useEffect,useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import classNames from "classnames";
+import { createSelector } from "reselect";
 
-import { CCard, CCardBody, CRow, CCol } from "@coreui/react";
+import { CCard, CCardBody, CCol,CRow } from "@coreui/react";
 
-import Table from "./Table";
-import Toolbar from "./Toolbar";
-import ContainForm from "./ContainForm";
-
-import { getAllExports } from "_common/queries-fn/configuration.query";
 import {
 	getMaterialGroupOf,
-	updateCategories,
 	removeCategories,
+	updateCategories,
 } from "src/apis/configuration.api";
 import { isSuccess } from "src/utils/funcs";
+
+import { getAllExports } from "_common/queries-fn/configuration.query";
+
+import ContainForm from "./ContainForm";
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectIsLoading = createSelector(
 	(state) => state.config,

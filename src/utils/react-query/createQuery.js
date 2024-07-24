@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 
-import { set, refetch } from "./";
+import { refetch, set } from "./";
 
 const createQuery = (key, func, options = {}) => {
   const { data, isLoading, ...query } = useQuery(key, func, options);

@@ -1,4 +1,4 @@
-import React, { forwardRef, createRef, useCallback, useState } from "react";
+import React, { createRef, forwardRef, useCallback, useState } from "react";
 import classNames from "classnames";
 
 import { CFormGroup, CLabel } from "@coreui/react";

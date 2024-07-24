@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo } from "react";
 
 import { getAllMaterials } from "_common/queries-fn/purchase-slip.query";
-
-import { CTable } from "_components/others";
 import { CCheckbox } from "_components/controls";
+import { CTable } from "_components/others";
 
 export default ({ filter, onSelect }) => {
 	const { data, set } = getAllMaterials(filter);

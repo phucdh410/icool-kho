@@ -1,14 +1,15 @@
+import fileDownload from "js-file-download";
+
 import {
+  _delete,
+  FORM_HEADER_ENCODED,
+  get,
   map,
   post,
-  FORM_HEADER_ENCODED,
   put,
-  _delete,
-  get,
 } from "src/utils/axios";
 
 import { MATERIAL_TYPE } from "./_constants";
-import fileDownload from "js-file-download";
 
 export const getAllMaterialTypes = async (params) =>
   await map(({ data }) => data).get(MATERIAL_TYPE.getAll, { params });

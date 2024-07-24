@@ -1,6 +1,6 @@
-import { CRow, CCol } from "@coreui/react";
-
 import styled from "styled-components";
+
+import { CCol,CRow } from "@coreui/react";
 
 import { CTable } from "src/common/components/others";
 import { money } from "src/utils/funcs";

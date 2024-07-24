@@ -1,13 +1,12 @@
-import { useState, useCallback } from "react";
-
-import { CTable, CPagination } from "_components/others";
-import { CCheckbox } from "_components/controls";
-
-import MPreview from "../../components/Preview";
-
-import { getPreview } from "_common/queries-fn/purchase-slip.query";
+import { useCallback,useState } from "react";
 
 import { money } from "src/utils/funcs";
+
+import { getPreview } from "_common/queries-fn/purchase-slip.query";
+import { CCheckbox } from "_components/controls";
+import { CPagination,CTable } from "_components/others";
+
+import MPreview from "../../components/Preview";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
 	//#region Data

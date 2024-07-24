@@ -1,27 +1,27 @@
-import "../../../assets/css/add-user.scss";
-
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import {
 	CCard,
 	CCardBody,
-	CCardHeader,
 	CCardFooter,
-	CRow,
+	CCardHeader,
 	CCol,
+	CRow,
 } from "@coreui/react";
-import { CInput, CSelect, CButton } from "_components/controls";
-import { CDialog } from "_components/others";
 
-import Row from "./Row";
+import { filter as filterFn } from "src/utils/funcs";
+
 import { Magnifying } from "_assets/icons";
-
 import { getAll } from "_common/queries-fn/user.query";
+import { CButton,CInput, CSelect } from "_components/controls";
+import { CDialog } from "_components/others";
 
 import { getAll as getAllStore } from "../../../queries-fn/store.query";
 
-import { filter as filterFn } from "src/utils/funcs";
+import Row from "./Row";
+
+import "../../../assets/css/add-user.scss";
 
 const initialState = {
 	code: "",

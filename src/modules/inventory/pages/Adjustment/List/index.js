@@ -1,29 +1,30 @@
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CRow, CCol, CCard, CCardBody } from "@coreui/react";
-import { CImagePreview } from "src/common/components/others";
+import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
 
-import Toolbar from "./Toolbar";
-import Table from "./Table";
-import Form from "./Form";
-import FormInput from "./FormInput";
+import {
+	create,
+	getByCode,
+	remove,
+	update,
+} from "src/apis/inventory_adjustment.api";
+import { setFilter } from "src/common/actions/config.action";
+import { CImagePreview } from "src/common/components/others";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
+import { fireDelete, fireSuccess } from "src/utils/alert";
+import { isSuccess } from "src/utils/funcs";
 
 import { getAll } from "_common/queries-fn/inventory-adjustment.query";
-import {
-	getByCode,
-	create,
-	update,
-	remove,
-} from "src/apis/inventory_adjustment.api";
 
-import { fireDelete, fireSuccess } from "src/utils/alert";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 import { getAll as getAllWarehouse } from "../../../queries-fn/warehouse.query";
-import { isSuccess } from "src/utils/funcs";
-import { setFilter } from "src/common/actions/config.action";
 import { NAME } from "../../../reducers/inventory-adjustment";
+
+import Form from "./Form";
+import FormInput from "./FormInput";
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
 	(state) => state.config,

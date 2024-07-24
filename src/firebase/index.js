@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import {
-  isSupported,
   getMessaging,
   getToken,
+  isSupported,
   onMessage,
 } from "firebase/messaging";
-import { app } from "./config";
-import toast from "react-hot-toast";
+
 import { CNotification } from "src/common/components/others";
+
+import { app } from "./config";
 
 export const requestPermission = async () => {
   console.log("Requesting permission...");

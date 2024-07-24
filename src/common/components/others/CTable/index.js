@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { CDataTable } from "@coreui/react";
 
-import { SorterAsc, SorterDefault, SorterDesc, Ban } from "_assets/icons";
+import { Ban,SorterAsc, SorterDefault, SorterDesc } from "_assets/icons";
 
 const sortingIconSlot = (s) => {
 	switch (s) {

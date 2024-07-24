@@ -5,11 +5,14 @@ import {
   useFieldArray,
   useWatch,
 } from "react-hook-form";
-import { PTable } from "src/1/common/components/others";
-import { Row } from "./Row";
 import { useQuery } from "react-query";
-import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
+
 import { CCard, CCardBody } from "@coreui/react";
+
+import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
+import { PTable } from "src/1/common/components/others";
+
+import { Row } from "./Row";
 
 export const SuggestTable = ({ control }) => {
   //#region Data

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-
-import { CCheckbox, CInput, CSelect, CNumber } from "_components/controls";
 import { Controller, useController, useWatch } from "react-hook-form";
+
+import { CCheckbox, CInput, CNumber,CSelect } from "_components/controls";
 
 export default ({ options, control, index, update }) => {
   //#region Data

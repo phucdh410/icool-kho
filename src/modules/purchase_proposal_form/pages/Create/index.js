@@ -2,16 +2,15 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import Form from "../../components/Form";
-
-import { PurchaseProposalForm } from "_models/purchase-proposal-form.model";
 import { create } from "src/apis/purchase_proposal_form.api";
-
 import { history } from "src/App";
+import { correctPurchaseProposal } from "src/common/correctDataFunctionFormUnitAndPrice";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 import { isSuccess } from "src/utils/funcs";
 
-import { correctPurchaseProposal } from "src/common/correctDataFunctionFormUnitAndPrice";
+import { PurchaseProposalForm } from "_models/purchase-proposal-form.model";
+
+import Form from "../../components/Form";
 
 const selectIsLoading = createSelector(
 	(state) => state.config,

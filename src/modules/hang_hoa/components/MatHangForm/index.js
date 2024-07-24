@@ -1,8 +1,9 @@
 import { CCard, CCardBody } from "@coreui/react";
-import { Toolbar } from "./Toolbar";
+
 import { GroupInput } from "./GroupInput";
-import { SuggestTable } from "./SuggestTable";
 import { PriceTable } from "./PriceTable";
+import { SuggestTable } from "./SuggestTable";
+import { Toolbar } from "./Toolbar";
 
 export const MatHangForm = ({
   control,

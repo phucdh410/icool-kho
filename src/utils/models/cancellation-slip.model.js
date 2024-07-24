@@ -1,11 +1,10 @@
-import Base from "./base.model";
+import { format, toDate } from "src/utils/moment";
 
+import Base from "./base.model";
 import {
   CancellationSlipMaterials,
   CancellationSlipPreviewMaterials,
 } from "./material.model";
-
-import { format, toDate } from "src/utils/moment";
 
 export class CancellationSlips extends Base {
   constructor({

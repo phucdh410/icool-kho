@@ -1,20 +1,21 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useMemo,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import Table from "./Table";
-import Toolbar from "./Toolbar";
-
-import { getAll } from "_common/queries-fn/purchase-slip.query";
-import { remove, approve } from "src/apis/purchase_slip.api";
-
+import { approve,remove } from "src/apis/purchase_slip.api";
 import { history } from "src/App";
+import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireSuccess } from "src/utils/alert";
 import { isSuccess } from "src/utils/funcs";
-import { setFilter } from "src/common/actions/config.action";
+
+import { getAll } from "_common/queries-fn/purchase-slip.query";
+
 import { NAME } from "../../reducers/import";
+
+import Table from "./Table";
+import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
   (state) => state.config,

@@ -1,10 +1,9 @@
 import { useCallback, useEffect } from "react";
-
 import { Controller, useForm } from "react-hook-form";
 
-import { CCheckbox, CInput, CSelect, CNumber } from "_components/controls";
-
 import { isFloatByUnit, money } from "src/utils/funcs";
+
+import { CCheckbox, CInput, CNumber,CSelect } from "_components/controls";
 
 export default ({ data, options, ignore, onSelect, onChange }) => {
 	const { watch, control, setValue, getValues, handleSubmit } = useForm({

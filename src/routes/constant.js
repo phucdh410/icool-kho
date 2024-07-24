@@ -2,31 +2,26 @@ import {
   CENTRAL_KITCHEN,
   CENTRAL_WAREHOUSE,
   ENTITY_GROUP_CODE,
-  SUMMARY_GROUP_CODE,
   PERMISSION_VALUE,
+  SUMMARY_GROUP_CODE,
 } from "src/configs/constant";
-
 import { NAME as EXPORT_REDUCER } from "src/modules/export/reducers/export";
 import { NAME as EXPORT_PRINT_REDUCER } from "src/modules/export/reducers/export-print";
-
 import { NAME as IMPORT_REDUCER } from "src/modules/import/reducers/import";
 import { NAME as IMPORT_PRINT_REDUCER } from "src/modules/import/reducers/import-print";
-
 import { NAME as INVENTORY_ADJUSTMENT_REDUCER } from "src/modules/inventory/reducers/inventory-adjustment";
+import { NAME as INVENTORY_CANCEL_REDUCER } from "src/modules/inventory/reducers/inventory-cancel";
 import { NAME as INVENTORY_CHECK_REDUCER } from "src/modules/inventory/reducers/inventory-check";
 import { NAME as INVENTORY_SLIP_REDUCER } from "src/modules/inventory/reducers/inventory-slip";
-import { NAME as INVENTORY_CANCEL_REDUCER } from "src/modules/inventory/reducers/inventory-cancel";
 import { NAME as INVENTORY_SLIP_INSTANT_REDUCER } from "src/modules/inventory/reducers/inventory-slip-instant";
-
 import { NAME as PURCHASE_PROPOSAL_FORM_REDUCER } from "src/modules/purchase_proposal_form/reducers/purchase-proposal-form";
 import { NAME as PURCHASE_PROPOSAL_FORM_PRINT_REDUCER } from "src/modules/purchase_proposal_form/reducers/purchase-proposal-form-print";
-
+import { NAME as SUMMARY_CANCELLATION_REDUCER } from "src/modules/summary/reducers/cancellation";
+import { NAME as SUMMARY_CANCELLATION_DETAIL_REDUCER } from "src/modules/summary/reducers/cancellation-detail";
 import { NAME as SUMMARY_EXPORT_REDUCER } from "src/modules/summary/reducers/export";
 import { NAME as SUMMARY_EXPORT_DETAIL_REDUCER } from "src/modules/summary/reducers/export-detail";
 import { NAME as SUMMARY_IMPORT_REDUCER } from "src/modules/summary/reducers/import";
 import { NAME as SUMMARY_IMPORT_DETAIL_REDUCER } from "src/modules/summary/reducers/import-detail";
-import { NAME as SUMMARY_CANCELLATION_REDUCER } from "src/modules/summary/reducers/cancellation";
-import { NAME as SUMMARY_CANCELLATION_DETAIL_REDUCER } from "src/modules/summary/reducers/cancellation-detail";
 import { NAME as SUMMARY_INVENTORY_REDUCER } from "src/modules/summary/reducers/inventory";
 import { NAME as SUMMARY_INVENTORY_ADJUSTMENT_REDUCER } from "src/modules/summary/reducers/inventory-adjustment";
 import { NAME as SUMMARY_ORDER_REDUCER } from "src/modules/summary/reducers/order";

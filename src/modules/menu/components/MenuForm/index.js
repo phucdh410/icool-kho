@@ -1,13 +1,17 @@
-import { CCard, CCardBody } from "@coreui/react";
-import { FormToolbar } from "../FormToolbar";
 import { Controller } from "react-hook-form";
+
+import { CCard, CCardBody } from "@coreui/react";
+
 import {
   CCheckbox,
   CDate,
   CInput,
   CSelect,
 } from "src/common/components/controls";
+
 import { MENU_STATUS_OPTIONS, WEEKDAYS_OPTIONS } from "../../constants";
+import { FormToolbar } from "../FormToolbar";
+
 import { StoresTable } from "./StoresTable";
 
 export const MenuForm = ({ onSubmit, control }) => {

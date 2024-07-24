@@ -1,16 +1,17 @@
+import fileDownload from "js-file-download";
+
 import {
+  _delete,
+  FORM_HEADER_ENCODED,
+  get,
   map,
   post,
-  FORM_HEADER_ENCODED,
   put,
-  _delete,
-  get,
 } from "src/utils/axios";
 
-import { MATERIAL_INDUSTRY } from "./_constants";
-
 import { MaterialIndustrys } from "_models/material-industry.model";
-import fileDownload from "js-file-download";
+
+import { MATERIAL_INDUSTRY } from "./_constants";
 
 export const getAll = async (params) =>
   await map(({ data }) => data.map((d) => new MaterialIndustrys(d))).get(

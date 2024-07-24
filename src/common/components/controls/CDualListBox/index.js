@@ -1,8 +1,8 @@
-import "react-dual-listbox/lib/react-dual-listbox.css";
-
 import DualListBox from "react-dual-listbox";
 
-import { First, Last, Back, NextStroke } from "_assets/icons";
+import { Back, First, Last, NextStroke } from "_assets/icons";
+
+import "react-dual-listbox/lib/react-dual-listbox.css";
 
 const icons = {
 	moveLeft: <Back />,

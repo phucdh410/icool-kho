@@ -1,8 +1,7 @@
-import { ROLE } from "./_constants";
-
-import { map, post, FORM_HEADER_ENCODED } from "src/utils/axios";
-
+import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
 import { Roles } from "src/utils/models/role.model";
+
+import { ROLE } from "./_constants";
 
 export const getAll = async (params) =>
 	await map(({ data }) => data.map((p) => new Roles(p))).get(ROLE.getAll, {
