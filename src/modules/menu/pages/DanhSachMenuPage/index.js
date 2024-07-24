@@ -1,7 +1,7 @@
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { menuApi } from "src/1/apis/menu.api";
 import { AddGoodsModal, ListToolbar, MenuTable } from "../../components";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { useSetQueryData } from "src/1/hooks/query";

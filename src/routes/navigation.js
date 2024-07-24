@@ -8,6 +8,7 @@ import {
   Summary,
   HangHoa,
   Menu,
+  NhaCungCap,
 } from "./constant";
 
 import {
@@ -577,6 +578,39 @@ const navigation = [
         to: Permission.Configuration.path,
         childrens: [Permission.Configuration.path],
         required: [{ code: ENTITY_GROUP_CODE.CONFIGURATION }],
+      },
+    ],
+  },
+  //#endregion
+
+  //#region Nhà cung cấp
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Danh mục nhà cung cấp",
+    route: "/suppliers",
+    icon: <MaterialIcon className="c-sidebar-nav-icon" />,
+    required: [
+      { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
+      { code: ENTITY_GROUP_CODE.MATERIAL },
+    ],
+    childrens: [
+      NhaCungCap.DanhSachDeXuatNhaCungCap.path,
+      NhaCungCap.ThemDeXuatNhaCungCap.path,
+    ],
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: NhaCungCap.DanhSachDeXuatNhaCungCap.name,
+        to: NhaCungCap.DanhSachDeXuatNhaCungCap.path,
+        childrens: [NhaCungCap.DanhSachDeXuatNhaCungCap.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: NhaCungCap.ThemDeXuatNhaCungCap.name,
+        to: NhaCungCap.ThemDeXuatNhaCungCap.path,
+        childrens: [NhaCungCap.ThemDeXuatNhaCungCap.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],
   },

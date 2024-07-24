@@ -708,6 +708,15 @@ export const Permission = {
 
 //#region Nhà cung cấp
 export const NhaCungCap = {
+  DanhSachDeXuatNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh sách đề xuất nhà cung cấp",
+    path: "/supplier-suggest/list",
+  },
   ThemDeXuatNhaCungCap: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
@@ -716,6 +725,15 @@ export const NhaCungCap = {
     icon: "",
     name: "Thêm đề xuất nhà cung cấp",
     path: "/supplier-suggest/create",
+  },
+  SuaDeXuatNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa đề xuất nhà cung cấp",
+    path: "/supplier-suggest/edit/:id",
   },
 };
 //#endregion
