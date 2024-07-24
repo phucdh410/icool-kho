@@ -1,6 +1,6 @@
 import fileDownload from "js-file-download";
 
-import { FORM_HEADER_ENCODED,map, post } from "src/utils/axios";
+import { FORM_HEADER_ENCODED, map, post } from "src/utils/axios";
 import { format } from "src/utils/moment";
 
 import {
@@ -12,6 +12,7 @@ import {
 
 import { CANCELLATION_SLIP } from "./_constants";
 
+import { global } from "_configs/index";
 const { api } = global;
 
 export const getAll = async (params) =>

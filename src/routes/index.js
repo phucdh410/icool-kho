@@ -47,6 +47,7 @@ import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
 import DanhSachDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachDeXuatNhaCungCap";
+import SuaDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/SuaDeXuatNhaCungCap";
 import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
 import {
   ConfigurationPermission,
@@ -463,6 +464,11 @@ const routes = [
     ...NhaCungCap.ThemDeXuatNhaCungCap,
     exact: true,
     component: ThemDeXuatNhaCungCap,
+  },
+  {
+    ...NhaCungCap.SuaDeXuatNhaCungCap,
+    exact: true,
+    component: SuaDeXuatNhaCungCap,
   },
   //#endregion
 ];

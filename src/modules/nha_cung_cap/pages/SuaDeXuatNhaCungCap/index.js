@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
@@ -9,8 +12,21 @@ import { history } from "src/App";
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";
 
-const ThemDeXuatNhaCungCap = () => {
+const SuaDeXuatNhaCungCap = () => {
   //#region Data
+  const params = useParams();
+
+  const { data, isError } = useQuery({
+    queryKey: ["chi-tiet-de-xuat-nha-cung-cap", params?.id],
+    queryFn: () => nhaCungCapApi.getDetailSuggest(params?.id),
+    enabled: !!params?.id,
+    select: (response) => response?.data?.data,
+  });
+
+  if (isError) {
+    noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
+  }
+
   const { control, handleSubmit, reset } = useForm({
     mode: "all",
     defaultValues,
@@ -49,20 +65,33 @@ const ThemDeXuatNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await nhaCungCapApi.createSuggest(payload);
+        await nhaCungCapApi.updateSuggest(params.id, payload);
 
-        noti("success", "Tạo đề xuất nhà cung cấp thành công!");
+        noti("success", "Sửa đề xuất nhà cung cấp thành công!");
         reset(defaultValues);
         history.push("/supplier-suggest/list");
       } catch (error) {
         noti(
           "error",
-          error?.message ?? "Tạo đề xuất nhà cung cấp không thành công!"
+          error?.message ?? "Sửa đề xuất nhà cung cấp không thành công!"
         );
       }
     })();
   };
   //#endregion
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        ...data,
+        evaluation_date: dayjs(data?.evaluation_date).toDate(),
+        suppliers: data?.suppliers?.map((e) => ({
+          ...e,
+          materials: e?.materials?.map((el) => el?.material_code),
+        })),
+      });
+    }
+  }, [data]);
 
   //#region Render
   return (
@@ -86,4 +115,4 @@ const ThemDeXuatNhaCungCap = () => {
   );
   //#endregion
 };
-export default ThemDeXuatNhaCungCap;
+export default SuaDeXuatNhaCungCap;

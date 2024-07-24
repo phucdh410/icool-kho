@@ -1,3 +1,4 @@
+import { global } from "_configs/index";
 const { api } = global;
 
 // Xác thực

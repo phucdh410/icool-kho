@@ -1,3 +1,4 @@
+import { global } from "_configs/index";
 const { api } = global;
 
 import { FORM_HEADER_FORMDATA, post } from "src/utils/axios";

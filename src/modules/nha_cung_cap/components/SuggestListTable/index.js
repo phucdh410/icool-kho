@@ -38,37 +38,37 @@ export const SuggestListTable = ({
     {
       key: "cycle",
       label: "Kỳ đánh giá",
-      _style: { width: "350px", minWidth: "350px", textAlign: "start" },
+      _style: { width: "130px", minWidth: "130px" },
     },
     {
       key: "year",
       label: "Năm",
-      _style: { width: "150px", minWidth: "150px" },
+      _style: { width: "130px", minWidth: "130px" },
     },
     {
-      key: "date",
+      key: "evaluation_date",
       label: "Ngày đánh giá",
       _style: { width: "250px", minWidth: "250px" },
     },
     {
       key: "suppliers",
       label: "Số nhà cung cấp",
-      _style: { width: "150px", minWidth: "150px" },
+      _style: { width: "170px", minWidth: "170px" },
     },
     {
-      key: "success_suppliers",
+      key: "pass",
       label: "NCC đạt",
-      _style: { width: "200px", minWidth: "170px" },
+      _style: { width: "170px", minWidth: "170px" },
     },
     {
-      key: "failed_suppliers",
+      key: "fail",
       label: "NCC không đạt",
-      _style: { width: "140px", minWidth: "140px" },
+      _style: { width: "170px", minWidth: "170px" },
     },
     {
       key: "note",
       label: "Ghi chú",
-      _style: { width: "140px", minWidth: "140px" },
+      _style: { width: "250px", minWidth: "250px", textAlign: "left" },
     },
   ];
 
@@ -80,10 +80,13 @@ export const SuggestListTable = ({
     ),
     code: ({ code }) => (
       <td>
-        <a href={`/suppliers-suggest/rating/${code}`}>{code}</a>
+        <a href={`/supplier-suggest/rating/${code}`}>{code}</a>
       </td>
     ),
-    date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
+    evaluation_date: ({ evaluation_date }) => (
+      <td>{dayjs(evaluation_date).format("DD/MM/YYYY")}</td>
+    ),
+    note: ({ note }) => <td style={{ textAlign: "left" }}>{note}</td>,
   };
 
   return (

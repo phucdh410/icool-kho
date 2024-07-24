@@ -709,7 +709,7 @@ export const NhaCungCap = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Danh sách đề xuất nhà cung cấp",
+    name: "DS đề xuất nhà cung cấp",
     path: "/supplier-suggest/list",
   },
   ThemDeXuatNhaCungCap: {

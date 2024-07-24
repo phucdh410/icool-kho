@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Route,Router, Switch } from "react-router-dom";
+import { Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import jwtDecode from "jwt-decode";
 import { createSelector } from "reselect";
@@ -10,10 +10,9 @@ import { profile } from "src/apis/auth.api";
 import { FirebaseRoot } from "src/firebase";
 import { setAuthToken } from "src/utils/axios";
 
-import { logout,setPermission, setUser } from "_common/actions/auth.action";
+import { logout, setPermission, setUser } from "_common/actions/auth.action";
 import { MainLayout } from "_components/layout";
-import { CNotification } from "_components/others";
-import { AnonymusRoute,PrivateRoute } from "_components/routes";
+import { AnonymusRoute, PrivateRoute } from "_components/routes";
 import { Login } from "_modules/auth/pages";
 import { E404 } from "_modules/error/pages";
 

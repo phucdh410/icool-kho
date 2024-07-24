@@ -9,13 +9,7 @@ import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 
-import {
-  AddGoodsModal,
-  ListToolbar,
-  MenuTable,
-  SuggestListTable,
-  SuggestListToolbar,
-} from "../../components";
+import { SuggestListTable, SuggestListToolbar } from "../../components";
 
 const DanhSachDeXuatNhaCungCap = () => {
   //#region Data
@@ -30,7 +24,7 @@ const DanhSachDeXuatNhaCungCap = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-de-xuat-nha-cung-cap", params],
-    queryFn: () => nhaCungCapApi.getAll(params),
+    queryFn: () => nhaCungCapApi.getAllSuggest(params),
     select: (response) =>
       Array.isArray(response) ? response : response?.data?.data,
   });
@@ -59,49 +53,24 @@ const DanhSachDeXuatNhaCungCap = () => {
 
   const onSearch = (_params) => setParams(_params);
 
-  const onAdd = () => history.push("/menus/form");
+  const onAdd = () => history.push("/supplier-suggest/create");
 
   const onEdit = () => {
     const id = data.find((e) => e.check)?.id;
-    history.push(`/menus/form/${id}`);
+    history.push(`/supplier-suggest/edit/${id}`);
   };
 
   const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
       try {
-        await nhaCungCapApi.remove(selected?.[0]?.id);
+        await nhaCungCapApi.removeSuggest(selected?.[0]?.id);
         refetch();
         fireSuccess();
       } catch (error) {
         fireError();
       }
     }
-  };
-
-  const onStartMenu = async () => {
-    try {
-      await nhaCungCapApi.updateStatus(selected?.[0]?.id, { status: 2 });
-      refetch();
-      noti("success", "Áp dụng menu thành công!");
-    } catch (error) {
-      noti("error", error?.message || "Lỗi");
-    }
-  };
-
-  const onStopMenu = async () => {
-    try {
-      await nhaCungCapApi.updateStatus(selected?.[0]?.id, { status: 3 });
-      refetch();
-      noti("success", "Ngưng chạy menu thành công!");
-    } catch (error) {
-      noti("error", error?.message || "Lỗi");
-    }
-  };
-
-  const onAddHH = () => {
-    const selectedItem = selected?.[0];
-    addModalRef.current?.open(selectedItem?.id, selectedItem?.name);
   };
   //#endregion
 

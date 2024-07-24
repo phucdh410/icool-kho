@@ -1,5 +1,6 @@
 import { post } from "src/utils/axios";
 
+import { global } from "_configs/index";
 const { api } = global;
 
 export const uploadApi = {
