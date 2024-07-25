@@ -739,5 +739,14 @@ export const NhaCungCap = {
     name: "Sửa đề xuất nhà cung cấp",
     path: "/supplier-suggest/edit/:id",
   },
+  DanhGiaNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Đánh giá nhà cung cấp",
+    path: "/supplier-suggest/rating/:id",
+  },
 };
 //#endregion
