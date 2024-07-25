@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { CCheckbox } from "src/common/components/controls";
@@ -78,9 +79,9 @@ export const SuggestListTable = ({
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    code: ({ code }) => (
+    code: ({ code, id }) => (
       <td>
-        <a href={`/supplier-suggest/rating/${code}`}>{code}</a>
+        <Link to={`/supplier-suggest/rating/${id}`}>{code}</Link>
       </td>
     ),
     evaluation_date: ({ evaluation_date }) => (

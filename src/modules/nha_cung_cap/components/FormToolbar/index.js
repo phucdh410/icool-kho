@@ -7,7 +7,12 @@ import { CActionGroup } from "src/common/components/others";
 
 import { KY_DANH_GIA_OPTIONS, YEAR_OPTIONS } from "../../constants";
 
-export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
+export const FormToolbar = ({
+  control,
+  onSubmit,
+  onAddSupplier,
+  onlyView = false,
+}) => {
   //#region Event
   const onClick = (keyAction) => {
     switch (keyAction) {
@@ -29,7 +34,12 @@ export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
       <CRow>
         <CCol xs="12" className="action">
           <div>
-            <CActionGroup onClick={onClick} canSave hideEditBtn />
+            <CActionGroup
+              onClick={onClick}
+              canAdd={!onlyView}
+              canSave={!onlyView}
+              hideEditBtn
+            />
           </div>
         </CCol>
       </CRow>
@@ -57,6 +67,7 @@ export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
               className="flex-1 max-w-[150px]"
               label="Kỳ đánh giá"
               options={KY_DANH_GIA_OPTIONS ?? []}
+              readOnly={onlyView}
             />
           )}
         />
@@ -70,6 +81,7 @@ export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
               className="flex-1 max-w-[150px]"
               label="Năm"
               options={YEAR_OPTIONS ?? []}
+              readOnly={onlyView}
             />
           )}
         />
@@ -81,6 +93,7 @@ export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
               {...field}
               className="flex-1 max-w-[200px]"
               label="Ngày đánh giá"
+              readOnly={onlyView}
             />
           )}
         />
@@ -88,7 +101,12 @@ export const FormToolbar = ({ control, onSubmit, onAddSupplier }) => {
           control={control}
           name="note"
           render={({ field }) => (
-            <CInput {...field} className="flex-1" label="Ghi chú" />
+            <CInput
+              {...field}
+              className="flex-1"
+              label="Ghi chú"
+              readOnly={onlyView}
+            />
           )}
         />
       </div>

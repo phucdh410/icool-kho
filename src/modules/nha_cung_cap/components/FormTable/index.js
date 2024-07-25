@@ -1,8 +1,10 @@
 import { Controller } from "react-hook-form";
 import { useQuery } from "react-query";
+import classNames from "classnames";
 
 import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
 import {
+  CButton,
   CCheckbox,
   CInput,
   CRating,
@@ -12,7 +14,7 @@ import { CTable } from "src/common/components/others";
 
 import { FilesCell } from "./FilesCell";
 
-export const FormTable = ({ control, dataTable }) => {
+export const FormTable = ({ control, dataTable, onlyView = false }) => {
   //#region Data
   const { data: materials_options } = useQuery({
     queryKey: ["danh-sach-nvl"],
@@ -77,6 +79,16 @@ export const FormTable = ({ control, dataTable }) => {
       _style: { minWidth: "185px" },
       sorter: false,
     },
+    ...(onlyView
+      ? [
+          {
+            key: "rating",
+            label: "Đánh giá",
+            _style: { minWidth: "185px" },
+            sorter: false,
+          },
+        ]
+      : []),
   ];
 
   const render = {
@@ -91,7 +103,7 @@ export const FormTable = ({ control, dataTable }) => {
           control={control}
           name={`suppliers.${index}.code`}
           render={({ field }) => (
-            <CInput {...field} placeholder="Nhập mã NCC" />
+            <CInput {...field} placeholder="Nhập mã NCC" readOnly={onlyView} />
           )}
         />
       </td>
@@ -102,7 +114,7 @@ export const FormTable = ({ control, dataTable }) => {
           control={control}
           name={`suppliers.${index}.name`}
           render={({ field }) => (
-            <CInput {...field} placeholder="Nhập tên NCC" />
+            <CInput {...field} placeholder="Nhập tên NCC" readOnly={onlyView} />
           )}
         />
       </td>
@@ -113,7 +125,7 @@ export const FormTable = ({ control, dataTable }) => {
           <Controller
             control={control}
             name={`suppliers.${index}.financial`}
-            render={({ field }) => <CRating {...field} />}
+            render={({ field }) => <CRating {...field} disabled={onlyView} />}
           />
         </div>
       </td>
@@ -124,7 +136,7 @@ export const FormTable = ({ control, dataTable }) => {
           <Controller
             control={control}
             name={`suppliers.${index}.reputation`}
-            render={({ field }) => <CRating {...field} />}
+            render={({ field }) => <CRating {...field} disabled={onlyView} />}
           />
         </div>
       </td>
@@ -135,7 +147,7 @@ export const FormTable = ({ control, dataTable }) => {
           <Controller
             control={control}
             name={`suppliers.${index}.quality`}
-            render={({ field }) => <CRating {...field} />}
+            render={({ field }) => <CRating {...field} disabled={onlyView} />}
           />
         </div>
       </td>
@@ -146,7 +158,7 @@ export const FormTable = ({ control, dataTable }) => {
           <Controller
             control={control}
             name={`suppliers.${index}.pricing`}
-            render={({ field }) => <CRating {...field} />}
+            render={({ field }) => <CRating {...field} disabled={onlyView} />}
           />
         </div>
       </td>
@@ -164,19 +176,32 @@ export const FormTable = ({ control, dataTable }) => {
                 className="flex-1"
                 options={materials_options ?? []}
                 canWrap
+                readOnlyText
               />
             )}
           />
         </div>
       </td>
     ),
-    files: (record, index) => <FilesCell control={control} index={index} />,
+    files: (record, index) => (
+      <FilesCell control={control} index={index} readOnly={onlyView} />
+    ),
+    rating: (record, index) => (
+      <td>
+        <CButton
+          className="btn-fill !bg-[#FFB946]"
+          icon={<i className="fa-solid fa-flag"></i>}
+        >
+          Đánh giá
+        </CButton>
+      </td>
+    ),
   };
 
   return (
     <CTable
-      className="selectable"
-      fields={fields}
+      className={classNames(!onlyView && "selectable")}
+      fields={onlyView ? fields?.slice(1) : fields}
       render={render}
       data={dataTable}
     />

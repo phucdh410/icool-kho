@@ -25,6 +25,7 @@ const SuaDeXuatNhaCungCap = () => {
 
   if (isError) {
     noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
+    history.replace("/supplier-suggest/list");
   }
 
   const { control, handleSubmit, reset } = useForm({

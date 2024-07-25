@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useMemo } from "react";
 import RSelect from "react-select";
 import classNames from "classnames";
 
-import { CFormGroup, CInput,CLabel } from "@coreui/react";
+import { CFormGroup, CInput, CLabel } from "@coreui/react";
 
 const selectTheme = (theme) => ({
   ...theme,
@@ -13,7 +13,16 @@ const selectTheme = (theme) => ({
 });
 
 function Select(
-  { label, onChange, className, value, options, canWrap = false, ...rest },
+  {
+    label,
+    onChange,
+    className,
+    value,
+    options,
+    canWrap = false,
+    readOnlyText = false,
+    ...rest
+  },
   ref
 ) {
   const _class = classNames("c-input c-select", className);
@@ -32,7 +41,9 @@ function Select(
           {label} {rest.required && <span className="text-danger">*</span>}
         </CLabel>
       )}
-      {rest.readOnly ? (
+      {readOnlyText ? (
+        <div>{_value.map((v) => v.label).join(", ")}</div>
+      ) : rest.readOnly ? (
         <CInput
           className="c-input"
           value={_value.map((v) => v.label)}

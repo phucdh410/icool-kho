@@ -2,7 +2,7 @@ import { useFieldArray } from "react-hook-form";
 
 import { CFile2 } from "src/common/components/controls";
 
-export const FilesCell = ({ index, control }) => {
+export const FilesCell = ({ index, control, readOnly }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: `suppliers.${index}.files`,
@@ -19,7 +19,12 @@ export const FilesCell = ({ index, control }) => {
 
   return (
     <td>
-      <CFile2 fields={fields} append={onAppend} remove={onRemove} />
+      <CFile2
+        fields={fields}
+        append={onAppend}
+        remove={onRemove}
+        readOnly={readOnly}
+      />
     </td>
   );
 };

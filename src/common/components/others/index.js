@@ -15,5 +15,6 @@ export {
   CPrintComponent,
   CTable,
 };
+export * from "./CFileItem";
 export * from "./CNotification";
 export * from "./CTag";

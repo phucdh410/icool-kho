@@ -5,8 +5,10 @@ import { CFormGroup, CLabel } from "@coreui/react";
 
 import { fileApi } from "src/apis/file.api";
 
+import { CFileItem } from "../../others";
+
 const CFile2 = (
-  { fields, append, remove, label, className, value, ...rest },
+  { fields, append, remove, label, className, value, readOnly, ...rest },
   ref
 ) => {
   const inputRef = createRef(null);
@@ -56,21 +58,23 @@ const CFile2 = (
         ref={inputRef}
         {...rest}
       />
-      <span
-        ref={ref}
-        tabIndex={0}
-        onKeyDown={onKeyDown}
-        onClick={click}
-        className="form-control"
-      >
-        {/* <span className={classNames("c-icon")}>
+      {!readOnly && (
+        <span
+          ref={ref}
+          tabIndex={0}
+          onKeyDown={onKeyDown}
+          onClick={click}
+          className="form-control"
+        >
+          {/* <span className={classNames("c-icon")}>
           {isUploading && "Uploading..."}
         </span> */}
-        <span className="flex items-center gap-2 h-full">
-          <i className="fa-regular fa-cloud-arrow-up"></i>
-          {isUploading ? "Uploading..." : "Upload"}
+          <span className="flex items-center gap-2 h-full">
+            <i className="fa-regular fa-cloud-arrow-up"></i>
+            {isUploading ? "Uploading..." : "Upload"}
+          </span>
         </span>
-      </span>
+      )}
       {fields.length > 0 && (
         <div
           style={{
@@ -85,15 +89,11 @@ const CFile2 = (
               className="self-start flex flex-row gap-1 items-center justify-between"
               key={e?.id}
             >
-              <a
-                href={e?.path}
-                target="_blank"
-                rel="noopener noreferrer"
+              <CFileItem
+                file={e}
                 className="text-left whitespace-nowrap text-ellipsis overflow-hidden max-w-[130px]"
-              >
-                {e?.originalname}
-              </a>
-              {remove && (
+              />
+              {remove && !readOnly && (
                 <i
                   onClick={remove(index)}
                   className="fa-regular fa-delete-left fa-lg cursor-pointer hover:text-red-600"
