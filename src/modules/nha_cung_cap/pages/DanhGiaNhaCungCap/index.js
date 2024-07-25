@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,8 @@ import { CCard, CCardBody } from "@coreui/react";
 
 import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
 import { history } from "src/App";
+
+import { CRange } from "_components/controls";
 
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";

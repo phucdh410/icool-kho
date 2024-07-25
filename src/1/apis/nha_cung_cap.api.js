@@ -16,4 +16,7 @@ export const nhaCungCapApi = {
   removeSuggest: async (id) => {
     return await methods.delete(`/supplier-proposals/${id}`);
   },
+  getDetailSupplier: async (id) => {
+    return await methods.get(`/supplier-proposals/getByProposalSupplier/${id}`);
+  },
 };

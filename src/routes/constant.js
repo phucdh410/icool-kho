@@ -748,5 +748,14 @@ export const NhaCungCap = {
     name: "Đánh giá nhà cung cấp",
     path: "/supplier-suggest/rating/:id",
   },
+  ChamDiemNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Chấm điểm nhà cung cấp",
+    path: "/supplier-suggest/rating/:id/:supplierId",
+  },
 };
 //#endregion

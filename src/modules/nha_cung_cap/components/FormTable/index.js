@@ -1,8 +1,10 @@
 import { Controller } from "react-hook-form";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
 import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
+import { history } from "src/App";
 import {
   CButton,
   CCheckbox,
@@ -22,6 +24,8 @@ export const FormTable = ({ control, dataTable, onlyView = false }) => {
     select: (response) =>
       response?.data?.data?.map((e) => ({ value: e?.code, label: e?.name })),
   });
+
+  const { pathname } = useLocation();
   //#endregion
 
   //#region Event
@@ -186,9 +190,10 @@ export const FormTable = ({ control, dataTable, onlyView = false }) => {
     files: (record, index) => (
       <FilesCell control={control} index={index} readOnly={onlyView} />
     ),
-    rating: (record, index) => (
+    rating: ({ id }, index) => (
       <td>
         <CButton
+          onClick={() => history.push(`${pathname}/${id}`)}
           className="btn-fill !bg-[#FFB946]"
           icon={<i className="fa-solid fa-flag"></i>}
         >

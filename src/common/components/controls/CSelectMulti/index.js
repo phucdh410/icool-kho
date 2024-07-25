@@ -42,7 +42,11 @@ function Select(
         </CLabel>
       )}
       {readOnlyText ? (
-        <div>{_value.map((v) => v.label).join(", ")}</div>
+        <div>
+          {Array.isArray(_value) &&
+            _value.length > 0 &&
+            _value.map((v) => v?.label ?? "").join(", ")}
+        </div>
       ) : rest.readOnly ? (
         <CInput
           className="c-input"

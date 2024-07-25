@@ -28,5 +28,6 @@ export {
   CTextarea,
 };
 
+export * from "./CRange";
 export * from "./CRating";
 export * from "./CSwitch";
