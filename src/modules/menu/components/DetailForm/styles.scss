@@ -1,0 +1,11 @@
+.menu-tabs {
+  .nav.nav-tabs {
+    .nav-item {
+      .nav-link {
+        &.active {
+          background-color: #2d8dff3d !important;
+        }
+      }
+    }
+  }
+}

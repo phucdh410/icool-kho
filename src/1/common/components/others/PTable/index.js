@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
+import classNames from "classnames";
 
 import "./styles.scss";
 
-export const PTable = ({ children, ...props }) => {
+export const PTable = ({ children, tableBgColor, ...props }) => {
   const tableRef = useRef(null);
 
   useEffect(() => {
@@ -40,7 +41,10 @@ export const PTable = ({ children, ...props }) => {
 
   //#region Render
   return (
-    <div id="c-table-phuc-container" className="overflow-auto block">
+    <div
+      id="c-table-phuc-container"
+      className={classNames("overflow-auto block", `bg-[${tableBgColor}]`)}
+    >
       <table ref={tableRef} id="c-table-phuc" {...props}>
         {children}
       </table>

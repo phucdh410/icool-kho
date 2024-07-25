@@ -43,6 +43,7 @@ import {
   InventoryReturnUpdate,
   InventorySlip,
 } from "_modules/inventory/pages";
+import ChiTietMenu from "_modules/menu/pages/ChiTietMenu";
 import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
@@ -433,6 +434,11 @@ const routes = [
     ...Menu.SuaMenu,
     exact: true,
     component: SuaMenuPage,
+  },
+  {
+    ...Menu.ChiTietMenu,
+    exact: true,
+    component: ChiTietMenu,
   },
   //#endregion
 

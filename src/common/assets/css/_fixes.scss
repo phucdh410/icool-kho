@@ -85,7 +85,7 @@ label {
   padding-left: 25px;
   padding-right: 25px;
 
-  >.card:first-child {
+  > .card:first-child {
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
 
@@ -118,7 +118,7 @@ label {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
-    &~.card-body {
+    & ~ .card-body {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
@@ -180,7 +180,8 @@ label {
     }
 
     &[readonly] {
-      background-color: inherit;
+      background-color: #f6f7f7;
+      // background-color: inherit;
       opacity: 1;
       pointer-events: none;
     }
@@ -191,7 +192,7 @@ label {
   }
 
   &.loading {
-    >div::after {
+    > div::after {
       content: "";
       display: block;
       position: absolute;
@@ -211,17 +212,16 @@ label {
   }
 }
 
-.btn-group>.btn:focus,
-.btn-group>.btn:active,
-.btn-group>.btn.active,
-.btn-group-vertical>.btn:focus,
-.btn-group-vertical>.btn:active,
-.btn-group-vertical>.btn.active,
-.btn-group>.btn:hover,
-.btn-group-vertical>.btn:hover {
+.btn-group > .btn:focus,
+.btn-group > .btn:active,
+.btn-group > .btn.active,
+.btn-group-vertical > .btn:focus,
+.btn-group-vertical > .btn:active,
+.btn-group-vertical > .btn.active,
+.btn-group > .btn:hover,
+.btn-group-vertical > .btn:hover {
   z-index: inherit;
 }
-
 
 .react-datepicker__year-read-view--down-arrow,
 .react-datepicker__month-read-view--down-arrow,
@@ -263,7 +263,6 @@ label {
 }
 
 @media screen and (max-width: 576px) {
-
   .c-subheader,
   .c-body {
     padding-left: 6px !important;

@@ -1,6 +1,8 @@
 import { FORM_HEADER_ENCODED, map, post } from "src/utils/axios";
 import { format } from "src/utils/moment";
 
+import { global } from "_configs/index";
+
 import {
   ReturnSlip,
   ReturnSlipPreview,
@@ -8,8 +10,6 @@ import {
 } from "../utils/models/return_slip.model";
 
 import { RETURN_SLIP } from "./_constants";
-
-import { global } from "_configs/index";
 const { api } = global;
 
 export const getAll = async (params) =>

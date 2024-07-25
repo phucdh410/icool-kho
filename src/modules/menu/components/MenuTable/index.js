@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { CCheckbox } from "src/common/components/controls";
@@ -69,6 +70,11 @@ export const MenuTable = ({ data = [], loading, isSelectAll, onSelect }) => {
     select: ({ code, status, check }) => (
       <td>
         <CCheckbox value={check} onChange={select(code)} />
+      </td>
+    ),
+    code: ({ code, id }) => (
+      <td>
+        <Link to={`/menus/detail/${id}`}>{code}</Link>
       </td>
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,

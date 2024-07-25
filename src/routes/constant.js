@@ -657,6 +657,15 @@ export const Menu = {
     name: "Sửa menu",
     path: "/menus/form/:id",
   },
+  ChiTietMenu: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Chi tiết menu",
+    path: "/menus/detail/:id",
+  },
 };
 //#endregion
 

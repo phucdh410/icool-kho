@@ -63,7 +63,8 @@ html:not([dir="rtl"]) .form-control.is-invalid {
     margin-top: 5px;
   }
 
-  .input-wrapper {
+  .input-wrapper,
+  .c-select {
     input {
       background-color: white !important;
       &:disabled,
