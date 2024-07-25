@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Controller,
   useController,
@@ -15,9 +15,13 @@ import { CNumberInput, CTextarea } from "src/common/components/controls";
 
 import { Row } from "./Row";
 
-const calculateFormula = (gia_thuong, gia_le) => {
-  const ty_gia = gia_le / gia_thuong;
-  return ((ty_gia - 1) * 100).toFixed(2).replace(/\.00$/, "");
+const calculateHolidayPrice = (gia_thuong, ty_gia) => {
+  const holiday_price = (ty_gia / 100) * gia_thuong + gia_thuong;
+  return holiday_price.toFixed(2).replace(/\.00$/, "");
+};
+const calculateRate = (gia_thuong, gia_le) => {
+  const ty_gia = ((gia_le - gia_thuong) / gia_thuong) * 100;
+  return ty_gia.toFixed(2).replace(/\.00$/, "");
 };
 
 export const PriceTable = ({ control, isPriceEdit }) => {
@@ -27,7 +31,7 @@ export const PriceTable = ({ control, isPriceEdit }) => {
     name: "materials",
     keyName: "__id",
   });
-  const price = useWatch({
+  const normal_price = useWatch({
     control,
     name: "price",
   });
@@ -35,10 +39,19 @@ export const PriceTable = ({ control, isPriceEdit }) => {
     control,
     name: "holiday_price",
   });
+  const rate = useWatch({
+    control,
+    name: "rate",
+  });
+
+  const [changeWhat, setChangeWhat] = useState("holiday_price"); // "price" | "holiday_price" | "rate"
 
   const {
     field: { onChange: onRateChange },
   } = useController({ control, name: "rate" });
+  const {
+    field: { onChange: onHolidayPriceChange },
+  } = useController({ control, name: "holiday_price" });
 
   const { data: material_options } = useQuery({
     queryKey: ["materials"],
@@ -49,13 +62,35 @@ export const PriceTable = ({ control, isPriceEdit }) => {
   //#endregion
 
   //#region Event
+  const handleChangeNormalPrice = (changeCb) => (newValue) => {
+    setChangeWhat("price");
+    changeCb(newValue);
+  };
+  const handleChangeHolidayPrice = (changeCb) => (newValue) => {
+    setChangeWhat("holiday_price");
+    changeCb(newValue);
+  };
+  const handleChangeRate = (changeCb) => (newValue) => {
+    setChangeWhat("rate");
+    changeCb(newValue);
+  };
   //#endregion
 
   useEffect(() => {
-    if (holiday_price) {
-      onRateChange(calculateFormula(price, holiday_price));
+    if (changeWhat === "price" || changeWhat === "holiday_price") {
+      // Change price or holiday_price -> update rate
+      const tmpRate = calculateRate(normal_price, holiday_price);
+
+      if (tmpRate !== "NaN" && rate !== tmpRate) onRateChange(tmpRate);
+    } else {
+      // Change rate -> update holiday_price
+      const tmpHolidayPrice = calculateHolidayPrice(normal_price, rate);
+
+      if (tmpHolidayPrice !== "NaN" && holiday_price !== tmpHolidayPrice) {
+        onHolidayPriceChange(tmpHolidayPrice);
+      }
     }
-  }, [price, holiday_price]);
+  }, [normal_price, holiday_price, rate, changeWhat]);
 
   //#region Render
   return (
@@ -111,35 +146,37 @@ export const PriceTable = ({ control, isPriceEdit }) => {
                 <Controller
                   name="price"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field: { onChange, ..._field } }) => (
                     <CNumberInput
                       label="Giá bán ngày thường:"
                       required
-                      {...field}
+                      onChange={handleChangeNormalPrice(onChange)}
+                      {..._field}
                     />
                   )}
                 />
                 <Controller
                   name="holiday_price"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field: { onChange, ..._field } }) => (
                     <CNumberInput
                       label="Giá bán ngày lễ:"
                       required
-                      {...field}
+                      onChange={handleChangeHolidayPrice(onChange)}
+                      {..._field}
                     />
                   )}
                 />
                 <Controller
                   name="rate"
                   control={control}
-                  render={({ field }) => (
+                  render={({ field: { onChange, ..._field } }) => (
                     <CNumberInput
                       label="Tỷ lệ giá thường/lễ:"
                       currency="%"
-                      readOnly
+                      onChange={handleChangeRate(onChange)}
                       required
-                      {...field}
+                      {..._field}
                     />
                   )}
                 />
