@@ -12,7 +12,7 @@ import {
   CSelect,
 } from "src/common/components/controls";
 
-import { CDialog,CPagination, CTable } from "_components/others";
+import { CDialog, CPagination, CTable } from "_components/others";
 
 import { PRICE_TYPES_OPTIONS } from "../../constants";
 
@@ -200,12 +200,7 @@ export const AddGoodsModal = forwardRef((props, ref) => {
     name: ({ name }) => <td className="text-left">{name}</td>,
     cost: ({ cost }) => <td>{cost?.toLocaleString("vi-VN")}</td>,
     price: ({ price, holiday_price }) => (
-      <td>
-        {(watch("price_type") === "normal"
-          ? price
-          : holiday_price
-        )?.toLocaleString("vi-VN")}
-      </td>
+      <td>{(isHoliday ? holiday_price : price)?.toLocaleString("vi-VN")}</td>
     ),
   };
 
