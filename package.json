@@ -48,7 +48,6 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-select": "^5.2.2",
-    "react-simple-star-rating": "^5.1.7",
     "react-switch": "^7.0.0",
     "react-text-mask": "^5.4.3",
     "react-to-print": "^2.14.4",
