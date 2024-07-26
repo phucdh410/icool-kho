@@ -35,12 +35,13 @@ export const CRange = forwardRef(
           type="range"
           min={min}
           max={max}
-          className={classNames("c-range relative", className)}
-          style={{
-            background: `linear-gradient(90deg, ${fillColor} ${value}%, ${emptyColor} ${value}%)`,
-          }}
+          aria-valuenow={value}
+          className={classNames("c-range relative bg-[#d3d8dd]", className)}
+          style={{ "--range-value": value, "--range-fill-color": fillColor }}
         />
-        {showPercent && <span className="font-semibold">{`${value}%`}</span>}
+        {showPercent && (
+          <span className="font-semibold shrink-0 !w-10">{`${value}%`}</span>
+        )}
       </div>
     );
     //#endregion

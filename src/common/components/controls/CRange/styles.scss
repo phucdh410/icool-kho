@@ -8,8 +8,8 @@
     max-width: 15rem;
     overflow: hidden;
     transition: background 100ms ease;
-    border-radius: 4px;
-    // box-shadow: 0 0 10px 4px rgb(0 0 0/8%);
+    border-radius: 6px;
+    position: relative;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -18,6 +18,22 @@
       height: 0.71rem;
       width: 0.71rem;
       background-color: transparent;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      border-radius: inherit;
+      height: 100%;
+      width: 0%;
+      transition: background 250ms;
+    }
+
+    &[aria-valuenow] {
+      &::after {
+        width: calc(var(--range-value) * 1%);
+        background: var(--range-fill-color);
+      }
     }
   }
 }
