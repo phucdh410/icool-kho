@@ -19,4 +19,10 @@ export const nhaCungCapApi = {
   getDetailSupplier: async (id) => {
     return await methods.get(`/supplier-proposals/getByProposalSupplier/${id}`);
   },
+  updateDetailSupplier: async (id, body) => {
+    return await methods.put(
+      `/supplier-proposals/proposalSupplier/${id}`,
+      body
+    );
+  },
 };

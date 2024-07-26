@@ -12,6 +12,8 @@ export const CRange = forwardRef(
       value,
       onChange,
       showPercent = true,
+      fillColor = "#FFB946",
+      emptyColor = "#d3d8dd",
       ...props
     },
     ref
@@ -28,13 +30,14 @@ export const CRange = forwardRef(
       <div className="c-range-wrapper flex items-center gap-3">
         <input
           ref={ref}
+          value={value}
           onChange={onSliderChange}
           type="range"
           min={min}
           max={max}
           className={classNames("c-range relative", className)}
           style={{
-            background: `linear-gradient(90deg, #FFB946 ${value}%, #d3d8dd ${value}%)`,
+            background: `linear-gradient(90deg, ${fillColor} ${value}%, ${emptyColor} ${value}%)`,
           }}
         />
         {showPercent && <span className="font-semibold">{`${value}%`}</span>}

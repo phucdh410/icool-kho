@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { CCard, CCardBody } from "@coreui/react";
 
 import {
+  CRadio,
   CRange,
   CRating,
   CSwitch,
@@ -19,28 +20,29 @@ export const MarkTable = ({ control }) => {
 
   const { fields: fieldsForm } = useFieldArray({
     control,
-    name: "cai_array",
+    name: "evaluations",
     keyName: "__id",
   });
   //#endregion
 
   //#region Render
   const fields = [
-    { key: "tieu_chi", label: "Tiêu chí", sorter: false },
+    { key: "percent", label: "Tiêu chí", sorter: false },
     { key: "muc_do", label: "Mức độ đánh giá", sorter: false },
-    { key: "danh_gia_ktt", label: "Đánh giá KTT", sorter: false },
-    { key: "note_danh_gia_ktt", label: "Ghi chú đánh giá KTT", sorter: false },
-    { key: "danh_gia_cheo", label: "Ghi chú đánh giá chéo", sorter: false },
-    { key: "note_danh_gia_cheo", label: "Ghi chú đánh giá KTT", sorter: false },
-    ...(user?.operator
+    { key: "ware_evaluation", label: "Đánh giá KTT", sorter: false },
+    { key: "ware_note", label: "Ghi chú đánh giá KTT", sorter: false },
+    { key: "peer_evaluation", label: "Đánh giá chéo", sorter: false },
+    { key: "peer_note", label: "Ghi chú đánh giá chéo", sorter: false },
+    // ...(user?.operator
+    ...(true
       ? [
           {
-            key: "note_bgd",
+            key: "operator_note",
             label: "Ghi chú của BGĐ",
             sorter: false,
           },
           {
-            key: "danh_gia_bgd",
+            key: "operator_choice",
             label: "Đánh giá của BGĐ",
             sorter: false,
           },
@@ -49,71 +51,96 @@ export const MarkTable = ({ control }) => {
   ];
 
   const render = {
-    tieu_chi: ({ name }, index) => (
+    percent: ({ label }, index) => (
       <td>
-        <div className="flex flex-col gap-4">
-          <h5 className="font-semibold">{name}</h5>
+        <div className="flex flex-col gap-1">
+          <h5 className="font-semibold text-base text-left mb-0">{label}</h5>
           <Controller
             control={control}
-            name={`cai_array.${index}.tieu_chi`}
-            render={({ field }) => <CRange {...field} />}
+            name={`evaluations.${index}.percent`}
+            render={({ field }) => (
+              <CRange
+                {...field}
+                fillColor={
+                  field.value >= 85
+                    ? "#28a745"
+                    : field.value < 70
+                    ? "#dc3545"
+                    : "#FFB946"
+                }
+              />
+            )}
           />
         </div>
       </td>
     ),
-    muc_do: ({ tieu_chi }) => <td>{renderRating(tieu_chi)}</td>,
-    danh_gia_ktt: (record, index) => (
+    muc_do: (record, index) => (
       <td>
         <Controller
           control={control}
-          name={`cai_array.${index}.danh_gia_ktt`}
-          render={({ field }) => <CRating {...field} />}
+          name={`evaluations.${index}.percent`}
+          render={({ field }) => renderRating(field.value)}
         />
       </td>
     ),
-    note_ktt: (record, index) => (
+    ware_evaluation: (record, index) => (
+      <td>
+        <div className="flex w-full items-center justify-center">
+          <Controller
+            control={control}
+            name={`evaluations.${index}.ware_evaluation`}
+            render={({ field }) => <CRating {...field} />}
+          />
+        </div>
+      </td>
+    ),
+    ware_note: (record, index) => (
       <td>
         <Controller
           control={control}
-          name={`cai_array.${index}.note_ktt`}
+          name={`evaluations.${index}.ware_note`}
           render={({ field }) => <CTextarea {...field} />}
         />
       </td>
     ),
-    danh_gia_cheo: (record, index) => (
+    peer_evaluation: (record, index) => (
       <td>
-        <Controller
-          control={control}
-          name={`cai_array.${index}.danh_gia_cheo`}
-          render={({ field }) => <CRating {...field} />}
-        />
+        <div className="flex w-full items-center justify-center">
+          <Controller
+            control={control}
+            name={`evaluations.${index}.peer_evaluation`}
+            render={({ field }) => <CRating {...field} />}
+          />
+        </div>
       </td>
     ),
-    note_danh_gia_cheo: (record, index) => (
+    peer_note: (record, index) => (
       <td>
         <Controller
           control={control}
-          name={`cai_array.${index}.note_danh_gia_cheo`}
+          name={`evaluations.${index}.peer_note`}
           render={({ field }) => <CTextarea {...field} />}
         />
       </td>
     ),
-    note_bgd: (record, index) => (
+    operator_note: (record, index) => (
       <td>
         <Controller
           control={control}
-          name={`cai_array.${index}.note_bgd`}
+          name={`evaluations.${index}.operator_note`}
           render={({ field }) => <CTextarea {...field} />}
         />
       </td>
     ),
-    danh_gia_bgd: (record, index) => (
+    operator_choice: (record, index) => (
       <td>
-        <Controller
-          control={control}
-          name={`cai_array.${index}.danh_gia_bgd`}
-          render={({ field }) => <CSwitch {...field} />}
-        />
+        <div className="flex w-full items-center justify-center">
+          <Controller
+            control={control}
+            name={`evaluations.${index}.operator_choice`}
+            render={({ field }) => <CSwitch {...field} />}
+          />
+        </div>
       </td>
     ),
   };
@@ -125,24 +152,38 @@ export const MarkTable = ({ control }) => {
           <CTable fields={fields} render={render} data={fieldsForm} />
         </CCardBody>
       </CCard>
-      <CCard>
-        <CCardBody>
-          <div className="flex flex-row justify-between">
-            <h5>Chốt cuối cùng của BGĐ</h5>
-            <Controller
-              control={control}
-              name="final_note"
-              render={({ field }) => <CTextarea {...field} />}
-            />
-            <span>Quyết định</span>
-            <Controller
-              control={control}
-              name="decision"
-              render={({ field }) => <div>Radio button</div>}
-            />
-          </div>
-        </CCardBody>
-      </CCard>
+      {/* {user?.operator && ( */}
+      {true && (
+        <CCard>
+          <CCardBody>
+            <div className="flex flex-row items-center gap-10">
+              <h5 className="mb-0">Chốt cuối cùng của BGĐ</h5>
+              <Controller
+                control={control}
+                name="final_note"
+                render={({ field }) => (
+                  <CTextarea className="min-w-[450px]" {...field} />
+                )}
+              />
+              <h5 className="mb-0">Quyết định</h5>
+              <Controller
+                control={control}
+                name="decision"
+                render={({ field }) => (
+                  <CRadio
+                    direction="horizontal"
+                    options={[
+                      { value: "0", label: "Không chọn" },
+                      { value: "1", label: "Chọn" },
+                    ]}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+          </CCardBody>
+        </CCard>
+      )}
     </>
   );
   //#endregion

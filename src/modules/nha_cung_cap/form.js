@@ -12,3 +12,10 @@ export const defaultValues = {
 };
 
 export const resolver = yupResolver(object({}));
+
+export const markDefaulValues = {
+  evaluations: [],
+  files: [],
+  final_note: "",
+  decision: null,
+};

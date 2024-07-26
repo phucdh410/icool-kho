@@ -4,8 +4,10 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { history } from "src/App";
 
 import { MarkInfo, MarkTable, MarkToolbar } from "../../components";
+import { markDefaulValues as defaultValues } from "../../form";
 
 const ChamDiemNhaCungCap = () => {
   //#region Data
@@ -17,17 +19,29 @@ const ChamDiemNhaCungCap = () => {
     enabled: !!params?.supplierId,
     select: (response) => response?.data?.data,
   });
-  console.log(data);
 
-  const { control, watch, reset, handleSubmit } = useForm({ mode: "all" });
+  const { control, watch, reset, handleSubmit } = useForm({
+    mode: "all",
+    defaultValues,
+  });
   //#endregion
 
   //#region Event
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        console.log(values);
+        const payload = {
+          files: values?.files?.map((file) => file?.id),
+          decision: Number(values?.decision),
+          final_note: values?.final_note,
+          evaluations: values?.evaluations,
+        };
+
+        await nhaCungCapApi.updateDetailSupplier(params?.supplierId, payload);
+
         noti("success", "Chấm điểm nhà cung cấp thành công!");
+        reset(defaultValues);
+        history.push(`/supplier-suggest/rating/${params?.id}`);
       } catch (error) {
         noti("error", error?.message || "Chấm điểm không thành công!");
       }
@@ -37,13 +51,13 @@ const ChamDiemNhaCungCap = () => {
 
   useEffect(() => {
     if (data) {
-      reset({ ...data });
+      reset({ ...data, decision: data?.decision ? "1" : "0" });
     }
   }, [data]);
 
   //#region Render
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col">
       <MarkToolbar onSubmit={onSubmit} />
 
       <MarkInfo watch={watch} />
