@@ -1,5 +1,6 @@
 //#region Imports
 import { Profile as MProfile } from "_modules/auth/pages";
+import ComboItem from "_modules/combo/pages/ComboItem";
 import {
   ExportCreate,
   ExportList,
@@ -80,6 +81,7 @@ import {
 } from "_modules/summary/pages";
 
 import {
+  Combo,
   Export,
   HangHoa,
   Import,
@@ -487,6 +489,14 @@ const routes = [
     ...NhaCungCap.ChamDiemNhaCungCap,
     exact: true,
     component: ChamDiemNhaCungCap,
+  },
+  //#endregion
+
+  //#region Combo
+  {
+    ...Combo.DanhMucComboItem,
+    exact: true,
+    component: ComboItem,
   },
   //#endregion
 ];

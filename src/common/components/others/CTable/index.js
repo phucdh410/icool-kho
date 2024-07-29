@@ -33,6 +33,7 @@ const Table = ({
   page,
   render,
   tableBgColor,
+  fields,
   ...rest
 }) => {
   const tableClass = classNames("c-table", className, `bg-[${tableBgColor}]`);
@@ -65,6 +66,7 @@ const Table = ({
       outlined
       responsive
       sorter
+      fields={fields}
       {...rest}
       activePage={saved.length ? 1 : 0}
       addTableClasses={tableClass}

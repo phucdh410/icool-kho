@@ -759,3 +759,17 @@ export const NhaCungCap = {
   },
 };
 //#endregion
+
+//#region Combo
+export const Combo = {
+  DanhMucComboItem: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh mục Combo",
+    path: "/combos",
+  },
+};
+//#endregion

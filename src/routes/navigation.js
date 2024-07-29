@@ -17,6 +17,7 @@ import {
 } from "_assets/icons";
 
 import {
+  Combo,
   Export,
   HangHoa,
   Import,
@@ -610,6 +611,29 @@ const navigation = [
         name: NhaCungCap.ThemDeXuatNhaCungCap.name,
         to: NhaCungCap.ThemDeXuatNhaCungCap.path,
         childrens: [NhaCungCap.ThemDeXuatNhaCungCap.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+    ],
+  },
+  //#endregion
+
+  //#region Combo
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Danh mục Combo",
+    route: "/combos",
+    icon: <MaterialIcon className="c-sidebar-nav-icon" />,
+    required: [
+      { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
+      { code: ENTITY_GROUP_CODE.MATERIAL },
+    ],
+    childrens: [Combo.DanhMucComboItem.path],
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: Combo.DanhMucComboItem.name,
+        to: Combo.DanhMucComboItem.path,
+        childrens: [Combo.DanhMucComboItem.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],
