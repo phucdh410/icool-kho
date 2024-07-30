@@ -771,14 +771,32 @@ export const Combo = {
     name: "Danh mục Combo item",
     path: "/combo-items",
   },
-  ThemCombo: {
+  ThemDeXuatCombo: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
     name: "Thêm đề xuất Combo",
-    path: "/combos/create",
+    path: "/combos/create-suggest",
+  },
+  SuaDeXuatCombo: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa đề xuất Combo",
+    path: "/combos/edit-suggest",
+  },
+  DanhSachDeXuatCombo: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh sách đề xuất Combo",
+    path: "/combos/suggest-list",
   },
   DanhSachCombo: {
     required: {
@@ -789,14 +807,14 @@ export const Combo = {
     name: "Danh sách Combo",
     path: "/combos/list",
   },
-  DanhSachDeXuatCombo: {
+  SuaCombo: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Danh sách đề xuất Combo",
-    path: "/combos/suggest-list",
+    name: "Sửa Combo",
+    path: "/combos/edit",
   },
 };
 //#endregion

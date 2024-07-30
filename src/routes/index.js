@@ -3,6 +3,8 @@ import { Profile as MProfile } from "_modules/auth/pages";
 import ComboItem from "_modules/combo/pages/ComboItem";
 import DanhSachCombo from "_modules/combo/pages/DanhSachCombo";
 import DanhSachDeXuatCombo from "_modules/combo/pages/DanhSachDeXuatCombo";
+import SuaCombo from "_modules/combo/pages/SuaCombo";
+import SuaDeXuatCombo from "_modules/combo/pages/SuaDeXuatCombo";
 import ThemCombo from "_modules/combo/pages/ThemCombo";
 import {
   ExportCreate,
@@ -502,7 +504,7 @@ const routes = [
     component: ComboItem,
   },
   {
-    ...Combo.ThemCombo,
+    ...Combo.ThemDeXuatCombo,
     exact: true,
     component: ThemCombo,
   },
@@ -512,9 +514,19 @@ const routes = [
     component: DanhSachDeXuatCombo,
   },
   {
+    ...Combo.SuaDeXuatCombo,
+    exact: true,
+    component: SuaDeXuatCombo,
+  },
+  {
     ...Combo.DanhSachCombo,
     exact: true,
     component: DanhSachCombo,
+  },
+  {
+    ...Combo.SuaCombo,
+    exact: true,
+    component: SuaCombo,
   },
   //#endregion
 ];

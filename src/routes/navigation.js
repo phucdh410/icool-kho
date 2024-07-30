@@ -629,9 +629,9 @@ const navigation = [
     ],
     childrens: [
       Combo.DanhMucComboItem.path,
-      Combo.ThemCombo.path,
-      Combo.DanhSachCombo.path,
+      Combo.ThemDeXuatCombo.path,
       Combo.DanhSachDeXuatCombo.path,
+      Combo.DanhSachCombo.path,
     ],
     _children: [
       {
@@ -643,9 +643,9 @@ const navigation = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: Combo.ThemCombo.name,
-        to: Combo.ThemCombo.path,
-        childrens: [Combo.ThemCombo.path],
+        name: Combo.ThemDeXuatCombo.name,
+        to: Combo.ThemDeXuatCombo.path,
+        childrens: [Combo.ThemDeXuatCombo.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
       {
@@ -657,9 +657,23 @@ const navigation = [
       },
       {
         _tag: "CSidebarNavItem",
+        name: Combo.SuaDeXuatCombo.name,
+        to: Combo.SuaDeXuatCombo.path,
+        childrens: [Combo.SuaDeXuatCombo.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
         name: Combo.DanhSachCombo.name,
         to: Combo.DanhSachCombo.path,
         childrens: [Combo.DanhSachCombo.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Combo.SuaCombo.name,
+        to: Combo.SuaCombo.path,
+        childrens: [Combo.SuaCombo.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],
