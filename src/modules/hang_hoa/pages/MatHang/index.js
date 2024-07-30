@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useRef,useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { hangHoaApi } from "src/1/apis/hang_hoa.api";
 import { useSetQueryData } from "src/1/hooks/query";
@@ -20,7 +20,7 @@ const remapData = (_data) => {
   }));
 };
 
-const InventoryCheck = () => {
+const HangHoa = () => {
   const modalRef = useRef(null);
 
   //#region Data
@@ -107,4 +107,4 @@ const InventoryCheck = () => {
   );
 };
 
-export default InventoryCheck;
+export default HangHoa;

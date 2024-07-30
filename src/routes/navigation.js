@@ -627,7 +627,12 @@ const navigation = [
       { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
       { code: ENTITY_GROUP_CODE.MATERIAL },
     ],
-    childrens: [Combo.DanhMucComboItem.path, Combo.ThemCombo.path],
+    childrens: [
+      Combo.DanhMucComboItem.path,
+      Combo.ThemCombo.path,
+      Combo.DanhSachCombo.path,
+      Combo.DanhSachDeXuatCombo.path,
+    ],
     _children: [
       {
         _tag: "CSidebarNavItem",
@@ -641,6 +646,20 @@ const navigation = [
         name: Combo.ThemCombo.name,
         to: Combo.ThemCombo.path,
         childrens: [Combo.ThemCombo.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Combo.DanhSachDeXuatCombo.name,
+        to: Combo.DanhSachDeXuatCombo.path,
+        childrens: [Combo.DanhSachDeXuatCombo.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Combo.DanhSachCombo.name,
+        to: Combo.DanhSachCombo.path,
+        childrens: [Combo.DanhSachCombo.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],

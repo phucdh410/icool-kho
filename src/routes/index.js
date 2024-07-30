@@ -1,6 +1,8 @@
 //#region Imports
 import { Profile as MProfile } from "_modules/auth/pages";
 import ComboItem from "_modules/combo/pages/ComboItem";
+import DanhSachCombo from "_modules/combo/pages/DanhSachCombo";
+import DanhSachDeXuatCombo from "_modules/combo/pages/DanhSachDeXuatCombo";
 import ThemCombo from "_modules/combo/pages/ThemCombo";
 import {
   ExportCreate,
@@ -503,6 +505,16 @@ const routes = [
     ...Combo.ThemCombo,
     exact: true,
     component: ThemCombo,
+  },
+  {
+    ...Combo.DanhSachDeXuatCombo,
+    exact: true,
+    component: DanhSachDeXuatCombo,
+  },
+  {
+    ...Combo.DanhSachCombo,
+    exact: true,
+    component: DanhSachCombo,
   },
   //#endregion
 ];

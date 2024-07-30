@@ -777,8 +777,26 @@ export const Combo = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Thêm Combo",
+    name: "Thêm đề xuất Combo",
     path: "/combos/create",
+  },
+  DanhSachCombo: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh sách Combo",
+    path: "/combos/list",
+  },
+  DanhSachDeXuatCombo: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Danh sách đề xuất Combo",
+    path: "/combos/suggest-list",
   },
 };
 //#endregion

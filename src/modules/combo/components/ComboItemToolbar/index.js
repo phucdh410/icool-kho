@@ -28,7 +28,7 @@ export const ComboItemToolbar = ({
   };
 
   return (
-    <CCard>
+    <CCard className="toolbar sticky">
       <CCardBody>
         <CRow>
           <CCol xs="12" className="action">
