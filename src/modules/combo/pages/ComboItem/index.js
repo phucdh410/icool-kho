@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { comboItemApi } from "src/1/apis/combo_item.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { useStateToolbar } from "src/1/hooks/state";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 
 import {
   ComboItemForm,
@@ -65,7 +66,18 @@ const ComboItem = () => {
     }
   };
 
-  const onRemove = () => {};
+  const onRemove = async () => {
+    const allow = await fireDelete();
+    if (allow) {
+      try {
+        await comboItemApi.remove(selected?.[0]?.id);
+        refetch();
+        fireSuccess();
+      } catch (error) {
+        fireError();
+      }
+    }
+  };
   //#endregion
 
   //#region Render
