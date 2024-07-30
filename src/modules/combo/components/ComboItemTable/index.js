@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { CCard } from "@coreui/react";
+
 import { CCheckbox } from "src/common/components/controls";
 import { CPagination, CTable } from "src/common/components/others";
 
@@ -44,23 +46,25 @@ export const ComboItemTable = ({
   };
 
   return (
-    <CTable
-      className="selectable"
-      data={data}
-      loading={loading}
-      fields={fields}
-      render={render}
-      page={paginate.page}
-      itemsPerPage={paginate.limit}
-      footer={
-        <CPagination
-          page={paginate.page}
-          total={data?.length}
-          limit={paginate.limit}
-          onPaginationChange={onPageChange}
-        />
-      }
-    />
+    <CCard>
+      <CTable
+        className="selectable"
+        data={data}
+        loading={loading}
+        fields={fields}
+        render={render}
+        page={paginate.page}
+        itemsPerPage={paginate.limit}
+        footer={
+          <CPagination
+            page={paginate.page}
+            total={data?.length}
+            limit={paginate.limit}
+            onPaginationChange={onPageChange}
+          />
+        }
+      />
+    </CCard>
   );
   //#endregion
 };

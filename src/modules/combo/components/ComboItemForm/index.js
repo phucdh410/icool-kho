@@ -2,15 +2,17 @@ import { forwardRef, useImperativeHandle } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 
-import { CCard } from "@coreui/react";
+import { CCard, CCardBody } from "@coreui/react";
 
+import { comboItemApi } from "src/1/apis/combo_item.api";
 import { hangHoaApi } from "src/1/apis/hang_hoa.api";
+import { CIconButton } from "src/1/common/components/controls";
 import { CButton, CInput, CSelect } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
 import { defaultValues } from "../../form";
 
-export const ComboItemForm = forwardRef((props, ref) => {
+export const ComboItemForm = forwardRef(({ refetch, listReset }, ref) => {
   //#region Data
   const { control, handleSubmit, reset } = useForm({
     mode: "all",
@@ -28,11 +30,10 @@ export const ComboItemForm = forwardRef((props, ref) => {
     queryFn: () => hangHoaApi.getAll(),
     select: (response) =>
       response?.data?.data?.map((e) => ({
-        id: e?.id,
-        value: e?.id,
         code: e?.code,
         label: e?.name,
         unit: e?.unit,
+        value: e?.code,
       })),
   });
   //#endregion
@@ -41,9 +42,26 @@ export const ComboItemForm = forwardRef((props, ref) => {
   const onSubmit = (isEdit) => {
     handleSubmit(async (values) => {
       try {
-        console.log(values);
+        const payload = {
+          ...values,
+          goods: values?.goods?.map((e) => e?.code),
+        };
+
+        if (isEdit) {
+          const id = values?.id;
+          await comboItemApi.update(id, payload);
+        } else {
+          await comboItemApi.create(payload);
+        }
+
+        refetch();
+        reset(defaultValues);
+        noti(
+          "success",
+          isEdit ? "Sửa combo item thành công!" : "Thêm combo item thành công!"
+        );
       } catch (error) {
-        noti("error", "Không thể cập lưu combo item!");
+        noti("error", "Không thể lưu combo item!");
       }
     })();
   };
@@ -55,12 +73,28 @@ export const ComboItemForm = forwardRef((props, ref) => {
   const onRemoveGood = (index) => () => {
     remove(index);
   };
+
+  const onReset = () => {
+    listReset();
+    reset(defaultValues);
+  };
   //#endregion
 
   useImperativeHandle(ref, () => ({
     addSubmit: () => onSubmit(),
-    edit: (id) => {
-      console.log("Do something with id: ", id);
+    edit: async (id) => {
+      try {
+        const res = await comboItemApi.getById(id);
+
+        if (res.data.data) {
+          reset({
+            id,
+            ...res.data.data,
+          });
+        }
+      } catch (error) {
+        noti("error", "Không thể lấy chi tiết combo item");
+      }
     },
     saveSubmit: () => onSubmit(true),
   }));
@@ -70,12 +104,15 @@ export const ComboItemForm = forwardRef((props, ref) => {
     {
       key: "action",
       label: (
-        <CButton
-          onClick={onAddGood}
-          icon={<i className="text-xl fa-regular fa-circle-plus"></i>}
-        />
+        <div className="w-full flex items-center justify-center ">
+          <CIconButton
+            onClick={onAddGood}
+            icon={<i className="fa-lg fa-regular fa-circle-plus"></i>}
+          />
+        </div>
       ),
       sorter: false,
+      _style: { textAlign: "center", width: 80 },
     },
     {
       key: "code",
@@ -94,7 +131,8 @@ export const ComboItemForm = forwardRef((props, ref) => {
   const render = {
     action: (record, index) => (
       <td>
-        <CButton
+        <CIconButton
+          color="#F26464"
           onClick={onRemoveGood(index)}
           icon={<i className="text-xl fa-solid fa-trash-can"></i>}
         />
@@ -105,17 +143,24 @@ export const ComboItemForm = forwardRef((props, ref) => {
         <Controller
           control={control}
           name={`goods.${index}.code`}
-          render={({ field }) => <CSelect {...field} options={goods_options} />}
+          render={({ field }) => (
+            <CSelect
+              {...field}
+              options={goods_options}
+              display="code"
+              select="code"
+            />
+          )}
         />
       </td>
     ),
-    code: (record, index) => (
+    name: (record, index) => (
       <td>
         <Controller
           control={control}
           name={`goods.${index}.code`}
           render={({ field }) => (
-            <CSelect {...field} display="name" options={goods_options} />
+            <CSelect {...field} options={goods_options} select="code" />
           )}
         />
       </td>
@@ -126,7 +171,12 @@ export const ComboItemForm = forwardRef((props, ref) => {
           control={control}
           name={`goods.${index}.code`}
           render={({ field }) => (
-            <CSelect {...field} display="unit" options={goods_options} />
+            <CSelect
+              {...field}
+              display="unit"
+              options={goods_options}
+              readOnly
+            />
           )}
         />
       </td>
@@ -142,7 +192,7 @@ export const ComboItemForm = forwardRef((props, ref) => {
               control={control}
               name="code"
               render={({ field }) => (
-                <CInput {...field} label="Mã combo item" required />
+                <CInput {...field} label="Mã combo item" required readOnly />
               )}
             />
             <Controller
@@ -159,11 +209,19 @@ export const ComboItemForm = forwardRef((props, ref) => {
                 <CInput {...field} label="Đơn vị tính" required />
               )}
             />
+            <div className="h-full flex items-end justify-end">
+              <CButton
+                onClick={onReset}
+                icon={<i className="fa-solid fa-rotate-reverse"></i>}
+              >
+                Làm mới
+              </CButton>
+            </div>
           </div>
         </CCardBody>
       </CCard>
       <CCard>
-        <h6 className="mb-0 px-3 py-1 font-semibold">
+        <h6 className="mb-0 px-4 py-2 font-semibold">
           Danh sách mặt hàng trong combo item
         </h6>
 

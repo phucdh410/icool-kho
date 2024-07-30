@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 
 export const defaultValues = {
+  id: "",
   code: "",
   name: "",
   unit: "",

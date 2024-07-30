@@ -45,7 +45,6 @@ const ComboItem = () => {
     try {
       await formRef.current.addSubmit();
       updateStatus("neutral");
-      refetch();
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +59,6 @@ const ComboItem = () => {
     try {
       await formRef.current.saveSubmit();
       updateStatus("neutral");
-      refetch();
     } catch (error) {
       console.error(error);
     }
@@ -85,7 +83,7 @@ const ComboItem = () => {
     <>
       <ComboItemToolbar
         canEdit={selected?.length === 1}
-        canRemove={selected?.length === 1}
+        canRemove={selected?.length === 1 && status === "neutral"}
         canAdd={status === "neutral"}
         canSave={status === "edit"}
         onAdd={onAdd}
@@ -104,7 +102,11 @@ const ComboItem = () => {
           />
         </div>
         <div className="basis-3/5">
-          <ComboItemForm ref={formRef} />
+          <ComboItemForm
+            ref={formRef}
+            refetch={refetch}
+            listReset={() => updateStatus("neutral")}
+          />
         </div>
       </div>
     </>

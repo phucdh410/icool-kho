@@ -657,23 +657,9 @@ const navigation = [
       },
       {
         _tag: "CSidebarNavItem",
-        name: Combo.SuaDeXuatCombo.name,
-        to: Combo.SuaDeXuatCombo.path,
-        childrens: [Combo.SuaDeXuatCombo.path],
-        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
-      },
-      {
-        _tag: "CSidebarNavItem",
         name: Combo.DanhSachCombo.name,
         to: Combo.DanhSachCombo.path,
         childrens: [Combo.DanhSachCombo.path],
-        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: Combo.SuaCombo.name,
-        to: Combo.SuaCombo.path,
-        childrens: [Combo.SuaCombo.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],

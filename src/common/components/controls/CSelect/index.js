@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useMemo } from "react";
 import RSelect from "react-select";
 import classNames from "classnames";
 
-import { CFormGroup, CInput,CLabel } from "@coreui/react";
+import { CFormGroup, CInput, CLabel } from "@coreui/react";
 
 const selectTheme = (theme) => ({
   ...theme,
@@ -13,7 +13,17 @@ const selectTheme = (theme) => ({
 });
 
 function Select(
-  { label, onChange, className, value, options, ignore, display, ...rest },
+  {
+    label,
+    onChange,
+    className,
+    value,
+    options,
+    ignore,
+    display,
+    select,
+    ...rest
+  },
   ref
 ) {
   const _class = classNames("c-input c-select", className);
@@ -34,7 +44,10 @@ function Select(
     return _options?.find((v) => v.value === value) || null;
   }, [value, _options]);
 
-  const change = useCallback((v) => onChange(v), [onChange]);
+  const change = useCallback(
+    (v) => (select ? onChange(v[select]) : onChange(v)),
+    [onChange, select]
+  );
 
   return (
     <CFormGroup className={_class}>
