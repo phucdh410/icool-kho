@@ -768,8 +768,17 @@ export const Combo = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Danh mục Combo",
-    path: "/combos",
+    name: "Danh mục Combo item",
+    path: "/combo-items",
+  },
+  ThemCombo: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Thêm Combo",
+    path: "/combos/create",
   },
 };
 //#endregion

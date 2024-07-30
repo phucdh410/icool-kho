@@ -1,6 +1,7 @@
 //#region Imports
 import { Profile as MProfile } from "_modules/auth/pages";
 import ComboItem from "_modules/combo/pages/ComboItem";
+import ThemCombo from "_modules/combo/pages/ThemCombo";
 import {
   ExportCreate,
   ExportList,
@@ -497,6 +498,11 @@ const routes = [
     ...Combo.DanhMucComboItem,
     exact: true,
     component: ComboItem,
+  },
+  {
+    ...Combo.ThemCombo,
+    exact: true,
+    component: ThemCombo,
   },
   //#endregion
 ];

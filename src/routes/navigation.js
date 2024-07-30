@@ -627,13 +627,20 @@ const navigation = [
       { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
       { code: ENTITY_GROUP_CODE.MATERIAL },
     ],
-    childrens: [Combo.DanhMucComboItem.path],
+    childrens: [Combo.DanhMucComboItem.path, Combo.ThemCombo.path],
     _children: [
       {
         _tag: "CSidebarNavItem",
         name: Combo.DanhMucComboItem.name,
         to: Combo.DanhMucComboItem.path,
         childrens: [Combo.DanhMucComboItem.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Combo.ThemCombo.name,
+        to: Combo.ThemCombo.path,
+        childrens: [Combo.ThemCombo.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],
