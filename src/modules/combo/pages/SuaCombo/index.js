@@ -17,7 +17,7 @@ const SuaCombo = () => {
       try {
         console.log(values);
       } catch (error) {
-        noti("error", error?.message ?? "Thêm đề xuất combo thành công!");
+        noti("error", error?.message ?? "Sửa combo thành công!");
       }
     })();
   };
