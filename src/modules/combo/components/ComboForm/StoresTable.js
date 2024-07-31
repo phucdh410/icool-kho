@@ -1,7 +1,10 @@
 import { Controller, useFieldArray } from "react-hook-form";
 import { useQuery } from "react-query";
 
+import { CCard, CCardBody } from "@coreui/react";
+
 import { cuaHangApi } from "src/1/apis/cua_hang.api";
+import { CIconButton } from "src/1/common/components/controls";
 import {
   CButton,
   CCheckbox,
@@ -22,7 +25,12 @@ export const StoresTable = ({ control }) => {
   const { data: stores_options } = useQuery({
     queryKey: ["danh-sach-cua-hang"],
     queryFn: () => cuaHangApi.getAll(),
-    select: (response) => response?.data?.data,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        code: e?.code,
+        value: e?.code,
+        label: e?.name,
+      })),
   });
   //#endregion
 
@@ -47,7 +55,7 @@ export const StoresTable = ({ control }) => {
     {
       key: "action",
       label: (
-        <CButton
+        <CIconButton
           onClick={onAddComboItem}
           icon={<i className="text-xl fa-regular fa-circle-plus"></i>}
         />
@@ -84,7 +92,8 @@ export const StoresTable = ({ control }) => {
   const render = {
     action: (record, index) => (
       <td>
-        <CButton
+        <CIconButton
+          color="error"
           onClick={onRemoveComboItem(index)}
           icon={<i className="text-xl fa-solid fa-trash-can"></i>}
         />
@@ -96,7 +105,7 @@ export const StoresTable = ({ control }) => {
           control={control}
           name={`stores.${index}.code`}
           render={({ field }) => (
-            <CSelect {...field} options={stores_options ?? []} />
+            <CSelect {...field} options={stores_options ?? []} display="code" />
           )}
         />
       </td>
@@ -107,7 +116,7 @@ export const StoresTable = ({ control }) => {
           control={control}
           name={`stores.${index}.code`}
           render={({ field }) => (
-            <CSelect {...field} options={stores_options ?? []} display="name" />
+            <CSelect {...field} options={stores_options ?? []} />
           )}
         />
       </td>
@@ -127,11 +136,7 @@ export const StoresTable = ({ control }) => {
           control={control}
           name={`stores.${index}.from`}
           render={({ field }) => (
-            <CSelect
-              {...field}
-              options={WEEKDAYS_OPTIONS ?? []}
-              display="unit"
-            />
+            <CSelect {...field} options={WEEKDAYS_OPTIONS ?? []} />
           )}
         />
       </td>
@@ -142,30 +147,30 @@ export const StoresTable = ({ control }) => {
           control={control}
           name={`stores.${index}.to`}
           render={({ field }) => (
-            <CSelect
-              {...field}
-              options={WEEKDAYS_OPTIONS ?? []}
-              display="unit"
-            />
+            <CSelect {...field} options={WEEKDAYS_OPTIONS ?? []} />
           )}
         />
       </td>
     ),
     is_holiday: (record, index) => (
       <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.is_holiday`}
-          render={({ field }) => <CCheckbox {...field} />}
-        />
+        <div className="flex items-center justify-center">
+          <Controller
+            control={control}
+            name={`stores.${index}.is_holiday`}
+            render={({ field }) => <CCheckbox {...field} />}
+          />
+        </div>
       </td>
     ),
   };
 
   return (
-    <>
-      <CTable fields={fields} render={render} data={fieldsForm} />
-    </>
+    <CCard>
+      <CCardBody>
+        <CTable fields={fields} render={render} data={fieldsForm} />
+      </CCardBody>
+    </CCard>
   );
   //#endregion
 };

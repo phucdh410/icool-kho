@@ -8,7 +8,7 @@ export const ComboForm = ({ control, onSubmit }) => {
     <>
       <Toolbar onSubmit={onSubmit} />
 
-      <div className="grid grid-cols-5 gap-5">
+      <div className="grid grid-cols-5 gap-x-2">
         <div className="col-span-5">
           <Info control={control} />
         </div>

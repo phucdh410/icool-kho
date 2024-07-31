@@ -221,11 +221,13 @@ export const ComboItemForm = forwardRef(({ refetch, listReset }, ref) => {
         </CCardBody>
       </CCard>
       <CCard>
-        <h6 className="mb-0 px-4 py-2 font-semibold">
-          Danh sách mặt hàng trong combo item
-        </h6>
+        <CCardBody>
+          <h6 className="mb-2 font-semibold">
+            Danh sách mặt hàng trong combo item
+          </h6>
 
-        <CTable data={fieldsForm} fields={fields} render={render} />
+          <CTable data={fieldsForm} fields={fields} render={render} />
+        </CCardBody>
       </CCard>
     </div>
   );

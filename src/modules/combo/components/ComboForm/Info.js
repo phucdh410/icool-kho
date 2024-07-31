@@ -31,7 +31,14 @@ export const Info = ({ control }) => {
           <Controller
             control={control}
             name="note"
-            render={({ field }) => <CTextarea {...field} label="Ghi chú" />}
+            render={({ field }) => (
+              <CTextarea
+                {...field}
+                label="Ghi chú"
+                className="row-span-3"
+                minHeight={150}
+              />
+            )}
           />
           <Controller
             control={control}

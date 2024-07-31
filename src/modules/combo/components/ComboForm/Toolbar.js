@@ -9,7 +9,7 @@ export const Toolbar = ({ onSubmit }) => {
         <CRow>
           <CCol xs="12" className="action">
             <div>
-              <CActionGroup onClick={onSubmit} canAdd />
+              <CActionGroup onClick={onSubmit} canAdd={false} canSave />
             </div>
           </CCol>
         </CRow>

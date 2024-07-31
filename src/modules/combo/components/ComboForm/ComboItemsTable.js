@@ -1,7 +1,10 @@
 import { Controller, useFieldArray } from "react-hook-form";
 import { useQuery } from "react-query";
 
+import { CCard, CCardBody } from "@coreui/react";
+
 import { comboItemApi } from "src/1/apis/combo_item.api";
+import { CIconButton } from "src/1/common/components/controls";
 import { CButton, CNumberInput, CSelect } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 
@@ -16,7 +19,13 @@ export const ComboItemsTable = ({ control }) => {
   const { data: combo_item_options } = useQuery({
     queryKey: ["danh-sach-combo-items"],
     queryFn: () => comboItemApi.getAll(),
-    select: (response) => response?.data?.data,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        code: e?.code,
+        label: e?.name,
+        value: e?.code,
+        unit: e?.unit,
+      })),
   });
   //#endregion
 
@@ -38,7 +47,7 @@ export const ComboItemsTable = ({ control }) => {
     {
       key: "action",
       label: (
-        <CButton
+        <CIconButton
           onClick={onAddComboItem}
           icon={<i className="text-xl fa-regular fa-circle-plus"></i>}
         />
@@ -48,25 +57,33 @@ export const ComboItemsTable = ({ control }) => {
     {
       key: "code",
       label: "Mã combo item",
+      _style: { width: 160 },
+      sorter: false,
     },
     {
       key: "name",
       label: "Tên combo item",
+      _style: { width: 160 },
+      sorter: false,
     },
     {
       key: "quantity",
       label: "Số lượng",
+      _style: { width: 120 },
+      sorter: false,
     },
     {
       key: "unit",
       label: "Đơn vị tính",
+      sorter: false,
     },
   ];
 
   const render = {
     action: (record, index) => (
       <td>
-        <CButton
+        <CIconButton
+          color="error"
           onClick={onRemoveComboItem(index)}
           icon={<i className="text-xl fa-solid fa-trash-can"></i>}
         />
@@ -78,7 +95,11 @@ export const ComboItemsTable = ({ control }) => {
           control={control}
           name={`combo_items.${index}.code`}
           render={({ field }) => (
-            <CSelect {...field} options={combo_item_options ?? []} />
+            <CSelect
+              {...field}
+              options={combo_item_options ?? []}
+              display="code"
+            />
           )}
         />
       </td>
@@ -89,11 +110,7 @@ export const ComboItemsTable = ({ control }) => {
           control={control}
           name={`combo_items.${index}.code`}
           render={({ field }) => (
-            <CSelect
-              {...field}
-              options={combo_item_options ?? []}
-              display="name"
-            />
+            <CSelect {...field} options={combo_item_options ?? []} />
           )}
         />
       </td>
@@ -125,13 +142,15 @@ export const ComboItemsTable = ({ control }) => {
   };
 
   return (
-    <>
-      <CTable fields={fields} render={render} data={fieldsForm} />
+    <CCard>
+      <CCardBody>
+        <CTable fields={fields} render={render} data={fieldsForm} />
 
-      <p className="font-semibold">
-        Tổng cost từ combo item: <span>{50000}</span>
-      </p>
-    </>
+        <p className="font-semibold m-0 mt-2">
+          Tổng cost từ combo item: <span>{50000}</span>
+        </p>
+      </CCardBody>
+    </CCard>
   );
   //#endregion
 };
