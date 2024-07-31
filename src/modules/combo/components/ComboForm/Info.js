@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import { CCard, CCardBody } from "@coreui/react";
 
 import {
+  C1Upload,
   CDate,
   CFile,
   CInput,
@@ -51,7 +52,7 @@ export const Info = ({ control }) => {
             control={control}
             name="files"
             render={({ field }) => (
-              <CFile {...field} label="Hình ảnh combo" required />
+              <C1Upload {...field} label="Hình ảnh combo" required />
             )}
           />
           <Controller

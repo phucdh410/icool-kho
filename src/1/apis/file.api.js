@@ -4,6 +4,6 @@ export const fileApi = {
   upload: async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    return await methods.post(`${api}/files/create`, formData);
+    return await methods.post("/files/create", formData);
   },
 };

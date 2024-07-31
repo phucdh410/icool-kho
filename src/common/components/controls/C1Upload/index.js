@@ -2,6 +2,8 @@ import { useRef } from "react";
 
 import { fileApi } from "src/1/apis/file.api";
 
+import { CFileItem } from "../../others";
+
 const validateFileType = (file, accept = "image/*") => {
   // Split the accept string into an array of accepted types
   const acceptedTypes = accept.split(",").map((type) => type.trim());
@@ -97,9 +99,10 @@ export const C1Upload = ({
         />
         <div className="flex flex-1 items-center input-file-wrapper h-[inherit] border-t border-l border-b border-[#D7D7D7] rounded-s-md !pl-3 pr-8">
           {value ? (
-            <span className="font-medium whitespace-nowrap text-ellipsis overflow-hidden">
-              {value?.originalname}
-            </span>
+            <CFileItem
+              file={value}
+              className="font-medium whitespace-nowrap text-ellipsis overflow-hidden"
+            />
           ) : (
             <>
               <i className="fa-regular fa-cloud-arrow-up text-lg pr-2"></i>
