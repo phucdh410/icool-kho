@@ -50,21 +50,21 @@ export const Info = ({ control }) => {
           />
           <Controller
             control={control}
-            name="files"
+            name="file_id"
             render={({ field }) => (
               <C1Upload {...field} label="Hình ảnh combo" required />
             )}
           />
           <Controller
             control={control}
-            name="start"
+            name="from"
             render={({ field }) => (
               <CDate {...field} label="Áp dụng từ ngày" required />
             )}
           />
           <Controller
             control={control}
-            name="end"
+            name="to"
             render={({ field }) => (
               <CDate {...field} label="Đến ngày" required />
             )}

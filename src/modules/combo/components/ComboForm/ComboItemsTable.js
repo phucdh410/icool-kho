@@ -16,7 +16,7 @@ export const ComboItemsTable = ({ control }) => {
     fields: fieldsForm,
     replace,
     remove,
-  } = useFieldArray({ control, name: "combo_items", keyName: "__id" });
+  } = useFieldArray({ control, name: "items", keyName: "__id" });
   //#endregion
 
   //#region Event
@@ -96,7 +96,10 @@ export const ComboItemsTable = ({ control }) => {
         <CTable fields={fields} render={render} data={fieldsForm} />
 
         <p className="font-semibold m-0 mt-2">
-          Tổng cost từ combo item: <span>{50000}</span>
+          Tổng cost từ combo item:{" "}
+          <span>
+            {fieldsForm?.reduce((prev, cur) => prev + cur?.cost ?? 0, 0)}
+          </span>
         </p>
 
         <ComboItemModal ref={addModalRef} getAddedData={getAddedData} />

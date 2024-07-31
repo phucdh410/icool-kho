@@ -89,7 +89,7 @@ export const StoresTable = ({ control }) => {
       sorter: false,
     },
     {
-      key: "is_holiday",
+      key: "holiday",
       label: "Áp dụng lễ",
       sorter: false,
     },
@@ -112,10 +112,10 @@ export const StoresTable = ({ control }) => {
     to: ({ to }) => (
       <td>{WEEKDAYS_OPTIONS.find((e) => e?.value === to)?.label}</td>
     ),
-    is_holiday: ({ is_holiday }) => (
+    holiday: ({ holiday }) => (
       <td>
         <div className="flex items-center justify-center">
-          <CCheckbox value={is_holiday} readOnly />
+          <CCheckbox value={holiday} readOnly />
         </div>
       </td>
     ),

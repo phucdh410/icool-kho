@@ -18,7 +18,7 @@ import { WEEKDAYS_OPTIONS } from "src/modules/menu/constants";
 
 const defaultValues = {
   price: 0,
-  is_holiday: false,
+  holiday: false,
   from: 1,
   to: 5,
 };
@@ -60,7 +60,7 @@ export const StoresModal = forwardRef(({ getAddedData }, ref) => {
         ?.map((e) => ({
           ...e,
           price: values?.price,
-          is_holiday: values?.is_holiday,
+          holiday: values?.holiday,
           from: values?.from,
           to: values?.to,
         }));
@@ -127,7 +127,7 @@ export const StoresModal = forwardRef(({ getAddedData }, ref) => {
             />
             <Controller
               control={control}
-              name="is_holiday"
+              name="holiday"
               render={({ field }) => (
                 <CCheckbox
                   {...field}
