@@ -65,22 +65,27 @@ export const StoresTable = ({ control }) => {
     {
       key: "code",
       label: "Mã chi nhánh",
+      sorter: false,
     },
     {
       key: "name",
       label: "Tên chi nhánh",
+      sorter: false,
     },
     {
       key: "price",
       label: "Giá",
+      sorter: false,
     },
     {
       key: "from",
       label: "Từ",
+      sorter: false,
     },
     {
       key: "to",
       label: "Đến",
+      sorter: false,
     },
     {
       key: "is_holiday",
