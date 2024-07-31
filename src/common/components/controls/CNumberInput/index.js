@@ -20,6 +20,11 @@ const allowedKeys = [
   "Tab",
 ];
 
+const THOUSAND_SEPARATOR = {
+  ",": "en-US",
+  ".": "vi-VN",
+};
+
 export const CNumberInput = forwardRef(
   (
     {
@@ -31,6 +36,7 @@ export const CNumberInput = forwardRef(
       max = 99999999,
       required = false,
       currency = "",
+      thousand_seperator = ",",
       ...rest
     },
     ref
@@ -43,12 +49,14 @@ export const CNumberInput = forwardRef(
       if (!value) return 0;
 
       if (!currency) {
-        return value.toLocaleString("vi-VN");
+        return value.toLocaleString(THOUSAND_SEPARATOR[thousand_seperator]);
       } else {
         if (isFocus) {
-          return value.toLocaleString("vi-VN");
+          return value.toLocaleString(THOUSAND_SEPARATOR[thousand_seperator]);
         } else {
-          return `${value.toLocaleString("vi-VN")}${currency}`;
+          return `${value.toLocaleString(
+            THOUSAND_SEPARATOR[thousand_seperator]
+          )}${currency}`;
         }
       }
     }, [value, isFocus, currency]);
@@ -62,8 +70,8 @@ export const CNumberInput = forwardRef(
     const onValueChange = (e) => {
       let tmpValue = e.target.value;
 
-      if (tmpValue?.includes(".")) {
-        tmpValue = tmpValue.replaceAll(".", "");
+      if (tmpValue?.includes(thousand_seperator)) {
+        tmpValue = tmpValue.replaceAll(thousand_seperator, "");
       }
 
       onChange(Number(tmpValue));
