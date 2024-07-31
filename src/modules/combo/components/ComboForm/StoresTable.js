@@ -112,14 +112,10 @@ export const StoresTable = ({ control }) => {
     to: ({ to }) => (
       <td>{WEEKDAYS_OPTIONS.find((e) => e?.value === to)?.label}</td>
     ),
-    is_holiday: (record, index) => (
+    is_holiday: ({ is_holiday }) => (
       <td>
         <div className="flex items-center justify-center">
-          <Controller
-            control={control}
-            name={`stores.${index}.is_holiday`}
-            render={({ field }) => <CCheckbox {...field} />}
-          />
+          <CCheckbox value={is_holiday} readOnly />
         </div>
       </td>
     ),
