@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Controller, useFieldArray } from "react-hook-form";
 import { useQuery } from "react-query";
 
@@ -14,39 +15,39 @@ import {
 import { CTable } from "src/common/components/others";
 import { WEEKDAYS_OPTIONS } from "src/modules/menu/constants";
 
+import { StoresModal } from "./Modal";
+
 export const StoresTable = ({ control }) => {
   //#region Data
+  const addModalRef = useRef(null);
+
   const {
     fields: fieldsForm,
-    append,
+    replace,
     remove,
   } = useFieldArray({ control, name: "stores", keyName: "__id" });
 
-  const { data: stores_options } = useQuery({
-    queryKey: ["danh-sach-cua-hang"],
-    queryFn: () => cuaHangApi.getAll(),
-    select: (response) =>
-      response?.data?.data?.map((e) => ({
-        code: e?.code,
-        value: e?.code,
-        label: e?.name,
-      })),
-  });
   //#endregion
 
   //#region Event
   const onAddComboItem = () => {
-    append({
-      code: "",
-      price: 0,
-      from: 1,
-      to: 5,
-      is_holiday: false,
-    });
+    addModalRef.current?.open();
   };
 
   const onRemoveComboItem = (index) => () => {
     remove(index);
+  };
+
+  const getAddedData = (newItems) => {
+    const combined = new Map();
+    fieldsForm.forEach((e) => {
+      combined.set(e?.code, e);
+    });
+    newItems.forEach((e) => {
+      combined.set(e?.code, e);
+    });
+    const result = Array.from(combined.values());
+    replace(result);
   };
   //#endregion
 
@@ -104,58 +105,12 @@ export const StoresTable = ({ control }) => {
         />
       </td>
     ),
-    code: (record, index) => (
-      <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.code`}
-          render={({ field }) => (
-            <CSelect {...field} options={stores_options ?? []} display="code" />
-          )}
-        />
-      </td>
+    price: ({ price }) => <td>{price.toLocaleString()}</td>,
+    from: ({ from }) => (
+      <td>{WEEKDAYS_OPTIONS.find((e) => e?.value === from)?.label}</td>
     ),
-    name: (record, index) => (
-      <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.code`}
-          render={({ field }) => (
-            <CSelect {...field} options={stores_options ?? []} />
-          )}
-        />
-      </td>
-    ),
-    price: (record, index) => (
-      <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.price`}
-          render={({ field }) => <CNumberInput {...field} />}
-        />
-      </td>
-    ),
-    from: (record, index) => (
-      <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.from`}
-          render={({ field }) => (
-            <CSelect {...field} options={WEEKDAYS_OPTIONS ?? []} />
-          )}
-        />
-      </td>
-    ),
-    to: (record, index) => (
-      <td>
-        <Controller
-          control={control}
-          name={`stores.${index}.to`}
-          render={({ field }) => (
-            <CSelect {...field} options={WEEKDAYS_OPTIONS ?? []} />
-          )}
-        />
-      </td>
+    to: ({ to }) => (
+      <td>{WEEKDAYS_OPTIONS.find((e) => e?.value === to)?.label}</td>
     ),
     is_holiday: (record, index) => (
       <td>
@@ -174,6 +129,8 @@ export const StoresTable = ({ control }) => {
     <CCard>
       <CCardBody>
         <CTable fields={fields} render={render} data={fieldsForm} />
+
+        <StoresModal ref={addModalRef} getAddedData={getAddedData} />
       </CCardBody>
     </CCard>
   );
