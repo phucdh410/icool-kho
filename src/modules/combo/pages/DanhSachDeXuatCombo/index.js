@@ -20,7 +20,7 @@ const DanhSachDeXuatCombo = () => {
 
   const { data, isFetching } = useQuery({
     queryKey: ["danh-sach-de-xuat-combo", params],
-    queryFn: () => comboApi.getAllSuggest(params),
+    queryFn: () => comboApi.getAllProposals(params),
     select: (dataResponse) =>
       Array.isArray(dataResponse) ? dataResponse : dataResponse?.data?.data,
   });

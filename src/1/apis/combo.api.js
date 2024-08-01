@@ -4,6 +4,9 @@ export const comboApi = {
   getAll: async (params) => {
     return await methods.get("/combos", { params });
   },
+  getAllProposals: async () => {
+    return await methods.get(`/combo/proposals`);
+  },
   create: async (body) => {
     return await methods.post("/combo/proposals", body);
   },
