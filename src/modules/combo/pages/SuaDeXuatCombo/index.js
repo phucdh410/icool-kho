@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { comboApi } from "src/1/apis/combo.api";
+import { useTabs } from "src/1/hooks/tab";
 import { history } from "src/App";
 
 import { ComboForm } from "../../components";
@@ -13,6 +14,8 @@ import { comboDefaultValues } from "../../form";
 const SuaDeXuatCombo = () => {
   //#region Data
   const params = useParams();
+
+  const { offCurrentTab } = useTabs("/combos/edit-suggest/:id");
 
   const { data, isError } = useQuery({
     queryKey: ["chi-tiet-de-xuat-combo", params?.id],
@@ -23,6 +26,7 @@ const SuaDeXuatCombo = () => {
 
   if (isError) {
     noti("error", "Không thể lấy thông tin chi tiết đề xuất combo!");
+    offCurrentTab();
     history.push("/combos/suggest-list");
   }
 
@@ -45,6 +49,7 @@ const SuaDeXuatCombo = () => {
         await comboApi.updateProposal(values?.id, payload);
         noti("success", "Sửa đề xuất combo thành công!");
         reset(comboDefaultValues);
+        offCurrentTab();
         history.push("/combos/suggest-list");
       } catch (error) {
         noti("error", error?.message ?? "Sửa đề xuất combo thành công!");
