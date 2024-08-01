@@ -1,9 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
+import classNames from "classnames";
 
 import { CCard, CCardBody, CCol, CCollapse, CRow } from "@coreui/react";
 
 import { Magnifying } from "src/common/assets/icons";
-import { CButton, CDate, CSelect } from "src/common/components/controls";
+import { CButton, CSelect } from "src/common/components/controls";
 import { CActionGroup } from "src/common/components/others";
 import { filter } from "src/utils/funcs";
 
@@ -61,6 +62,13 @@ export const ComboSuggestToolbar = ({
                 canRemove={canRemove}
               />
             </div>
+            <CButton
+              disabled={selected.length !== 1}
+              onClick={onApprove}
+              className="mr-2"
+            >
+              Xác nhận
+            </CButton>
             <div
               className={classNames(
                 "btn",
@@ -73,8 +81,8 @@ export const ComboSuggestToolbar = ({
           </CCol>
         </CRow>
 
-        <CCollapse>
-          <CRow className="mt-3 justify-content-xxl-end">
+        <CCollapse show={status === 1}>
+          <CRow className="mt-3">
             <CCol xs="2">
               <Controller
                 control={control}
@@ -84,12 +92,12 @@ export const ComboSuggestToolbar = ({
                 )}
               />
             </CCol>
-            <CCol xs="1">
+            <CCol xs="2">
               <Controller
                 control={control}
                 name="code"
                 render={({ field }) => (
-                  <CSelect {...field} label="Mã hàng hóa" options={[]} />
+                  <CSelect {...field} label="Mã combo" options={[]} />
                 )}
               />
             </CCol>
@@ -98,25 +106,18 @@ export const ComboSuggestToolbar = ({
                 control={control}
                 name="name"
                 render={({ field }) => (
-                  <CSelect {...field} label="Tên hàng hóa" options={[]} />
+                  <CSelect {...field} label="Tên combo" options={[]} />
                 )}
               />
             </CCol>
-            <CCol xs="2" className="btn-search">
-              <div className="form-group c-input">
+            <CCol xs="5" className="btn-search flex items-end justify-end">
+              <div className="form-group c-input w-fit">
                 <CButton
                   icon={<Magnifying />}
                   onClick={search}
                   className="mr-0"
                 >
                   Tìm kiếm
-                </CButton>
-                <CButton
-                  disabled={selected.length !== 1}
-                  onClick={onApprove}
-                  className="mr-0"
-                >
-                  Xác nhận
                 </CButton>
               </div>
             </CCol>
