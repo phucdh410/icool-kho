@@ -1,6 +1,7 @@
 import { useState } from "react";
+import dayjs from "dayjs";
 
-import { CCard } from "@coreui/react";
+import { CCard, CCardBody } from "@coreui/react";
 
 import { CCheckbox } from "src/common/components/controls";
 import { CPagination, CTable } from "src/common/components/others";
@@ -49,15 +50,15 @@ export const ComboSuggestTable = ({ isSelectAll, data, onSelect, loading }) => {
       label: "Người đề xuất",
     },
     {
-      key: "status",
+      key: "active",
       label: "Trạng thái",
     },
     {
-      key: "start",
+      key: "from",
       label: "Áp dụng từ ngày",
     },
     {
-      key: "end",
+      key: "to",
       label: "Đến ngày",
     },
     {
@@ -72,30 +73,33 @@ export const ComboSuggestTable = ({ isSelectAll, data, onSelect, loading }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    // name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
+    from: ({ from }) => <td>{dayjs(from).format("DD/MM/YYYY")}</td>,
+    to: ({ to }) => <td>{dayjs(to).format("DD/MM/YYYY")}</td>,
   };
 
   return (
     <CCard>
-      <div className="mt-3">
-        <CTable
-          className="selectable"
-          loading={loading}
-          fields={fields}
-          render={render}
-          data={data}
-          page={paginate?.page}
-          itemsPerPage={paginate?.limit}
-          footer={
-            <CPagination
-              page={paginate.page}
-              total={data?.length}
-              limit={paginate.limit}
-              onPaginationChange={onPaginationChange}
-            />
-          }
-        />
-      </div>
+      <CCardBody className="pt-0 px-0">
+        <div className="mt-3">
+          <CTable
+            className="selectable"
+            loading={loading}
+            fields={fields}
+            render={render}
+            data={data}
+            page={paginate?.page}
+            itemsPerPage={paginate?.limit}
+            footer={
+              <CPagination
+                page={paginate.page}
+                total={data?.length}
+                limit={paginate.limit}
+                onPaginationChange={onPaginationChange}
+              />
+            }
+          />
+        </div>
+      </CCardBody>
     </CCard>
   );
   //#endregion

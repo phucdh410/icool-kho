@@ -55,7 +55,12 @@ const SuaDeXuatCombo = () => {
 
   useEffect(() => {
     if (data) {
-      reset(...data);
+      reset({
+        ...data,
+        from: dayjs(data?.from).toDate(),
+        to: dayjs(data?.to).toDate(),
+        file_id: data?.file ?? null,
+      });
     }
   }, [data]);
 

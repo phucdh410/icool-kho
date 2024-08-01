@@ -787,7 +787,7 @@ export const Combo = {
     },
     icon: "",
     name: "Sửa đề xuất Combo",
-    path: "/combos/edit-suggest",
+    path: "/combos/edit-suggest/:id",
   },
   DanhSachDeXuatCombo: {
     required: {

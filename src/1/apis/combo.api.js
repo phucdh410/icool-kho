@@ -10,13 +10,13 @@ export const comboApi = {
   create: async (body) => {
     return await methods.post("/combo/proposals", body);
   },
-  getProposalById: async () => {
-    return await methods.get(`/combo/propasals/${id}`);
+  getProposalById: async (id) => {
+    return await methods.get(`/combo/proposals/${id}`);
   },
   updateProposal: async (id, body) => {
-    return await methods.post(`/combo/proposals/${id}`, body);
+    return await methods.put(`/combo/proposals/${id}`, body);
   },
   removeProposal: async (id) => {
-    return await methods.delete(`/combo/propasals/${id}`);
+    return await methods.delete(`/combo/proposals/${id}`);
   },
 };

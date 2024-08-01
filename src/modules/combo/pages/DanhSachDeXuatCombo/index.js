@@ -18,7 +18,7 @@ const DanhSachDeXuatCombo = () => {
 
   const [status, setStatus] = useState(0);
 
-  const { data, isFetching } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-de-xuat-combo", params],
     queryFn: () => comboApi.getAllProposals(params),
     select: (dataResponse) =>
@@ -49,18 +49,18 @@ const DanhSachDeXuatCombo = () => {
 
   const onSearch = (data) => setParams(data);
 
-  const onAdd = () => history.push("/combos/create");
+  const onAdd = () => history.push("/combos/create-suggest");
 
   const onEdit = () => {
     const id = data.find((e) => e.check)?.id;
-    history.push(`/combos/edit/${id}`);
+    history.push(`/combos/edit-suggest/${id}`);
   };
 
   const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
       try {
-        await comboApi.remove(selected?.[0]?.id);
+        await comboApi.removeProposal(selected?.[0]?.id);
         refetch();
         fireSuccess();
       } catch (error) {
