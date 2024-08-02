@@ -613,6 +613,13 @@ const navigation = [
         childrens: [NhaCungCap.ThemDeXuatNhaCungCap.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: NhaCungCap.DanhSachNhaCungCap.name,
+        to: NhaCungCap.DanhSachNhaCungCap.path,
+        childrens: [NhaCungCap.DanhSachNhaCungCap.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
     ],
   },
   //#endregion

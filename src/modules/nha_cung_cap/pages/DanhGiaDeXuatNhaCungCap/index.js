@@ -12,7 +12,7 @@ import { history } from "src/App";
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";
 
-const DanhGiaNhaCungCap = () => {
+const DanhGiaDeXuatNhaCungCap = () => {
   //#region Data
   const params = useParams();
 
@@ -72,4 +72,4 @@ const DanhGiaNhaCungCap = () => {
   );
   //#endregion
 };
-export default DanhGiaNhaCungCap;
+export default DanhGiaDeXuatNhaCungCap;

@@ -53,9 +53,12 @@ import ChiTietMenu from "_modules/menu/pages/ChiTietMenu";
 import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
+import ChamDiemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ChamDiemDeXuatNhaCungCap";
 import ChamDiemNhaCungCap from "_modules/nha_cung_cap/pages/ChamDiemNhaCungCap";
+import DanhGiaDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhGiaDeXuatNhaCungCap";
 import DanhGiaNhaCungCap from "_modules/nha_cung_cap/pages/DanhGiaNhaCungCap";
 import DanhSachDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachDeXuatNhaCungCap";
+import DanhSachNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachNhaCungCap";
 import SuaDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/SuaDeXuatNhaCungCap";
 import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
 import {
@@ -484,6 +487,21 @@ const routes = [
     ...NhaCungCap.SuaDeXuatNhaCungCap,
     exact: true,
     component: SuaDeXuatNhaCungCap,
+  },
+  {
+    ...NhaCungCap.DanhGiaDeXuatNhaCungCap,
+    exact: true,
+    component: DanhGiaDeXuatNhaCungCap,
+  },
+  {
+    ...NhaCungCap.ChamDiemDeXuatNhaCungCap,
+    exact: true,
+    component: ChamDiemDeXuatNhaCungCap,
+  },
+  {
+    ...NhaCungCap.DanhSachNhaCungCap,
+    exact: true,
+    component: DanhSachNhaCungCap,
   },
   {
     ...NhaCungCap.DanhGiaNhaCungCap,
