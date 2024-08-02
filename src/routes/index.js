@@ -54,11 +54,8 @@ import DanhSachMenuPage from "_modules/menu/pages/DanhSachMenuPage";
 import SuaMenuPage from "_modules/menu/pages/SuaMenuPage";
 import TaoMenuPage from "_modules/menu/pages/TaoMenuPage";
 import ChamDiemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ChamDiemDeXuatNhaCungCap";
-import ChamDiemNhaCungCap from "_modules/nha_cung_cap/pages/ChamDiemNhaCungCap";
 import DanhGiaDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhGiaDeXuatNhaCungCap";
-import DanhGiaNhaCungCap from "_modules/nha_cung_cap/pages/DanhGiaNhaCungCap";
 import DanhSachDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachDeXuatNhaCungCap";
-import DanhSachNhaCungCap from "_modules/nha_cung_cap/pages/DanhSachNhaCungCap";
 import SuaDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/SuaDeXuatNhaCungCap";
 import ThemDeXuatNhaCungCap from "_modules/nha_cung_cap/pages/ThemDeXuatNhaCungCap";
 import {
@@ -66,6 +63,11 @@ import {
   GroupPermission,
   SlipPermission,
 } from "_modules/permission/pages";
+import DanhSachNhaCungCapChamDiem from "_modules/phieu_cham_diem_nha_cung_cap/pages/DanhSachNhaCungCapChamDiem";
+import DanhSachPhieuChamDiemNhaCungCap from "_modules/phieu_cham_diem_nha_cung_cap/pages/DanhSachPhieuChamDiemNhaCungCap";
+import NhaCungCapChamDiem from "_modules/phieu_cham_diem_nha_cung_cap/pages/NhaCungCapChamDiem";
+import SuaPhieuChamDiemNhaCungCap from "_modules/phieu_cham_diem_nha_cung_cap/pages/SuaPhieuChamDiemNhaCungCap";
+import ThemPhieuChamDiemNhaCungCap from "_modules/phieu_cham_diem_nha_cung_cap/pages/ThemPhieuChamDiemNhaCungCap";
 import {
   PurchaseProposalFormCreate,
   PurchaseProposalFormList,
@@ -90,6 +92,7 @@ import {
 
 import {
   Combo,
+  DeXuatNhaCungCap,
   Export,
   HangHoa,
   Import,
@@ -102,7 +105,6 @@ import {
   Solution,
   Summary,
 } from "./constant";
-
 //#endregion
 
 //#region Routes
@@ -472,46 +474,59 @@ const routes = [
   },
   //#endregion
 
-  //#region Nhà cung cấp
+  //#region Đề xuất nhà cung cấp
   {
-    ...NhaCungCap.DanhSachDeXuatNhaCungCap,
+    ...DeXuatNhaCungCap.DanhSachDeXuatNhaCungCap,
     exact: true,
     component: DanhSachDeXuatNhaCungCap,
   },
   {
-    ...NhaCungCap.ThemDeXuatNhaCungCap,
+    ...DeXuatNhaCungCap.ThemDeXuatNhaCungCap,
     exact: true,
     component: ThemDeXuatNhaCungCap,
   },
   {
-    ...NhaCungCap.SuaDeXuatNhaCungCap,
+    ...DeXuatNhaCungCap.SuaDeXuatNhaCungCap,
     exact: true,
     component: SuaDeXuatNhaCungCap,
   },
   {
-    ...NhaCungCap.DanhGiaDeXuatNhaCungCap,
+    ...DeXuatNhaCungCap.DanhGiaDeXuatNhaCungCap,
     exact: true,
     component: DanhGiaDeXuatNhaCungCap,
   },
   {
-    ...NhaCungCap.ChamDiemDeXuatNhaCungCap,
+    ...DeXuatNhaCungCap.ChamDiemDeXuatNhaCungCap,
     exact: true,
     component: ChamDiemDeXuatNhaCungCap,
   },
+  //#endregion
+
+  //#region Nhà cung cấp
   {
-    ...NhaCungCap.DanhSachNhaCungCap,
+    ...NhaCungCap.DanhSachPhieuChamDiemNhaCungCap,
     exact: true,
-    component: DanhSachNhaCungCap,
+    component: DanhSachPhieuChamDiemNhaCungCap,
   },
   {
-    ...NhaCungCap.DanhGiaNhaCungCap,
+    ...NhaCungCap.ThemPhieuChamDiemNhaCungCap,
     exact: true,
-    component: DanhGiaNhaCungCap,
+    component: ThemPhieuChamDiemNhaCungCap,
+  },
+  {
+    ...NhaCungCap.SuaPhieuChamDiemNhaCungCap,
+    exact: true,
+    component: SuaPhieuChamDiemNhaCungCap,
+  },
+  {
+    ...NhaCungCap.DanhSachNhaCungCapChamDiem,
+    exact: true,
+    component: DanhSachNhaCungCapChamDiem,
   },
   {
     ...NhaCungCap.ChamDiemNhaCungCap,
     exact: true,
-    component: ChamDiemNhaCungCap,
+    component: NhaCungCapChamDiem,
   },
   //#endregion
 

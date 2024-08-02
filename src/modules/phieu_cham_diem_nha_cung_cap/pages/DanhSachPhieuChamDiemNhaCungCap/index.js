@@ -9,9 +9,9 @@ import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 
-import { SuggestListTable, SuggestListToolbar } from "../../components";
+import { ListTable, ListToolbar } from "../../components";
 
-const DanhSachNhaCungCap = () => {
+const DanhSachPhieuChamDiemNhaCungCap = () => {
   //#region Data
   const [status, setStatus] = useState(0);
 
@@ -24,7 +24,7 @@ const DanhSachNhaCungCap = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-de-xuat-nha-cung-cap", params],
-    queryFn: () => nhaCungCapApi.getAllSuggest(params),
+    queryFn: () => nhaCungCapApi.getAll(params),
     select: (response) =>
       Array.isArray(response) ? response : response?.data?.data,
   });
@@ -53,18 +53,18 @@ const DanhSachNhaCungCap = () => {
 
   const onSearch = (_params) => setParams(_params);
 
-  const onAdd = () => history.push("/supplier-suggest/create");
+  const onAdd = () => history.push("/suppliers/create");
 
   const onEdit = () => {
     const id = data.find((e) => e.check)?.id;
-    history.push(`/supplier-suggest/edit/${id}`);
+    history.push(`/suppliers/edit/${id}`);
   };
 
   const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
       try {
-        await nhaCungCapApi.removeSuggest(selected?.[0]?.id);
+        await nhaCungCapApi.remove(selected?.[0]?.id);
         refetch();
         fireSuccess();
       } catch (error) {
@@ -79,7 +79,7 @@ const DanhSachNhaCungCap = () => {
     <>
       <CCard className="toolbar sticky">
         <CCardBody>
-          <SuggestListToolbar
+          <ListToolbar
             params={params}
             status={status}
             toggleStatus={onStatusChange}
@@ -96,7 +96,7 @@ const DanhSachNhaCungCap = () => {
       <CCard>
         <CCardHeader></CCardHeader>
         <CCardBody className="px-0 pt-0">
-          <SuggestListTable
+          <ListTable
             loading={isFetching}
             isSelectAll={isSelectAll}
             data={data}
@@ -108,4 +108,4 @@ const DanhSachNhaCungCap = () => {
   );
   //#endregion
 };
-export default DanhSachNhaCungCap;
+export default DanhSachPhieuChamDiemNhaCungCap;

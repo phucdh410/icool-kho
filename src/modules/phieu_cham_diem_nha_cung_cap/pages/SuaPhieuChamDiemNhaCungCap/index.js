@@ -6,26 +6,26 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { deXuatNhaCungCapApi } from "src/1/apis/de_xuat_nha_cung_cap.api";
+import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";
 
-const SuaDeXuatNhaCungCap = () => {
+const SuaPhieuChamDiemNhaCungCap = () => {
   //#region Data
   const params = useParams();
 
   const { data, isError } = useQuery({
     queryKey: ["chi-tiet-de-xuat-nha-cung-cap", params?.id],
-    queryFn: () => deXuatNhaCungCapApi.getById(params?.id),
+    queryFn: () => nhaCungCapApi.getById(params?.id),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });
 
   if (isError) {
     noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
-    history.replace("/supplier-suggest/list");
+    history.replace("/suppliers/list");
   }
 
   const { control, handleSubmit, reset } = useForm({
@@ -66,11 +66,11 @@ const SuaDeXuatNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await deXuatNhaCungCapApi.update(params.id, payload);
+        await nhaCungCapApi.update(params.id, payload);
 
         noti("success", "Sửa đề xuất nhà cung cấp thành công!");
         reset(defaultValues);
-        history.push("/supplier-suggest/list");
+        history.push("/suppliers/list");
       } catch (error) {
         noti(
           "error",
@@ -116,4 +116,4 @@ const SuaDeXuatNhaCungCap = () => {
   );
   //#endregion
 };
-export default SuaDeXuatNhaCungCap;
+export default SuaPhieuChamDiemNhaCungCap;

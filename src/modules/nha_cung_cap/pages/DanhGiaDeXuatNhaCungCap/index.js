@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { deXuatNhaCungCapApi } from "src/1/apis/de_xuat_nha_cung_cap.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
@@ -18,7 +18,7 @@ const DanhGiaDeXuatNhaCungCap = () => {
 
   const { data, isError } = useQuery({
     queryKey: ["chi-tiet-danh-gia-de-xuat-ncc", params?.id],
-    queryFn: () => nhaCungCapApi.getDetailSuggest(params?.id),
+    queryFn: () => deXuatNhaCungCapApi.getById(params?.id),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });

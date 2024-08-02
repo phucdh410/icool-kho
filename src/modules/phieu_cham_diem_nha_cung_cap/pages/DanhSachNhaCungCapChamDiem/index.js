@@ -12,20 +12,20 @@ import { history } from "src/App";
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";
 
-const DanhGiaNhaCungCap = () => {
+const DanhSachNhaCungCapChamDiem = () => {
   //#region Data
   const params = useParams();
 
   const { data, isError } = useQuery({
     queryKey: ["chi-tiet-danh-gia-de-xuat-ncc", params?.id],
-    queryFn: () => nhaCungCapApi.getDetailSuggest(params?.id),
+    queryFn: () => nhaCungCapApi.getById(params?.id),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });
 
   if (isError) {
     noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
-    history.replace("/supplier-suggest/list");
+    history.replace("/suppliers/list");
   }
 
   const { control, reset } = useForm({
@@ -72,4 +72,4 @@ const DanhGiaNhaCungCap = () => {
   );
   //#endregion
 };
-export default DanhGiaNhaCungCap;
+export default DanhSachNhaCungCapChamDiem;

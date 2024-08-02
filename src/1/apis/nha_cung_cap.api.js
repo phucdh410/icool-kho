@@ -1,28 +1,25 @@
 import { methods } from "../axios";
 
 export const nhaCungCapApi = {
-  createSuggest: async (body) => {
-    return await methods.post("/supplier-proposals", body);
+  create: async (body) => {
+    return await methods.post("/suppliers", body);
   },
-  getAllSuggest: async (params) => {
-    return await methods.get("/supplier-proposals", { params });
+  getAll: async (params) => {
+    return await methods.get("/suppliers", { params });
   },
-  getDetailSuggest: async (id) => {
-    return await methods.get(`/supplier-proposals/${id}`);
+  getById: async (id) => {
+    return await methods.get(`/suppliers/${id}`);
   },
-  updateSuggest: async (id, body) => {
-    return await methods.put(`/supplier-proposals/${id}`, body);
+  update: async (id, body) => {
+    return await methods.put(`/suppliers/${id}`, body);
   },
-  removeSuggest: async (id) => {
-    return await methods.delete(`/supplier-proposals/${id}`);
+  remove: async (id) => {
+    return await methods.delete(`/suppliers/${id}`);
   },
-  getDetailSupplier: async (id) => {
-    return await methods.get(`/supplier-proposals/getByProposalSupplier/${id}`);
+  getSupplierById: async (id) => {
+    return await methods.get(`/suppliers/getByProposalSupplier/${id}`);
   },
-  updateDetailSupplier: async (id, body) => {
-    return await methods.put(
-      `/supplier-proposals/proposalSupplier/${id}`,
-      body
-    );
+  updateSupplier: async (id, body) => {
+    return await methods.put(`/suppliers/proposalSupplier/${id}`, body);
   },
 };

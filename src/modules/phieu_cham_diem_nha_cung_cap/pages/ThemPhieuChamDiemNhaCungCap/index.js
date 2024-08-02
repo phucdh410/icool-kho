@@ -1,33 +1,16 @@
-import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { deXuatNhaCungCapApi } from "src/1/apis/de_xuat_nha_cung_cap.api";
+import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
 import { defaultValues, resolver } from "../../form";
 
-const SuaDeXuatNhaCungCap = () => {
+const ThemPhieuChamDiemNhaCungCap = () => {
   //#region Data
-  const params = useParams();
-
-  const { data, isError } = useQuery({
-    queryKey: ["chi-tiet-de-xuat-nha-cung-cap", params?.id],
-    queryFn: () => deXuatNhaCungCapApi.getById(params?.id),
-    enabled: !!params?.id,
-    select: (response) => response?.data?.data,
-  });
-
-  if (isError) {
-    noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
-    history.replace("/supplier-suggest/list");
-  }
-
   const { control, handleSubmit, reset } = useForm({
     mode: "all",
     defaultValues,
@@ -66,33 +49,20 @@ const SuaDeXuatNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await deXuatNhaCungCapApi.update(params.id, payload);
+        await nhaCungCapApi.create(payload);
 
-        noti("success", "Sửa đề xuất nhà cung cấp thành công!");
+        noti("success", "Tạo đề xuất nhà cung cấp thành công!");
         reset(defaultValues);
-        history.push("/supplier-suggest/list");
+        history.push("/suppliers/list");
       } catch (error) {
         noti(
           "error",
-          error?.message ?? "Sửa đề xuất nhà cung cấp không thành công!"
+          error?.message ?? "Tạo đề xuất nhà cung cấp không thành công!"
         );
       }
     })();
   };
   //#endregion
-
-  useEffect(() => {
-    if (data) {
-      reset({
-        ...data,
-        evaluation_date: dayjs(data?.evaluation_date).toDate(),
-        suppliers: data?.suppliers?.map((e) => ({
-          ...e,
-          materials: e?.materials?.map((el) => el?.material_code),
-        })),
-      });
-    }
-  }, [data]);
 
   //#region Render
   return (
@@ -116,4 +86,4 @@ const SuaDeXuatNhaCungCap = () => {
   );
   //#endregion
 };
-export default SuaDeXuatNhaCungCap;
+export default ThemPhieuChamDiemNhaCungCap;

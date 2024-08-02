@@ -9,13 +9,13 @@ import { history } from "src/App";
 import { MarkInfo, MarkTable, MarkToolbar } from "../../components";
 import { markDefaulValues as defaultValues } from "../../form";
 
-const ChamDiemNhaCungCap = () => {
+const NhaCungCapChamDiem = () => {
   //#region Data
   const params = useParams();
 
   const { data } = useQuery({
     queryKey: ["chi-tiet-diem-ncc", params?.supplierId],
-    queryFn: () => nhaCungCapApi.getDetailSupplier(params?.supplierId),
+    queryFn: () => nhaCungCapApi.getSupplierById(params?.supplierId),
     enabled: !!params?.supplierId,
     select: (response) => response?.data?.data,
   });
@@ -37,11 +37,11 @@ const ChamDiemNhaCungCap = () => {
           evaluations: values?.evaluations,
         };
 
-        await nhaCungCapApi.updateDetailSupplier(params?.supplierId, payload);
+        await nhaCungCapApi.updateSupplier(params?.supplierId, payload);
 
         noti("success", "Chấm điểm nhà cung cấp thành công!");
         reset(defaultValues);
-        history.push(`/supplier-suggest/rating/${params?.id}`);
+        history.push(`/suppliers/rating/${params?.id}`);
       } catch (error) {
         noti("error", error?.message || "Chấm điểm không thành công!");
       }
@@ -67,4 +67,4 @@ const ChamDiemNhaCungCap = () => {
   );
   //#endregion
 };
-export default ChamDiemNhaCungCap;
+export default NhaCungCapChamDiem;

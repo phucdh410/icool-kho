@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { deXuatNhaCungCapApi } from "src/1/apis/de_xuat_nha_cung_cap.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
@@ -49,7 +49,7 @@ const ThemDeXuatNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await nhaCungCapApi.createSuggest(payload);
+        await deXuatNhaCungCapApi.create(payload);
 
         noti("success", "Tạo đề xuất nhà cung cấp thành công!");
         reset(defaultValues);

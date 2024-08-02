@@ -710,8 +710,8 @@ export const Permission = {
 };
 //#endregion
 
-//#region Nhà cung cấp
-export const NhaCungCap = {
+//#region Đề xuất nhà cung cấp
+export const DeXuatNhaCungCap = {
   DanhSachDeXuatNhaCungCap: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
@@ -757,22 +757,27 @@ export const NhaCungCap = {
     name: "Sửa đề xuất nhà cung cấp",
     path: "/supplier-suggest/edit/:id",
   },
-  DanhSachNhaCungCap: {
+};
+//#endregion
+
+//#region Nhà cung cấp
+export const NhaCungCap = {
+  DanhSachPhieuChamDiemNhaCungCap: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Danh sách nhà cung cấp",
+    name: "DS phiếu chấm điểm NCC",
     path: "/suppliers/list",
   },
-  DanhGiaNhaCungCap: {
+  DanhSachNhaCungCapChamDiem: {
     required: {
       code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "Đánh giá nhà cung cấp",
+    name: "DS nhà cung cấp chiếm điểm",
     path: "/suppliers/rating/:id",
   },
   ChamDiemNhaCungCap: {
@@ -783,6 +788,24 @@ export const NhaCungCap = {
     icon: "",
     name: "Chấm điểm nhà cung cấp",
     path: "/suppliers/rating/:id/:supplierId",
+  },
+  ThemPhieuChamDiemNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Thêm phiếu chấm điểm NCC",
+    path: "/suppliers/create",
+  },
+  SuaPhieuChamDiemNhaCungCap: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa phiếu chấm điểm NCC",
+    path: "/suppliers/edit/:id",
   },
 };
 //#endregion
