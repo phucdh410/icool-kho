@@ -1,11 +1,20 @@
+import { Controller } from "react-hook-form";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 
 import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
 import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
-import { PTable } from "src/1/common/components/others";
-import { CCheckbox } from "src/common/components/controls";
+import { CTable } from "src/1/common/components/others";
+import { history } from "src/App";
+import {
+  CButton,
+  CCheckbox,
+  CRating,
+  CSelect,
+  CSelectMulti,
+} from "src/common/components/controls";
 
-import { Row } from "./Row";
+import { FilesCell } from "./FilesCell";
 
 export const FormTable = ({
   control,
@@ -32,6 +41,8 @@ export const FormTable = ({
         code: e?.code,
       })),
   });
+
+  const { pathname } = useLocation();
   //#endregion
 
   //#region Event
@@ -41,71 +52,200 @@ export const FormTable = ({
   //#endregion
 
   //#region Render
-  return (
-    <PTable>
-      <thead>
-        <tr>
-          {!onlyView && (
-            <th>
+  const headers = [
+    ...(!onlyView
+      ? [
+          {
+            key: "selected",
+            label: "",
+            style: { minWidth: 50 },
+            render: () => (
               <CCheckbox
                 value={isSelectedAll}
                 onChange={onSelectAll}
                 disabled={onlyView}
               />
-            </th>
+            ),
+            cellRender: (value, record, index) => (
+              <Controller
+                control={control}
+                name={`suppliers.${index}.selected`}
+                render={({ field }) => <CCheckbox {...field} value={value} />}
+              />
+            ),
+          },
+        ]
+      : []),
+    {
+      key: "code",
+      label: "Mã NCC",
+      style: { minWidth: 190 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.code`}
+          render={({ field }) => (
+            <CSelect
+              {...field}
+              className="w-full"
+              options={suppliers_options ?? []}
+              display="code"
+              select="value"
+              readOnly={onlyView}
+            />
           )}
-          <th className="min-w-[190px]" style={{ textTransform: "capitalize" }}>
-            Mã NCC
-          </th>
-          <th className="min-w-[350px]" style={{ textTransform: "capitalize" }}>
-            Tên NCC
-          </th>
-          <th className="min-w-[180px]" style={{ textTransform: "capitalize" }}>
-            Năng lực tài chính
-          </th>
-          <th className="min-w-[140px]" style={{ textTransform: "capitalize" }}>
-            Uy tín NCC
-          </th>
-          <th className="min-w-[140px]" style={{ textTransform: "capitalize" }}>
-            Chất lượng
-          </th>
-          <th className="min-w-[140px]" style={{ textTransform: "capitalize" }}>
-            Đánh giá từ
-            <br />
-            chi nhánh
-          </th>
-          <th className="min-w-[140px]" style={{ textTransform: "capitalize" }}>
-            Đánh giá từ
-            <br />
-            khách hàng
-          </th>
-          <th className="min-w-[140px]" style={{ textTransform: "capitalize" }}>
-            Giá cả
-          </th>
-          <th className="min-w-[350px]" style={{ textTransform: "capitalize" }}>
-            Danh sách NVL cung cấp
-          </th>
-          <th className="min-w-[185px]" style={{ textTransform: "capitalize" }}>
-            Tài liệu minh chứng
-          </th>
-          {onlyView && <th className="min-w-[150px]">Đánh giá</th>}
-        </tr>
-      </thead>
-      <tbody>
-        {dataTable.map((row, index) => (
-          <Row
-            key={row?.__id}
-            control={control}
-            data={row}
-            index={index}
-            onlyView={onlyView}
-            suppliers_options={suppliers_options}
-            materials_options={materials_options}
-            onListChange={onListChange}
-          />
-        ))}
-      </tbody>
-    </PTable>
+        />
+      ),
+    },
+    {
+      key: "name",
+      label: "Tên NCC",
+      align: "left",
+      style: { minWidth: 350 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.code`}
+          render={({ field }) => (
+            <CSelect
+              {...field}
+              className="w-full"
+              options={suppliers_options ?? []}
+              select="value"
+              readOnly={onlyView}
+            />
+          )}
+        />
+      ),
+    },
+    {
+      key: "financial",
+      label: "Năng lực tài chính",
+      style: { minWidth: 180 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.financial`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "reputation",
+      label: "Uy tín NCC",
+      style: { minWidth: 140 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.reputation`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "quality",
+      label: "Chất lượng",
+      style: { minWidth: 140 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.quality`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "branch_review",
+      label: "Đánh giá từ\nchi nhánh",
+      style: { minWidth: 140 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.branch_review`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "customer_review",
+      label: "Đánh giá từ\nkhách hàng",
+      style: { minWidth: 140 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.customer_review`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "pricing",
+      label: "Giá cả",
+      style: { minWidth: 140 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.pricing`}
+          render={({ field }) => <CRating {...field} disabled={onlyView} />}
+        />
+      ),
+    },
+    {
+      key: "materials",
+      label: "Danh sách NVL cung cấp",
+      style: { minWidth: 350 },
+      cellRender: (value, record, index) => (
+        <Controller
+          control={control}
+          name={`suppliers.${index}.materials`}
+          render={({ field: { onChange, ..._field } }) => (
+            <CSelectMulti
+              {..._field}
+              onChange={onListChange(onChange)}
+              className="flex-1"
+              options={materials_options ?? []}
+              canWrap
+              readOnlyText={onlyView}
+            />
+          )}
+        />
+      ),
+    },
+    {
+      key: "files",
+      label: "Tài liệu minh chứng",
+      style: { minWidth: 185 },
+      cellRender: (value, record, index) => (
+        <FilesCell control={control} index={index} readOnly={onlyView} />
+      ),
+    },
+    ...(onlyView
+      ? [
+          {
+            key: "rating",
+            label: "Đánh giá",
+            style: { minWidth: 160 },
+            cellRender: (value, record, index) => (
+              <CButton
+                onClick={() => history.push(`${pathname}/${record?.id}`)}
+                className="btn-fill !bg-[#FFB946]"
+                icon={<i className="fa-solid fa-flag"></i>}
+              >
+                Đánh giá
+              </CButton>
+            ),
+          },
+        ]
+      : []),
+  ];
+  return (
+    <CTable
+      rowKey="__id"
+      headers={headers}
+      headerMultiline
+      data={dataTable}
+      headerTransform="capitalize"
+    />
   );
   //#endregion
 };

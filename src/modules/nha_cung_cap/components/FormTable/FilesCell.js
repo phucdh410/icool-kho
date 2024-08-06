@@ -18,13 +18,12 @@ export const FilesCell = ({ index, control, readOnly }) => {
   };
 
   return (
-    <td>
-      <CFile2
-        fields={fields}
-        append={onAppend}
-        remove={onRemove}
-        readOnly={readOnly}
-      />
-    </td>
+    <CFile2
+      className="w-full"
+      fields={fields}
+      append={onAppend}
+      remove={onRemove}
+      readOnly={readOnly}
+    />
   );
 };

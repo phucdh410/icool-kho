@@ -4,7 +4,7 @@ import { CActionGroup } from "src/common/components/others";
 
 export const MarkToolbar = ({ onSubmit }) => {
   return (
-    <CCard>
+    <CCard className="toolbar sticky">
       <CCardBody>
         <CRow>
           <CCol xs="12" className="action">

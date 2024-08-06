@@ -777,7 +777,7 @@ export const NhaCungCap = {
       permission: PERMISSION_VALUE.READ,
     },
     icon: "",
-    name: "DS nhà cung cấp chiếm điểm",
+    name: "DS nhà cung cấp chấm điểm",
     path: "/suppliers/rating/:id",
   },
   ChamDiemNhaCungCap: {
