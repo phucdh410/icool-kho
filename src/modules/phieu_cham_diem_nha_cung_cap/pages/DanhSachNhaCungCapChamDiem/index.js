@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { phieuChamDiemNCCApi } from "src/1/apis/phieu_cham_diem_ncc.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
@@ -18,7 +18,7 @@ const DanhSachNhaCungCapChamDiem = () => {
 
   const { data, isError } = useQuery({
     queryKey: ["chi-tiet-danh-gia-de-xuat-ncc", params?.id],
-    queryFn: () => nhaCungCapApi.getById(params?.id),
+    queryFn: () => phieuChamDiemNCCApi.getById(params?.id),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });

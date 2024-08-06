@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { phieuChamDiemNCCApi } from "src/1/apis/phieu_cham_diem_ncc.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
@@ -17,14 +17,14 @@ const SuaPhieuChamDiemNhaCungCap = () => {
   const params = useParams();
 
   const { data, isError } = useQuery({
-    queryKey: ["chi-tiet-de-xuat-nha-cung-cap", params?.id],
-    queryFn: () => nhaCungCapApi.getById(params?.id),
+    queryKey: ["chi-tiet-phieu-cham-diem-nha-cung-cap", params?.id],
+    queryFn: () => phieuChamDiemNCCApi.getById(params?.id),
     enabled: !!params?.id,
     select: (response) => response?.data?.data,
   });
 
   if (isError) {
-    noti("error", "Không thể lấy thông tin đề xuất nhà cung cấp!");
+    noti("error", "Không thể lấy thông tin phiếu chấm điểm nhà cung cấp!");
     history.replace("/suppliers/list");
   }
 
@@ -66,15 +66,15 @@ const SuaPhieuChamDiemNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await nhaCungCapApi.update(params.id, payload);
+        await phieuChamDiemNCCApi.update(params.id, payload);
 
-        noti("success", "Sửa đề xuất nhà cung cấp thành công!");
+        noti("success", "Sửa phiếu chấm điểm nhà cung cấp thành công!");
         reset(defaultValues);
         history.push("/suppliers/list");
       } catch (error) {
         noti(
           "error",
-          error?.message ?? "Sửa đề xuất nhà cung cấp không thành công!"
+          error?.message ?? "Sửa phiếu chấm điểm nhà cung cấp không thành công!"
         );
       }
     })();

@@ -1,9 +1,10 @@
-import { useFieldArray, useForm } from "react-hook-form";
+import { useMemo } from "react";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import dayjs from "dayjs";
 
 import { CCard, CCardBody } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { phieuChamDiemNCCApi } from "src/1/apis/phieu_cham_diem_ncc.api";
 import { history } from "src/App";
 
 import { FormTable, FormToolbar } from "../../components";
@@ -11,27 +12,51 @@ import { defaultValues, resolver } from "../../form";
 
 const ThemPhieuChamDiemNhaCungCap = () => {
   //#region Data
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, getValues } = useForm({
     mode: "all",
     defaultValues,
     resolver,
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, update, remove, replace } = useFieldArray({
     control,
     name: "suppliers",
     keyName: "__id",
   });
+
+  const watchSuppliers = useWatch({ control, name: "suppliers" });
+
+  const controlledSuppliers = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchSuppliers[index],
+    };
+  });
+
+  const isSelectedAll = useMemo(
+    () =>
+      controlledSuppliers?.length &&
+      controlledSuppliers?.every((e) => e?.selected),
+    [controlledSuppliers]
+  );
+
+  const selectedList = useMemo(
+    () => controlledSuppliers.filter((e) => e?.selected),
+    [controlledSuppliers]
+  );
   //#endregion
 
   //#region Event
   const onAddSupplier = () => {
     append({
+      selected: false,
       code: "",
       name: "",
       financial: 5,
       reputation: 5,
       quality: 5,
+      branch_review: 5,
+      customer_review: 5,
       pricing: 5,
       materials: [],
       files: [],
@@ -49,18 +74,42 @@ const ThemPhieuChamDiemNhaCungCap = () => {
             files: e?.files?.map((el) => el?.id),
           })),
         };
-        await nhaCungCapApi.create(payload);
+        await phieuChamDiemNCCApi.create(payload);
 
-        noti("success", "Tạo đề xuất nhà cung cấp thành công!");
+        noti("success", "Tạo phiếu chấm điểm nhà cung cấp thành công!");
         reset(defaultValues);
         history.push("/suppliers/list");
       } catch (error) {
         noti(
           "error",
-          error?.message ?? "Tạo đề xuất nhà cung cấp không thành công!"
+          error?.message ?? "Tạo phiếu chấm điểm nhà cung cấp không thành công!"
         );
       }
     })();
+  };
+
+  const onSelectAll = (value) => {
+    const newSuppliers = controlledSuppliers.map((e) => ({
+      ...e,
+      selected: value,
+    }));
+    replace(newSuppliers);
+  };
+
+  const onSelect = (index) => (value) => {
+    const updateItem = { ...controlledSuppliers[index] };
+    updateItem.selected = value;
+    update(index, updateItem);
+  };
+
+  const onRemove = () => {
+    let removeIndexs = [];
+    controlledSuppliers.forEach((e, i) => {
+      if (e.selected) {
+        removeIndexs.push(i);
+      }
+    });
+    remove(removeIndexs);
   };
   //#endregion
 
@@ -73,13 +122,23 @@ const ThemPhieuChamDiemNhaCungCap = () => {
             control={control}
             onSubmit={onSubmit}
             onAddSupplier={onAddSupplier}
+            canRemove={selectedList?.length}
+            onRemove={onRemove}
           />
         </CCardBody>
       </CCard>
 
+      <button onClick={() => console.log(getValues())}>Log values</button>
+
       <CCard>
         <CCardBody className="px-0 pt-4">
-          <FormTable control={control} dataTable={fields} />
+          <FormTable
+            control={control}
+            dataTable={controlledSuppliers}
+            isSelectedAll={isSelectedAll}
+            onSelectAll={onSelectAll}
+            onSelect={onSelect}
+          />
         </CCardBody>
       </CCard>
     </>

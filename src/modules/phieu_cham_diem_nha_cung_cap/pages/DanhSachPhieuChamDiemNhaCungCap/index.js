@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { phieuChamDiemNCCApi } from "src/1/apis/phieu_cham_diem_ncc.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
@@ -24,7 +24,7 @@ const DanhSachPhieuChamDiemNhaCungCap = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ["danh-sach-de-xuat-nha-cung-cap", params],
-    queryFn: () => nhaCungCapApi.getAll(params),
+    queryFn: () => phieuChamDiemNCCApi.getAll(params),
     select: (response) =>
       Array.isArray(response) ? response : response?.data?.data,
   });
@@ -64,7 +64,7 @@ const DanhSachPhieuChamDiemNhaCungCap = () => {
     const allow = await fireDelete();
     if (allow) {
       try {
-        await nhaCungCapApi.remove(selected?.[0]?.id);
+        await phieuChamDiemNCCApi.remove(selected?.[0]?.id);
         refetch();
         fireSuccess();
       } catch (error) {

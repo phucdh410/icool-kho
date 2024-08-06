@@ -12,12 +12,16 @@ export const FormToolbar = ({
   onSubmit,
   onAddSupplier,
   onlyView = false,
+  canRemove,
+  onRemove,
 }) => {
   //#region Event
   const onClick = (keyAction) => {
     switch (keyAction) {
       case "add":
         return onAddSupplier();
+      case "remove":
+        return onRemove();
       default:
         return onSubmit();
     }
@@ -38,6 +42,7 @@ export const FormToolbar = ({
               onClick={onClick}
               canAdd={!onlyView}
               canSave={!onlyView}
+              canRemove={canRemove}
               hideEditBtn
             />
           </div>

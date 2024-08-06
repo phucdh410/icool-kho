@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
-import { nhaCungCapApi } from "src/1/apis/nha_cung_cap.api";
+import { phieuChamDiemNCCApi } from "src/1/apis/phieu_cham_diem_ncc.api";
 import { history } from "src/App";
 
 import { MarkInfo, MarkTable, MarkToolbar } from "../../components";
@@ -15,7 +15,7 @@ const NhaCungCapChamDiem = () => {
 
   const { data } = useQuery({
     queryKey: ["chi-tiet-diem-ncc", params?.supplierId],
-    queryFn: () => nhaCungCapApi.getSupplierById(params?.supplierId),
+    queryFn: () => phieuChamDiemNCCApi.getSupplierById(params?.supplierId),
     enabled: !!params?.supplierId,
     select: (response) => response?.data?.data,
   });
@@ -37,7 +37,7 @@ const NhaCungCapChamDiem = () => {
           evaluations: values?.evaluations,
         };
 
-        await nhaCungCapApi.updateSupplier(params?.supplierId, payload);
+        await phieuChamDiemNCCApi.updateSupplier(params?.supplierId, payload);
 
         noti("success", "Chấm điểm nhà cung cấp thành công!");
         reset(defaultValues);
