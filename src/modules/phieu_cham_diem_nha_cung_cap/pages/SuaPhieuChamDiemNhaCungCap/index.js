@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useEffect, useMemo } from "react";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -34,11 +34,32 @@ const SuaPhieuChamDiemNhaCungCap = () => {
     resolver,
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: "suppliers",
     keyName: "__id",
   });
+
+  const watchSuppliers = useWatch({ control, name: "suppliers" });
+
+  const controlledSuppliers = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchSuppliers[index],
+    };
+  });
+
+  const isSelectedAll = useMemo(
+    () =>
+      controlledSuppliers?.length &&
+      controlledSuppliers?.every((e) => e?.selected),
+    [controlledSuppliers]
+  );
+
+  const selectedList = useMemo(
+    () => controlledSuppliers.filter((e) => e?.selected),
+    [controlledSuppliers]
+  );
   //#endregion
 
   //#region Event
@@ -79,6 +100,24 @@ const SuaPhieuChamDiemNhaCungCap = () => {
       }
     })();
   };
+
+  const onSelectAll = (value) => {
+    const newSuppliers = controlledSuppliers.map((e) => ({
+      ...e,
+      selected: value,
+    }));
+    replace(newSuppliers);
+  };
+
+  const onRemove = () => {
+    let removeIndexs = [];
+    controlledSuppliers.forEach((e, i) => {
+      if (e.selected) {
+        removeIndexs.push(i);
+      }
+    });
+    remove(removeIndexs);
+  };
   //#endregion
 
   useEffect(() => {
@@ -103,13 +142,20 @@ const SuaPhieuChamDiemNhaCungCap = () => {
             control={control}
             onSubmit={onSubmit}
             onAddSupplier={onAddSupplier}
+            canRemove={selectedList?.length}
+            onRemove={onRemove}
           />
         </CCardBody>
       </CCard>
 
       <CCard>
         <CCardBody className="px-0 pt-4">
-          <FormTable control={control} dataTable={fields} />
+          <FormTable
+            control={control}
+            dataTable={controlledSuppliers}
+            isSelectedAll={isSelectedAll}
+            onSelectAll={onSelectAll}
+          />
         </CCardBody>
       </CCard>
     </>

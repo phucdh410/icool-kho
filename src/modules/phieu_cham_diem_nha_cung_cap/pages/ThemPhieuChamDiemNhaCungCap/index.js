@@ -12,13 +12,13 @@ import { defaultValues, resolver } from "../../form";
 
 const ThemPhieuChamDiemNhaCungCap = () => {
   //#region Data
-  const { control, handleSubmit, reset, getValues } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     mode: "all",
     defaultValues,
     resolver,
   });
 
-  const { fields, append, update, remove, replace } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: "suppliers",
     keyName: "__id",
@@ -96,12 +96,6 @@ const ThemPhieuChamDiemNhaCungCap = () => {
     replace(newSuppliers);
   };
 
-  const onSelect = (index) => (value) => {
-    const updateItem = { ...controlledSuppliers[index] };
-    updateItem.selected = value;
-    update(index, updateItem);
-  };
-
   const onRemove = () => {
     let removeIndexs = [];
     controlledSuppliers.forEach((e, i) => {
@@ -128,8 +122,6 @@ const ThemPhieuChamDiemNhaCungCap = () => {
         </CCardBody>
       </CCard>
 
-      <button onClick={() => console.log(getValues())}>Log values</button>
-
       <CCard>
         <CCardBody className="px-0 pt-4">
           <FormTable
@@ -137,7 +129,6 @@ const ThemPhieuChamDiemNhaCungCap = () => {
             dataTable={controlledSuppliers}
             isSelectedAll={isSelectedAll}
             onSelectAll={onSelectAll}
-            onSelect={onSelect}
           />
         </CCardBody>
       </CCard>

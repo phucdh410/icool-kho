@@ -99,7 +99,7 @@ const DanhSachPhieuChamDiemNhaCungCap = () => {
           <ListTable
             loading={isFetching}
             isSelectAll={isSelectAll}
-            data={data}
+            data={data ?? []}
             onSelect={onSelect}
           />
         </CCardBody>

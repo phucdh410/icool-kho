@@ -45,9 +45,15 @@ export const FormTable = ({
     <PTable>
       <thead>
         <tr>
-          <th>
-            <CCheckbox value={isSelectedAll} onChange={onSelectAll} />
-          </th>
+          {!onlyView && (
+            <th>
+              <CCheckbox
+                value={isSelectedAll}
+                onChange={onSelectAll}
+                disabled={onlyView}
+              />
+            </th>
+          )}
           <th className="min-w-[190px]" style={{ textTransform: "capitalize" }}>
             Mã NCC
           </th>
@@ -82,7 +88,7 @@ export const FormTable = ({
           <th className="min-w-[185px]" style={{ textTransform: "capitalize" }}>
             Tài liệu minh chứng
           </th>
-          {onlyView && <th className="min-w-[120px]">Đánh giá</th>}
+          {onlyView && <th className="min-w-[150px]">Đánh giá</th>}
         </tr>
       </thead>
       <tbody>

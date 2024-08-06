@@ -17,11 +17,32 @@ const ThemDeXuatNhaCungCap = () => {
     resolver,
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: "suppliers",
     keyName: "__id",
   });
+
+  const watchSuppliers = useWatch({ control, name: "suppliers" });
+
+  const controlledSuppliers = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchSuppliers[index],
+    };
+  });
+
+  const isSelectedAll = useMemo(
+    () =>
+      controlledSuppliers?.length &&
+      controlledSuppliers?.every((e) => e?.selected),
+    [controlledSuppliers]
+  );
+
+  const selectedList = useMemo(
+    () => controlledSuppliers.filter((e) => e?.selected),
+    [controlledSuppliers]
+  );
   //#endregion
 
   //#region Event
@@ -62,6 +83,24 @@ const ThemDeXuatNhaCungCap = () => {
       }
     })();
   };
+
+  const onSelectAll = (value) => {
+    const newSuppliers = controlledSuppliers.map((e) => ({
+      ...e,
+      selected: value,
+    }));
+    replace(newSuppliers);
+  };
+
+  const onRemove = () => {
+    let removeIndexs = [];
+    controlledSuppliers.forEach((e, i) => {
+      if (e.selected) {
+        removeIndexs.push(i);
+      }
+    });
+    remove(removeIndexs);
+  };
   //#endregion
 
   //#region Render
@@ -73,13 +112,20 @@ const ThemDeXuatNhaCungCap = () => {
             control={control}
             onSubmit={onSubmit}
             onAddSupplier={onAddSupplier}
+            canRemove={selectedList?.length}
+            onRemove={onRemove}
           />
         </CCardBody>
       </CCard>
 
       <CCard>
         <CCardBody className="px-0 pt-4">
-          <FormTable control={control} dataTable={fields} />
+          <FormTable
+            control={control}
+            dataTable={controlledSuppliers}
+            isSelectedAll={isSelectedAll}
+            onSelectAll={onSelectAll}
+          />
         </CCardBody>
       </CCard>
     </>

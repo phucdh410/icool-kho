@@ -5,8 +5,8 @@ import { history } from "src/App";
 import {
   CButton,
   CCheckbox,
+  CInput,
   CRating,
-  CSelect,
   CSelectMulti,
 } from "src/common/components/controls";
 
@@ -17,7 +17,6 @@ export const Row = ({
   data,
   index,
   onlyView,
-  suppliers_options,
   materials_options,
   onListChange,
 }) => {
@@ -39,29 +38,14 @@ export const Row = ({
         <Controller
           control={control}
           name={`suppliers.${index}.code`}
-          render={({ field }) => (
-            <CSelect
-              {...field}
-              options={suppliers_options ?? []}
-              display="code"
-              select="value"
-              readOnly={onlyView}
-            />
-          )}
+          render={({ field }) => <CInput {...field} readOnly={onlyView} />}
         />
       </td>
       <td>
         <Controller
           control={control}
-          name={`suppliers.${index}.code`}
-          render={({ field }) => (
-            <CSelect
-              {...field}
-              options={suppliers_options ?? []}
-              select="value"
-              readOnly={onlyView}
-            />
-          )}
+          name={`suppliers.${index}.name`}
+          render={({ field }) => <CInput {...field} readOnly={onlyView} />}
         />
       </td>
       <td>
@@ -87,24 +71,6 @@ export const Row = ({
           <Controller
             control={control}
             name={`suppliers.${index}.quality`}
-            render={({ field }) => <CRating {...field} disabled={onlyView} />}
-          />
-        </div>
-      </td>
-      <td>
-        <div className="w-full flex items-center justify-center">
-          <Controller
-            control={control}
-            name={`suppliers.${index}.branch_review`}
-            render={({ field }) => <CRating {...field} disabled={onlyView} />}
-          />
-        </div>
-      </td>
-      <td>
-        <div className="w-full flex items-center justify-center">
-          <Controller
-            control={control}
-            name={`suppliers.${index}.customer_review`}
             render={({ field }) => <CRating {...field} disabled={onlyView} />}
           />
         </div>
