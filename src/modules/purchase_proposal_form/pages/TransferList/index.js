@@ -1,8 +1,8 @@
-import { useCallback, useMemo,useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { deleteTransfer, updateTransferStatus } from "src/apis/material.api";
 import { history } from "src/App";
@@ -20,9 +20,9 @@ const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
   (state) => state.purchaseProposalForm,
-  ({ isLoading }, { storeCode }, { filters }) => ({
+  ({ isLoading }, { store_code }, { filters }) => ({
     isLoading,
-    storeCode,
+    store_code,
     filters,
   })
 );

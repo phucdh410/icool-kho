@@ -4,11 +4,11 @@ import Base from "./base.model";
 import { InventoryAdjustmentMaterials } from "./material.model";
 
 export class InventoryAdjustments extends Base {
-  constructor({ wareName, createdDate, date, file, ...rest }) {
+  constructor({ ware_name, createdDate, date, file, ...rest }) {
     super(rest);
 
     Object.assign(this, {
-      wareName: wareName,
+      ware_name: ware_name,
       createdDate: format(createdDate),
       date: format(date),
       file: file,
@@ -18,12 +18,12 @@ export class InventoryAdjustments extends Base {
 }
 
 export class InventoryAdjustment extends Base {
-  constructor({ wareCode, storeCode, date, files, materials, ...rest }) {
+  constructor({ ware_code, store_code, date, files, materials, ...rest }) {
     super(rest);
 
     Object.assign(this, {
-      wareCode: wareCode,
-      storeCode: storeCode,
+      ware_code: ware_code,
+      store_code: store_code,
       date: toDate(date),
       file: files.map((f) => f.path),
       materials: materials.map((m) => new InventoryAdjustmentMaterials(m)),

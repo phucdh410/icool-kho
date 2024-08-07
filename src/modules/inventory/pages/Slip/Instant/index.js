@@ -1,8 +1,8 @@
-import { useCallback,useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { toExcelByWareCodeAndDate } from "src/apis/backlog_slip.api";
 import { setFilter } from "src/common/actions/config.action";
@@ -15,65 +15,65 @@ import Table from "./Table";
 import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
-	(state) => state.config,
-	(state) => state.auth,
-	(state) => state.inventorySlipInstant,
-	(state) => state,
-	({ isLoading }, { wareCode }, { filters }) => ({
-		isLoading,
-		filters: { ...filters, wareCode: filters?.wareCode ?? wareCode },
-	})
+  (state) => state.config,
+  (state) => state.auth,
+  (state) => state.inventorySlipInstant,
+  (state) => state,
+  ({ isLoading }, { ware_code }, { filters }) => ({
+    isLoading,
+    filters: { ...filters, ware_code: filters?.ware_code ?? ware_code },
+  })
 );
 
 const InventoryInstant = ({}) => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	//#region Data
-	const { isLoading, filters } = useSelector(selectData);
+  //#region Data
+  const { isLoading, filters } = useSelector(selectData);
 
-	const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(0);
 
-	const { data, set } = getInstants(filters, isLoading);
-	//#endregion
+  const { data, set } = getInstants(filters, isLoading);
+  //#endregion
 
-	//#region Event
-	const onSelect = (code) => {};
-	const onStatusChange = useCallback(
-		(_status) => setStatus(_status === status ? 0 : _status),
-		[status]
-	);
-	const onSearch = useCallback(
-		(data) => dispatch(setFilter(NAME, data)),
-		[dispatch]
-	);
+  //#region Event
+  const onSelect = (code) => {};
+  const onStatusChange = useCallback(
+    (_status) => setStatus(_status === status ? 0 : _status),
+    [status]
+  );
+  const onSearch = useCallback(
+    (data) => dispatch(setFilter(NAME, data)),
+    [dispatch]
+  );
 
-	const onExport = useCallback(
-		async (data) => await toExcelByWareCodeAndDate(data),
-		[]
-	);
-	//#endregion
+  const onExport = useCallback(
+    async (data) => await toExcelByWareCodeAndDate(data),
+    []
+  );
+  //#endregion
 
-	return (
-		<>
-			<CCard className="toolbar sticky">
-				<CCardBody>
-					<Toolbar
-						filter={filters}
-						status={status}
-						toggleStatus={onStatusChange}
-						onSearch={onSearch}
-						onExport={onExport}
-					/>
-				</CCardBody>
-			</CCard>
-			<CCard>
-				<CCardHeader></CCardHeader>
-				<CCardBody className="px-0 pt-0">
-					<Table data={data} onSelect={onSelect} />
-				</CCardBody>
-			</CCard>
-		</>
-	);
+  return (
+    <>
+      <CCard className="toolbar sticky">
+        <CCardBody>
+          <Toolbar
+            filter={filters}
+            status={status}
+            toggleStatus={onStatusChange}
+            onSearch={onSearch}
+            onExport={onExport}
+          />
+        </CCardBody>
+      </CCard>
+      <CCard>
+        <CCardHeader></CCardHeader>
+        <CCardBody className="px-0 pt-0">
+          <Table data={data} onSelect={onSelect} />
+        </CCardBody>
+      </CCard>
+    </>
+  );
 };
 
 export default InventoryInstant;

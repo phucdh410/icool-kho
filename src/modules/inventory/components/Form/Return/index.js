@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef,useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 
@@ -155,7 +155,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
       {edit && (
         <Responsble
           ref={responsibleRef}
-          store={watch("storeCode")}
+          store={watch("store_code")}
           code={data?.code}
           onResponsible={onResponsible}
         />

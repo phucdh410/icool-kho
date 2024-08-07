@@ -1,13 +1,13 @@
-import { useCallback, useMemo,useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { kiemKhoApi } from "src/1/apis/kiemkho.api";
 import { useSetQueryData } from "src/1/hooks/query";
-import { approve, getUnFulfilled,remove } from "src/apis/inventory_slip.api";
+import { approve, getUnFulfilled, remove } from "src/apis/inventory_slip.api";
 import { history } from "src/App";
 import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireSuccess } from "src/utils/alert";
@@ -22,9 +22,9 @@ const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
   (state) => state.inventoryCheck,
-  ({ isLoading }, { wareCode }, { filters }) => ({
+  ({ isLoading }, { ware_code }, { filters }) => ({
     isLoading,
-    filters: { ...filters, wareCode: filters?.wareCode ?? wareCode },
+    filters: { ...filters, ware_code: filters?.ware_code ?? ware_code },
   })
 );
 

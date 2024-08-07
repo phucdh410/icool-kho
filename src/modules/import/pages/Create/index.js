@@ -17,16 +17,16 @@ const selectIsLoading = createSelector(
 
 const selectUserWarehouse = createSelector(
   (state) => state.auth,
-  ({ wareCode }) => wareCode
+  ({ ware_code }) => ware_code
 );
 
 const ImportCreate = () => {
   const isLoading = useSelector(selectIsLoading);
-  const wareCode = useSelector(selectUserWarehouse);
+  const ware_code = useSelector(selectUserWarehouse);
 
   const [data] = useState({
     code: "",
-    wareCode: wareCode,
+    ware_code: ware_code,
     date: moment().toDate(),
     note: "",
   });

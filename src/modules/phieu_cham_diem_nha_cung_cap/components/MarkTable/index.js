@@ -33,8 +33,7 @@ export const MarkTable = ({ control }) => {
     { key: "ware_note", label: "Ghi chú đánh giá KTT", sorter: false },
     { key: "peer_evaluation", label: "Đánh giá chéo", sorter: false },
     { key: "peer_note", label: "Ghi chú đánh giá chéo", sorter: false },
-    // ...(user?.operator
-    ...(true
+    ...(user?.role_code === "OPERATOR"
       ? [
           {
             key: "operator_note",
@@ -152,8 +151,7 @@ export const MarkTable = ({ control }) => {
           <CTable fields={fields} render={render} data={fieldsForm} />
         </CCardBody>
       </CCard>
-      {/* {user?.operator && ( */}
-      {true && (
+      {user?.role_code === "OPERATOR" && (
         <CCard>
           <CCardBody>
             <div className="flex flex-row items-center gap-10">

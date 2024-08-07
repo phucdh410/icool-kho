@@ -30,7 +30,7 @@ export const toggleSidebar = (isShow) => (dispatch) => {
 };
 
 export const pushToTab =
-  ({ pathname }, storeCode) =>
+  ({ pathname }, store_code) =>
   async (dispatch, getStore) => {
     const mapTo = routes.find((route) => {
       return matchPath(pathname, { path: route.path, exact: true });
@@ -47,7 +47,7 @@ export const pushToTab =
 
     if (!ability.can(permission, code)) return history.goBack();
 
-    if (store && !store.includes(storeCode)) return history.goBack();
+    if (store && !store.includes(store_code)) return history.goBack();
 
     dispatch({
       type: SET_TABS,

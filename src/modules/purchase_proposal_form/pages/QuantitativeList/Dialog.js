@@ -15,7 +15,7 @@ import { CDialog } from "_components/others";
 import { getAll } from "../../queries-fn/store.query";
 
 const defaultValues = {
-  storeCode: "",
+  store_code: "",
   date: new Date(),
   note: "",
 };
@@ -33,7 +33,7 @@ export const MQuantitativeDialog = forwardRef(({ refetch }, ref) => {
 
   const {
     field: { onChange: onStoreChange },
-  } = useController({ control, name: "storeCode" });
+  } = useController({ control, name: "store_code" });
   //#endregion
 
   //#region Event
@@ -70,7 +70,7 @@ export const MQuantitativeDialog = forwardRef(({ refetch }, ref) => {
         reset({
           date: moment(data?.updated_date).toDate(),
           note: data?.note,
-          storeCode: data?.store_code,
+          store_code: data?.store_code,
         });
       }
       setOpen(true);
@@ -98,7 +98,7 @@ export const MQuantitativeDialog = forwardRef(({ refetch }, ref) => {
           >
             <div>
               <Controller
-                name="storeCode"
+                name="store_code"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (

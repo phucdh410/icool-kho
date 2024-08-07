@@ -24,7 +24,7 @@ const InventoryReturnUpdate = ({ match: { params } }) => {
   const onSubmit = async (data) => {
     const res = await returnApi.save_update({
       code: params.code,
-      wareCode: data?.wareCode,
+      ware_code: data?.ware_code,
       note: data?.note,
       date: data?.date,
       material_ids: data?.materials?.map((e) => e.id),

@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 
-import { CCard, CCardBody, CCol,CRow } from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import { money } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import { CInput } from "_components/controls";
-import { CDialog, CLoading, CPagination,CTable } from "_components/others";
+import { CDialog, CLoading, CPagination, CTable } from "_components/others";
 
 export default ({ code, getter, onClose, onFileClick }) => {
   const { data, isLoading } = getter(code);
@@ -78,7 +78,7 @@ export default ({ code, getter, onClose, onFileClick }) => {
     responsible: ({ responsible }) => (
       <td>
         {responsible == 1
-          ? data.wareName
+          ? data.ware_name
           : responsible === 2
           ? "Kho Trung Tâm"
           : "Chưa xác định"}
@@ -112,7 +112,7 @@ export default ({ code, getter, onClose, onFileClick }) => {
                 <CInput readOnly label="Mã phiếu" value={data?.code} />
               </CCol>
               <CCol xs="12" sm="6" md="6" lg="3" xl="3" xxl="3">
-                <CInput readOnly label="Kho" value={data?.wareName} />
+                <CInput readOnly label="Kho" value={data?.ware_name} />
               </CCol>
               <CCol xs="12" sm="4" md="4" lg="3" xl="3" xxl="3">
                 <CInput

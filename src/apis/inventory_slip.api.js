@@ -1,6 +1,6 @@
 import fileDownload from "js-file-download";
 
-import { FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
+import { FORM_HEADER_ENCODED, get, map, post } from "src/utils/axios";
 import { format } from "src/utils/moment";
 
 import {
@@ -51,8 +51,8 @@ export const getPreview = async (code) =>
   );
 
 export const create = async ({
-  wareCode,
-  storeCode,
+  ware_code,
+  store_code,
   checked,
   note,
   value,
@@ -61,8 +61,8 @@ export const create = async ({
 }) => {
   const params = new URLSearchParams();
 
-  params.append("wareCode", wareCode);
-  params.append("storeCode", storeCode);
+  params.append("ware_code", ware_code);
+  params.append("store_code", store_code);
   params.append("value", value);
   params.append("note", note);
   params.append("checked", checked);
@@ -74,8 +74,8 @@ export const create = async ({
 
 export const update = async ({
   code,
-  wareCode,
-  storeCode,
+  ware_code,
+  store_code,
   checked,
   note,
   value,
@@ -84,8 +84,8 @@ export const update = async ({
   const params = new URLSearchParams();
 
   params.append("code", code);
-  params.append("wareCode", wareCode);
-  params.append("storeCode", storeCode);
+  params.append("ware_code", ware_code);
+  params.append("store_code", store_code);
   params.append("value", value);
   params.append("note", note);
   params.append("checked", checked);

@@ -32,8 +32,8 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   });
 
   const { data: materialDatas } = getAllMaterials(
-    { storeCode: watch("storeCode"), date: watch("issueDate") },
-    !watch("storeCode")
+    { store_code: watch("store_code"), date: watch("issueDate") },
+    !watch("store_code")
   );
 
   const [status, setStatus] = useState(1);
@@ -62,8 +62,8 @@ export default ({ isLoading, edit, data, onSubmit }) => {
     setStatus(status === _status ? 0 : _status);
 
   const onAutoFill = async (v) => {
-    if (!v || !getValues("storeCode")) return;
-    const res = await getAutoSuggest(getValues("storeCode"));
+    if (!v || !getValues("store_code")) return;
+    const res = await getAutoSuggest(getValues("store_code"));
 
     if (isSuccess(res)) {
       setMaterials(
@@ -112,7 +112,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
   };
 
   const onCorrectQuantity = () => {
-    correctQuantityRef.current.set(watch("storeCode"));
+    correctQuantityRef.current.set(watch("store_code"));
   };
 
   const onSuccess = (v) => setIsUpdated(v);
@@ -202,7 +202,7 @@ export default ({ isLoading, edit, data, onSubmit }) => {
               <Good
                 edit={edit}
                 isLoading={isLoading}
-                storeCode={watch("storeCode")}
+                store_code={watch("store_code")}
                 data={goods}
                 onChange={(data) => setGoods(data)}
               />

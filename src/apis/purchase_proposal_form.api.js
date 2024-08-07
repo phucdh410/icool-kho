@@ -1,6 +1,6 @@
 import fileDownload from "js-file-download";
 
-import { _delete,FORM_HEADER_ENCODED, get, map, post } from "src/utils/axios";
+import { _delete, FORM_HEADER_ENCODED, get, map, post } from "src/utils/axios";
 import { generate } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
@@ -42,9 +42,9 @@ export const exportReport = async (params) => {
   }).then((res) => fileDownload(res.data, "report.xlsx"));
 };
 
-export const getAutoSuggest = async (storeCode) =>
+export const getAutoSuggest = async (store_code) =>
   await map(({ data }) => data.map((d) => d)).get(
-    `${PURCHASE_PROPOSAL_FORM.getAutoSuggest}/${storeCode}`
+    `${PURCHASE_PROPOSAL_FORM.getAutoSuggest}/${store_code}`
   );
 
 export const getByStore = async (code) =>
@@ -79,7 +79,7 @@ export const getForPrintByGroup = async (code) =>
   ).get(`${PURCHASE_PROPOSAL_FORM.getForPrint}?code=${code}&group=true`);
 
 export const create = async ({
-  storeCode,
+  store_code,
   issueDate,
   total,
   reason,
@@ -88,8 +88,8 @@ export const create = async ({
 }) => {
   const params = new URLSearchParams();
 
-  params.append("code", generate(storeCode));
-  params.append("storeCode", storeCode);
+  params.append("code", generate(store_code));
+  params.append("store_code", store_code);
   params.append("issueDate", format(issueDate, "YYYY-MM-DD"));
   params.append("total", total);
   params.append("note", reason);
@@ -102,7 +102,7 @@ export const create = async ({
 
 export const update = async ({
   code,
-  storeCode,
+  store_code,
   issueDate,
   total,
   reason,
@@ -112,7 +112,7 @@ export const update = async ({
   const params = new URLSearchParams();
 
   params.append("code", code);
-  params.append("storeCode", storeCode);
+  params.append("store_code", store_code);
   params.append("issueDate", format(issueDate, "YYYY-MM-DD"));
   params.append("total", total);
   params.append("note", reason);
@@ -123,10 +123,10 @@ export const update = async ({
   return await post(PURCHASE_PROPOSAL_FORM.update, params, FORM_HEADER_ENCODED);
 };
 
-export const correctQuantity = async ({ storeCode, date }) => {
+export const correctQuantity = async ({ store_code, date }) => {
   const params = new URLSearchParams();
 
-  params.append("storeCode", storeCode);
+  params.append("store_code", store_code);
   params.append("date", format(date, "YYYY-MM-DD"));
 
   return await post(

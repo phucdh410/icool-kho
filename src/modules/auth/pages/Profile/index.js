@@ -1,10 +1,10 @@
-import { useCallback,useEffect, useRef, useState } from "react";
-import { Controller,useForm } from "react-hook-form";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-import { CCard, CCardBody, CCardHeader,CCol, CImg, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCol, CImg, CRow } from "@coreui/react";
 
-import { CButton,CDate, CInput, CSelect } from "_components/controls";
+import { CButton, CDate, CInput, CSelect } from "_components/controls";
 
 import MChangePassword from "./ChangePassword";
 
@@ -126,7 +126,7 @@ const Profile = () => {
                   </CCol>
                   <CCol xs="12" className="mb-4 text-black font-italic">
                     <b style={{ fontSize: "16px" }}>
-                      {user?.roleName || "Nhân sự"} -{" "}
+                      {user?.role_name || "Nhân sự"} -{" "}
                       {user?.storeName || "ICOOL Trần não"}
                     </b>
                   </CCol>
@@ -233,7 +233,7 @@ const Profile = () => {
                     <CInput label="Chi nhánh" value={user.storeName} readOnly />
                   </CCol>
                   <CCol xs="12" sm="6" md="4" lg="3">
-                    <CInput label="Vị trí" value={user.roleName} readOnly />
+                    <CInput label="Vị trí" value={user.role_name} readOnly />
                   </CCol>
                 </CRow>
               </form>

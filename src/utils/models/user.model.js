@@ -1,46 +1,46 @@
 import Base from "./base.model";
 
 export class UserProfile extends Base {
-	constructor({
-		name,
-		mobile,
-		avatar,
-		regionCode,
-		regionName,
-		storeCode,
-		storeName,
-		roleCode,
-		roleName,
-		wareCode,
-		wareName,
-		permissions,
-		...rest
-	}) {
-		super(rest);
+  constructor({
+    name,
+    mobile,
+    avatar,
+    region_code,
+    region_name,
+    store_code,
+    storeName,
+    role_code,
+    role_name,
+    ware_code,
+    ware_name,
+    permissions,
+    ...rest
+  }) {
+    super(rest);
 
-		Object.assign(this, {
-			name: name,
-			mobile: mobile,
-			avatar: avatar,
-			regionCode: regionCode,
-			regionName: regionName,
-			storeCode: storeCode,
-			storeName: storeName,
-			wareCode: storeCode,
-			wareName: storeName,
-			roleCode: roleCode,
-			roleName: roleName,
-			wareCode: wareCode,
-			wareName: wareName,
-			permissions: permissions,
-		});
-	}
+    Object.assign(this, {
+      name: name,
+      mobile: mobile,
+      avatar: avatar,
+      region_code: region_code,
+      region_name: region_name,
+      store_code: store_code,
+      storeName: storeName,
+      ware_code: store_code,
+      ware_name: storeName,
+      role_code: role_code,
+      role_name: role_name,
+      ware_code: ware_code,
+      ware_name: ware_name,
+      permissions: permissions,
+    });
+  }
 }
 
 export class Users extends Base {
-	constructor({ name, ...rest }) {
-		super(rest);
+  constructor({ name, ...rest }) {
+    super(rest);
 
-		Object.assign(this, { name: name });
-	}
+    Object.assign(this, { name: name });
+  }
 }

@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { checkSave, checkUpdated } from "src/apis/purchase_proposal_form.api";
 import { isSuccess } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
-import { CButton, CDate,CInput, CSelect } from "_components/controls";
+import { CButton, CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import CCheckbox from "../../components/Checkbox";
@@ -71,7 +71,7 @@ export default ({
     ({ data, value, label }) => {
       setValue("storeAddress", data.address);
       setValue("storePhone", data.phone);
-      setValue("storeCode", value);
+      setValue("store_code", value);
     },
     [setValue]
   );
@@ -81,16 +81,16 @@ export default ({
     const onStoreChange = async () => {
       setIsUpdated(false);
       setSave(true);
-      if (stores && watch("storeCode")) {
-        const store = stores.find((s) => s.value == watch("storeCode"));
+      if (stores && watch("store_code")) {
+        const store = stores.find((s) => s.value == watch("store_code"));
 
         setValue("storeName", store.data.name);
         setValue("storeAddress", store.data.address);
         setValue("storePhone", store.data.phone);
 
-        const res = await checkUpdated(watch("storeCode"));
+        const res = await checkUpdated(watch("store_code"));
 
-        const _res = await checkSave(watch("storeCode"));
+        const _res = await checkSave(watch("store_code"));
 
         if (isSuccess(res)) {
           setIsUpdated(res.data);
@@ -102,16 +102,16 @@ export default ({
         }
       }
     };
-    watch("storeCode") && onStoreChange();
-  }, [stores, watch("storeCode")]);
+    watch("store_code") && onStoreChange();
+  }, [stores, watch("store_code")]);
 
   useEffect(() => {
     const onIssueDateChange = async () => {
-      const res = await checkUpdated(watch("storeCode"), {
+      const res = await checkUpdated(watch("store_code"), {
         date: format(watch("issueDate"), "YYYY-MM-DD"),
       });
 
-      const _res = await checkSave(watch("storeCode"), {
+      const _res = await checkSave(watch("store_code"), {
         date: format(watch("issueDate"), "YYYY-MM-DD"),
       });
 
@@ -167,7 +167,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="12" md="4" lg="3" xl="3" xxl="3">
             <Controller
-              name="storeCode"
+              name="store_code"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (

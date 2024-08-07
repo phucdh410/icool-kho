@@ -9,7 +9,7 @@ export const getAll = (params, isLoading = false, options = {}) => {
 
   if (_params.startAt) _params.startAt = format(_params.startAt, "yyyy-MM-DD");
   if (_params.endAt) _params.endAt = format(_params.endAt, "yyyy-MM-DD");
-  if (_params.wareCode) _params.wareCode = "";
+  if (_params.ware_code) _params.ware_code = "";
 
   return createQuery(["inventory_checks", _params], () => api.getAll(_params), {
     enabled: !isLoading,

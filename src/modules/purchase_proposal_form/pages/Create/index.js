@@ -13,53 +13,53 @@ import { PurchaseProposalForm } from "_models/purchase-proposal-form.model";
 import Form from "../../components/Form";
 
 const selectIsLoading = createSelector(
-	(state) => state.config,
-	({ isLoading }) => isLoading
+  (state) => state.config,
+  ({ isLoading }) => isLoading
 );
 
 const selectUserStore = createSelector(
-	(state) => state.auth,
-	({ storeCode }) => storeCode
+  (state) => state.auth,
+  ({ store_code }) => store_code
 );
 
 const PurchaseProposalFormCreate = ({}) => {
-	//#region Data
-	const isLoading = useSelector(selectIsLoading);
-	const storeCode = useSelector(selectUserStore);
+  //#region Data
+  const isLoading = useSelector(selectIsLoading);
+  const store_code = useSelector(selectUserStore);
 
-	const [data] = useState(
-		new PurchaseProposalForm({
-			code: "",
-			storeCode: storeCode,
-			issueDate: new Date(),
-			reason: "",
-			storeAddress: "",
-			storePhone: "",
-		})
-	);
-	//#endregion
+  const [data] = useState(
+    new PurchaseProposalForm({
+      code: "",
+      store_code: store_code,
+      issueDate: new Date(),
+      reason: "",
+      storeAddress: "",
+      storePhone: "",
+    })
+  );
+  //#endregion
 
-	//#region Event
-	const onSubmit = async (data) => {
-		const _data = correctPurchaseProposal(data);
+  //#region Event
+  const onSubmit = async (data) => {
+    const _data = correctPurchaseProposal(data);
 
-		const res = await create(_data);
+    const res = await create(_data);
 
-		if (isSuccess(res)) {
-			history.push("/solution/list");
-			noti("success", SUCCESS_MESSAGE.PURCHASE_PROPOSAL_FORM.CREATE);
-		} else {
-			noti("error", ERROR_MESSAGE.PURCHASE_PROPOSAL_FORM.CREATE);
-		}
-	};
+    if (isSuccess(res)) {
+      history.push("/solution/list");
+      noti("success", SUCCESS_MESSAGE.PURCHASE_PROPOSAL_FORM.CREATE);
+    } else {
+      noti("error", ERROR_MESSAGE.PURCHASE_PROPOSAL_FORM.CREATE);
+    }
+  };
 
-	//#endregion
+  //#endregion
 
-	//#region Render
-	return (
-		<Form isLoading={isLoading} edit={false} data={data} onSubmit={onSubmit} />
-	);
-	//#endregion
+  //#region Render
+  return (
+    <Form isLoading={isLoading} edit={false} data={data} onSubmit={onSubmit} />
+  );
+  //#endregion
 };
 
 export default PurchaseProposalFormCreate;

@@ -10,7 +10,7 @@ import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { returnApi } from "src/apis/return_slip.api";
 import { uploadApi } from "src/apis/upload.api";
@@ -55,8 +55,8 @@ export default forwardRef(
 
     const { data: warehouses } = getAllWarehouse({}, isLoading);
     const { data: materials } = getAllMaterials(
-      { storeCode: watch("storeCode") },
-      isLoading || !watch("storeCode")
+      { store_code: watch("store_code") },
+      isLoading || !watch("store_code")
     );
 
     const {
@@ -108,11 +108,11 @@ export default forwardRef(
     const submit = handleSubmit(
       async (d) => {
         try {
-          const storeCode = Number(watch("storeCode")) ?? 0;
+          const store_code = Number(watch("store_code")) ?? 0;
 
           const payload = {
             ...d,
-            storeCode,
+            store_code,
             vat: 0,
             files: d?.files?.map((e) => e?.id),
           };
@@ -151,8 +151,8 @@ export default forwardRef(
 
     const onWareChange = useCallback(
       ({ data, label }) => {
-        setValue("storeCode", data.storeCode);
-        setValue("wareCode", data.code);
+        setValue("store_code", data.store_code);
+        setValue("ware_code", data.code);
         setWarehouse(label);
       },
       [control, setValue]
@@ -194,10 +194,10 @@ export default forwardRef(
 
     useEffect(() => {
       if (warehouses) {
-        const _find = warehouses.find((w) => w.value === watch("wareCode"));
+        const _find = warehouses.find((w) => w.value === watch("ware_code"));
         _find && setWarehouse(_find.label);
       }
-    }, [warehouses, watch("wareCode")]);
+    }, [warehouses, watch("ware_code")]);
 
     //#region Render
     return (
@@ -257,7 +257,7 @@ export default forwardRef(
             </CCol>
             <CCol xs="12" sm="6" md="4" lg="4" xl="3" xxl="3">
               <Controller
-                name="wareCode"
+                name="ware_code"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (

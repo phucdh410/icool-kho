@@ -1,8 +1,8 @@
-import { useCallback, useMemo,useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { approve, confirm, remove } from "src/apis/purchase_proposal_form.api";
 import { history } from "src/App";
@@ -24,9 +24,9 @@ const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
   (state) => state.purchaseProposalForm,
-  ({ isLoading }, { storeCode }, { filters }) => ({
+  ({ isLoading }, { store_code }, { filters }) => ({
     isLoading,
-    storeCode,
+    store_code,
     filters,
   })
 );
@@ -34,7 +34,7 @@ const selectData = createSelector(
 const PurchaseProposalForm = ({}) => {
   const dispatch = useDispatch();
   //#region Data
-  const { isLoading, storeCode, filters } = useSelector(selectData);
+  const { isLoading, store_code, filters } = useSelector(selectData);
 
   const [isFetching, setFetching] = useState();
 
@@ -44,7 +44,7 @@ const PurchaseProposalForm = ({}) => {
     onSuccess: () => setFetching(false),
   });
 
-  const mutation = approver(isCentral(storeCode) ? confirm : approve);
+  const mutation = approver(isCentral(store_code) ? confirm : approve);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.status || d.check),

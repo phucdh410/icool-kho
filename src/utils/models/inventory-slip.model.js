@@ -31,8 +31,8 @@ export class InventorySlips extends Base {
 
 export class InventorySlip extends Base {
   constructor({
-    wareCode,
-    storeCode,
+    ware_code,
+    store_code,
     createdBy,
     checked,
     note,
@@ -42,8 +42,8 @@ export class InventorySlip extends Base {
     super(rest);
 
     Object.assign(this, {
-      storeCode: storeCode,
-      wareCode: wareCode,
+      store_code: store_code,
+      ware_code: ware_code,
       createdBy: createdBy,
       checked: toDate(checked),
       note: note,
@@ -54,7 +54,7 @@ export class InventorySlip extends Base {
 
 export class InventorySlipPreview extends Base {
   constructor({
-    wareName,
+    ware_name,
     checked,
     createdBy,
     value,
@@ -65,7 +65,7 @@ export class InventorySlipPreview extends Base {
     super(rest);
 
     Object.assign(this, {
-      wareName: wareName,
+      ware_name: ware_name,
       checked: checked,
       createdBy: createdBy,
       value: value,

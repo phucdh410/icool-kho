@@ -1,4 +1,4 @@
-import { FORM_HEADER_ENCODED, get,map, post } from "src/utils/axios";
+import { FORM_HEADER_ENCODED, get, map, post } from "src/utils/axios";
 
 import { Materials } from "_models/material.model";
 
@@ -10,9 +10,9 @@ export const getAll = async (params) => {
     { params }
   );
 };
-export const getAllByUser = async ({ storeCode, ...params }) => {
+export const getAllByUser = async ({ store_code, ...params }) => {
   return await map(({ data }) => data.map((d) => new Materials(d))).get(
-    `${MATERIAL.getAllByUser}/${storeCode}`,
+    `${MATERIAL.getAllByUser}/${store_code}`,
     { params }
   );
 };

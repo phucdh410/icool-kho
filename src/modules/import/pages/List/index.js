@@ -1,10 +1,10 @@
-import { useCallback, useMemo,useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { approve,remove } from "src/apis/purchase_slip.api";
+import { approve, remove } from "src/apis/purchase_slip.api";
 import { history } from "src/App";
 import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireSuccess } from "src/utils/alert";
@@ -21,11 +21,11 @@ const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
   (state) => state.import,
-  ({ isLoading }, { storeCode }, { filters }) => ({
+  ({ isLoading }, { store_code }, { filters }) => ({
     isLoading,
     filters: {
       ...filters,
-      storeCode: filters.storeCode ? filters.storeCode : storeCode,
+      store_code: filters.store_code ? filters.store_code : store_code,
     },
   })
 );

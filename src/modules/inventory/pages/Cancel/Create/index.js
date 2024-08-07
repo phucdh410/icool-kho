@@ -18,15 +18,15 @@ const InventoryCancelCreate = () => {
 
   const [data] = useState({
     createdBy: user.code,
-    storeCode: user.storeCode,
-    wareCode: user.wareCode,
+    store_code: user.store_code,
+    ware_code: user.ware_code,
     checked: new Date(),
     note: "",
   });
 
   const onSubmit = async (data) => {
     const payload = {
-      wareCode: data?.wareCode,
+      ware_code: data?.ware_code,
       note: data?.note,
       date: data?.date,
       material_ids: data?.materials?.map((e) => e.id),

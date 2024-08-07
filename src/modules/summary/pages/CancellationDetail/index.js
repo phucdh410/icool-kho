@@ -1,4 +1,4 @@
-import { useCallback,useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
@@ -16,69 +16,69 @@ import Table from "./Table";
 import Toolbar from "./Toolbar";
 
 const selectData = createSelector(
-	(state) => state.config,
-	(state) => state.auth,
-	(state) => state.summaryCancellationDetail,
-	({ isLoading }, { storeCode }, { filters }) => ({
-		isLoading,
-		filters: { ...filters, storeIds: filters.storeIds ?? [storeCode] },
-	})
+  (state) => state.config,
+  (state) => state.auth,
+  (state) => state.summaryCancellationDetail,
+  ({ isLoading }, { store_code }, { filters }) => ({
+    isLoading,
+    filters: { ...filters, storeIds: filters.storeIds ?? [store_code] },
+  })
 );
 
 const CancellationDetailSummary = () => {
-	const previewRef = useRef();
+  const previewRef = useRef();
 
-	const dispatch = useDispatch();
-	//#region Data
-	const { isLoading, filters } = useSelector(selectData);
+  const dispatch = useDispatch();
+  //#region Data
+  const { isLoading, filters } = useSelector(selectData);
 
-	const { data, loading } = getDetailReport(filters, isLoading);
+  const { data, loading } = getDetailReport(filters, isLoading);
 
-	const { data: stores } = getAllStores({}, isLoading);
+  const { data: stores } = getAllStores({}, isLoading);
 
-	const selectedStore = useMemo(() => {
-		if (filters.storeIds?.length && stores)
-			return filters.storeIds.map((s) => stores.find((_s) => _s.value === s));
-		return stores ?? [];
-	}, [filters?.storeIds, stores]);
-	//#endregion
+  const selectedStore = useMemo(() => {
+    if (filters.storeIds?.length && stores)
+      return filters.storeIds.map((s) => stores.find((_s) => _s.value === s));
+    return stores ?? [];
+  }, [filters?.storeIds, stores]);
+  //#endregion
 
-	//region Events
-	const onSearch = (v) => dispatch(setFilter(NAME, v));
+  //region Events
+  const onSearch = (v) => dispatch(setFilter(NAME, v));
 
-	const onPreview = useCallback(
-		(path) => (e) => previewRef.current.preview(path),
-		[]
-	);
-	//#endregion
+  const onPreview = useCallback(
+    (path) => (e) => previewRef.current.preview(path),
+    []
+  );
+  //#endregion
 
-	//#region Render
-	return (
-		<>
-			<CCard>
-				<CCardBody className="toolbar sticky">
-					<Toolbar
-						filter={filters}
-						isLoading={isLoading}
-						stores={stores}
-						onSearch={onSearch}
-					/>
-				</CCardBody>
-			</CCard>
-			<CCard>
-				<CCardBody className="px-0">
-					<Table
-						loading={loading}
-						data={data}
-						stores={selectedStore}
-						onPreview={onPreview}
-					/>
-				</CCardBody>
-			</CCard>
-			<CImagePreview ref={previewRef} />
-		</>
-	);
-	//#endregion
+  //#region Render
+  return (
+    <>
+      <CCard>
+        <CCardBody className="toolbar sticky">
+          <Toolbar
+            filter={filters}
+            isLoading={isLoading}
+            stores={stores}
+            onSearch={onSearch}
+          />
+        </CCardBody>
+      </CCard>
+      <CCard>
+        <CCardBody className="px-0">
+          <Table
+            loading={loading}
+            data={data}
+            stores={selectedStore}
+            onPreview={onPreview}
+          />
+        </CCardBody>
+      </CCard>
+      <CImagePreview ref={previewRef} />
+    </>
+  );
+  //#endregion
 };
 
 export default CancellationDetailSummary;

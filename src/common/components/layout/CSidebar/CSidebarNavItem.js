@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { matchPath,useLocation } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { createSelector } from "reselect";
 
@@ -11,13 +11,13 @@ import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "src/configs/constant";
 
 const selectStoreCode = createSelector(
   (state) => state.auth,
-  ({ storeCode }) => storeCode
+  ({ store_code }) => store_code
 );
 
 const SidebarNavItem = ({ children, childrens, required, store, ...rest }) => {
   const { pathname } = useLocation();
 
-  const storeCode = useSelector(selectStoreCode);
+  const store_code = useSelector(selectStoreCode);
 
   const _class = classNames(
     "sidebar-item-custom",
@@ -33,7 +33,7 @@ const SidebarNavItem = ({ children, childrens, required, store, ...rest }) => {
             code || ENTITY_GROUP_CODE.ALL
           )
         ) {
-          // if (stores && !stores.includes(storeCode)) return false;
+          // if (stores && !stores.includes(store_code)) return false;
           return true;
         }
 

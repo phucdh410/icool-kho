@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Controller } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
@@ -30,8 +30,8 @@ export default ({
   const { data: warehouses } = getAllWarehouse({}, isLoading);
 
   const { data: users } = getUserByStore(
-    watch("storeCode"),
-    !watch("storeCode")
+    watch("store_code"),
+    !watch("store_code")
   );
   //#endregion
 
@@ -47,8 +47,8 @@ export default ({
 
   const onSelectWarehouse = useCallback(
     ({ data, value }) => {
-      setValue("storeCode", data.storeCode);
-      setValue("wareCode", data.code);
+      setValue("store_code", data.store_code);
+      setValue("ware_code", data.code);
     },
     [setValue]
   );
@@ -130,7 +130,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
             <Controller
-              name="wareCode"
+              name="ware_code"
               control={control}
               render={({ field }) => (
                 <CSelect

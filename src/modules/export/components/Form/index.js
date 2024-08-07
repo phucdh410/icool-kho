@@ -1,4 +1,4 @@
-import { useCallback, useEffect,useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
@@ -94,7 +94,7 @@ const MForm = ({ isLoading, edit, data, onSubmit }) => {
               isLoading={isLoading}
               isSelectAll={isSelectAll}
               data={materials}
-              storeCode={watch("storeCode")}
+              store_code={watch("store_code")}
               onChange={(data) => setMaterials(data)}
             />
           </div>

@@ -1,8 +1,8 @@
-import { useCallback, useMemo, useRef,useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import {
   approve,
@@ -30,9 +30,9 @@ const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
   (state) => state.purchaseProposalForm,
-  ({ isLoading }, { storeCode }, { filters }) => ({
+  ({ isLoading }, { store_code }, { filters }) => ({
     isLoading,
-    storeCode,
+    store_code,
     filters,
   })
 );
@@ -40,7 +40,7 @@ const selectData = createSelector(
 const QuantitativeListPage = ({}) => {
   const dispatch = useDispatch();
   //#region Data
-  const { isLoading, storeCode, filters } = useSelector(selectData);
+  const { isLoading, store_code, filters } = useSelector(selectData);
 
   const [isFetching, setFetching] = useState();
 
@@ -50,7 +50,7 @@ const QuantitativeListPage = ({}) => {
     onSuccess: () => setFetching(false),
   });
 
-  const mutation = approver(isCentral(storeCode) ? confirm : approve);
+  const mutation = approver(isCentral(store_code) ? confirm : approve);
 
   const isSelectAll = useMemo(
     () => data?.every((d) => d.status || d.check),
@@ -112,7 +112,7 @@ const QuantitativeListPage = ({}) => {
 
   const onReCalculate = async () => {
     const values = {
-      storeCode: selected[0]?.store_code,
+      store_code: selected[0]?.store_code,
       date: format(selected[0]?.updated_date, "YYYY-MM-DD"),
       note: selected[0]?.note,
     };

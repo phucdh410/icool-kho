@@ -21,16 +21,16 @@ export const setUser = (user) => ({
 });
 
 export const setPermission = ({
-  roleCode,
-  storeCode,
-  wareCode,
+  role_code,
+  store_code,
+  ware_code,
   permissions,
 }) => ({
   type: SET_PERMISSION,
   payload: {
-    roleCode,
-    storeCode,
-    wareCode,
+    role_code,
+    store_code,
+    ware_code,
     permissions,
   },
 });

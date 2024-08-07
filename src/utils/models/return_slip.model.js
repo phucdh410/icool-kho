@@ -33,10 +33,10 @@ export class ReturnSlips extends Base {
 
 export class ReturnSlip extends Base {
   constructor({
-    storeCode,
+    store_code,
     storeName,
-    wareCode,
-    wareName,
+    ware_code,
+    ware_name,
     createdDate,
     date,
     note,
@@ -49,10 +49,10 @@ export class ReturnSlip extends Base {
     super(rest);
 
     Object.assign(this, {
-      storeCode: storeCode,
+      store_code: store_code,
       storeName: storeName,
-      wareCode: wareCode,
-      wareName: wareName,
+      ware_code: ware_code,
+      ware_name: ware_name,
       createdDate: createdDate,
       date: toDate(date),
       note: note,
@@ -66,7 +66,7 @@ export class ReturnSlip extends Base {
 
 export class ReturnSlipPreview extends Base {
   constructor({
-    wareName,
+    ware_name,
     createdDate,
     date,
     total,
@@ -77,7 +77,7 @@ export class ReturnSlipPreview extends Base {
     super(rest);
 
     Object.assign(this, {
-      wareName,
+      ware_name,
       createdDate,
       date,
       total,

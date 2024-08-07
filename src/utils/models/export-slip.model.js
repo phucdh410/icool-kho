@@ -34,7 +34,7 @@ export class ExportSlips extends Base {
 
 export class ExportSlip extends Base {
   constructor({
-    storeCode,
+    store_code,
     storeAddress,
     storePhone,
     date,
@@ -49,7 +49,7 @@ export class ExportSlip extends Base {
     super(rest);
 
     Object.assign(this, {
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       date: toDate(date),
@@ -65,7 +65,7 @@ export class ExportSlip extends Base {
 
 export class ExportSlipPreview extends Base {
   constructor({
-    storeCode,
+    store_code,
     storeName,
     storeAddress,
     storePhone,
@@ -81,7 +81,7 @@ export class ExportSlipPreview extends Base {
     super(rest);
 
     Object.assign(this, {
-      storeCode: storeCode,
+      store_code: store_code,
       storeName: storeName,
       storeAddress: storeAddress,
       storePhone: storePhone,
@@ -104,7 +104,7 @@ export class ExprotFormPrints extends Base {
     materials,
     reason,
     storeAddress,
-    storeCode,
+    store_code,
     storeName,
     storePhone,
     total,
@@ -114,7 +114,7 @@ export class ExprotFormPrints extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       reason: reason,

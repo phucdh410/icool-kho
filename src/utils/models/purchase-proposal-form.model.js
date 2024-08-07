@@ -44,7 +44,7 @@ export class PurchaseProposalForms extends Base {
   }) {
     super(rest);
 
-    const { storeCode, user } = store.getState().auth;
+    const { store_code, user } = store.getState().auth;
 
     const byThisUser = true;
     // user.id !== createdBy;
@@ -53,7 +53,12 @@ export class PurchaseProposalForms extends Base {
       storeName: storeName,
       creator: creator,
       issueDate: format(issueDate),
-      status: mapStatus(approvedStatus, confirmedStatus, storeCode, byThisUser),
+      status: mapStatus(
+        approvedStatus,
+        confirmedStatus,
+        store_code,
+        byThisUser
+      ),
       reason: reason,
       total: total,
     });
@@ -62,7 +67,7 @@ export class PurchaseProposalForms extends Base {
 
 export class PurchaseProposalForm extends Base {
   constructor({
-    storeCode,
+    store_code,
     storeName,
     storeAddress,
     storePhone,
@@ -77,7 +82,7 @@ export class PurchaseProposalForm extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       issueDate: toDate(issueDate),
@@ -92,7 +97,7 @@ export class PurchaseProposalForm extends Base {
 
 export class PurchaseProposalFormPreview extends Base {
   constructor({
-    storeCode,
+    store_code,
     storeName,
     storeAddress,
     storePhone,
@@ -107,7 +112,7 @@ export class PurchaseProposalFormPreview extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       issueDate: toDate(issueDate),
@@ -124,7 +129,7 @@ export class PurchaseProposalFormPreview extends Base {
 export class PurchaseProposalFormPrints extends Base {
   constructor({
     storeName,
-    storeCode,
+    store_code,
     storeAddress,
     storePhone,
     reason,
@@ -138,7 +143,7 @@ export class PurchaseProposalFormPrints extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       reason: reason,

@@ -35,8 +35,8 @@ export class CancellationSlips extends Base {
 
 export class CancellationSlip extends Base {
   constructor({
-    storeCode,
-    wareCode,
+    store_code,
+    ware_code,
     createdDate,
     date,
     note,
@@ -44,21 +44,21 @@ export class CancellationSlip extends Base {
     vat,
     total,
     materials,
-    wareName,
+    ware_name,
     ...rest
   }) {
     super(rest);
 
     Object.assign(this, {
-      storeCode: storeCode,
-      wareCode: wareCode,
+      store_code: store_code,
+      ware_code: ware_code,
       createdDate: createdDate,
       date: toDate(date),
       note: note,
       sum: sum,
       vat: vat,
       total: total,
-      wareName: wareName,
+      ware_name: ware_name,
       materials: materials.map((m) => new CancellationSlipMaterials(m)),
     });
   }
@@ -66,7 +66,7 @@ export class CancellationSlip extends Base {
 
 export class CancellationSlipPreview extends Base {
   constructor({
-    wareName,
+    ware_name,
     date,
     createdDate,
     total,
@@ -77,7 +77,7 @@ export class CancellationSlipPreview extends Base {
     super(rest);
 
     Object.assign(this, {
-      wareName,
+      ware_name,
       date,
       createdDate,
       note,

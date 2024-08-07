@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { createSelector } from "reselect";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "src/configs/constant";
 import { Can } from "src/utils/ability";
 import { filter } from "src/utils/funcs";
 
 import { Magnifying } from "_assets/icons";
-import { CButton, CDate,CInput, CSelect } from "_components/controls";
+import { CButton, CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import { getAll as getAllWarehouse } from "../../../queries-fn/warehouse.query";
@@ -118,7 +118,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="wareCode"
+              name="ware_code"
               control={control}
               defaultValue=""
               render={({ field }) => (

@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import {
   ENTITY_GROUP_CODE,
@@ -12,8 +12,8 @@ import {
 import { Can } from "src/utils/ability";
 import { filter as filterFunc } from "src/utils/funcs";
 
-import { Magnifying, TickCircleFill,XCircleFill } from "_assets/icons";
-import { CButton, CDate,CInput, CSelect } from "_components/controls";
+import { Magnifying, TickCircleFill, XCircleFill } from "_assets/icons";
+import { CButton, CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import { getAll } from "../../queries-fn/store.query";
@@ -55,7 +55,7 @@ export default ({
   };
 
   const onStoreChange = ({ value }) => {
-    setValue("storeCode", value);
+    setValue("store_code", value);
   };
 
   const search = handleSubmit(
@@ -81,7 +81,7 @@ export default ({
             />
           </div>
           <div>
-            {/* !isCentral(storeCode) && () */}
+            {/* !isCentral(store_code) && () */}
 
             <Can
               do={PERMISSION_VALUE.CREATE}
@@ -146,7 +146,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="2" xxl="2">
             <Controller
-              name="storeCode"
+              name="store_code"
               control={control}
               render={({ field }) => (
                 <CSelect

@@ -10,7 +10,7 @@ import {
 export class PurchaseSlips extends Base {
   constructor({
     storeName,
-    storeCode,
+    store_code,
     createdDate,
     createdBy,
     approvedStatus,
@@ -23,7 +23,7 @@ export class PurchaseSlips extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       createdDate: format(createdDate),
       createdBy: createdBy,
       approvedStatus: approvedStatus,
@@ -36,8 +36,8 @@ export class PurchaseSlips extends Base {
 
 export class PurchaseSlip extends Base {
   constructor({
-    wareCode,
-    storeCode,
+    ware_code,
+    store_code,
     date,
     materials,
     supplier,
@@ -47,8 +47,8 @@ export class PurchaseSlip extends Base {
     super(rest);
 
     Object.assign(this, {
-      wareCode: wareCode,
-      storeCode: storeCode,
+      ware_code: ware_code,
+      store_code: store_code,
       date: toDate(date),
       supplier: supplier,
       materials: materials.map((m) => new PurchaseSlipMaterials(m)),
@@ -92,7 +92,7 @@ export class ImportFormPrints extends Base {
     materials,
     reason,
     storeAddress,
-    storeCode,
+    store_code,
     storeName,
     storePhone,
     total,
@@ -102,7 +102,7 @@ export class ImportFormPrints extends Base {
 
     Object.assign(this, {
       storeName: storeName,
-      storeCode: storeCode,
+      store_code: store_code,
       storeAddress: storeAddress,
       storePhone: storePhone,
       reason: reason,
