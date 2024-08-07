@@ -31,4 +31,5 @@ export {
 export * from "./CRadio";
 export * from "./CRange";
 export * from "./CRating";
+export * from "./CSelectColor";
 export * from "./CSwitch";

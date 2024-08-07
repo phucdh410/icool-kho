@@ -86,6 +86,19 @@
       }
     }
   }
+
+  &.c-select-color {
+    .react-select__control {
+      border: none !important;
+      box-shadow: none !important;
+      background: var(--select-color);
+    }
+    .react-select__placeholder,
+    .react-select__single-value,
+    .react-select__indicator.react-select__dropdown-indicator {
+      color: white;
+    }
+  }
 }
 
 .react-select-multi {
