@@ -39,8 +39,8 @@ export const CRating = forwardRef(
               className={classNames(
                 displayValue.value >= index + 1 ? "fa-solid" : "fa-regular",
                 disabled
-                  ? "cursor-default text-[#0070c480]"
-                  : "cursor-pointer text-[#0071c7]",
+                  ? "cursor-default text-[#56b3a8a4]"
+                  : "cursor-pointer text-[#5CB0A6]",
                 "text-[24px] fa-star transition-all duration-100"
               )}
             ></i>

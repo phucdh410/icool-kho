@@ -58,18 +58,7 @@ export const MarkTable = ({ control }) => {
           <Controller
             control={control}
             name={`evaluations.${index}.percent`}
-            render={({ field }) => (
-              <CRange
-                {...field}
-                fillColor={
-                  field.value >= 85
-                    ? "#28a745"
-                    : field.value < 70
-                    ? "#dc3545"
-                    : "#FFB946"
-                }
-              />
-            )}
+            render={({ field }) => <CRange {...field} />}
           />
         </div>
       </td>

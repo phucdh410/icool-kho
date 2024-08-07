@@ -810,6 +810,56 @@ export const NhaCungCap = {
 };
 //#endregion
 
+//#region Chất lượng hàng hóa
+export const ChatLuongHangHoa = {
+  DanhSachPhieuChamDiemHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS phiếu chấm điểm HH",
+    path: "/goods-quality/list",
+  },
+  DanhSachHangHoaChamDiem: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "DS hàng hóa chấm điểm",
+    path: "/goods-quality/rating/:id",
+  },
+  ChamDiemHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Chấm điểm hàng hóa",
+    path: "/goods-quality/rating/:id/:supplierId",
+  },
+  ThemPhieuChamDiemHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Thêm phiếu chấm điểm HH",
+    path: "/goods-quality/create",
+  },
+  SuaPhieuChamDiemHangHoa: {
+    required: {
+      code: ENTITY_GROUP_CODE.MATERIAL_GROUP,
+      permission: PERMISSION_VALUE.READ,
+    },
+    icon: "",
+    name: "Sửa phiếu chấm điểm HH",
+    path: "/goods-quality/edit/:id",
+  },
+};
+//#endregion
+
 //#region Combo
 export const Combo = {
   DanhMucComboItem: {

@@ -17,6 +17,7 @@ import {
 } from "_assets/icons";
 
 import {
+  ChatLuongHangHoa,
   Combo,
   DeXuatNhaCungCap,
   Export,
@@ -628,6 +629,39 @@ const navigation = [
         name: NhaCungCap.ThemPhieuChamDiemNhaCungCap.name,
         to: NhaCungCap.ThemPhieuChamDiemNhaCungCap.path,
         childrens: [NhaCungCap.ThemPhieuChamDiemNhaCungCap.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+    ],
+  },
+  //#endregion
+
+  //#region Chất lượng hàng hóa
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Danh mục chất lượng hàng hóa",
+    route: "/goods-quality",
+    icon: <MaterialIcon className="c-sidebar-nav-icon" />,
+    required: [
+      { code: ENTITY_GROUP_CODE.MATERIAL_GROUP },
+      { code: ENTITY_GROUP_CODE.MATERIAL },
+    ],
+    childrens: [
+      ChatLuongHangHoa.DanhSachPhieuChamDiemHangHoa.path,
+      ChatLuongHangHoa.ThemPhieuChamDiemHangHoa.path,
+    ],
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: ChatLuongHangHoa.DanhSachPhieuChamDiemHangHoa.name,
+        to: ChatLuongHangHoa.DanhSachPhieuChamDiemHangHoa.path,
+        childrens: [ChatLuongHangHoa.DanhSachPhieuChamDiemHangHoa.path],
+        required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: ChatLuongHangHoa.ThemPhieuChamDiemHangHoa.name,
+        to: ChatLuongHangHoa.ThemPhieuChamDiemHangHoa.path,
+        childrens: [ChatLuongHangHoa.ThemPhieuChamDiemHangHoa.path],
         required: [{ code: ENTITY_GROUP_CODE.MATERIAL_GROUP }],
       },
     ],

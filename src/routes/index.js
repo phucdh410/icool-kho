@@ -91,6 +91,7 @@ import {
 } from "_modules/summary/pages";
 
 import {
+  ChatLuongHangHoa,
   Combo,
   DeXuatNhaCungCap,
   Export,
@@ -525,6 +526,34 @@ const routes = [
   },
   {
     ...NhaCungCap.ChamDiemNhaCungCap,
+    exact: true,
+    component: NhaCungCapChamDiem,
+  },
+  //#endregion
+
+  //#region Chất lượng hàng hóa
+  {
+    ...ChatLuongHangHoa.DanhSachPhieuChamDiemHangHoa,
+    exact: true,
+    component: DanhSachPhieuChamDiemNhaCungCap,
+  },
+  {
+    ...ChatLuongHangHoa.ThemPhieuChamDiemHangHoa,
+    exact: true,
+    component: ThemPhieuChamDiemNhaCungCap,
+  },
+  {
+    ...ChatLuongHangHoa.SuaPhieuChamDiemHangHoa,
+    exact: true,
+    component: SuaPhieuChamDiemNhaCungCap,
+  },
+  {
+    ...ChatLuongHangHoa.DanhSachHangHoaChamDiem,
+    exact: true,
+    component: DanhSachNhaCungCapChamDiem,
+  },
+  {
+    ...ChatLuongHangHoa.ChamDiemHangHoa,
     exact: true,
     component: NhaCungCapChamDiem,
   },
