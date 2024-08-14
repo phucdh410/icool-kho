@@ -70,9 +70,7 @@ export const CNumberInput = forwardRef(
     const onValueChange = (e) => {
       let tmpValue = e.target.value;
 
-      if (tmpValue?.includes(thousand_seperator)) {
-        tmpValue = tmpValue.replaceAll(thousand_seperator, "");
-      }
+      tmpValue = tmpValue.replace(/\D/g, "");
 
       onChange(Number(tmpValue));
     };
