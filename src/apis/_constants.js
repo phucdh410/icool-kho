@@ -75,22 +75,22 @@ export const PURCHASE_PROPOSAL_FORM = {
 
 // Phiếu mua hàng or Phiếu nhập hàng
 export const PURCHASE_SLIP = {
-  getAll: `${api}/purchase_slips`,
-  getByCode: `${api}/purchase_slips/getByCode`,
-  getPreview: `${api}/purchase_slips/getPreview`,
-  getForPrint: `${api}/purchase_slips/getForPrint`,
-  getMaterial: `${api}/purchase_slips/getMaterial`,
+  getAll: `${api}/purchase-forms`,
+  getByCode: `${api}/purchase-forms/getByCode`,
+  getPreview: `${api}/purchase-forms/getPreview`,
+  getForPrint: `${api}/purchase-forms/getForPrint`,
+  getMaterial: `${api}/purchase-forms/getMaterial`,
 
-  getReport: `${api}/purchase_slips/getReportByMaterialId`,
-  exportReport: `${api}/purchase_slips/exportReportByMaterialId`,
+  getReport: `${api}/purchase-forms/getReportByMaterialId`,
+  exportReport: `${api}/purchase-forms/exportReportByMaterialId`,
 
-  getAllReportDetail: `${api}/purchase_slips/getReportDetailByMaterialId`,
-  exportReportDetail: `${api}/purchase_slips/exportReportDetailByMaterialId`,
+  getAllReportDetail: `${api}/purchase-forms/getReportDetailByMaterialId`,
+  exportReportDetail: `${api}/purchase-forms/exportReportDetailByMaterialId`,
 
-  create: `${api}/purchase_slips/create`,
-  update: `${api}/purchase_slips/update`,
-  approve: `${api}/purchase_slips/approve`,
-  delete: `${api}/purchase_slips/delete`,
+  create: `${api}/purchase-forms/create`,
+  update: `${api}/purchase-forms/update`,
+  approve: `${api}/purchase-forms/approve`,
+  delete: `${api}/purchase-forms/delete`,
 };
 
 // Phiếu hủy hàng

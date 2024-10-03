@@ -22,6 +22,8 @@ function Select(
     ignore,
     display,
     select,
+    disabled,
+    isDisabled,
     ...rest
   },
   ref
@@ -74,6 +76,7 @@ function Select(
           theme={selectTheme}
           onChange={change}
           classNamePrefix="react-select"
+          isDisabled={disabled || isDisabled}
           getOptionLabel={display ? (option) => option[display] : undefined}
           {...rest}
         />

@@ -4,10 +4,11 @@ import { createSelector } from "reselect";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
+import { phieuNhapHangApi } from "src/1/apis/phieu_nhap_hang.api";
 import { approve, remove } from "src/apis/purchase_slip.api";
 import { history } from "src/App";
 import { setFilter } from "src/common/actions/config.action";
-import { fireDelete, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { isSuccess } from "src/utils/funcs";
 
 import { getAll } from "_common/queries-fn/purchase-slip.query";
@@ -77,10 +78,8 @@ const ImportList = () => {
     [dispatch]
   );
 
-  const onAdd = useCallback(() => history.push());
-
   const onEdit = useCallback(() => {
-    if (selected.length === 1) history.push(`/import/form/${selected[0].code}`);
+    if (selected.length === 1) history.push(`/import/form/${selected[0]?.id}`);
   });
 
   const onApprove = useCallback(async () => {
@@ -96,21 +95,22 @@ const ImportList = () => {
     }
   });
 
-  const onRemove = useCallback(async () => {
+  const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
+      try {
+        await phieuNhapHangApi.remove(selected?.[0]?.id);
 
-      if (isSuccess(res)) {
         refetch();
         fireSuccess();
-      } else {
+      } catch (error) {
         fireError();
       }
     }
-  }, [selected, refetch]);
+  };
   //#endregion
 
+  //#region Render
   return (
     <>
       <CCard className="toolbar sticky">
@@ -121,7 +121,6 @@ const ImportList = () => {
             selectedNo={selected.length}
             toggleStatus={onStatusChange}
             onSearch={onSearch}
-            onAdd={onAdd}
             onEdit={onEdit}
             onApprove={onApprove}
             onRemove={onRemove}
@@ -142,6 +141,7 @@ const ImportList = () => {
       </CCard>
     </>
   );
+  //#endregion
 };
 
 export default ImportList;

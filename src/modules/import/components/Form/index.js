@@ -1,73 +1,62 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useMemo } from "react";
+import { useFieldArray, useWatch } from "react-hook-form";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
-
-import { ERROR_MESSAGE } from "src/configs/constant";
-import { UID } from "src/utils/funcs";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
 
-const MForm = ({ isLoading, edit, data, onSubmit }) => {
+const MForm = ({ isLoading, isEdit = false, control, onSubmit, setValue }) => {
   //#region Data
-  const { control, watch, setValue, setError, clearErrors, handleSubmit } =
-    useForm({ defaultValues: data });
+  const { fields, append, update, remove, replace } = useFieldArray({
+    control,
+    name: "materials",
+    keyName: "__id",
+  });
 
-  const [status, setStatus] = useState(1);
-
-  const [materials, setMaterials] = useState([]);
+  const realtimeMaterials = useWatch({ control, name: "materials" });
 
   const isSelectAll = useMemo(
-    () => materials?.every((m) => m.check) ?? false,
-    [materials]
-  );
-
-  const selected = useMemo(
-    () => materials?.filter((m) => m.check) ?? [],
-    [materials]
+    () =>
+      realtimeMaterials.every((e) => e?.checked && realtimeMaterials.length),
+    [realtimeMaterials]
   );
   //#endregion
 
   //#region Events
-  const onStatusChange = useCallback(
-    (_status) => setStatus(_status === status ? 0 : _status),
-    [status]
-  );
-
   const onAdd = () => {
-    setMaterials([...materials, { id: UID() }]);
+    append({
+      material_code: "",
+      price: 0,
+      total: 0,
+      ware_q: 1,
+      note: "",
+      bought_unit: "",
+      ware_unit: "",
+      provider_q: 0,
+      provider_unit: "",
+      sum: 0,
+    });
+  };
+
+  const handleCheckAll = (checked) => {
+    realtimeMaterials.forEach((e, index) => {
+      update(index, { ...e, checked });
+    });
   };
 
   const onRemove = () => {
-    setMaterials(materials.filter((m) => !m.check));
+    if (isSelectAll) {
+      replace([]);
+    } else {
+      const indexList = [];
+      realtimeMaterials.forEach((e, i) => {
+        if (e?.checked) indexList.push(i);
+      });
+      remove(indexList);
+    }
   };
-
-  const onSave = () => {
-    clearErrors();
-    handleSubmit(
-      (d) => {
-        const _materials = materials.filter((m) => m.boughtQ);
-
-        if (_materials.length) {
-          onSubmit({ ...d, materials: _materials });
-        } else {
-          noti("error", ERROR_MESSAGE.NVL.REQUIRED);
-          setError("materials", { type: "Required" });
-        }
-      },
-      (e) => {
-        noti("error", ERROR_MESSAGE.PURCHASE_SLIP.REQUIRED);
-      }
-    )();
-  };
-  //#enderion
-
-  useEffect(() => {
-    if (isLoading || !data) return;
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
-    setMaterials(data.materials ?? []);
-  }, [isLoading, data]);
+  //#endregion
 
   //#region Render
   return (
@@ -76,14 +65,11 @@ const MForm = ({ isLoading, edit, data, onSubmit }) => {
         <CCardBody>
           <Toolbar
             control={control}
-            watch={watch}
-            setValue={setValue}
-            status={status}
-            selectedNo={selected.length}
             onAdd={onAdd}
-            onSave={onSave}
+            onSave={onSubmit}
             onRemove={onRemove}
-            onStatusChange={onStatusChange}
+            isEdit={isEdit}
+            replace={replace}
           />
         </CCardBody>
       </CCard>
@@ -92,12 +78,11 @@ const MForm = ({ isLoading, edit, data, onSubmit }) => {
         <CCardBody className="px-0 py-0">
           <div className="table-responsive">
             <Table
-              edit={edit}
-              isLoading={isLoading}
+              fields={fields}
+              control={control}
+              setValue={setValue}
               isSelectAll={isSelectAll}
-              data={materials}
-              store_code={watch("store_code")}
-              onChange={(data) => setMaterials(data)}
+              handleCheckAll={handleCheckAll}
             />
           </div>
         </CCardBody>

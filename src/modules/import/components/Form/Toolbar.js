@@ -1,35 +1,32 @@
 import { useCallback, useEffect } from "react";
 import { Controller } from "react-hook-form";
+import { useQuery } from "react-query";
 import classNames from "classnames";
 
 import { CCol, CCollapse, CRow } from "@coreui/react";
 
+import { cuaHangApi } from "src/1/apis/cua_hang.api";
+
 import { CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
-import { getAll as getAllSupplier } from "../../queries-fn/supplier.query";
-import { getAll as getAllWarehouse } from "../../queries-fn/warehouse.query";
+import { importDefaultValues } from "../../form";
 
-export default ({
-  isLoading,
-  status,
-  watch,
-  control,
-  setValue,
-  onStatusChange,
-  selectedNo,
-  onAdd,
-  onSave,
-  onRemove,
-}) => {
+export default ({ control, onAdd, onSave, onRemove, isEdit, replace }) => {
   //#region Data
-  const { data: warehouses } = getAllWarehouse({}, isLoading);
-  const { data: suppliers } = getAllSupplier({}, isLoading);
+  const { data: stores } = useQuery({
+    queryKey: ["danh-sach-chi-nhanh"],
+    queryFn: () => cuaHangApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        ...e,
+        label: e?.name ?? "",
+        value: e?.code ?? "",
+      })),
+  });
   //#endregion
 
   //#region Event
-  const toggleCollapse = useCallback(() => onStatusChange(1), [onStatusChange]);
-
   const onClick = useCallback(
     (state) => {
       switch (state) {
@@ -44,26 +41,11 @@ export default ({
     [onAdd, onSave, onRemove]
   );
 
-  const changeWarehouse = useCallback(({ value, data }) => {
-    setValue("ware_code", value);
-
-    setValue("wareAddress", data.address);
-    setValue("store_code", data.store_code);
-  }, []);
-
-  const changeSupplier = useCallback(({ value }) => {
-    setValue("supplier", value);
-  });
+  const onStoreChange = (onChangeCallback) => (selectedOption) => {
+    onChangeCallback(selectedOption?.value);
+    replace(importDefaultValues.materials);
+  };
   //#endregion
-
-  useEffect(() => {
-    if (warehouses && watch("ware_code")) {
-      const warehouse = warehouses.find((s) => s.value == watch("ware_code"));
-
-      setValue("wareAddress", warehouse.data.address);
-      setValue("store_code", warehouse.data.store_code);
-    }
-  }, [warehouses, watch("store_code")]);
 
   //#region Render
   return (
@@ -76,7 +58,7 @@ export default ({
               canAdd={true}
               canSave={true}
               canEdit={false}
-              canRemove={selectedNo}
+              canRemove
             />
           </div>
           <div
@@ -85,87 +67,64 @@ export default ({
               "btn-primary",
               "btn-collapse",
               "extend",
-              status == 1 && "show"
+              "show"
             )}
-            onClick={toggleCollapse}
           ></div>
         </CCol>
       </CRow>
-      <CCollapse show={status === 1}>
-        <CRow className="mt-3">
-          <CCol xs="12" sm="6" md="4" lg="3" xl="2" xxl="3">
-            <CInput
-              label="Số đơn hàng"
-              readOnly
-              control={control}
-              value={watch("code")}
-            />
-          </CCol>
-          <CCol xs="12" sm="6" md="4" lg="3" xl="3" xxl="3">
-            <Controller
-              name="ware_code"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <CSelect
-                  label="Kho"
-                  required
-                  options={warehouses}
-                  {...field}
-                  onChange={changeWarehouse}
-                />
-              )}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="4" lg="3" xl="5" xxl="4">
-            <CInput
-              label="Địa chỉ"
-              required
-              readOnly
-              control={control}
-              value={watch("wareAddress")}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="4" lg="3" xl="2" xxl="2">
-            <Controller
-              name="date"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <CDate
-                  maxDate={Date.now()}
-                  label="Ngày nhập"
-                  required
-                  {...field}
-                />
-              )}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="4" lg="3" xl="3" xxl="3">
-            <Controller
-              name="supplier"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <CSelect
-                  options={suppliers}
-                  label="Nhà cung cấp"
-                  required
-                  {...field}
-                  onChange={changeSupplier}
-                />
-              )}
-            />
-          </CCol>
-          <CCol xs="12" sm="12" md="12" lg="9" xl="9" xxl="9">
-            <Controller
-              name="note"
-              control={control}
-              defaultValue=""
-              render={({ field }) => <CInput label="Ghi chú" {...field} />}
-            />
-          </CCol>
-        </CRow>
+      <CCollapse show>
+        <div className="mt-3 grid grid-cols-5 gap-3">
+          <Controller
+            control={control}
+            name="code"
+            render={({ field }) => (
+              <CInput label="Số đơn hàng" readOnly {...field} />
+            )}
+          />
+          <Controller
+            control={control}
+            name="store_code"
+            render={({ field: { onChange, ..._field } }) => (
+              <CSelect
+                label="Chi nhánh"
+                disabled={isEdit}
+                required
+                onChange={onStoreChange(onChange)}
+                options={stores}
+                {..._field}
+              />
+            )}
+          />
+          <Controller
+            name="date"
+            control={control}
+            render={({ field }) => (
+              <CDate
+                maxDate={Date.now()}
+                label="Ngày mua"
+                required
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="phone_number"
+            render={({ field }) => (
+              <CInput
+                label="Số điện thoại"
+                required
+                control={control}
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="note"
+            render={({ field }) => <CInput label="Ghi chú" {...field} />}
+          />
+        </div>
       </CCollapse>
     </>
   );

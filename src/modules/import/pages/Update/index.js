@@ -1,50 +1,76 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import moment from "moment";
 
-import { update } from "src/apis/purchase_slip.api";
+import { phieuNhapHangApi } from "src/1/apis/phieu_nhap_hang.api";
 import { history } from "src/App";
-import { correctImport } from "src/common/correctDataFunctionFormUnitAndPrice";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
-import { isSuccess } from "src/utils/funcs";
-
-import { getByCode } from "_common/queries-fn/purchase-slip.query";
 
 import MForm from "../../components/Form";
-
-const selectIsLoading = createSelector(
-	(state) => state.config,
-	({ isLoading }) => isLoading
-);
+import { importDefaultValues } from "../../form";
 
 const ImportUpdate = ({ match: { params } }) => {
-	const isLoading = useSelector(selectIsLoading);
+  //#region Data
+  const { data } = useQuery({
+    queryKey: ["chi-tiet-phieu-nhap-hang", params?.id],
+    queryFn: () => phieuNhapHangApi.getById(params.id),
+    enabled: !!params?.id,
+    select: (response) => response?.data?.data,
+  });
 
-	const { data } = getByCode(params.code, isLoading);
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { isSubmitting },
+  } = useForm({
+    mode: "all",
+    defaultValues: importDefaultValues,
+  });
+  //#endregion
 
-	const onSubmit = async (data) => {
-		const _data = correctImport(data);
+  //#region Event
+  const onSubmit = () => {
+    handleSubmit(async (values) => {
+      try {
+        const { id, date, ...payload } = values;
+        payload.date = moment(date).format("YYYY-MM-DD");
+        await phieuNhapHangApi.update(id, payload);
+        history.push("/import/list");
+        reset(importDefaultValues);
+        noti("success", SUCCESS_MESSAGE.IMPORT.UPDATE);
+      } catch (error) {
+        noti("error", ERROR_MESSAGE.IMPORT.UPDATE);
+      }
+    })();
+  };
+  //#endregion
 
-		const res = await update(_data);
+  useEffect(() => {
+    if (data) {
+      reset({
+        ...data,
+        date: moment(data?.date).toDate(),
+        materials: data?.materials?.map((e) => ({ ...e, checked: false })),
+      });
+    }
+  }, [data]);
 
-		if (isSuccess(res)) {
-			history.push("/import/list");
-			noti("success", SUCCESS_MESSAGE.IMPORT.UPDATE);
-		} else {
-			noti("error", ERROR_MESSAGE.IMPORT.UPDATE);
-		}
-	};
-
-	return (
-		<>
-			<MForm
-				edit={true}
-				data={data}
-				isLoading={isLoading}
-				onSubmit={onSubmit}
-			/>
-		</>
-	);
+  //#region Render
+  return (
+    <>
+      <MForm
+        control={control}
+        isLoading={isSubmitting}
+        onSubmit={onSubmit}
+        setValue={setValue}
+        isEdit
+      />
+    </>
+  );
+  //#endregion
 };
 
 export default ImportUpdate;

@@ -9,11 +9,11 @@ import {
 
 export class PurchaseSlips extends Base {
   constructor({
-    storeName,
+    store_name,
     store_code,
-    createdDate,
-    createdBy,
-    approvedStatus,
+    created_date,
+    created_by,
+    approved_status,
     date,
     total,
     note,
@@ -22,11 +22,11 @@ export class PurchaseSlips extends Base {
     super(rest);
 
     Object.assign(this, {
-      storeName: storeName,
+      store_name: store_name,
       store_code: store_code,
-      createdDate: format(createdDate),
-      createdBy: createdBy,
-      approvedStatus: approvedStatus,
+      created_date: format(created_date, "DD/MM/yyyy"),
+      created_by: created_by,
+      approved_status: approved_status,
       date: format(date, "DD/MM/yyyy"),
       total: total,
       note: note,

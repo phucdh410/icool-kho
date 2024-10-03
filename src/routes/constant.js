@@ -410,7 +410,7 @@ export const Import = {
       },
       reducer: IMPORT_REDUCER,
       icon: "",
-      name: "DS phiếu nhập",
+      name: "DS đơn nhập hàng",
       path: "/import/list",
     },
     Create: {
@@ -429,7 +429,7 @@ export const Import = {
       },
       icon: "",
       name: "Sửa phiếu nhập nguyên vật liệu",
-      path: "/import/form/:code",
+      path: "/import/form/:id",
     },
     Print: {
       required: {

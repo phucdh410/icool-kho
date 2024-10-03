@@ -74,7 +74,7 @@ export default ({
               canAdd={false}
               canSave={false}
               canEdit={selectedNo === 1}
-              canRemove={!!selectedNo}
+              canRemove={selectedNo === 1}
             />
           </div>
           <div>
@@ -178,7 +178,7 @@ export default ({
               control={control}
               render={({ field }) => (
                 <CDate
-                  label="Ngày giao: "
+                  label="Ngày mua: "
                   placeholderText="Chọn ngày"
                   {...field}
                 />

@@ -390,7 +390,7 @@ const navigation = [
     _children: [
       {
         _tag: "CSidebarNavItem",
-        name: "Nguyên vật liệu",
+        name: "DS Đơn nhập hàng",
         to: Import.Material.List.path,
         childrens: [
           Import.Material.List.path,
