@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { money } from "src/utils/funcs";
 
@@ -12,7 +12,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
-  const [preview, setPreview] = useState(null);
+  const modalRef = useRef(null);
   //#endregion
 
   //#region Event
@@ -20,10 +20,6 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     (_paginate) => setPaginate(_paginate),
     []
   );
-
-  const onClose = useCallback(() => {
-    setPreview(null);
-  }, [preview]);
 
   const select = useCallback(
     (code = -1) =>
@@ -114,10 +110,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     ),
     code: (item) => (
       <td>
-        <a
-          href={`/preview/${item.code}`}
-          onClick={(e) => e.preventDefault() || setPreview(item)}
-        >
+        <a href="#" onClick={() => modalRef.current?.open(item?.id)}>
           {item.code}
         </a>
       </td>
@@ -149,9 +142,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
           />
         }
       />
-      {preview && (
-        <MPreview item={preview} getter={getPreview} onClose={onClose} />
-      )}
+      <MPreview ref={modalRef} />
     </>
   );
   //#endregion

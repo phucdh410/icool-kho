@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
 import { phieuNhapHangApi } from "src/1/apis/phieu_nhap_hang.api";
-import { approve, remove } from "src/apis/purchase_slip.api";
+import { approve } from "src/apis/purchase_slip.api";
 import { history } from "src/App";
 import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
