@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
@@ -93,7 +93,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "auto", minWidth: "350px", textAlign: "left" },
     },
     {
-      key: "approved_by",
+      key: "created_by",
       label: "NV xác nhận",
       _style: { width: "auto", minWidth: "200px" },
     },
@@ -122,8 +122,8 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     ),
     note: ({ note }) => <td className="text-left">{note}</td>,
     status: mapStatus,
-    approved_by: ({ approved_by }) => (
-      <td className="text-center">{approved_by ?? "-"}</td>
+    created_by: ({ created_by }) => (
+      <td className="text-center">{created_by ?? "-"}</td>
     ),
   };
 

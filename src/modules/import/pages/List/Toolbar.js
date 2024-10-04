@@ -25,7 +25,6 @@ export default ({
   status,
   selectedNo,
   toggleStatus,
-  onAdd,
   onEdit,
   onApprove,
   onRemove,
@@ -142,7 +141,7 @@ export default ({
                   options={STATUS_OPTIONS}
                   {...field}
                   onChange={({ value }) => field.onChange(value)}
-                ></CSelect>
+                />
               )}
             />
           </CCol>

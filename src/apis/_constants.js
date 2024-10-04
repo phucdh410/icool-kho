@@ -159,24 +159,24 @@ export const BACKLOG_SLIP = {
 
 // Phiếu xuất hàng
 export const EXPORT_SLIP = {
-  getAll: `${api}/export_slips`,
+  getAll: `${api}/delivery-forms`,
 
-  getMaterial: `${api}/export_slips/getMaterial`,
+  getMaterial: `${api}/delivery-forms/getMaterial`,
 
-  getReport: `${api}/export_slips/getReportByMaterialId`,
-  exportReport: `${api}/export_slips/exportReportByMaterialId`,
+  getReport: `${api}/delivery-forms/getReportByMaterialId`,
+  exportReport: `${api}/delivery-forms/exportReportByMaterialId`,
 
-  getAllReportDetail: `${api}/export_slips/getReportDetailByMaterialId`,
-  exportReportDetail: `${api}/export_slips/exportReportDetailByMaterialId`,
+  getAllReportDetail: `${api}/delivery-forms/getReportDetailByMaterialId`,
+  exportReportDetail: `${api}/delivery-forms/exportReportDetailByMaterialId`,
 
-  getByCode: `${api}/export_slips/getByCode`,
-  getPreview: `${api}/export_slips/getPreview`,
-  getForPrint: `${api}/export_slips/getForPrint`,
-  getByStore: `${api}/export_slips/getByStore`,
-  create: `${api}/export_slips/create`,
-  update: `${api}/export_slips/update`,
-  approve: `${api}/export_slips/approve`,
-  delete: `${api}/export_slips/delete`,
+  getByCode: `${api}/delivery-forms/getByCode`,
+  getPreview: `${api}/delivery-forms/getPreview`,
+  getForPrint: `${api}/delivery-forms/getForPrint`,
+  getByStore: `${api}/delivery-forms/getByStore`,
+  create: `${api}/delivery-forms/create`,
+  update: `${api}/delivery-forms/update`,
+  approve: `${api}/delivery-forms/approve`,
+  delete: `${api}/delivery-forms/delete`,
 };
 
 // Phiếu điều chỉnh lượng tồn kho

@@ -89,7 +89,7 @@ export default forwardRef((props, ref) => {
   return (
     <CDialog
       title={`Phiếu xuất hàng: ${data?.code || "LOADING..."}`}
-      show={true}
+      show={open}
       onClose={onClose}
     >
       <CLoading loading={isFetching}>

@@ -36,7 +36,7 @@ export default ({
   onSearch,
 }) => {
   //#region Data
-  const { isLoading, store_code } = useSelector(selectIsLoading);
+  const { isLoading } = useSelector(selectIsLoading);
 
   const { control, setValue, handleSubmit } = useForm({
     defaultValues: filter,
@@ -50,14 +50,6 @@ export default ({
     (d) => onSearch(filterFn(d)),
     (e) => noti("error", e)
   );
-
-  const onStoreChange = useCallback(({ value }) => {
-    setValue("store_code", value);
-  });
-
-  const onStatusChange = useCallback(({ value }) => {
-    setValue("status", value);
-  });
 
   const toggleCollapse = () => toggleStatus(1);
 
@@ -89,14 +81,9 @@ export default ({
             />
           </div>
           <div>
-            {[CENTRAL_WAREHOUSE, CENTRAL_KITCHEN].includes(store_code) ? (
-              <CButton className="btn-fill" to="/export/form" calc>
-                Tạo Phiếu xuất hàng
-              </CButton>
-            ) : (
-              ""
-            )}
-
+            <CButton className="btn-fill" to="/export/form" calc>
+              Tạo Phiếu xuất hàng
+            </CButton>
             <CButton
               className="btn-fill"
               disabled={selectedNo !== 1}
@@ -142,7 +129,7 @@ export default ({
                       ? [{ value: "", label: "Tất cả" }, ...stores]
                       : stores
                   }
-                  onChange={onStoreChange}
+                  onChange={({ value }) => field.onChange(value)}
                 />
               )}
             />
@@ -157,8 +144,8 @@ export default ({
                   label="Trạng thái: "
                   placeholder="Tất cả"
                   options={STATUS_OPTIONS}
-                  onChange={onStatusChange}
-                ></CSelect>
+                  onChange={({ value }) => field.onChange(value)}
+                />
               )}
             />
           </CCol>
