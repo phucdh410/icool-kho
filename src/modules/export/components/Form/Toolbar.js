@@ -101,7 +101,7 @@ export default ({ control, onAdd, onSave, onRemove, isEdit, replace }) => {
             render={({ field }) => (
               <CDate
                 maxDate={Date.now()}
-                label="Ngày mua"
+                label="Ngày giao"
                 required
                 {...field}
               />

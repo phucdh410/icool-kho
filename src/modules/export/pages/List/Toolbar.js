@@ -38,7 +38,7 @@ export default ({
   //#region Data
   const { isLoading } = useSelector(selectIsLoading);
 
-  const { control, setValue, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: filter,
   });
 
@@ -81,7 +81,7 @@ export default ({
             />
           </div>
           <div>
-            <CButton className="btn-fill" to="/export/form" calc>
+            <CButton className="btn-fill" to="/export/form">
               Tạo Phiếu xuất hàng
             </CButton>
             <CButton

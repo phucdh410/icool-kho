@@ -359,7 +359,6 @@ export const Export = {
     required: {
       code: ENTITY_GROUP_CODE.EXPORT_SLIP,
       permission: PERMISSION_VALUE.READ,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
     },
     reducer: EXPORT_REDUCER,
     icon: "",
@@ -370,7 +369,6 @@ export const Export = {
     required: {
       code: ENTITY_GROUP_CODE.EXPORT_SLIP,
       permission: PERMISSION_VALUE.CREATE,
-      store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
     },
     icon: "",
     name: "Tạo phiếu xuất hàng",
@@ -380,17 +378,15 @@ export const Export = {
     required: {
       code: ENTITY_GROUP_CODE.EXPORT_SLIP,
       permission: PERMISSION_VALUE.UPDATE,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
     },
     icon: "",
     name: "Sửa phiếu xuất hàng",
-    path: "/export/form/:code",
+    path: "/export/form/:id",
   },
   Print: {
     required: {
       code: ENTITY_GROUP_CODE.EXPORT_SLIP,
       permission: PERMISSION_VALUE.UPDATE,
-      // store: [CENTRAL_WAREHOUSE, CENTRAL_KITCHEN],
     },
     reducer: EXPORT_PRINT_REDUCER,
     icon: "",
