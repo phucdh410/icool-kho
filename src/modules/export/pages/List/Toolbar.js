@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
@@ -85,7 +85,7 @@ export default ({
               canAdd={false}
               canSave={false}
               canEdit={selectedNo === 1}
-              canRemove={!!selectedNo}
+              canRemove={selectedNo === 1}
             />
           </div>
           <div>

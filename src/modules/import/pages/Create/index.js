@@ -41,14 +41,12 @@ const ImportCreate = () => {
 
   //#region Render
   return (
-    <>
-      <MForm
-        control={control}
-        isLoading={isSubmitting}
-        onSubmit={onSubmit}
-        setValue={setValue}
-      />
-    </>
+    <MForm
+      control={control}
+      isLoading={isSubmitting}
+      onSubmit={onSubmit}
+      setValue={setValue}
+    />
   );
   //#endregion
 };

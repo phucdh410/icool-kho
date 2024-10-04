@@ -1,45 +1,54 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import moment from "moment";
-import { createSelector } from "reselect";
 
-import { create } from "src/apis/export_slip.api";
+import { phieuXuatHangApi } from "src/1/apis/phieu_xuat_hang.api";
 import { history } from "src/App";
-import { correctExport } from "src/common/correctDataFunctionFormUnitAndPrice";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 
 import MForm from "../../components/Form";
-
-const selectIsLoading = createSelector(
-  (state) => state.config,
-  ({ isLoading }) => isLoading
-);
+import { exportDefaultValues } from "../../form";
 
 const ExportCreate = () => {
-  const isLoading = useSelector(selectIsLoading);
-
-  const [data] = useState({
-    code: "",
-    date: moment().toDate(),
-    note: "",
+  //#region Data
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { isSubmitting },
+  } = useForm({
+    mode: "all",
+    defaultValues: exportDefaultValues,
   });
+  //#endregion
 
-  const onSubmit = async (data) => {
-    const _data = correctExport(data);
-
-    const res = await create(_data);
-
-    if (res.status) {
-      history.push("/export/list");
-      noti("success", SUCCESS_MESSAGE.EXPORT.CREATE);
-    } else {
-      noti("error", ERROR_MESSAGE.EXPORT.CREATE);
-    }
+  //#region Event
+  const onSubmit = () => {
+    handleSubmit(async (values) => {
+      try {
+        const { id, date, ...payload } = values;
+        payload.date = moment(date).format("YYYY-MM-DD");
+        await phieuXuatHangApi.create(payload);
+        history.push("/export/list");
+        reset(exportDefaultValues);
+        noti("success", SUCCESS_MESSAGE.EXPORT.CREATE);
+      } catch (error) {
+        noti("error", ERROR_MESSAGE.EXPORT.CREATE);
+      }
+    })();
   };
+  //#endregion
 
+  //#region Render
   return (
-    <MForm edit={false} data={data} isLoading={isLoading} onSubmit={onSubmit} />
+    <MForm
+      control={control}
+      isLoading={isSubmitting}
+      onSubmit={onSubmit}
+      setValue={setValue}
+    />
   );
+  //#endregion
 };
 
 export default ExportCreate;

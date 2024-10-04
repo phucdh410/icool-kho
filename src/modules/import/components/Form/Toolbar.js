@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Controller } from "react-hook-form";
 import { useQuery } from "react-query";
 import classNames from "classnames";

@@ -1,8 +1,5 @@
 import { useCallback, useRef, useState } from "react";
 
-import { money } from "src/utils/funcs";
-
-import { getPreview } from "_common/queries-fn/purchase-slip.query";
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 

@@ -1,14 +1,14 @@
-import { useCallback, useMemo,useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useCallback, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { approve,remove } from "src/apis/export_slip.api";
+import { phieuXuatHangApi } from "src/1/apis/phieu_xuat_hang.api";
+import { approve } from "src/apis/export_slip.api";
 import { history } from "src/App";
 import { setFilter } from "src/common/actions/config.action";
-import { fireDelete, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { isSuccess } from "src/utils/funcs";
 
 import { getAll } from "_common/queries-fn/export.query";
@@ -73,7 +73,7 @@ const ExportList = () => {
   );
 
   const onEdit = useCallback(() => {
-    if (selected.length === 1) history.push(`/export/form/${selected[0].code}`);
+    if (selected.length === 1) history.push(`/export/form/${selected[0]?.id}`);
   });
 
   const onApprove = useCallback(async () => {
@@ -89,20 +89,19 @@ const ExportList = () => {
     }
   });
 
-  const onRemove = useCallback(async () => {
+  const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
+      try {
+        await phieuXuatHangApi.remove(selected?.[0]?.id);
 
-      if (res.exitcode == 200) {
         refetch();
         fireSuccess();
-      } else {
+      } catch (error) {
         fireError();
       }
     }
-  }, [selected, refetch]);
-
+  };
   //#endregion
 
   return (
