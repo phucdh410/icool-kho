@@ -159,6 +159,9 @@ const navigation = [
       Inventory.Cancel.List.path,
       Inventory.Cancel.Create.path,
       Inventory.Cancel.Update.path,
+      Inventory.EndOfMonthCheck.List.path,
+      Inventory.EndOfMonthCheck.Create.path,
+      Inventory.EndOfMonthCheck.Update.path,
     ],
     _children: [
       {
@@ -169,6 +172,17 @@ const navigation = [
           Inventory.Check.List.path,
           Inventory.Check.Create.path,
           Inventory.Check.Update.path,
+        ],
+        required: [{ code: ENTITY_GROUP_CODE.INVENTORY_SLIP }],
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: Inventory.EndOfMonthCheck.List.name,
+        to: Inventory.EndOfMonthCheck.List.path,
+        childrens: [
+          Inventory.EndOfMonthCheck.List.path,
+          Inventory.EndOfMonthCheck.Create.path,
+          Inventory.EndOfMonthCheck.Update.path,
         ],
         required: [{ code: ENTITY_GROUP_CODE.INVENTORY_SLIP }],
       },

@@ -188,6 +188,24 @@ const routes = [
   },
   //#endregion
 
+  //#region Kiểm kho cuối tháng
+  {
+    ...Inventory.EndOfMonthCheck.List,
+    exact: true,
+    component: InventoryCheck,
+  },
+  {
+    ...Inventory.EndOfMonthCheck.Create,
+    exact: true,
+    component: InventoryCheckCreate,
+  },
+  {
+    ...Inventory.EndOfMonthCheck.Update,
+    exact: true,
+    component: InventoryCheckUpdate,
+  },
+  //#endregion
+
   //#region Danh sách tồn kho
   {
     ...Inventory.Slip.List,

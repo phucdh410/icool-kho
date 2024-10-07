@@ -270,6 +270,36 @@ export const Inventory = {
       path: "/inventory-cancel/form/:code",
     },
   },
+  EndOfMonthCheck: {
+    List: {
+      required: {
+        code: ENTITY_GROUP_CODE.INVENTORY_SLIP,
+        permission: PERMISSION_VALUE.READ,
+      },
+      reducer: INVENTORY_CHECK_REDUCER,
+      icon: "",
+      name: "DS kiểm kho cuối tháng",
+      path: "/end-of-month-inventory-check/list",
+    },
+    Create: {
+      required: {
+        code: ENTITY_GROUP_CODE.INVENTORY_SLIP,
+        permission: PERMISSION_VALUE.CREATE,
+      },
+      icon: "",
+      name: "Tạo phiếu kiểm kho",
+      path: "/end-of-month-inventory-check/form",
+    },
+    Update: {
+      required: {
+        code: ENTITY_GROUP_CODE.INVENTORY_SLIP,
+        permission: PERMISSION_VALUE.UPDATE,
+      },
+      icon: "",
+      name: "Sửa phiếu kiểm kho",
+      path: "/end-of-month-inventory-check/form/:id",
+    },
+  },
 };
 //#endregion
 
