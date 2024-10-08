@@ -279,7 +279,7 @@ export const Inventory = {
       reducer: INVENTORY_CHECK_REDUCER,
       icon: "",
       name: "DS kiểm kho cuối tháng",
-      path: "/end-of-month-inventory-check/list",
+      path: "/inventory-end-of-month-check/list",
     },
     Create: {
       required: {
@@ -288,7 +288,7 @@ export const Inventory = {
       },
       icon: "",
       name: "Tạo phiếu kiểm kho",
-      path: "/end-of-month-inventory-check/form",
+      path: "/inventory-end-of-month-check/form",
     },
     Update: {
       required: {
@@ -297,7 +297,7 @@ export const Inventory = {
       },
       icon: "",
       name: "Sửa phiếu kiểm kho",
-      path: "/end-of-month-inventory-check/form/:id",
+      path: "/inventory-end-of-month-check/form/:id",
     },
   },
 };
