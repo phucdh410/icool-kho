@@ -13,7 +13,7 @@ import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireSuccess } from "src/utils/alert";
 import { format } from "src/utils/moment";
 
-import { NAME } from "../../../reducers/inventory-check";
+import { NAME } from "../../../reducers/inventory-end-of-month-check";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
@@ -21,7 +21,7 @@ import Toolbar from "./Toolbar";
 const selectData = createSelector(
   (state) => state.config,
   (state) => state.auth,
-  (state) => state.inventoryCheck,
+  (state) => state.inventoryEndOfMonthCheck,
   ({ isLoading }, { ware_code }, { filters }) => ({
     isLoading,
     filters: { ...filters, ware_code: filters?.ware_code ?? ware_code },
@@ -36,7 +36,7 @@ const remapData = (_data) => {
   }));
 };
 
-const InventoryCheck = () => {
+const InventoryEndOfMonthCheck = () => {
   const dispatch = useDispatch();
   //#region Data
   const { isLoading, filters } = useSelector(selectData);
@@ -46,7 +46,7 @@ const InventoryCheck = () => {
   const [status, setStatus] = useState(0);
 
   const { data, refetch } = useQuery({
-    queryKey: ["kiem-kho", filters],
+    queryKey: ["kiem-kho-cuoi-thang", filters],
     queryFn: () => kiemKhoApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
@@ -54,7 +54,7 @@ const InventoryCheck = () => {
       ),
   });
 
-  const { setQueryData } = useSetQueryData(["kiem-kho", filters]);
+  const { setQueryData } = useSetQueryData(["kiem-kho-cuoi-thang", filters]);
 
   const { data: response } = useQuery({
     queryKey: ["unfulfilled"],
@@ -176,4 +176,4 @@ const InventoryCheck = () => {
   );
 };
 
-export default InventoryCheck;
+export default InventoryEndOfMonthCheck;

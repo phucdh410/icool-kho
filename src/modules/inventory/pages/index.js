@@ -24,17 +24,29 @@ const InventoryCancelList = lazy(() => import("./Cancel/List"));
 const InventoryCancelCreate = lazy(() => import("./Cancel/Create"));
 const InventoryCancelUpdate = lazy(() => import("./Cancel/Update"));
 
+// Kiểm kho cuối tháng
+const InventoryEndOfMonthCheck = lazy(() => import("./EndOfMonthCheck/List"));
+const InventoryEndOfMonthCheckCreate = lazy(() =>
+  import("./EndOfMonthCheck/Create")
+);
+const InventoryEndOfMonthCheckUpdate = lazy(() =>
+  import("./EndOfMonthCheck/Update")
+);
+
 export {
-	InventoryAdjustmentList,
-	InventoryCancelCreate,
-	InventoryCancelList,
-	InventoryCancelUpdate,
-	InventoryCheck,
-	InventoryCheckCreate,
-	InventoryCheckUpdate,
-	InventoryInstant,
-	InventoryReturnCreate,
-	InventoryReturnList,
-	InventoryReturnUpdate,
-	InventorySlip,
+  InventoryAdjustmentList,
+  InventoryCancelCreate,
+  InventoryCancelList,
+  InventoryCancelUpdate,
+  InventoryCheck,
+  InventoryCheckCreate,
+  InventoryCheckUpdate,
+  InventoryEndOfMonthCheck,
+  InventoryEndOfMonthCheckCreate,
+  InventoryEndOfMonthCheckUpdate,
+  InventoryInstant,
+  InventoryReturnCreate,
+  InventoryReturnList,
+  InventoryReturnUpdate,
+  InventorySlip,
 };

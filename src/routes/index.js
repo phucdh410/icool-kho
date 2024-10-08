@@ -43,6 +43,9 @@ import {
   InventoryCheck,
   InventoryCheckCreate,
   InventoryCheckUpdate,
+  InventoryEndOfMonthCheck,
+  InventoryEndOfMonthCheckCreate,
+  InventoryEndOfMonthCheckUpdate,
   InventoryInstant,
   InventoryReturnCreate,
   InventoryReturnList,
@@ -192,17 +195,17 @@ const routes = [
   {
     ...Inventory.EndOfMonthCheck.List,
     exact: true,
-    component: InventoryCheck,
+    component: InventoryEndOfMonthCheck,
   },
   {
     ...Inventory.EndOfMonthCheck.Create,
     exact: true,
-    component: InventoryCheckCreate,
+    component: InventoryEndOfMonthCheckCreate,
   },
   {
     ...Inventory.EndOfMonthCheck.Update,
     exact: true,
-    component: InventoryCheckUpdate,
+    component: InventoryEndOfMonthCheckUpdate,
   },
   //#endregion
 
