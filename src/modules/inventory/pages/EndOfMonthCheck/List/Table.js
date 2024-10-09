@@ -40,11 +40,11 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   const mapStatus = (status) => {
     switch (status) {
       case 0:
-        return <span className="text-danger">Chờ xác nhận</span>;
+        return <span className="text-warning">Mới tạo</span>;
       case 1:
-        return <span className="text-success">Quản lý đã duyệt</span>;
-      case 2:
-        return <span className="text-warning">Quản lý từ chối</span>;
+        return <span className="text-success">Đã duyệt</span>;
+      case -1:
+        return <span className="text-danger">Từ chối</span>;
     }
   };
   //#endregion
@@ -62,9 +62,9 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "240px", minWidth: "240px" },
     },
     {
-      key: "storeName",
+      key: "store_name",
       label: "Chi nhánh",
-      _style: { width: "350px", minWidth: "350px", textAlign: "left" },
+      _style: { width: "250px", minWidth: "250px", textAlign: "left" },
       sorter: true,
     },
     {
@@ -73,24 +73,24 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "140px", minWidth: "140px" },
     },
     {
-      key: "createdBy",
+      key: "created_by",
       label: "Người kiểm",
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "status",
+      key: "approved_status",
       label: "Trạng thái",
       _style: { width: "140px", minWidth: "140px" },
     },
     {
       key: "value",
       label: "Thành tiền",
-      _style: { width: "150px", minWidth: "150px" },
+      _style: { width: "150px", minWidth: "150px", textAlign: "right" },
     },
     {
       key: "note",
       label: "Ghi chú",
-      _style: { width: "150px", minWidth: "150px" },
+      _style: { width: "350px", minWidth: "350px" },
     },
   ];
 
@@ -107,9 +107,13 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         </a>
       </td>
     ),
-    status: ({ status }) => <td>{mapStatus(status)}</td>,
-    storeName: ({ storeName }) => <td className="text-left">{storeName}</td>,
-    value: ({ value }) => <td>{money(value)}</td>,
+    approved_status: ({ approved_status }) => (
+      <td>{mapStatus(approved_status)}</td>
+    ),
+    store_name: ({ store_name }) => <td className="text-left">{store_name}</td>,
+    value: ({ value }) => (
+      <td className="text-right">{value.toLocaleString()}</td>
+    ),
   };
 
   return (

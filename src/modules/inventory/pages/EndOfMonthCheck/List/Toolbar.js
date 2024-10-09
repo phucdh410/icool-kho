@@ -121,7 +121,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="ware_code"
+              name="store_code"
               control={control}
               defaultValue=""
               render={({ field }) => (
@@ -141,7 +141,7 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="approvedStatus"
+              name="approved_status"
               control={control}
               defaultValue=""
               render={({ field }) => (
@@ -161,14 +161,14 @@ export default ({
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="startAt"
+              name="start_at"
               control={control}
               render={({ field }) => <CDate label="Từ ngày" {...field} />}
             />
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="endAt"
+              name="end_at"
               control={control}
               render={({ field }) => <CDate label="Đến ngày" {...field} />}
             />

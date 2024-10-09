@@ -1,15 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import { useDispatch } from "react-redux";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { kiemKhoApi } from "src/1/apis/kiem_kho.api";
+import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
 import { useSetQueryData } from "src/1/hooks/query";
-import { approve, getUnFulfilled, remove } from "src/apis/inventory_slip.api";
 import { history } from "src/App";
-import { setFilter } from "src/common/actions/config.action";
 import { fireDelete, fireSuccess } from "src/utils/alert";
 import { format } from "src/utils/moment";
 
@@ -17,16 +14,6 @@ import { NAME } from "../../../reducers/inventory-end-of-month-check";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
-
-const selectData = createSelector(
-  (state) => state.config,
-  (state) => state.auth,
-  (state) => state.inventoryEndOfMonthCheck,
-  ({ isLoading }, { ware_code }, { filters }) => ({
-    isLoading,
-    filters: { ...filters, ware_code: filters?.ware_code ?? ware_code },
-  })
-);
 
 const remapData = (_data) => {
   return _data.map((e) => ({
@@ -39,15 +26,19 @@ const remapData = (_data) => {
 const InventoryEndOfMonthCheck = () => {
   const dispatch = useDispatch();
   //#region Data
-  const { isLoading, filters } = useSelector(selectData);
-
-  const [isFetching, setFetching] = useState(false);
-
   const [status, setStatus] = useState(0);
 
-  const { data, refetch } = useQuery({
+  const [filters, setFilters] = useState({
+    code: "",
+    store_code: "",
+    start_at: "",
+    end_at: "",
+    approved_status: "",
+  });
+
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["kiem-kho-cuoi-thang", filters],
-    queryFn: () => kiemKhoApi.getAll(filters),
+    queryFn: () => kiemKhoCuoiThangApi.getAll(filters),
     select: (dataResponse) =>
       remapData(
         Array.isArray(dataResponse) ? dataResponse : dataResponse?.data?.data
@@ -91,31 +82,26 @@ const InventoryEndOfMonthCheck = () => {
     [status]
   );
 
-  const onSearch = useCallback((data) => dispatch(setFilter(NAME, data)), []);
+  const onSearch = (newFilters) => setFilters(newFilters);
 
-  const onApproved = useCallback(async () => {
-    setFetching(true);
-    const res = await approve({
-      code: selected.map((m) => m.code),
+  const onApproved = async () => {
+    await kiemKhoCuoiThangApi.approve({
+      id: selected[0]?.id,
       status: 1,
     });
 
-    if (res.exitcode === 200) {
-      refetch();
-    } else {
-      setFetching(false);
-    }
-  }, [selected]);
+    refetch();
+  };
 
-  const onEdit = useCallback(async () => {
+  const onEdit = async () => {
     const code = data.find((d) => d.check).code;
     history.push(`/inventory-check/form/${code}`);
-  }, [data]);
+  };
 
-  const onRemove = useCallback(async () => {
+  const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
+      const res = await kiemKhoCuoiThangApi.remove(selected[0]?.id);
 
       if (res.exitcode == 200) {
         refetch();
@@ -124,11 +110,7 @@ const InventoryEndOfMonthCheck = () => {
         fireError();
       }
     }
-  }, [selected, refetch]);
-
-  const onExport = useCallback(async () => {
-    // await toExcel(data);
-  }, []);
+  };
   //#endregion
 
   return (
@@ -144,7 +126,6 @@ const InventoryEndOfMonthCheck = () => {
             onApproved={onApproved}
             onRemove={onRemove}
             onSearch={onSearch}
-            onExport={onExport}
           />
         </CCardBody>
       </CCard>
@@ -165,7 +146,7 @@ const InventoryEndOfMonthCheck = () => {
         )}
         <CCardBody className="px-0 pt-0">
           <Table
-            loading={isLoading}
+            loading={isFetching}
             isSelectAll={isSelectAll}
             data={data || []}
             onSelect={select}
