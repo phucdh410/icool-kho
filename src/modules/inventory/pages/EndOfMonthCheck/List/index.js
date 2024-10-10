@@ -7,10 +7,8 @@ import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
 import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
-import { fireDelete, fireSuccess } from "src/utils/alert";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 import { format } from "src/utils/moment";
-
-import { NAME } from "../../../reducers/inventory-end-of-month-check";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
@@ -24,7 +22,6 @@ const remapData = (_data) => {
 };
 
 const InventoryEndOfMonthCheck = () => {
-  const dispatch = useDispatch();
   //#region Data
   const [status, setStatus] = useState(0);
 
@@ -94,19 +91,17 @@ const InventoryEndOfMonthCheck = () => {
   };
 
   const onEdit = async () => {
-    const code = data.find((d) => d.check).code;
-    history.push(`/inventory-check/form/${code}`);
+    history.push(`/inventory-end-of-month-check/form/${selected[0]?.id}`);
   };
 
   const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await kiemKhoCuoiThangApi.remove(selected[0]?.id);
-
-      if (res.exitcode == 200) {
+      try {
+        await kiemKhoCuoiThangApi.remove(selected[0]?.id);
         refetch();
         fireSuccess();
-      } else {
+      } catch (error) {
         fireError();
       }
     }

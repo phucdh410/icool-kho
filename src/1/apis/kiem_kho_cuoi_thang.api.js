@@ -8,7 +8,7 @@ export const kiemKhoCuoiThangApi = {
     return await methods.post("/inventory-check", body);
   },
   getById: async (id) => {
-    return await methods.get(`/inventory-check/${id}`);
+    return await methods.get(`/inventory-check/getById/${id}`);
   },
   update: async (id, body) => {
     return await methods.put(`/inventory-check/${id}`, body);
@@ -18,5 +18,8 @@ export const kiemKhoCuoiThangApi = {
   },
   approve: async (id) => {
     return await methods.put(`/inventory-check/${id}/approve`);
+  },
+  getMaterials: async (params) => {
+    return await methods.get("/inventory-check/getMaterial", { params });
   },
 };

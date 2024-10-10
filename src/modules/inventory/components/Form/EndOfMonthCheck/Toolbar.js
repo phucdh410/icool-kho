@@ -1,62 +1,42 @@
 import { useCallback } from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useWatch } from "react-hook-form";
+import { useQuery } from "react-query";
 import classNames from "classnames";
 
 import { CCol, CCollapse, CRow } from "@coreui/react";
 
+import { cuaHangApi } from "src/1/apis/cua_hang.api";
+import { nhomNguyenVatLieuApi } from "src/1/apis/nhom_nguyen_vat_lieu.api";
+
 import { CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
-import { getAll as getAllMaterialGroup } from "../../../queries-fn/material-group.query";
-import { getByStore as getUserByStore } from "../../../queries-fn/user.query";
-import { getAll as getAllWarehouse } from "../../../queries-fn/warehouse.query";
-
-export default ({
-  isLoading,
-  status,
-  watch,
-  control,
-  setValue,
-  onStatusChange,
-  onMaterialGroupSelect,
-  canRemove,
-  onAdd,
-  onSave,
-  onRemove,
-}) => {
+export default ({ onAdd, onSave, onRemove, canRemove, control }) => {
   //#region Data
-  const { data: materialGroups } = getAllMaterialGroup({}, isLoading);
+  const { data: stores = [] } = useQuery({
+    queryKey: ["danh-sach-cua-hang"],
+    queryFn: () => cuaHangApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        ...e,
+        value: e?.code,
+        label: e?.name,
+      })),
+  });
 
-  const { data: warehouses } = getAllWarehouse({}, isLoading);
-
-  const { data: users } = getUserByStore(
-    watch("store_code"),
-    !watch("store_code")
-  );
+  const { data: material_groups = [] } = useQuery({
+    queryKey: ["danh-sach-nhom-nguyen-vat-lieu"],
+    queryFn: () => nhomNguyenVatLieuApi.getAll(),
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        ...e,
+        value: e?.code,
+        label: e?.name,
+      })),
+  });
   //#endregion
 
   //#region Event
-  const toggleCollapse = useCallback(() => onStatusChange(1), [onStatusChange]);
-
-  const selectMaterialGroup = useCallback(
-    ({ value }) => {
-      onMaterialGroupSelect(value);
-    },
-    [onMaterialGroupSelect]
-  );
-
-  const onSelectWarehouse = useCallback(
-    ({ data, value }) => {
-      setValue("store_code", data.store_code);
-      setValue("ware_code", data.code);
-    },
-    [setValue]
-  );
-
-  const onSelectChecker = useCallback(({ data, value }) => {
-    setValue("createdBy", value);
-  });
-
   const onClick = useCallback(
     (state) => {
       switch (state) {
@@ -91,25 +71,22 @@ export default ({
               "btn",
               "btn-primary",
               "btn-collapse extend",
-              status == 1 && "show"
+              "show"
             )}
-            onClick={toggleCollapse}
           ></div>
         </CCol>
       </CRow>
-      <CCollapse show={status == 1}>
+      <CCollapse show>
         <CRow className="mt-3">
           <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
             <Controller
               name="createdBy"
               control={control}
               render={({ field }) => (
-                <CSelect
-                  options={users}
-                  label="Người kiểm"
-                  required
+                <CInput
                   {...field}
-                  onChange={onSelectChecker}
+                  label="Người kiểm"
+                  placeholder="Không hiểu field này là gì"
                 />
               )}
             />
@@ -120,41 +97,41 @@ export default ({
               control={control}
               render={({ field }) => (
                 <CDate
+                  {...field}
                   maxDate={Date.now()}
                   label="Ngày kiểm"
                   required
-                  {...field}
                 />
               )}
             />
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
             <Controller
-              name="ware_code"
+              name="store_code"
               control={control}
               render={({ field }) => (
                 <CSelect
-                  options={warehouses}
+                  {...field}
                   label="Kho kiểm"
                   required
-                  {...field}
-                  onChange={onSelectWarehouse}
+                  select="value"
+                  options={stores}
                 />
               )}
             />
           </CCol>
           <CCol xs="12" sm="6" md="4" lg="4" xl="4" xxl="4">
             <Controller
-              name="groupCode"
+              name="group_code"
               control={control}
               render={({ field }) => {
                 return (
                   <CSelect
-                    label="Nhóm Nguyên Vật Liệu"
-                    options={materialGroups}
                     {...field}
+                    label="Nhóm Nguyên Vật Liệu"
+                    select="value"
                     required
-                    onChange={selectMaterialGroup}
+                    options={material_groups}
                   />
                 );
               }}
@@ -164,7 +141,7 @@ export default ({
             <Controller
               name="note"
               control={control}
-              render={({ field }) => <CInput label="Ghi chú" {...field} />}
+              render={({ field }) => <CInput {...field} label="Ghi chú" />}
             />
           </CCol>
         </CRow>

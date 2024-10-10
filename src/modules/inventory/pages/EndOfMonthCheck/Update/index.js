@@ -1,49 +1,76 @@
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import dayjs from "dayjs";
 
-import { update } from "src/apis/inventory_slip.api";
+import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
-import { isSuccess } from "src/utils/funcs";
-
-import { correctInventoryCheck } from "_common/correctDataFunctionFormUnitAndPrice";
-import { getByCode } from "_common/queries-fn/inventory-check.query";
 
 import Form from "../../../components/Form/EndOfMonthCheck";
-
-const selectIsLoading = createSelector(
-  (state) => state.config,
-  ({ isLoading }) => isLoading
-);
+import { defaultValues } from "../form";
 
 const InventoryCheckUpdate = ({ match: { params } }) => {
-  // #region Data
-  const isLoading = useSelector(selectIsLoading);
+  //#region Data
+  const { data } = useQuery({
+    queryKey: ["chi-tiet-phieu-kiem-kho-cuoi-thang", params?.id],
+    queryFn: () => kiemKhoCuoiThangApi.getById(params?.id),
+    select: (response) => response?.data?.data,
+  });
 
-  const { data } = getByCode(params.code, isLoading);
-  // #endregion
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm({ mode: "all", defaultValues: defaultValues });
+  //#endregion
 
-  // #region Events
-  const onSubmit = async (data) => {
-    const _data = correctInventoryCheck(data);
+  //#region Event
+  const onSubmit = () => {
+    handleSubmit(async (values) => {
+      try {
+        const payload = { ...values };
+        payload.checked = dayjs(values?.checked).format("YYYY-MM-DD");
+        payload.ware_code = values?.store_code;
+        payload.materials = values?.materials?.map((e) => ({
+          code: e?.code,
+          ware_unit: e?.ware_unit,
+          ware_q: e?.ware_q,
+          unit: e?.unit,
+          quantity: e?.ware_q,
+          price: e?.price,
+        }));
 
-    const res = await update(_data);
-
-    if (isSuccess(res)) {
-      history.push("/inventory-check/list");
-
-      noti("success", SUCCESS_MESSAGE.INVENTORY_CHECK.UPDATE);
-    } else {
-      noti("error", ERROR_MESSAGE.INVENTORY_CHECK.UPDATE);
-    }
+        await kiemKhoCuoiThangApi.update(params?.id, payload);
+        history.push("/inventory-end-of-month-check/list");
+        noti("success", SUCCESS_MESSAGE.INVENTORY_CHECK.UPDATE);
+        reset(defaultValues);
+      } catch (error) {
+        noti("error", ERROR_MESSAGE.INVENTORY_CHECK.UPDATE);
+      }
+    })();
   };
-  // #endregion
+  //#endregion
 
-  // #region Render
+  useEffect(() => {
+    if (data) {
+      reset({ ...data });
+    }
+  }, [data]);
+
+  //#region Render
   return (
-    <Form isLoading={isLoading} edit={true} data={data} onSubmit={onSubmit} />
+    <Form
+      isEdit
+      onSubmit={onSubmit}
+      loading={isSubmitting}
+      control={control}
+      setValue={setValue}
+    />
   );
-  // #endregion
+  //#endregion
 };
 
 export default InventoryCheckUpdate;

@@ -68,8 +68,7 @@ export default ({
               canAdd={false}
               canSave={false}
               canEdit={selectedNo == 1}
-              canRemove={selectedNo}
-              canPrint={false}
+              canRemove={selectedNo == 1}
             />
           </div>
           <div>
@@ -116,7 +115,9 @@ export default ({
               name="code"
               control={control}
               defaultValue=""
-              render={({ field }) => <CInput label="Số Phiếu" {...field} />}
+              render={({ field }) => (
+                <CInput label="Số Phiếu" placeholder="Tất cả" {...field} />
+              )}
             />
           </CCol>
           <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">

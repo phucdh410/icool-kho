@@ -1,72 +1,55 @@
-import React from "react";
+import { useEffect, useMemo } from "react";
+import { useWatch } from "react-hook-form";
+import { useQuery } from "react-query";
+import dayjs from "dayjs";
 
-import { money } from "src/utils/funcs";
+import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
 
-import { getAllUnCheckByStore } from "_common/queries-fn/material.query";
 import { CCheckbox } from "_components/controls";
 
-import InputRow from "./InputRow";
 import Row from "./Row";
 
-export default ({
-  store_code,
-  date,
-  amounts,
-  data,
-  inputData,
-  isSelectAll,
-  onAmountChange,
-  onInputRowChange,
-  onChange,
-  quantity,
-  total,
-}) => {
-  const { data: materials } = getAllUnCheckByStore(
-    { store_code, date },
-    !store_code
+export default ({ fields, control, setValue }) => {
+  //#region Data
+  const checked = useWatch({ control, name: "checked" });
+  const store_code = useWatch({ control, name: "store_code" });
+  const _materials = useWatch({ control, name: "materials" });
+
+  const totalCount = useMemo(
+    () => _materials.reduce((prev, cur) => prev + cur?.ware_q, 0),
+    [_materials]
+  );
+  const totalPrice = useMemo(
+    () => _materials.reduce((prev, cur) => prev + cur?.ware_q * cur?.price, 0),
+    [_materials]
   );
 
-  const change = (_data) => {
-    if (_data.code === "") return;
-    if (_data.wareQ === "") delete amounts[_data.code];
-    else {
-      if (_data.wareQ == amounts[_data.code]?.wareQ) return;
+  const { data: materials = [] } = useQuery({
+    queryKey: ["danh-sach-nguyen-vat-lieu", store_code],
+    queryFn: () =>
+      kiemKhoCuoiThangApi.getMaterials({
+        store_code,
+        date: dayjs(checked).format("YYYY-MM-DD"),
+      }),
+    enabled: !!store_code,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        ...e,
+        value: e?.code,
+        label: e?.name,
+      })),
+  });
+  //#endregion
 
-      amounts[_data.code] = { ..._data };
-
-      onAmountChange({ ...amounts });
+  useEffect(() => {
+    if (totalPrice) {
+      setValue("value", totalPrice);
+    } else {
+      setValue("value", 0);
     }
-  };
+  }, [totalPrice]);
 
-  const inputChange = (id) => (_data) => {
-    onInputRowChange(
-      inputData.map((d) => (d.id === id ? { ..._data, ...d } : d))
-    );
-    change(_data);
-  };
-
-  const selectAll = (v) => {
-    onChange(data.map((d) => ({ ...d, check: v })));
-    onInputRowChange(inputData.map((d) => ({ ...d, check: v })));
-  };
-
-  const select = (index) => (v) => {
-    const _new = [...data];
-
-    _new[index] = { ..._new[index], check: v };
-
-    onChange(_new);
-  };
-
-  const selectInput = (id) => (v) => {
-    const _new = [...inputData];
-
-    const _find = _new.find((n) => n.id === id);
-    _find.check = v;
-
-    onInputRowChange(_new);
-  };
-
+  //#region Render
   return (
     <table className="table table-hover border c-table selectable">
       <thead>
@@ -74,7 +57,7 @@ export default ({
           <th
             style={{ width: "50px", paddingLeft: "20px", paddingRight: "24px" }}
           >
-            <CCheckbox value={isSelectAll} onChange={selectAll} />
+            <CCheckbox />
           </th>
           <th
             style={{ width: "250px", minWidth: "250px", paddingRight: "24px" }}
@@ -84,12 +67,12 @@ export default ({
           <th
             style={{ width: "auto", minWidth: "250px", paddingRight: "24px" }}
           >
-            Tên NVL
+            Tên nguyên vật liệu
           </th>
           <th
             style={{ width: "150px", minWidth: "150px", paddingRight: "24px" }}
           >
-            ĐVT
+            Đơn vị
           </th>
           <th
             style={{ width: "200px", minWidth: "200px", paddingRight: "24px" }}
@@ -109,44 +92,30 @@ export default ({
         </tr>
       </thead>
       <tbody>
-        {inputData.map((m, index) => (
-          <InputRow
-            key={`_${m.id}}`}
-            amounts={amounts}
-            materials={materials?.map((d) => ({
-              value: d.code,
-              data: d,
-              label: d.name,
-            }))}
-            data={m}
-            onChange={inputChange(m.id)}
-            onSelect={selectInput(m.id)}
+        {fields.map((row, index) => (
+          <Row
+            key={row?.__id}
+            control={control}
+            index={index}
+            materials={materials}
+            setValue={setValue}
           />
         ))}
-        {data &&
-          data.map((m, index) => (
-            <Row
-              key={m.id}
-              amount={amounts[m.code] || {}}
-              data={m}
-              onChange={change}
-              onSelect={select(index)}
-            />
-          ))}
         <tr>
           <td colSpan={3}></td>
           <td>
             <span className="font-weight-bold">Tổng</span>
           </td>
           <td>
-            <span className="font-weight-bold">{money(quantity)}</span>
+            <span className="font-weight-bold">{totalCount}</span>
           </td>
           <td></td>
           <td>
-            <span className="font-weight-bold">{money(total)}</span>
+            <span className="font-weight-bold">{totalPrice}</span>
           </td>
         </tr>
       </tbody>
     </table>
   );
+  //#endregion
 };
