@@ -12,11 +12,18 @@ import { defaultValues } from "../form";
 
 const InventoryCheckUpdate = ({ match: { params } }) => {
   //#region Data
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["chi-tiet-phieu-kiem-kho-cuoi-thang", params?.id],
     queryFn: () => kiemKhoCuoiThangApi.getById(params?.id),
     select: (response) => response?.data?.data,
   });
+
+  useEffect(() => {
+    if (!!error) {
+      noti("error", error?.message ?? "Không thể lấy thông tin chi tiết phiếu");
+      history.push("/inventory-end-of-month-check/list");
+    }
+  }, [error]);
 
   const {
     control,
@@ -56,7 +63,23 @@ const InventoryCheckUpdate = ({ match: { params } }) => {
 
   useEffect(() => {
     if (data) {
-      reset({ ...data });
+      reset({
+        checked: dayjs(data?.checked).toDate(),
+        group_code: data?.group_code,
+        store_code: data?.store_code,
+        ware_code: data?.ware_code,
+        value: data?.value,
+        note: data?.note,
+        materials: data?.materials?.map((e) => ({
+          checked: false,
+          code: e?.code,
+          ware_unit: e?.ware_unit,
+          ware_q: e?.ware_q,
+          unit: e?.unit,
+          quantity: e?.quantity,
+          price: e?.price,
+        })),
+      });
     }
   }, [data]);
 

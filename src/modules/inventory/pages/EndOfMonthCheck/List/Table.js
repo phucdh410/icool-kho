@@ -1,8 +1,5 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
-import { money } from "src/utils/funcs";
-
-import { getPreview } from "_common/queries-fn/inventory-check.query";
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 
@@ -10,9 +7,9 @@ import MPreview from "../../../components/Preview/EndOfMonthCheck";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data
-  const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
+  const previewRef = useRef(null);
 
-  const [preview, setPreview] = useState(null);
+  const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
   //#endregion
 
   //#region Event
@@ -21,19 +18,16 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     []
   );
 
-  const onPreview = useCallback(
-    (code) => (e) => e.preventDefault() || setPreview(code),
-    [setPreview]
-  );
-
-  const onClose = useCallback(() => setPreview(null), []);
-
   const select = useCallback(
     (code = -1) =>
       (e) =>
         onSelect(code, e),
     [onSelect]
   );
+
+  const onPreview = (id) => () => {
+    previewRef.current?.open(id);
+  };
   //#endregion
 
   //#region Other
@@ -100,9 +94,9 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         <CCheckbox value={check} onChange={select(code)} disabled={status} />
       </td>
     ),
-    code: ({ code }) => (
+    code: ({ code, id }) => (
       <td>
-        <a href={`#preview/${code}`} onClick={onPreview(code)}>
+        <a href={`#preview/${code}`} onClick={onPreview(id)}>
           {code}
         </a>
       </td>
@@ -135,9 +129,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
           />
         }
       />
-      {preview && (
-        <MPreview code={preview} getter={getPreview} onClose={onClose} />
-      )}
+      <MPreview ref={previewRef} />
     </>
   );
   //#endregion

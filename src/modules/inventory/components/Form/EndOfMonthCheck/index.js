@@ -47,6 +47,7 @@ const Form = ({
             onSave={onSubmit}
             onRemove={onRemove}
             canRemove
+            isEdit={isEdit}
           />
         </CCardBody>
       </CCard>

@@ -11,7 +11,7 @@ import { nhomNguyenVatLieuApi } from "src/1/apis/nhom_nguyen_vat_lieu.api";
 import { CDate, CInput, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
-export default ({ onAdd, onSave, onRemove, canRemove, control }) => {
+export default ({ onAdd, onSave, onRemove, canRemove, control, isEdit }) => {
   //#region Data
   const { data: stores = [] } = useQuery({
     queryKey: ["danh-sach-cua-hang"],
@@ -116,6 +116,7 @@ export default ({ onAdd, onSave, onRemove, canRemove, control }) => {
                   required
                   select="value"
                   options={stores}
+                  disabled={isEdit}
                 />
               )}
             />
