@@ -84,7 +84,7 @@ export const C1Upload = forwardRef(
             {label} {required && <span className="text-danger">*</span>}
           </label>
         )}
-        <div className="flex items-center h-10 w-full mt-[1px]">
+        <div className="flex items-center h-10 w-full mt-[3px]">
           <input
             ref={inputRef}
             onChange={onFileChange}

@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
 import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { toExcelByWareCodeAndDate } from "src/apis/backlog_slip.api";
 import { setFilter } from "src/common/actions/config.action";
 
 import { getInstants } from "_common/queries-fn/inventory-slip.query";
 
+import { InstantInventoryAdjustmentModal } from "../../../components/InstantInventoryAdjustmentModal";
 import { NAME } from "../../../reducers/inventory-slip-instant";
 
 import Table from "./Table";
@@ -29,15 +29,16 @@ const InventoryInstant = ({}) => {
   const dispatch = useDispatch();
 
   //#region Data
+  const modalRef = useRef(null);
+
   const { isLoading, filters } = useSelector(selectData);
 
   const [status, setStatus] = useState(0);
 
-  const { data, set } = getInstants(filters, isLoading);
+  const { data } = getInstants(filters, isLoading);
   //#endregion
 
   //#region Event
-  const onSelect = (code) => {};
   const onStatusChange = useCallback(
     (_status) => setStatus(_status === status ? 0 : _status),
     [status]
@@ -46,11 +47,9 @@ const InventoryInstant = ({}) => {
     (data) => dispatch(setFilter(NAME, data)),
     [dispatch]
   );
-
-  const onExport = useCallback(
-    async (data) => await toExcelByWareCodeAndDate(data),
-    []
-  );
+  const onAdjust = () => {
+    modalRef.current?.open();
+  };
   //#endregion
 
   return (
@@ -62,16 +61,18 @@ const InventoryInstant = ({}) => {
             status={status}
             toggleStatus={onStatusChange}
             onSearch={onSearch}
-            onExport={onExport}
+            onAdjust={onAdjust}
           />
         </CCardBody>
       </CCard>
       <CCard>
         <CCardHeader></CCardHeader>
         <CCardBody className="px-0 pt-0">
-          <Table data={data} onSelect={onSelect} />
+          <Table data={data} />
         </CCardBody>
       </CCard>
+
+      <InstantInventoryAdjustmentModal ref={modalRef} />
     </>
   );
 };

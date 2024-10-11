@@ -1,14 +1,12 @@
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
-import { useQuery } from "react-query";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
-import { money } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import { CInput } from "_components/controls";
-import { CDialog, CLoading, CPagination, CTable } from "_components/others";
+import { CDialog, CPagination, CTable } from "_components/others";
 
 export default forwardRef(({ ...props }, ref) => {
   //#region Data
