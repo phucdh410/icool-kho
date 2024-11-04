@@ -1,5 +1,5 @@
 import axios from "axios";
-import dayjs from "dayjs";
+import dayjs, { isDayjs } from "dayjs";
 
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use(
   (req) => {
     if (req.params) {
       Object.keys(req.params).forEach((key) => {
-        if (req.params[key] instanceof Date) {
+        if (req.params[key] instanceof Date || isDayjs(req.params[key])) {
           req.params[key] = dayjs(req.params[key]).format("YYYY-MM-DD");
         }
         if (
@@ -21,6 +21,22 @@ axiosInstance.interceptors.request.use(
           delete req.params[key];
         }
       });
+    }
+    if (req.method === "post" || req.method === "put") {
+      if (req.data && !(req.data instanceof FormData)) {
+        for (let [key, value] of Object.entries(req.data)) {
+          if (
+            key.includes("file") &&
+            typeof value === "object" &&
+            !Array.isArray(value)
+          ) {
+            req.data[key] = value?.id;
+          }
+          if (key.includes("date")) {
+            req.data[key] = dayjs(value).format("YYYY-MM-DD");
+          }
+        }
+      }
     }
     return req;
   },

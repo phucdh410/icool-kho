@@ -2,9 +2,10 @@
 import { forwardRef, useMemo } from "react";
 import DatePicker from "react-datepicker";
 import classNames from "classnames";
+import dayjs from "dayjs";
 import moment from "moment";
 
-import { CFormGroup, CInput,CLabel } from "@coreui/react";
+import { CFormGroup, CInput, CLabel } from "@coreui/react";
 
 import { Calendar } from "_assets/icons";
 
@@ -30,9 +31,11 @@ const CustomInput = forwardRef(
 const InputDate = ({ label, onChange, className, value, ...rest }, ref) => {
   const _class = classNames("c-input-date", className);
 
+  const validValue = useMemo(() => dayjs(value).toDate(), [value]);
+
   const formatedDate = useMemo(
-    () => moment(value).format("DD/MM/yyyy"),
-    [value]
+    () => moment(validValue).format("DD/MM/yyyy"),
+    [validValue]
   );
 
   return (
@@ -47,7 +50,7 @@ const InputDate = ({ label, onChange, className, value, ...rest }, ref) => {
       ) : (
         <DatePicker
           ref={ref}
-          selected={value}
+          selected={validValue}
           onChange={onChange}
           timeInputLabel={label}
           dateFormat="dd/MM/yyyy"

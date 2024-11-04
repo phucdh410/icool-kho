@@ -32,7 +32,9 @@ export default ({ warehouses, filter: _filter, onSearch }) => {
           <Controller
             name="code"
             control={control}
-            render={({ field }) => <CInput label="Mã Phiếu" {...field} />}
+            render={({ field }) => (
+              <CInput label="Mã Phiếu" placeholder="Tất cả" {...field} />
+            )}
           />
         </CCol>
         <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
@@ -56,14 +58,14 @@ export default ({ warehouses, filter: _filter, onSearch }) => {
         </CCol>
         <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
           <Controller
-            name="startAt"
+            name="start_at"
             control={control}
             render={({ field }) => <CDate label="Ngày" {...field} />}
           />
         </CCol>
         <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
           <Controller
-            name="endAt"
+            name="end_at"
             control={control}
             render={({ field }) => <CDate label="Đến ngày" {...field} />}
           />

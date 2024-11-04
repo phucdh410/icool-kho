@@ -1,9 +1,10 @@
 import { useCallback, useState } from "react";
+import dayjs from "dayjs";
 
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 
-export default ({ isSelectAll, data, status, onSelect, onPreview }) => {
+export default ({ isSelectAll, data, status, onSelect }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
   const onPaginationChange = useCallback(
@@ -53,15 +54,12 @@ export default ({ isSelectAll, data, status, onSelect, onPreview }) => {
       </td>
     ),
     ware_name: ({ ware_name }) => <td className="text-left">{ware_name}</td>,
-    file: ({ file, fileName }) => (
+    date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
+    file: ({ path, originalname }) => (
       <td>
-        {file ? (
-          <a href={`#preview?${fileName}`} onClick={onPreview(file, fileName)}>
-            {fileName}
-          </a>
-        ) : (
-          <>{fileName}</>
-        )}
+        <a target="_blank" rel="noopener noreferrer" href={path}>
+          {originalname}
+        </a>
       </td>
     ),
   };

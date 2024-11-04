@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import "../PTable/styles.scss";
@@ -83,7 +82,7 @@ export const CTable = ({
           ) : (
             <tr>
               <td colSpan="100%">
-                <div className="min-h-[300px] flex justify-center items-center">
+                <div className="min-h-[300px] text-black flex justify-center items-center">
                   Không có dữ liệu hiển thị
                 </div>
               </td>

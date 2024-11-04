@@ -1,214 +1,189 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-} from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
+import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import { useQuery } from "react-query";
 
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
-import {
-  ENTITY_GROUP_CODE,
-  ERROR_MESSAGE,
-  PERMISSION_VALUE,
-} from "src/configs/constant";
-import { Can } from "src/utils/ability";
-import { isFloatByUnit } from "src/utils/funcs";
+import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
+import { CIconButton } from "src/1/common/components/controls";
+import { CTable } from "src/1/common/components/others";
 
-import { PlusCircle, Trash } from "_assets/icons";
-import { getMaterials } from "_common/queries-fn/inventory-adjustment.query";
-import { CButton, CInput, CNumber, CSelect } from "_components/controls";
+import { EditPencil, PlusCircle, Save, Trash, TrashFill } from "_assets/icons";
+import { CButton, CNumberInput, CSelect } from "_components/controls";
 
-import { getAll as getAllMaterials } from "../../../../queries-fn/material.query";
+const DEFAULT_MATERIALS_VALUES = { materials: [] };
 
-import MaterialTable from "./MaterialTable";
-
-const initial = {
+const DEFAULT_INPUT_VALUES = {
+  index: -1,
   code: "",
   name: "",
-  warePrice: 0,
-  wareQ: 0,
-  wareUnit: "",
+  ware_q: 1,
+  ware_unit: "",
 };
 
-export default forwardRef(({ isLoading, store_code, code, ignore }, ref) => {
+export default forwardRef(({ store_code, status }, ref) => {
   //#region Data
-  const { control, watch, getValues, setValue, reset, handleSubmit } = useForm({
-    defaultValues: initial,
+  const [inputValues, setInputValues] = useState(DEFAULT_INPUT_VALUES);
+
+  const { control, reset } = useForm({
+    defaultValues: DEFAULT_MATERIALS_VALUES,
   });
 
-  const { data, set } = getMaterials(code, !code);
+  const { fields, append, remove, update, replace } = useFieldArray({
+    control,
+    name: "materials",
+    keyName: "__id",
+  });
 
-  const { data: _materials } = getAllMaterials(
-    { store_code },
-    isLoading || !store_code
-  );
+  const materialsValue = useWatch({ control, name: "materials" });
 
-  const materials = useMemo(
-    () =>
-      _materials?.filter(({ value }) => !data?.find((d) => d.code === value)) ??
-      [],
-    [data, _materials]
-  );
-
-  const total = useMemo(() => {
-    return watch("warePrice") * watch("wareQ") || 0;
-  }, [watch("warePrice"), watch("wareQ")]);
-
-  const isFloat = useMemo(
-    () => isFloatByUnit(getValues("unit")),
-    [watch("unit")]
-  );
-
-  const isSelectedAll = useMemo(
-    () => data?.every((d) => d.approvedStatus || d.check) ?? false,
-    [data]
-  );
-
-  const selected = useMemo(() => data?.filter((d) => d.check) ?? [], [data]);
+  const { data: materials = [] } = useQuery({
+    queryKey: ["danh-sach-nguyen-vat-lieu", store_code],
+    queryFn: () => nguyenVatLieuApi.getAll({ store_code }),
+    enabled: !!store_code && status === 3,
+    select: (response) =>
+      response?.data?.data?.map((e) => ({
+        value: e?.code,
+        code: e?.code,
+        label: e?.name,
+        ware_unit: e?.wareUnit,
+      })),
+  });
   //#endregion
 
   //#region Event
-  const onChange = (_data) => set(_data);
-
-  const onAdd = handleSubmit(
-    (d) => {
-      if (!data) return;
-      set([{ ...d, total, approvedStatus: false }, ...data]);
-      reset(initial);
-    },
-    (e) => {
-      if (e["code"])
-        noti("error", ERROR_MESSAGE.INVENTORY_ADJUSTMENT.MATERIAL_REQUIRED);
-      else if (e["wareQ"])
-        noti("error", ERROR_MESSAGE.INVENTORY_ADJUSTMENT.QUANTITY_REQUIRED);
+  const onInputChange = (key) => (value, selectedOption) => {
+    if (key === "code") {
+      setInputValues((prev) => ({
+        ...prev,
+        code: value,
+        name: selectedOption?.label,
+        ware_unit: selectedOption?.ware_unit,
+      }));
+    } else {
+      setInputValues((prev) => ({ ...prev, [key]: value }));
     }
-  );
-
-  const submit = (callback) => {
-    callback(data);
   };
 
-  const onRemove = () => set(data.filter((d) => !d.check));
-
-  const onApprove = () => {
-    set(
-      data.map((d) =>
-        d.check ? { ...d, check: false, approvedStatus: true } : d
-      )
-    );
+  const onSubmit = () => {
+    const { index, ...values } = inputValues;
+    if (index !== -1) {
+      update(index, values);
+    } else {
+      append(values);
+    }
+    setInputValues(DEFAULT_INPUT_VALUES);
   };
 
-  const onMaterialChange = ({ data: _data }) => {
-    setValue("name", _data.name);
-    setValue("wareUnit", _data.wareUnit);
-    setValue("price", _data.warePrice);
-    setValue("code", _data.code);
+  const onEdit = (index, editedData) => () => {
+    setInputValues({ index, ...editedData });
+  };
+
+  const onRemove = (index) => () => {
+    remove(index);
   };
   //#endregion
 
   useImperativeHandle(ref, () => ({
-    submit,
+    submit: () => {
+      const values = materialsValue?.map((e) => ({
+        code: e?.code,
+        ware_q: e?.ware_q,
+        ware_unit: e?.ware_unit,
+      }));
+      reset(DEFAULT_MATERIALS_VALUES);
+      return values;
+    },
+    getInitMaterials: (initMaterials) => {
+      replace(initMaterials);
+    },
   }));
 
-  useEffect(() => {
-    if (!code) reset(initial);
-  }, [code]);
-
   //#region Render
+  const headers = [
+    { key: "code", label: "Mã" },
+    { key: "name", label: "Tên" },
+    { key: "ware_q", label: "Số lượng" },
+    { key: "ware_unit", label: "Đơn vị lưu kho" },
+    {
+      key: "action",
+      label: "",
+      cellRender: (value, record, index) => (
+        <div className="flex gap-2 flex-row items-center">
+          <CIconButton icon={<EditPencil />} onClick={onEdit(index, record)} />
+          <CIconButton
+            color="error"
+            icon={<TrashFill />}
+            onClick={onRemove(index)}
+          />
+        </div>
+      ),
+    },
+  ];
   return (
     <>
       <CCard>
         <CCardBody>
           <div className="btn-group">
-            <CButton
-              icon={<PlusCircle />}
-              disabled={!code}
-              color={"primary"}
-              onClick={onAdd}
-            >
-              Thêm
-            </CButton>
-            <CButton
-              icon={<Trash />}
-              disabled={!code || !selected.length}
-              color="danger"
-              onClick={onRemove}
-            >
-              Xóa
-            </CButton>
+            {inputValues.index !== -1 ? (
+              <CButton
+                disabled={!store_code || status !== 3}
+                icon={<Save />}
+                color={"primary"}
+                onClick={onSubmit}
+              >
+                Lưu
+              </CButton>
+            ) : (
+              <CButton
+                disabled={!store_code || status !== 3}
+                icon={<PlusCircle />}
+                color={"primary"}
+                onClick={onSubmit}
+              >
+                Thêm
+              </CButton>
+            )}
           </div>
           <CRow className="mt-3">
             <CCol>
-              <CInput readOnly value={watch("code")} label="Mã NVL" />
-            </CCol>
-            <CCol>
-              <Controller
-                control={control}
-                name="code"
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <CSelect
-                    readOnly={!code}
-                    ignore={ignore}
-                    label="Tên NVL"
-                    options={materials}
-                    required
-                    {...field}
-                    onChange={onMaterialChange}
-                  />
-                )}
+              <CSelect
+                required
+                disabled={inputValues.index !== -1}
+                options={materials}
+                value={inputValues.code}
+                select="code"
+                display="code"
+                label="Mã NVL"
+                onChange={onInputChange("code")}
               />
             </CCol>
             <CCol>
-              <Controller
-                control={control}
-                name="wareQ"
-                rules={{ required: true, min: -999, max: 999 }}
-                render={({ field }) => (
-                  <CNumber
-                    disabled={!code}
-                    isFloat={isFloat}
-                    label="Số lượng"
-                    min="-999"
-                    max="999"
-                    required
-                    {...field}
-                  />
-                )}
+              <CSelect
+                required
+                disabled={inputValues.index !== -1}
+                options={materials}
+                value={inputValues.code}
+                select="code"
+                label="Tên NVL"
+                onChange={onInputChange("code")}
+              />
+            </CCol>
+            <CCol>
+              <CNumberInput
+                label="Số lượng"
+                required
+                value={inputValues.ware_q}
+                onChange={onInputChange("ware_q")}
               />
             </CCol>
           </CRow>
         </CCardBody>
       </CCard>
 
-      <Can
-        do={PERMISSION_VALUE.APPROVE}
-        on={ENTITY_GROUP_CODE.INVENTORY_ADJUSTMENT}
-      >
-        <div className="text-right mb-2">
-          <div className="mr-4">
-            <CButton
-              onClick={onApprove}
-              disabled={!selected.length}
-              className="btn-fill mr-0 px-4"
-            >
-              Xác nhận
-            </CButton>
-          </div>
-        </div>
-      </Can>
-
       <CCard>
         <CCardBody className="px-0">
-          <div className="table-responsive">
-            <MaterialTable
-              materials={data}
-              isSelectedAll={isSelectedAll}
-              onChange={onChange}
-            />
-          </div>
+          <CTable headers={headers} data={fields} rowKey="__id" />
         </CCardBody>
       </CCard>
     </>

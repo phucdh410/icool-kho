@@ -1,38 +1,29 @@
 import { forwardRef, useEffect, useImperativeHandle } from "react";
 import { Controller, useForm } from "react-hook-form";
-import moment from "moment";
+import dayjs from "dayjs";
 
 import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { CActionGroup } from "src/common/components/others";
 import { ERROR_MESSAGE } from "src/configs/constant";
 
-import { CDate, CFile, CInput, CSelect } from "_components/controls";
+import { C1Upload, CDate, CInput, CSelect } from "_components/controls";
 
 const initial = {
   code: "",
+  file_id: "",
   ware_code: "",
-  store_code: "",
-  date: moment.now(),
-  file: [],
+  date: dayjs().toDate(),
+  materials: [],
 };
 
 export default forwardRef(
   (
-    {
-      warehouses,
-      status,
-      onSave,
-      selectedNo,
-      onAdd,
-      onEdit,
-      onRemove,
-      onStoreChange,
-    },
+    { warehouses, status, onSave, selectedNo, onAdd, onEdit, onRemove },
     ref
   ) => {
     //#region Data
-    const { control, watch, setValue, handleSubmit } = useForm({
+    const { control, watch, reset, handleSubmit } = useForm({
       defaultValue: initial,
     });
     //#endregion
@@ -44,9 +35,6 @@ export default forwardRef(
         noti("error", ERROR_MESSAGE.INVENTORY_ADJUSTMENT.REQUIRED);
       }
     );
-
-    const setData = (_data) =>
-      Object.keys(_data).forEach((key) => setValue(key, _data[key]));
 
     const onClick = (state) => {
       switch (state) {
@@ -62,19 +50,14 @@ export default forwardRef(
           return onPrint();
       }
     };
-
-    const onWarehouseChoose = ({ data }) => {
-      setValue("ware_code", data.code);
-      setValue("store_code", data.store_code);
-
-      onStoreChange(data.store_code);
-    };
     //#endregion
 
-    useImperativeHandle(ref, () => ({ setData }));
+    useImperativeHandle(ref, () => ({
+      setData: (editedData) => reset(editedData),
+    }));
 
     useEffect(() => {
-      if (!status) setData(initial);
+      if (!status) reset(initial);
     }, [status]);
 
     //#region Render
@@ -87,7 +70,7 @@ export default forwardRef(
             canAdd={status !== 3}
             canSave={status > 1}
             canEdit={status === 3 || selectedNo === 1}
-            canRemove={selectedNo && status === 0}
+            canRemove={status !== 3 && selectedNo === 1}
           />
         </div>
         <CCollapse show={status > 1}>
@@ -108,10 +91,11 @@ export default forwardRef(
                 render={({ field }) => (
                   <CSelect
                     options={warehouses ?? []}
+                    disabled={status === 3}
                     label="Kho"
+                    select="code"
                     required
                     {...field}
-                    onChange={onWarehouseChoose}
                   />
                 )}
               />
@@ -134,18 +118,10 @@ export default forwardRef(
             <CCol style={{ minWidth: "200px" }}>
               <Controller
                 control={control}
-                name="file"
+                name="file_id"
                 rules={{ required: true }}
                 render={({ field }) => (
-                  <CFile
-                    label="File đính kèm"
-                    render={(file) => (
-                      <span key={file}>{file.name || file}</span>
-                    )}
-                    required
-                    max={1}
-                    {...field}
-                  />
+                  <C1Upload label="File đính kèm" required {...field} />
                 )}
               />
             </CCol>

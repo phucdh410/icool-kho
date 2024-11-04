@@ -3,6 +3,7 @@
 
   thead {
     background-color: #d0e5ff;
+    color: #000000;
     font-weight: 500;
 
     th {
@@ -27,6 +28,7 @@
   }
 
   tbody {
+    color: #000000;
     tr {
       &:hover {
         background-color: rgba(0, 0, 21, 0.075);
@@ -38,6 +40,7 @@
       }
 
       td {
+        color: inherit;
         padding: 0.75rem;
         text-align: center;
         font-size: 16px;

@@ -70,11 +70,6 @@ export default ({
               canRemove={false}
             />
           </div>
-          <div>
-            <CButton className="btn-fill" onClick={onAdjust}>
-              Điều chỉnh lượng tồn kho
-            </CButton>
-          </div>
           <div
             className={classNames(
               "btn",

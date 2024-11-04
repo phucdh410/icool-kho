@@ -40,14 +40,16 @@ function Select(
 
   const _value = useMemo(() => {
     if (typeof value === "object" && value !== null) {
-      return _options?.find((v) => v.value === value?.value) || null;
+      return (
+        _options?.find((v) => v[select || "value"] === value?.value) || null
+      );
     }
 
-    return _options?.find((v) => v.value === value) || null;
+    return _options?.find((v) => v[select || "value"] === value) || null;
   }, [value, _options]);
 
   const change = useCallback(
-    (v) => (select ? onChange(v[select]) : onChange(v)),
+    (v) => (select ? onChange(v[select], v) : onChange(v)),
     [onChange, select]
   );
 
