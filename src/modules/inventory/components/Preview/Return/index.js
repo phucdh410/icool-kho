@@ -1,16 +1,33 @@
-import { useCallback, useState } from "react";
+import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { useQuery } from "react-query";
 
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
-import { money } from "src/utils/funcs";
+import { phieuTraHangApi } from "src/1/apis/phieu_tra_hang.api";
 import { format } from "src/utils/moment";
 
 import { CInput } from "_components/controls";
 import { CDialog, CLoading, CPagination, CTable } from "_components/others";
 
-export default ({ code, getter, onClose }) => {
-  const { data, isLoading } = getter(code);
+export default forwardRef((props, ref) => {
+  //#region Data
+  const [id, setId] = useState("");
+  const [open, setOpen] = useState(false);
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
+
+  const { data, isFetching } = useQuery({
+    queryKey: ["chi-tiet-phieu-tra-hang", id],
+    queryFn: () => phieuTraHangApi.getById(id),
+    enabled: !!id,
+    select: (response) => response?.data?.data,
+  });
+  //#endregion
+
+  //#region Event
+  const onClose = () => {
+    setId("");
+    setOpen(false);
+  };
 
   const onPaginationChange = useCallback(
     (_paginate) => setPaginate(_paginate),
@@ -27,7 +44,16 @@ export default ({ code, getter, onClose }) => {
         return <td className="text-warning">Chưa xác nhận</td>;
     }
   }, []);
+  //#endregion
 
+  useImperativeHandle(ref, () => ({
+    open: (selectedId) => {
+      setId(selectedId);
+      setOpen(true);
+    },
+  }));
+
+  //#region Render
   const fields = [
     {
       key: "code",
@@ -90,7 +116,7 @@ export default ({ code, getter, onClose }) => {
       show={true}
       onClose={onClose}
     >
-      <CLoading loading={isLoading}>
+      <CLoading loading={isFetching}>
         <CCard>
           <CCardBody>
             <CRow>
@@ -104,7 +130,7 @@ export default ({ code, getter, onClose }) => {
                 <CInput
                   readOnly
                   label="Ngày tạo"
-                  value={data ? format(data.createdDate) : ""}
+                  value={data ? format(data.created_date) : ""}
                 />
               </CCol>
               <CCol xs="12" sm="4" md="4" lg="3" xl="3" xxl="3">
@@ -126,7 +152,7 @@ export default ({ code, getter, onClose }) => {
         <CCard>
           <CCardBody>
             <CTable
-              loading={isLoading}
+              loading={isFetching}
               data={data?.materials ?? []}
               page={paginate.page}
               itemsPerPage={paginate.limit}
@@ -146,4 +172,5 @@ export default ({ code, getter, onClose }) => {
       </CLoading>
     </CDialog>
   );
-};
+  //#endregion
+});

@@ -87,8 +87,8 @@ export default ({
       </CRow>
 
       <CCollapse show={status === 1}>
-        <CRow className="mt-3 justify-content-xxl-end">
-          <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
+        <div className="mt-3 flex flex-row justify-between items-end">
+          <div className="flex flex-row gap-3">
             <Controller
               name="code"
               control={control}
@@ -97,14 +97,13 @@ export default ({
                 <CInput placeholder="Tất cả" label="Mã Phiếu" {...field} />
               )}
             />
-          </CCol>
-          <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="ware_code"
+              name="store_code"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <CSelect
+                  className="min-w-[240px]"
                   label="Kho"
                   options={
                     warehouses && warehouses.length > 2
@@ -117,52 +116,26 @@ export default ({
                 />
               )}
             />
-          </CCol>
-          <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="startAt"
+              name="start_at"
               control={control}
               render={({ field }) => <CDate label="Từ ngày" {...field} />}
             />
-          </CCol>
-          <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
             <Controller
-              name="endAt"
+              name="end_at"
               control={control}
-              defaultValue=""
               render={({ field }) => <CDate label="Đến ngày" {...field} />}
             />
-          </CCol>
-          <CCol xs="12" sm="6" md="3" lg="4" xl="3" xxl="2">
-            <Controller
-              name="date"
-              control={control}
-              defaultValue=""
-              render={({ field }) => <CDate label="Ngày trả" {...field} />}
-            />
-          </CCol>
-          <CCol
-            xs="12"
-            sm="6"
-            md="5"
-            lg="4"
-            xl="3"
-            xxl="2"
-            className="text-xxl-right btn-search"
-          >
-            <div className="form-group c-input">
-              <div>
-                <CButton
-                  icon={<Magnifying />}
-                  onClick={search}
-                  className="mr-0"
-                >
-                  Tìm kiếm
-                </CButton>
-              </div>
+          </div>
+
+          <div className="form-group c-input">
+            <div>
+              <CButton icon={<Magnifying />} onClick={search} className="mr-0">
+                Tìm kiếm
+              </CButton>
             </div>
-          </CCol>
-        </CRow>
+          </div>
+        </div>
       </CCollapse>
     </>
   );

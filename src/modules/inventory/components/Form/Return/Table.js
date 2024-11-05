@@ -1,23 +1,12 @@
 import { CCheckbox } from "_components/controls";
 
-import { getAll } from "../../../queries-fn/material-group.query";
-
 import Row from "./Row";
 
-export default ({ data, warehouse, isSelectAll, onChange }) => {
+export default ({ control, data, onSelect, isSelectedAll, selected }) => {
   //#region Data
-  const { data: materials } = getAll({});
   //#endregion
 
   //#region Event
-  const selectAll = (v) => onChange(data.map((d) => ({ ...d, check: v })));
-
-  const select = (index) => (v) => {
-    const _new = [...data];
-    _new[index] = { ..._new[index], check: v };
-
-    onChange(_new);
-  };
   //#endregion
 
   //#region Render
@@ -28,7 +17,7 @@ export default ({ data, warehouse, isSelectAll, onChange }) => {
           <th
             style={{ width: "50px", paddingLeft: "20px", paddingRight: "24px" }}
           >
-            <CCheckbox value={isSelectAll} onChange={selectAll} />
+            <CCheckbox value={isSelectedAll} onChange={onSelect()} />
           </th>
           <th
             style={{ width: "250px", minWidth: "250px", paddingRight: "24px" }}
@@ -74,13 +63,13 @@ export default ({ data, warehouse, isSelectAll, onChange }) => {
       </thead>
       <tbody>
         {data &&
-          data.map((m, index) => (
+          data.map((e, index) => (
             <Row
-              key={m.id}
-              data={m}
-              warehouse={warehouse}
-              materials={materials}
-              onSelect={select(index)}
+              key={e?.__id}
+              control={control}
+              index={index}
+              onSelect={onSelect}
+              selected={selected}
             />
           ))}
       </tbody>

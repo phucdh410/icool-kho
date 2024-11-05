@@ -1,61 +1,65 @@
-import { useCallback, useMemo,useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { createSelector } from "reselect";
+import { useCallback, useMemo, useState } from "react";
+import { useQuery } from "react-query";
+import dayjs from "dayjs";
 
-import { CCard, CCardBody,CCardHeader } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 
-import { remove } from "src/apis/return_slip.api";
+import { phieuTraHangApi } from "src/1/apis/phieu_tra_hang.api";
+import { useSetQueryData } from "src/1/hooks/query";
 import { history } from "src/App";
-import { setFilter } from "src/common/actions/config.action";
-import { fireDelete, fireSuccess } from "src/utils/alert";
-
-import { getAll } from "_common/queries-fn/inventory-return.query";
+import { fireDelete, fireError, fireSuccess } from "src/utils/alert";
 
 import Table from "./Table";
 import Toolbar from "./Toolbar";
 
-const selectData = createSelector(
-  (state) => state.config,
-  (state) => state.inventoryReturn,
-  ({ isLoading }, { filters }) => ({ isLoading, filters })
-);
-
 const InventoryReturn = ({}) => {
-  const dispatch = useDispatch();
-
-  const { isLoading, filters } = useSelector(selectData);
-
+  //#region Data
   const [status, setStatus] = useState(0);
 
-  const { data, set, refetch } = getAll(filters, isLoading);
+  const [params, setParams] = useState({
+    code: "",
+    store_code: "",
+    start_at: dayjs().startOf("month"),
+    end_at: dayjs().endOf("month"),
+  });
+
+  const { data, refetch, isFetching } = useQuery({
+    queryKey: ["danh-sach-phieu-tra-hang", params],
+    queryFn: () => phieuTraHangApi.getAll(params),
+    select: (response) =>
+      Array.isArray(response) ? response : response?.data?.data,
+  });
+
+  const { setQueryData } = useSetQueryData([
+    "danh-sach-phieu-tra-hang",
+    params,
+  ]);
 
   const isSelectAll = useMemo(() => data?.every((d) => d.check), [data]);
 
   const selected = useMemo(() => data?.filter((d) => d.check) || []);
+  //#endregion
 
-  //#render Events
-  const onEdit = useCallback(async () => {
-    const code = data.find((d) => d.check).code;
-    history.push(`/inventory-return/form/${code}`);
-  }, [data]);
+  //#region Events
+  const onEdit = async () => {
+    history.push(`/inventory-return/form/${selected[0].id}`);
+  };
 
-  const onRemove = useCallback(async () => {
+  const onRemove = async () => {
     const allow = await fireDelete();
     if (allow) {
-      const res = await remove(selected.map((s) => s.code));
-
-      if (res.exitcode == 200) {
+      try {
+        await phieuTraHangApi.remove(selected[0].id);
         refetch();
         fireSuccess();
-      } else {
+      } catch (error) {
         fireError();
       }
     }
-  }, [selected, refetch]);
+  };
 
   const select = (code, v) =>
-    set(
+    setQueryData(
       data?.map((d) =>
         code === -1 || d.code === code ? { ...d, check: v } : d
       )
@@ -66,15 +70,16 @@ const InventoryReturn = ({}) => {
     [status]
   );
 
-  const onSearch = useCallback((data) => dispatch(setFilter(data)), []);
+  const onSearch = (data) => setParams(data);
   //#endregion
 
+  //#region Render
   return (
     <>
       <CCard className="toolbar sticky">
         <CCardBody>
           <Toolbar
-            filter={filters}
+            filter={params}
             status={status}
             selectedNo={selected.length}
             toggleStatus={onStatusChange}
@@ -88,7 +93,7 @@ const InventoryReturn = ({}) => {
         <CCardHeader></CCardHeader>
         <CCardBody className="px-0 pt-0">
           <Table
-            loading={isLoading}
+            loading={isFetching}
             isSelectAll={isSelectAll}
             data={data}
             onSelect={select}
@@ -97,6 +102,7 @@ const InventoryReturn = ({}) => {
       </CCard>
     </>
   );
+  //#endregion
 };
 
 export default InventoryReturn;

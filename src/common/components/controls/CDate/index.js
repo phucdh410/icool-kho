@@ -34,7 +34,7 @@ const InputDate = ({ label, onChange, className, value, ...rest }, ref) => {
   const validValue = useMemo(() => dayjs(value).toDate(), [value]);
 
   const formatedDate = useMemo(
-    () => moment(validValue).format("DD/MM/yyyy"),
+    () => dayjs(validValue).format("DD/MM/yyyy"),
     [validValue]
   );
 

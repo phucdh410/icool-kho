@@ -1,6 +1,4 @@
 import {
-  CENTRAL_KITCHEN,
-  CENTRAL_WAREHOUSE,
   ENTITY_GROUP_CODE,
   PERMISSION_VALUE,
   SUMMARY_GROUP_CODE,
@@ -237,7 +235,7 @@ export const Inventory = {
       },
       icon: "",
       name: "Sửa phiếu trả hàng",
-      path: "/inventory-return/form/:code",
+      path: "/inventory-return/form/:id",
     },
   },
   Cancel: {

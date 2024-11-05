@@ -1,48 +1,38 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
+import { useForm } from "react-hook-form";
 
-import { returnApi } from "src/apis/return_slip.api";
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 
 import Form from "../../../components/Form/Return";
-
-const selectCurrentUser = createSelector(
-  (state) => state.auth,
-  ({ user }) => user
-);
+import { DEFAULT_VALUES } from "../form";
 
 const InventoryReturnCreate = () => {
-  const user = useSelector(selectCurrentUser);
-
-  const [data] = useState({
-    createdBy: user.code,
-    store_code: user.store_code,
-    ware_code: user.ware_code,
-    checked: new Date(),
-    note: "",
+  //#region Data
+  const { control, handleSubmit, reset } = useForm({
+    mode: "all",
+    defaultValues: DEFAULT_VALUES,
   });
+  //#endregion
 
-  const onSubmit = async (data) => {
-    const payload = {
-      ware_code: data?.ware_code,
-      note: data?.note,
-      date: data?.date,
-      material_ids: data?.materials?.map((e) => e.id),
-    };
-
-    const res = await returnApi.save_create(payload);
-
-    if (res) {
-      history.push("/inventory-return/list");
-      noti("success", SUCCESS_MESSAGE.INVENTORY_RETURN.CREATE);
-    } else {
-      noti("error", ERROR_MESSAGE.INVENTORY_RETURN.CREATE);
-    }
+  //#region Event
+  const onSubmit = () => {
+    handleSubmit(async (values) => {
+      try {
+        console.log("values at line 23 is:", values);
+        //note: call create api
+        // history.push("/inventory-return/list");
+        // reset(DEFAULT_VALUES);
+        noti("success", SUCCESS_MESSAGE.INVENTORY_RETURN.CREATE);
+      } catch (error) {
+        noti("error", ERROR_MESSAGE.INVENTORY_RETURN.CREATE);
+      }
+    })();
   };
+  //#endregion
 
-  return <Form edit={false} onSubmit={onSubmit} data={data} />;
+  //#region Render
+  return <Form onSubmit={onSubmit} control={control} />;
+  //#endregion
 };
 
 export default InventoryReturnCreate;

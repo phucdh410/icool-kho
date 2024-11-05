@@ -1,10 +1,8 @@
-import { useCallback, useState } from "react";
-
-import { money } from "src/utils/funcs/";
+import { useCallback, useRef, useState } from "react";
 
 import { getByCode } from "_common/queries-fn/inventory-return.query";
 import { CCheckbox } from "_components/controls";
-import { CPagination,CTable } from "_components/others";
+import { CPagination, CTable } from "_components/others";
 
 import MPreview from "../../../components/Preview/Return";
 
@@ -12,7 +10,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
 
-  const [preview, setPreview] = useState(null);
+  const previewRef = useRef(null);
   //#endregion
 
   //#region Event
@@ -28,12 +26,9 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     [onSelect]
   );
 
-  const onPreview = useCallback(
-    (code) => (e) => e.preventDefault() || setPreview(code),
-    [setPreview]
-  );
-
-  const onClose = useCallback(() => setPreview(null), []);
+  const onPreview = (id) => () => {
+    previewRef.current?.open(id);
+  };
   //#endregion
 
   //#region Render
@@ -49,13 +44,13 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "storeName",
+      key: "store_name",
       label: "Chi nhánh",
       _style: { width: "350px", minWidth: "350px", textAlign: "left" },
       sorter: true,
     },
     {
-      key: "createdDate",
+      key: "created_date",
       label: "Ngày tạo",
       _style: { width: "200px", minWidth: "200px" },
     },
@@ -86,16 +81,16 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         />
       </td>
     ),
-    code: ({ code }) => (
+    code: ({ id }) => (
       <td>
-        <a href={`#preview/${code}`} onClick={onPreview(code)}>
-          {code}
-        </a>
+        <button onClick={onPreview(id)}>{code}</button>
       </td>
     ),
-    storeName: ({ storeName }) => <td className="text-left">{storeName}</td>,
+    store_name: ({ store_name }) => <td className="text-left">{store_name}</td>,
     note: ({ note }) => <td className="text-left">{note}</td>,
-    total: ({ total }) => <td className="text-right">{money(total)}</td>,
+    total: ({ total }) => (
+      <td className="text-right">{total?.toLocaleString()}</td>
+    ),
   };
 
   return (
@@ -117,9 +112,8 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
           />
         }
       />
-      {preview && (
-        <MPreview code={preview} getter={getByCode} onClose={onClose} />
-      )}
+
+      <MPreview ref={previewRef} />
     </>
   );
   //#endregion

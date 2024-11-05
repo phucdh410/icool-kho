@@ -1,50 +1,82 @@
-import { money } from "src/utils/funcs";
+import { Controller } from "react-hook-form";
 
-import { CCheckbox, CInput } from "_components/controls";
+import { CViewableFile } from "src/1/common/components/controls";
 
-export default ({ data, onSelect }) => {
+import { CCheckbox, CInput, CNumberInput } from "_components/controls";
+
+export default ({ control, index, onSelect, selected }) => {
   //#region Render
   return (
     <tr>
       <td>
         <CCheckbox
-          value={data.check}
-          onChange={onSelect}
-          disabled={data.approvedStatus}
+          value={selected.includes(index)}
+          onChange={onSelect(index)}
         />
       </td>
       <td>
-        <CInput value={data?.code} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.code`}
+          render={({ field }) => <CInput {...field} disabled />}
+        />
       </td>
       <td>
-        <CInput value={data?.name} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.name`}
+          render={({ field }) => <CInput {...field} disabled />}
+        />
       </td>
       <td>
-        <CInput value={data?.wareQ} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.quantity`}
+          render={({ field }) => <CNumberInput {...field} disabled />}
+        />
       </td>
       <td>
-        <CInput value={data?.wareUnit || ""} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.unit`}
+          render={({ field }) => <CInput {...field} disabled />}
+        />
       </td>
       <td>
-        <CInput value={money(data?.price)} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.price`}
+          render={({ field }) => <CNumberInput {...field} disabled />}
+        />
       </td>
       <td>
-        <CInput value={money((data?.wareQ || 0) * data?.price)} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}`}
+          render={({ field: { value } }) => (
+            <CNumberInput value={value?.quantity * value?.price} disabled />
+          )}
+        />
       </td>
       <td>
-        <CInput value={data?.reason} disabled />
+        <Controller
+          control={control}
+          name={`materials.${index}.reason`}
+          render={({ field }) => <CInput {...field} disabled />}
+        />
       </td>
       <td>
-        <div className="d-flex">
-          {data?.files?.map((f, index) => (
-            <span
-              key={f?.id + new Date()}
-              className="c-icon file"
-              style={{ cursor: "pointer" }}
-              onClick={() => onFileClick(f, index)}
-            ></span>
-          ))}
-        </div>
+        <Controller
+          control={control}
+          name={`materials.${index}.documents`}
+          render={({ field: { value } }) => (
+            <div className="flex flex-row gap-1">
+              {value.map((file) => (
+                <CViewableFile key={file?.id} file={file} />
+              ))}
+            </div>
+          )}
+        />
       </td>
     </tr>
   );
