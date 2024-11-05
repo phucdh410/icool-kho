@@ -80,7 +80,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
   const materialsValue = useWatch({ control, name: "materials" });
 
   const isSelectedAll = useMemo(
-    () => selected.length === materialsValue.length,
+    () => selected.length === materialsValue.length && selected.length > 0,
     [selected, materialsValue]
   );
   //#endregion
@@ -205,7 +205,9 @@ export default ({ isEdit = false, onSubmit, control }) => {
                   )}
                 />
               </div>
-              <div className="col-span-1">
+            </div>
+            <div className="mt-3 grid grid-cols-12 gap-5">
+              <div className="col-span-2">
                 <Controller
                   control={miniControl}
                   name="code"
@@ -222,7 +224,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
                   )}
                 />
               </div>
-              <div className="col-span-1">
+              <div className="col-span-3">
                 <Controller
                   control={miniControl}
                   name="code"
@@ -256,7 +258,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
                   )}
                 />
               </div>
-              <div className="col-span-1">
+              <div className="col-span-3">
                 <Controller
                   control={miniControl}
                   name="reason"
@@ -265,7 +267,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
                   )}
                 />
               </div>
-              <div className="col-span-1">
+              <div className="col-span-2">
                 <Controller
                   control={miniControl}
                   name="documents"
