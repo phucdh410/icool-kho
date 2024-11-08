@@ -68,7 +68,7 @@ export default ({ control, index, onSelect, selected }) => {
       <td>
         <Controller
           control={control}
-          name={`materials.${index}.documents`}
+          name={`materials.${index}.files`}
           render={({ field: { value } }) => (
             <div className="flex flex-row gap-1">
               {value.map((file) => (

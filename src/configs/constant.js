@@ -95,8 +95,12 @@ export const ERROR_MESSAGE = {
     RESPONSIBLE_REQUIRED: "Chưa chọn người chịu trách nhiệm",
   },
   INVENTORY_CHECK: {
-    CREATE: "Không thể tạo phiếu kiểm kho thành công",
-    UPDATE: "Không thể cập nhật phiếu kiểm kho thành công",
+    CREATE: "Không thể tạo phiếu kiểm kho",
+    UPDATE: "Không thể cập nhật phiếu kiểm kho",
+  },
+  INVENTORY_RETURN: {
+    CREATE: "Không thể tạo phiếu trả hàng",
+    UPDATE: "Không thể cập nhật phiếu trả hàng",
   },
   IMPORT: {
     CREATE: "Không thể tạo phiếu nhập hàng",

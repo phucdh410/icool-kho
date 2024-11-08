@@ -12,9 +12,9 @@ export const CFileItem = ({ file, clickable = true, className, ...props }) => {
       )}
       {...props}
     >
-      {file?.originalname}
+      {file?.original_name}
     </a>
   ) : (
-    <p {...props}>{file?.originalname}</p>
+    <p {...props}>{file?.original_name}</p>
   );
 };

@@ -36,6 +36,9 @@ export const CFile = forwardRef(
         }
       }
 
+      e.target.value = "";
+      if (inputRef.current) inputRef.current.value = "";
+
       // if (max) onChange(files.slice(0, max));
       // else onChange(files);
     };
@@ -79,7 +82,7 @@ export const CFile = forwardRef(
               render(file)
             ) : (
               <span
-                key={file.originalname || file}
+                key={file.original_name || file}
                 className={classNames("c-icon", "file")}
               ></span>
             )

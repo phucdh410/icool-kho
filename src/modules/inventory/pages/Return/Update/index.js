@@ -31,13 +31,13 @@ const InventoryReturnUpdate = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        console.log("values at line 23 is:", values);
-        //note: call create api
-        // history.push("/inventory-return/list");
-        // reset(DEFAULT_VALUES);
-        noti("success", SUCCESS_MESSAGE.INVENTORY_RETURN.CREATE);
+        const { id, ...payload } = values;
+        await phieuTraHangApi.update(id, payload);
+        history.push("/inventory-return/list");
+        noti("success", SUCCESS_MESSAGE.INVENTORY_RETURN.UPDATE);
+        reset(DEFAULT_VALUES);
       } catch (error) {
-        noti("error", ERROR_MESSAGE.INVENTORY_RETURN.CREATE);
+        noti("error", ERROR_MESSAGE.INVENTORY_RETURN.UPDATE);
       }
     })();
   };

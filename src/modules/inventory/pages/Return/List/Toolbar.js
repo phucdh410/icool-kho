@@ -64,8 +64,8 @@ export default ({
               onClick={onClick}
               canAdd={false}
               canSave={false}
-              canEdit={selectedNo == 1}
-              canRemove={selectedNo}
+              canEdit={selectedNo === 1}
+              canRemove={selectedNo === 1}
               canPrint={false}
             />
           </div>

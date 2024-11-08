@@ -32,7 +32,7 @@ const DEFAULT_VALUES = {
   quantity: 1,
   unit: "",
   reason: "",
-  documents: [],
+  files: [],
 };
 
 export default ({ isEdit = false, onSubmit, control }) => {
@@ -181,7 +181,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
                       select="value"
                       required
                       options={warehouses}
-                      readOnly={isEdit}
+                      disabled={isEdit || materialsValue.length > 0}
                       {...field}
                     />
                   )}
@@ -270,7 +270,7 @@ export default ({ isEdit = false, onSubmit, control }) => {
               <div className="col-span-2">
                 <Controller
                   control={miniControl}
-                  name="documents"
+                  name="files"
                   render={({ field }) => (
                     <CFile label="Hình ảnh" required {...field} />
                   )}

@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
+import dayjs from "dayjs";
 
-import { getByCode } from "_common/queries-fn/inventory-return.query";
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 
@@ -44,7 +44,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       _style: { width: "200px", minWidth: "200px" },
     },
     {
-      key: "store_name",
+      key: "ware_name",
       label: "Chi nhánh",
       _style: { width: "350px", minWidth: "350px", textAlign: "left" },
       sorter: true,
@@ -57,7 +57,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
     {
       key: "date",
       label: "Ngày trả",
-      _style: { width: "120px", minWidth: "120px" },
+      _style: { width: "200px", minWidth: "200px" },
     },
     {
       key: "total",
@@ -81,13 +81,17 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         />
       </td>
     ),
-    code: ({ id }) => (
+    code: ({ id, code }) => (
       <td>
         <button onClick={onPreview(id)}>{code}</button>
       </td>
     ),
-    store_name: ({ store_name }) => <td className="text-left">{store_name}</td>,
+    ware_name: ({ ware_name }) => <td className="text-left">{ware_name}</td>,
     note: ({ note }) => <td className="text-left">{note}</td>,
+    created_date: ({ created_date }) => (
+      <td>{dayjs(created_date).format("DD/MM/YYYY")}</td>
+    ),
+    date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
     total: ({ total }) => (
       <td className="text-right">{total?.toLocaleString()}</td>
     ),

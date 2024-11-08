@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 
+import { phieuTraHangApi } from "src/1/apis/phieu_tra_hang.api";
 import { history } from "src/App";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "src/configs/constant";
 
@@ -18,11 +19,10 @@ const InventoryReturnCreate = () => {
   const onSubmit = () => {
     handleSubmit(async (values) => {
       try {
-        console.log("values at line 23 is:", values);
-        //note: call create api
-        // history.push("/inventory-return/list");
-        // reset(DEFAULT_VALUES);
+        await phieuTraHangApi.create(values);
+        history.push("/inventory-return/list");
         noti("success", SUCCESS_MESSAGE.INVENTORY_RETURN.CREATE);
+        reset(DEFAULT_VALUES);
       } catch (error) {
         noti("error", ERROR_MESSAGE.INVENTORY_RETURN.CREATE);
       }

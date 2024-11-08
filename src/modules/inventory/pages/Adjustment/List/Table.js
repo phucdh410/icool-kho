@@ -55,10 +55,10 @@ export default ({ isSelectAll, data, status, onSelect }) => {
     ),
     ware_name: ({ ware_name }) => <td className="text-left">{ware_name}</td>,
     date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
-    file: ({ path, originalname }) => (
+    file: ({ path, original_name }) => (
       <td>
         <a target="_blank" rel="noopener noreferrer" href={path}>
-          {originalname}
+          {original_name}
         </a>
       </td>
     ),
