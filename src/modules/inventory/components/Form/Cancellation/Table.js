@@ -4,7 +4,7 @@ import { getAll } from "../../../queries-fn/material-group.query";
 
 import Row from "./Row";
 
-export default ({ data, warehouse, isSelectAll, onChange }) => {
+export default ({ data = [], warehouse, isSelectAll, onChange }) => {
   //#region Data
   const { data: materials } = getAll({});
   //#endregion

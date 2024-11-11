@@ -12,7 +12,7 @@ export default ({
   store_code,
   date,
   amounts,
-  data,
+  data = [],
   inputData,
   isSelectAll,
   onAmountChange,
