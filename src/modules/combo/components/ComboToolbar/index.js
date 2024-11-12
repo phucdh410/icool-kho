@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import classNames from "classnames";
 
 import { CCard, CCardBody, CCol, CCollapse, CRow } from "@coreui/react";
 
@@ -59,19 +60,10 @@ export const ComboToolbar = ({
                 canRemove={canRemove}
               />
             </div>
-            <div
-              className={classNames(
-                "btn",
-                "btn-primary",
-                "btn-collapse",
-                status == 1 && "show"
-              )}
-              onClick={toggleCollapse}
-            ></div>
           </CCol>
         </CRow>
 
-        <CCollapse>
+        <CCollapse show>
           <CRow className="mt-3 justify-content-xxl-end">
             <CCol xs="2">
               <Controller
@@ -117,7 +109,7 @@ export const ComboToolbar = ({
               />
             </CCol>
             <CCol xs="2" className="btn-search">
-              <div className="form-group c-input">
+              <div className="form-group flex flex-row gap-2 c-input">
                 <CButton
                   icon={<Magnifying />}
                   onClick={search}

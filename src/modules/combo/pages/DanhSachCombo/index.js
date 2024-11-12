@@ -14,8 +14,8 @@ const DanhSachCombo = () => {
     status: "",
     code: "",
     name: "",
-    start: "",
-    end: "",
+    start: null,
+    end: null,
   });
 
   const [status, setStatus] = useState(0);

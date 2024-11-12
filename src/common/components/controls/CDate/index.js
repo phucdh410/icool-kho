@@ -31,7 +31,10 @@ const CustomInput = forwardRef(
 const InputDate = ({ label, onChange, className, value, ...rest }, ref) => {
   const _class = classNames("c-input-date", className);
 
-  const validValue = useMemo(() => dayjs(value).toDate(), [value]);
+  const validValue = useMemo(
+    () => (value ? dayjs(value).toDate() : null),
+    [value]
+  );
 
   const formatedDate = useMemo(
     () => dayjs(validValue).format("DD/MM/yyyy"),

@@ -147,14 +147,14 @@ export const RETURN_SLIP = {
 
 // Phiếu tồn đọng
 export const BACKLOG_SLIP = {
-  getAll: `${api}/backlog_slips`,
-  getByStoreAndDate: `${api}/backlog_slips/getByDateAndStoreCode`,
-  getByWareCodeAndDate: `${api}/backlog_slips/getByWareCodeAndDate`,
-  export: `${api}/backlog_slips/export`,
-  exportByWareCodeAndDate: `${api}/backlog_slips/exportByWareCodeAndDate`,
-  create: `${api}/backlog_slips/create`,
-  update: `${api}/backlog_slips/update`,
-  delete: `${api}/backlog_slips/delete`,
+  getAll: `${api}/backlog-forms`,
+  getByStoreAndDate: `${api}/backlog-forms/getByDateAndStoreCode`,
+  getByWareCodeAndDate: `${api}/backlog-forms/getByWareCodeAndDate`,
+  export: `${api}/backlog-forms/export`,
+  exportByWareCodeAndDate: `${api}/backlog-forms/exportByWareCodeAndDate`,
+  create: `${api}/backlog-forms/create`,
+  update: `${api}/backlog-forms/update`,
+  delete: `${api}/backlog-forms/delete`,
 };
 
 // Phiếu xuất hàng
