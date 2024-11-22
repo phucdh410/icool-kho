@@ -11,6 +11,7 @@ import { CCard, CCardBody } from "@coreui/react";
 
 import { nguyenVatLieuApi } from "src/1/apis/nguyen_vat_lieu.api";
 import { PTable } from "src/1/common/components/others";
+import { money } from "src/utils/funcs";
 
 import { Row } from "./Row";
 
@@ -121,9 +122,7 @@ export const SuggestTable = ({ control }) => {
         <Controller
           control={control}
           name="cost"
-          render={({ field: { value } }) => (
-            <span>{value.toLocaleString("vi-VN")}</span>
-          )}
+          render={({ field: { value } }) => <span>{money(value)}</span>}
         />
       </div>
     </>

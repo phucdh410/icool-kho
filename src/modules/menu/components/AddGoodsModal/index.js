@@ -11,6 +11,7 @@ import {
   CInput,
   CSelect,
 } from "src/common/components/controls";
+import { money } from "src/utils/funcs";
 
 import { CDialog, CPagination, CTable } from "_components/others";
 
@@ -198,9 +199,9 @@ export const AddGoodsModal = forwardRef((props, ref) => {
       </td>
     ),
     name: ({ name }) => <td className="text-left">{name}</td>,
-    cost: ({ cost }) => <td>{cost?.toLocaleString("vi-VN")}</td>,
+    cost: ({ cost }) => <td>{money(cost)}</td>,
     price: ({ price, holiday_price }) => (
-      <td>{(isHoliday ? holiday_price : price)?.toLocaleString("vi-VN")}</td>
+      <td>{money(isHoliday ? holiday_price : price)}</td>
     ),
   };
 

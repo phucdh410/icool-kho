@@ -5,7 +5,6 @@ import { CCard, CCardBody } from "@coreui/react";
 import {
   C1Upload,
   CDate,
-  CFile,
   CInput,
   CTextarea,
 } from "src/common/components/controls";
@@ -14,7 +13,7 @@ export const Info = ({ control }) => {
   return (
     <CCard>
       <CCardBody>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           <Controller
             control={control}
             name="code"

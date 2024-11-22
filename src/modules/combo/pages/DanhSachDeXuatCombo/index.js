@@ -71,7 +71,7 @@ const DanhSachDeXuatCombo = () => {
 
   const onApprove = async () => {
     try {
-      await comboApi.updateStatus(selected?.[0]?.id);
+      await comboApi.approveProposal(selected?.[0]?.id);
       refetch();
       noti("success", "Duyệt combo thành công!");
     } catch (error) {

@@ -7,7 +7,7 @@ export const CFileItem = ({ file, clickable = true, className, ...props }) => {
       target="_blank"
       rel="noopener noreferrer"
       className={classNames(
-        "text-[#17BD08] font-medium no-underline hover:underline hover:text-[#008939]",
+        "text-[#17BD08] text-ellipsis overflow-hidden whitespace-nowrap font-medium no-underline hover:underline hover:text-[#008939]",
         className
       )}
       {...props}

@@ -3,6 +3,7 @@ import { useFieldArray } from "react-hook-form";
 import { CButton } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { mapWeekday } from "src/modules/menu/funcs";
+import { money } from "src/utils/funcs";
 
 export const MenuTable = ({ fieldsForm, onRemove }) => {
   //#region Data
@@ -39,13 +40,9 @@ export const MenuTable = ({ fieldsForm, onRemove }) => {
 
   const render = {
     index: (item, index) => <td>{index + 1}</td>,
-    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
     price: ({ normal_price, holiday_price, normal_or_holiday }) => (
-      <td>
-        {(normal_or_holiday ? holiday_price : normal_price)?.toLocaleString(
-          "en-US"
-        )}
-      </td>
+      <td>{money(normal_or_holiday ? holiday_price : normal_price)}</td>
     ),
     from: ({ from }) => <td>{mapWeekday(from)}</td>,
     to: ({ to }) => <td>{mapWeekday(to)}</td>,

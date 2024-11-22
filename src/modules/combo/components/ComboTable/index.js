@@ -4,6 +4,7 @@ import { CCard } from "@coreui/react";
 
 import { CCheckbox } from "src/common/components/controls";
 import { CPagination, CTable } from "src/common/components/others";
+import { money } from "src/utils/funcs";
 
 export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
   //#region Data
@@ -31,14 +32,17 @@ export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
     {
       key: "code",
       label: "Mã Combo",
+      _style: { textAlign: "left" },
     },
     {
       key: "name",
       label: "Tên Combo",
+      _style: { textAlign: "left" },
     },
     {
       key: "cost",
       label: "Tổng giá trị giá cost",
+      _style: { textAlign: "right" },
     },
     {
       key: "unit",
@@ -47,6 +51,7 @@ export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
     {
       key: "created_by",
       label: "Người đề xuất",
+      _style: { textAlign: "left" },
     },
     {
       key: "status",
@@ -63,6 +68,7 @@ export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
     {
       key: "note",
       label: "Ghi chú",
+      _style: { textAlign: "left" },
     },
   ];
 
@@ -72,7 +78,11 @@ export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    // name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
+    code: ({ code }) => <td className="text-left">{code}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
+    cost: ({ cost }) => <td className="text-right">{money(cost)}</td>,
+    created_by: ({ created_by }) => <td className="text-left">{created_by}</td>,
+    note: ({ note }) => <td className="text-left">{note}</td>,
   };
 
   return (

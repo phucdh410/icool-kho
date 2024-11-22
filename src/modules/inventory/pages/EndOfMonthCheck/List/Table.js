@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
+import { money } from "src/utils/funcs";
+
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 
@@ -105,9 +107,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       <td>{mapStatus(approved_status)}</td>
     ),
     store_name: ({ store_name }) => <td className="text-left">{store_name}</td>,
-    value: ({ value }) => (
-      <td className="text-right">{value.toLocaleString()}</td>
-    ),
+    value: ({ value }) => <td className="text-right">{money(value)}</td>,
   };
 
   return (

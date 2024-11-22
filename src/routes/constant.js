@@ -938,7 +938,7 @@ export const Combo = {
     },
     icon: "",
     name: "Sửa Combo",
-    path: "/combos/edit",
+    path: "/combos/edit/:id",
   },
 };
 //#endregion

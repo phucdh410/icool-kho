@@ -167,7 +167,7 @@ export const Table = ({ control }) => {
         />
       </td>
     ),
-    price: ({ price }) => <td>{(price ?? 0)?.toLocaleString("vi-VN")}</td>,
+    price: ({ price }) => <td>{money(price)}</td>,
     ware_unit: (item, index) => (
       <td>
         <Controller
@@ -221,9 +221,7 @@ export const Table = ({ control }) => {
         <Controller
           control={control}
           name="cost"
-          render={({ field: { value } }) => (
-            <span>{value.toLocaleString("vi-VN")}</span>
-          )}
+          render={({ field: { value } }) => <span>{money(value)}</span>}
         />
       </div>
     </>

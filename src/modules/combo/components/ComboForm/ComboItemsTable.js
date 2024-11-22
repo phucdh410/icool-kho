@@ -56,13 +56,13 @@ export const ComboItemsTable = ({ control }) => {
     {
       key: "code",
       label: "Mã combo item",
-      _style: { width: 160 },
+      _style: { width: 160, textAlign: "left" },
       sorter: false,
     },
     {
       key: "name",
       label: "Tên combo item",
-      _style: { width: 160 },
+      _style: { width: 160, textAlign: "left" },
       sorter: false,
     },
     {
@@ -88,6 +88,8 @@ export const ComboItemsTable = ({ control }) => {
         />
       </td>
     ),
+    code: ({ code }) => <td className="text-left">{code}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
   };
 
   return (

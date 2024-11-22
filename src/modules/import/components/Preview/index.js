@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import { phieuNhapHangApi } from "src/1/apis/phieu_nhap_hang.api";
+import { money } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import { CInput } from "_components/controls";
@@ -82,7 +83,7 @@ export default forwardRef((props, ref) => {
   const render = {
     name: ({ name }) => <td className="text-left">{name}</td>,
     total: ({ price, ware_q }) => (
-      <td className="text-right">{(price * ware_q).toLocaleString()}</td>
+      <td className="text-right">{money(price * ware_q)}</td>
     ),
   };
 
@@ -110,11 +111,7 @@ export default forwardRef((props, ref) => {
                 />
               </CCol>
               <CCol xs="12" sm="4" md="4" lg="5" xl="3" xxl="3">
-                <CInput
-                  readOnly
-                  label="Tổng tiền"
-                  value={total?.toLocaleString()}
-                />
+                <CInput readOnly label="Tổng tiền" value={money(total)} />
               </CCol>
               <CCol xs="12" sm="4" md="4" lg="5" xl="4" xxl="4">
                 <CInput

@@ -115,23 +115,23 @@ export const CANCELLATION_SLIP = {
 
 // Phiếu kiểm kê || Phiếu kiểm kho
 export const INVENTORY_SLIP = {
-  getAll: `${api}/inventory_slips`,
+  getAll: `${api}/inventory-check`,
 
-  getAllReport: `${api}/inventory_slips/getReport`,
-  exportReport: `${api}/inventory_slips/exportReport`,
+  getAllReport: `${api}/inventory-check/getReport`,
+  exportReport: `${api}/inventory-check/exportReport`,
 
-  getByWarehouse: `${api}/inventory_slips/warehouse`,
+  getByWarehouse: `${api}/inventory-check/warehouse`,
 
-  getMaterial: `${api}/inventory_slips/getMaterial`,
+  getMaterial: `${api}/inventory-check/getMaterial`,
 
-  getByCode: `${api}/inventory_slips/getByCode`,
-  getPreview: `${api}/inventory_slips/getPreview`,
-  create: `${api}/inventory_slips/create`,
-  update: `${api}/inventory_slips/update`,
-  approve: `${api}/inventory_slips/approve`,
-  delete: `${api}/inventory_slips/delete`,
+  getByCode: `${api}/inventory-check/getByCode`,
+  getPreview: `${api}/inventory-check/getPreview`,
+  create: `${api}/inventory-check/create`,
+  update: `${api}/inventory-check/update`,
+  approve: `${api}/inventory-check/approve`,
+  delete: `${api}/inventory-check/delete`,
 
-  getUnFulfilled: `${api}/inventory_slips/getUnFulfilled`,
+  getUnFulfilled: `${api}/inventory-check/getUnFulfilled`,
 };
 
 // Phiểu trả hàng

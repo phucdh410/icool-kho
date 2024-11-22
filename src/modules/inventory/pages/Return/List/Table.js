@@ -1,6 +1,8 @@
 import { useCallback, useRef, useState } from "react";
 import dayjs from "dayjs";
 
+import { money } from "src/utils/funcs";
+
 import { CCheckbox } from "_components/controls";
 import { CPagination, CTable } from "_components/others";
 
@@ -92,9 +94,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
       <td>{dayjs(created_date).format("DD/MM/YYYY")}</td>
     ),
     date: ({ date }) => <td>{dayjs(date).format("DD/MM/YYYY")}</td>,
-    total: ({ total }) => (
-      <td className="text-right">{total?.toLocaleString()}</td>
-    ),
+    total: ({ total }) => <td className="text-right">{money(total)}</td>,
   };
 
   return (

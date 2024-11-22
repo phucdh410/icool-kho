@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
 
 import { CNumber, CSelect } from "src/common/components/controls";
+import { money } from "src/utils/funcs";
 
 export const Row = ({
   control,
@@ -72,9 +73,7 @@ export const Row = ({
         <Controller
           control={control}
           name={`materials.${index}.price`}
-          render={({ field }) => (
-            <>{(field.value ?? 0)?.toLocaleString("vi-VN")}</>
-          )}
+          render={({ field }) => <>{money(field.value)}</>}
         />
       </td>
       <td>

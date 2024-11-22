@@ -59,7 +59,7 @@ export const C1Upload = forwardRef(
 
             onChange(res?.data?.data);
           } catch (error) {
-            console.log(error);
+            console.error(error);
             noti("error", "Upload lỗi!");
           } finally {
             inputRef.current.value = null;
@@ -75,7 +75,7 @@ export const C1Upload = forwardRef(
 
     //#region Render
     return (
-      <div>
+      <div className="form-group c-input">
         {label && (
           <label
             className="text-black font-medium mb-0 mt-0"
@@ -95,7 +95,7 @@ export const C1Upload = forwardRef(
             accept={accept}
             multiple={false}
           />
-          <div className="flex flex-1 items-center input-file-wrapper h-[inherit] border-t border-l border-b border-[#D7D7D7] rounded-s-md !pl-3 pr-8">
+          <div className="flex flex-1 items-center overflow-hidden input-file-wrapper h-[inherit] border-t border-l border-b border-[#D7D7D7] rounded-s-md !pl-3 pr-8">
             {value ? (
               <CFileItem
                 file={value}

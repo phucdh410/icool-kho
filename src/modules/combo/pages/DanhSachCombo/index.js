@@ -86,7 +86,6 @@ const DanhSachCombo = () => {
       <ComboToolbar
         params={params}
         status={status}
-        toggleStatus={onStatusChange}
         canEdit={selected?.length === 1}
         canRemove={selected?.length === 1}
         onEdit={onEdit}
@@ -94,6 +93,7 @@ const DanhSachCombo = () => {
         onSearch={onSearch}
         selected={selected}
         onPause={onPause}
+        combos={data}
       />
 
       <ComboTable

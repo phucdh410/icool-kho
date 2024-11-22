@@ -1,7 +1,9 @@
-import { useCallback,useState } from "react";
+import { useCallback, useState } from "react";
+
+import { money } from "src/utils/funcs";
 
 import { CCheckbox } from "_components/controls";
-import { CPagination,CTable } from "_components/others";
+import { CPagination, CTable } from "_components/others";
 
 export default ({ isSelectAll, data, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
@@ -65,7 +67,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
         <CCheckbox value={check} onChange={select(code)} />
       </td>
     ),
-    price: ({ price }) => <td>{price ? price.toLocaleString() : "Chưa có"}</td>,
+    price: ({ price }) => <td>{price ? money(price) : "Chưa có"}</td>,
     name: ({ name }) => <td className="text-left">{name}</td>,
     supplier: ({ supplier }) => <td>{supplier ? supplier : "Chưa có"}</td>,
   };

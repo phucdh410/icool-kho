@@ -14,6 +14,7 @@ import {
 } from "src/common/components/controls";
 import { CTable } from "src/common/components/others";
 import { WEEKDAYS_OPTIONS } from "src/modules/menu/constants";
+import { money } from "src/utils/funcs";
 
 import { StoresModal } from "./Modal";
 
@@ -72,6 +73,7 @@ export const StoresTable = ({ control }) => {
       key: "name",
       label: "Tên chi nhánh",
       sorter: false,
+      _style: { textAlign: "left" },
     },
     {
       key: "price",
@@ -105,7 +107,8 @@ export const StoresTable = ({ control }) => {
         />
       </td>
     ),
-    price: ({ price }) => <td>{price.toLocaleString()}</td>,
+    price: ({ price }) => <td>{money(price)}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
     from: ({ from }) => (
       <td>{WEEKDAYS_OPTIONS.find((e) => e?.value === from)?.label}</td>
     ),

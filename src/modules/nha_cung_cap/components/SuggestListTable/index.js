@@ -87,7 +87,7 @@ export const SuggestListTable = ({
     evaluation_date: ({ evaluation_date }) => (
       <td>{dayjs(evaluation_date).format("DD/MM/YYYY")}</td>
     ),
-    note: ({ note }) => <td style={{ textAlign: "left" }}>{note}</td>,
+    note: ({ note }) => <td className="text-left">{note}</td>,
   };
 
   return (

@@ -1,7 +1,7 @@
-import { useCallback,useState } from "react";
+import { useCallback, useState } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CPagination,CTable } from "_components/others";
+import { CPagination, CTable } from "_components/others";
 
 export default ({ isSelectAll, data, onSelect, loading }) => {
   const [paginate, setPaginate] = useState({ page: 1, limit: 10 });
@@ -43,7 +43,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       _style: { width: "140px", minWidth: "180px" },
     },
     {
-      key: "proposer",
+      key: "created_by",
       label: "Người đề xuất",
       _style: { width: "auto", minWidth: "200px" },
     },

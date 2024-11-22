@@ -1,11 +1,10 @@
-import { useCallback,useState } from "react";
+import { useCallback, useState } from "react";
 import dayjs from "dayjs";
 
-import { getPreview } from "_common/queries-fn/purchase-proposal-form.query";
 import { CCheckbox } from "_components/controls";
-import { CPagination,CTable } from "_components/others";
+import { CPagination, CTable } from "_components/others";
 
-import MPreview from "../../components/Preview";
+import MPreview from "../../components/TransferPreview";
 
 export default ({ data, loading, isSelectAll, onSelect }) => {
   //#region Data
@@ -21,7 +20,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
   );
 
   const onPreview = useCallback(
-    (code) => (e) => e.preventDefault() || setPreview(code),
+    (id) => (e) => e.preventDefault() || setPreview(id),
     [setPreview]
   );
 
@@ -122,9 +121,9 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         />
       </td>
     ),
-    code: ({ code }) => (
+    code: ({ code, id }) => (
       <td>
-        <a href={`#preview/${code}`} onClick={onPreview(code)}>
+        <a href={`#preview/${code}`} onClick={onPreview(id)}>
           {code}
         </a>
       </td>
@@ -160,9 +159,7 @@ export default ({ data, loading, isSelectAll, onSelect }) => {
         }
       />
 
-      {preview && (
-        <MPreview code={preview} getter={getPreview} onClose={onClose} />
-      )}
+      {preview && <MPreview id={preview} onClose={onClose} />}
     </>
   );
   //#endregion

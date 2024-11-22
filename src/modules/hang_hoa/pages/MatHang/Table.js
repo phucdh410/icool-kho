@@ -1,7 +1,7 @@
-import { useCallback,useState } from "react";
+import { useCallback, useState } from "react";
 
 import { CCheckbox } from "_components/controls";
-import { CPagination,CTable } from "_components/others";
+import { CPagination, CTable } from "_components/others";
 
 import { mapGoodsStatusText } from "../../funcs";
 
@@ -78,7 +78,7 @@ export default ({ isSelectAll, data, onSelect, loading }) => {
       </td>
     ),
     status: ({ status }) => <td>{mapGoodsStatusText(status)}</td>,
-    name: ({ name }) => <td style={{ textAlign: "left" }}>{name}</td>,
+    name: ({ name }) => <td className="text-left">{name}</td>,
   };
 
   return (

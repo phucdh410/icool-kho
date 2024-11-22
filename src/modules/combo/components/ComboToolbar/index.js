@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
@@ -11,7 +12,6 @@ import { filter } from "src/utils/funcs";
 export const ComboToolbar = ({
   params,
   status,
-  toggleStatus,
   canEdit,
   canRemove,
   onPause,
@@ -19,11 +19,20 @@ export const ComboToolbar = ({
   onEdit,
   onRemove,
   selected,
+  combos: _combos,
 }) => {
   //#region Data
   const { control, handleSubmit } = useForm({
     defaultValues: params,
   });
+
+  const combos = useMemo(
+    () =>
+      _combos
+        ? _combos?.map((e) => ({ value: e?.id, label: e?.name, code: e?.code }))
+        : [],
+    [_combos]
+  );
   //#endregion
 
   //#region Event
@@ -37,8 +46,6 @@ export const ComboToolbar = ({
         return;
     }
   };
-
-  const toggleCollapse = () => toggleStatus(1);
 
   const search = handleSubmit(
     (d) => onSearch(filter(d)),
@@ -64,8 +71,8 @@ export const ComboToolbar = ({
         </CRow>
 
         <CCollapse show>
-          <CRow className="mt-3 justify-content-xxl-end">
-            <CCol xs="2">
+          <div className="mt-3 flex flex-row flex-wrap gap-2">
+            <div className="min-w-[200px]">
               <Controller
                 control={control}
                 name="status"
@@ -73,26 +80,33 @@ export const ComboToolbar = ({
                   <CSelect {...field} label="Trạng thái" options={[]} />
                 )}
               />
-            </CCol>
-            <CCol xs="1">
+            </div>
+
+            <div className="min-w-[240px]">
               <Controller
                 control={control}
                 name="code"
                 render={({ field }) => (
-                  <CSelect {...field} label="Mã combo" options={[]} />
+                  <CSelect
+                    {...field}
+                    label="Mã combo"
+                    display="code"
+                    options={combos}
+                  />
                 )}
               />
-            </CCol>
-            <CCol xs="3">
+            </div>
+            <div className="min-w-[240px]">
               <Controller
                 control={control}
-                name="name"
+                name="code"
                 render={({ field }) => (
-                  <CSelect {...field} label="Tên hàng hóa" options={[]} />
+                  <CSelect {...field} label="Tên combo" options={combos} />
                 )}
               />
-            </CCol>
-            <CCol xs="2">
+            </div>
+
+            <div className="w-[200px]">
               <Controller
                 control={control}
                 name="start"
@@ -100,15 +114,17 @@ export const ComboToolbar = ({
                   <CDate {...field} label="Ngày áp dụng từ" />
                 )}
               />
-            </CCol>
-            <CCol xs="2">
+            </div>
+
+            <div className="w-[200px]">
               <Controller
                 control={control}
                 name="end"
                 render={({ field }) => <CDate {...field} label="Đến ngày" />}
               />
-            </CCol>
-            <CCol xs="2" className="btn-search">
+            </div>
+
+            <div className="ml-auto btn-search">
               <div className="form-group flex flex-row gap-2 c-input">
                 <CButton
                   icon={<Magnifying />}
@@ -127,8 +143,8 @@ export const ComboToolbar = ({
                   Ngưng
                 </CButton>
               </div>
-            </CCol>
-          </CRow>
+            </div>
+          </div>
         </CCollapse>
       </CCardBody>
     </CCard>

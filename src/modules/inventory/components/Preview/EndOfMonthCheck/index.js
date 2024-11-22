@@ -3,6 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import { kiemKhoCuoiThangApi } from "src/1/apis/kiem_kho_cuoi_thang.api";
+import { money } from "src/utils/funcs";
 import { format } from "src/utils/moment";
 
 import { CInput } from "_components/controls";
@@ -69,7 +70,7 @@ export default forwardRef(({ ...props }, ref) => {
   const render = {
     name: ({ name }) => <td className="text-left">{name}</td>,
     total: ({ ware_q, price }) => (
-      <td className="text-right">{(ware_q * price)?.toLocaleString()}</td>
+      <td className="text-right">{money(ware_q * price)}</td>
     ),
   };
 
@@ -102,7 +103,7 @@ export default forwardRef(({ ...props }, ref) => {
               <CInput
                 readOnly
                 label="Tổng tiền"
-                value={data ? data.value?.toLocaleString() : ""}
+                value={data ? money(data.value) : ""}
               />
             </CCol>
             <CCol xs="12" sm="12" md="12" lg="7" xl="9" xxl="9">
