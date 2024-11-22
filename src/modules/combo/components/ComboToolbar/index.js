@@ -5,13 +5,18 @@ import classNames from "classnames";
 import { CCard, CCardBody, CCol, CCollapse, CRow } from "@coreui/react";
 
 import { Magnifying, XCircleFill } from "src/common/assets/icons";
-import { CButton, CDate, CSelect } from "src/common/components/controls";
+import {
+  CButton,
+  CDate,
+  CInput,
+  CSelect,
+} from "src/common/components/controls";
 import { CActionGroup } from "src/common/components/others";
+import { COMBO_STATUSES_OPTIONS } from "src/configs/constant";
 import { filter } from "src/utils/funcs";
 
 export const ComboToolbar = ({
   params,
-  status,
   canEdit,
   canRemove,
   onPause,
@@ -19,20 +24,11 @@ export const ComboToolbar = ({
   onEdit,
   onRemove,
   selected,
-  combos: _combos,
 }) => {
   //#region Data
   const { control, handleSubmit } = useForm({
     defaultValues: params,
   });
-
-  const combos = useMemo(
-    () =>
-      _combos
-        ? _combos?.map((e) => ({ value: e?.id, label: e?.name, code: e?.code }))
-        : [],
-    [_combos]
-  );
   //#endregion
 
   //#region Event
@@ -77,21 +73,12 @@ export const ComboToolbar = ({
                 control={control}
                 name="status"
                 render={({ field }) => (
-                  <CSelect {...field} label="Trạng thái" options={[]} />
-                )}
-              />
-            </div>
-
-            <div className="min-w-[240px]">
-              <Controller
-                control={control}
-                name="code"
-                render={({ field }) => (
                   <CSelect
                     {...field}
-                    label="Mã combo"
-                    display="code"
-                    options={combos}
+                    label="Trạng thái"
+                    options={COMBO_STATUSES_OPTIONS}
+                    select="value"
+                    optionAll
                   />
                 )}
               />
@@ -101,21 +88,34 @@ export const ComboToolbar = ({
                 control={control}
                 name="code"
                 render={({ field }) => (
-                  <CSelect {...field} label="Tên combo" options={combos} />
+                  <CInput
+                    {...field}
+                    label="Mã combo"
+                    placeholder="Tìm kiếm theo mã"
+                  />
                 )}
               />
             </div>
-
+            <div className="min-w-[240px]">
+              <Controller
+                control={control}
+                name="name"
+                render={({ field }) => (
+                  <CInput
+                    {...field}
+                    label="Tên combo"
+                    placeholder="Tìm kiếm theo tên"
+                  />
+                )}
+              />
+            </div>
             <div className="w-[200px]">
               <Controller
                 control={control}
                 name="start"
-                render={({ field }) => (
-                  <CDate {...field} label="Ngày áp dụng từ" />
-                )}
+                render={({ field }) => <CDate {...field} label="Từ ngày" />}
               />
             </div>
-
             <div className="w-[200px]">
               <Controller
                 control={control}
@@ -123,7 +123,6 @@ export const ComboToolbar = ({
                 render={({ field }) => <CDate {...field} label="Đến ngày" />}
               />
             </div>
-
             <div className="ml-auto btn-search">
               <div className="form-group flex flex-row gap-2 c-input">
                 <CButton

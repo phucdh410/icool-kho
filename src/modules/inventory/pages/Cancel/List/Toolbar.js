@@ -107,11 +107,8 @@ export default ({
               render={({ field }) => (
                 <CSelect
                   label="Kho"
-                  options={
-                    warehouses && warehouses.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...warehouses]
-                      : []
-                  }
+                  options={warehouses}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

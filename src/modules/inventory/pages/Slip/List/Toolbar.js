@@ -94,9 +94,8 @@ export default ({
               render={({ field }) => (
                 <CSelect
                   label="Nhóm hàng"
-                  options={
-                    groups ? [{ value: "", label: "Tất cả" }, ...groups] : []
-                  }
+                  options={groups}
+                  optionAll
                   {...field}
                   onChange={(v) => field.onChange(v.value)}
                 />
@@ -131,11 +130,8 @@ export default ({
               render={({ field }) => (
                 <CSelect
                   label="Kho"
-                  options={
-                    warehouses && warehouses.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...warehouses]
-                      : warehouses
-                  }
+                  options={warehouses}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

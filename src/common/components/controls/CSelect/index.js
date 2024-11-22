@@ -24,19 +24,24 @@ function Select(
     select,
     disabled,
     isDisabled,
+    optionAll = false,
     ...rest
   },
   ref
 ) {
   const _class = classNames("c-input c-select", className);
 
-  const _options = useMemo(
-    () =>
+  const _options = useMemo(() => {
+    const result =
       options?.filter(
         (o) => !ignore?.includes(o.value) || (value && o.value === value)
-      ) ?? [],
-    [options, ignore]
-  );
+      ) ?? [];
+    if (optionAll) {
+      return [{ value: "", label: "Tất cả" }, ...result];
+    } else {
+      return result;
+    }
+  }, [options, ignore, optionAll]);
 
   const _value = useMemo(() => {
     if (typeof value === "object" && value !== null) {

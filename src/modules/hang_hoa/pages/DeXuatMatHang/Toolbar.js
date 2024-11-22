@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { ENTITY_GROUP_CODE, PERMISSION_VALUE } from "src/configs/constant";
 import { Can } from "src/utils/ability";
@@ -113,10 +113,10 @@ export default ({
                 <CSelect
                   label="Trạng thái"
                   options={[
-                    { value: "", label: "Tất cả" },
                     { value: 0, label: "Chưa duyệt" },
                     { value: 1, label: "Đã duyệt" },
                   ]}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

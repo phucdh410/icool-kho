@@ -10,6 +10,9 @@ export const comboApi = {
   update: async (id, body) => {
     return await methods.put(`/combo/${id}`, body);
   },
+  stop: async (id) => {
+    return await methods.put(`/combo/${id}/stop`);
+  },
   getAllProposals: async () => {
     return await methods.get(`/combo/proposals`);
   },

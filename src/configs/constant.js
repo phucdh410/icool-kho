@@ -167,3 +167,8 @@ export const DATE_MANAGEMENT_OPTIONS = [
   { value: 0, label: "Không" },
   { value: 1, label: "Có" },
 ];
+
+export const COMBO_STATUSES_OPTIONS = [
+  { value: 1, label: "Hoạt động" },
+  { value: 0, label: "Ngưng" },
+];

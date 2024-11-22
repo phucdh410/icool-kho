@@ -4,7 +4,8 @@ import { CCard } from "@coreui/react";
 
 import { CCheckbox } from "src/common/components/controls";
 import { CPagination, CTable } from "src/common/components/others";
-import { money } from "src/utils/funcs";
+import { COMBO_STATUSES_OPTIONS } from "src/configs/constant";
+import { findLabel, money } from "src/utils/funcs";
 
 export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
   //#region Data
@@ -83,6 +84,9 @@ export const ComboTable = ({ isSelectAll, data, onSelect, loading }) => {
     cost: ({ cost }) => <td className="text-right">{money(cost)}</td>,
     created_by: ({ created_by }) => <td className="text-left">{created_by}</td>,
     note: ({ note }) => <td className="text-left">{note}</td>,
+    status: ({ status }) => (
+      <td>{findLabel(status, COMBO_STATUSES_OPTIONS)}</td>
+    ),
   };
 
   return (

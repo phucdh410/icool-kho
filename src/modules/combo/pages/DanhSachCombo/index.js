@@ -18,9 +18,7 @@ const DanhSachCombo = () => {
     end: null,
   });
 
-  const [status, setStatus] = useState(0);
-
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, refetch } = useQuery({
     queryKey: ["danh-sach-combo", params],
     queryFn: () => comboApi.getAll(params),
     select: (dataResponse) =>
@@ -46,9 +44,6 @@ const DanhSachCombo = () => {
     );
   };
 
-  const onStatusChange = (_status) =>
-    setStatus(_status === status ? 0 : _status);
-
   const onSearch = (data) => setParams(data);
 
   const onEdit = () => {
@@ -71,7 +66,7 @@ const DanhSachCombo = () => {
 
   const onPause = async () => {
     try {
-      await comboApi.updateStatus(selected?.[0]?.id);
+      await comboApi.stop(selected?.[0]?.id);
       refetch();
       noti("success", "Ngưng chạy combo thành công!");
     } catch (error) {
@@ -85,7 +80,6 @@ const DanhSachCombo = () => {
     <>
       <ComboToolbar
         params={params}
-        status={status}
         canEdit={selected?.length === 1}
         canRemove={selected?.length === 1}
         onEdit={onEdit}
@@ -93,7 +87,6 @@ const DanhSachCombo = () => {
         onSearch={onSearch}
         selected={selected}
         onPause={onPause}
-        combos={data}
       />
 
       <ComboTable

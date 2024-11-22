@@ -105,11 +105,8 @@ export default ({
                 <CSelect
                   className="min-w-[240px]"
                   label="Kho"
-                  options={
-                    warehouses && warehouses.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...warehouses]
-                      : []
-                  }
+                  options={warehouses}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

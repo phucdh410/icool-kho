@@ -87,10 +87,8 @@ export const ListToolbar = ({
               render={({ field }) => (
                 <CSelect
                   label="Kỳ đánh giá:"
-                  options={[
-                    { value: "", label: "Tất cả" },
-                    ...KY_DANH_GIA_OPTIONS,
-                  ]}
+                  options={KY_DANH_GIA_OPTIONS}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                 />

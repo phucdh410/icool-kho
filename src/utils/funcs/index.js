@@ -1,4 +1,5 @@
 import filter from "./filter";
+import { findLabel } from "./findLabel";
 import { generate, UID } from "./generateCode";
 import isEmpty from "./isEmpty";
 import { isFloatByUnit } from "./isFloat";
@@ -8,6 +9,7 @@ import { getShortNameStore, isCentral, isSuccess } from "./response";
 
 export {
   filter,
+  findLabel,
   generate,
   getShortNameStore,
   isCentral,

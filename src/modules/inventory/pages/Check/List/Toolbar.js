@@ -145,10 +145,10 @@ export default ({
                 <CSelect
                   label="Trạng thái"
                   options={[
-                    { value: "", label: "Tất cả" },
                     { value: 0, label: "Chưa duyệt" },
                     { value: 1, label: "Đã duyệt" },
                   ]}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                   onChange={(v) => field.onChange(v.value)}

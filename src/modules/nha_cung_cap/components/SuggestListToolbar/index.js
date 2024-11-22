@@ -2,12 +2,12 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import classNames from "classnames";
 
-import { CCol, CCollapse,CRow } from "@coreui/react";
+import { CCol, CCollapse, CRow } from "@coreui/react";
 
 import { filter as filterFunc } from "src/utils/funcs";
 
 import { Magnifying } from "_assets/icons";
-import { CButton, CDate,CSelect } from "_components/controls";
+import { CButton, CDate, CSelect } from "_components/controls";
 import { CActionGroup } from "_components/others";
 
 import { KY_DANH_GIA_OPTIONS, YEAR_OPTIONS } from "../../constants";
@@ -87,10 +87,8 @@ export const SuggestListToolbar = ({
               render={({ field }) => (
                 <CSelect
                   label="Kỳ đánh giá:"
-                  options={[
-                    { value: "", label: "Tất cả" },
-                    ...KY_DANH_GIA_OPTIONS,
-                  ]}
+                  options={KY_DANH_GIA_OPTIONS}
+                  optionAll
                   placeholder="Tất cả"
                   {...field}
                 />

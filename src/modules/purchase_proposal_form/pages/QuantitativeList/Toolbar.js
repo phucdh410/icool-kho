@@ -118,11 +118,8 @@ export default ({
                 <CSelect
                   label="Chi nhánh: "
                   placeholder="Tất cả"
-                  options={
-                    stores && stores.length > 2
-                      ? [{ value: "", label: "Tất cả" }, ...stores]
-                      : stores
-                  }
+                  options={stores}
+                  optionAll
                   {...field}
                   onChange={onStoreChange}
                 />
