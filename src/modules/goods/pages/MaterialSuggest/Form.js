@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import classNames from "classnames";
 
-import { CCard, CCardBody,CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import { getConfigs } from "src/apis/config.api";
 import { DATE_MANAGEMENT_OPTIONS } from "src/configs/constant";
@@ -121,7 +121,6 @@ export default forwardRef(({ isEdit = false, refetch }, ref) => {
                   <Controller
                     control={control}
                     name="expired"
-                    rules={{ required: true }}
                     render={({ field }) => (
                       <CSelect
                         label="Quản lý date"

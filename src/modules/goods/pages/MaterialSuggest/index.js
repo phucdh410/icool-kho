@@ -1,9 +1,9 @@
-import { useCallback, useEffect,useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { createSelector } from "reselect";
 
-import { CCard, CCardBody, CCardHeader,CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 
 import {
   approveMaterialSuggest,
@@ -102,25 +102,21 @@ const MaterialList = () => {
   };
 
   const onSave = () => {
-    ref.current.handleSubmit(
-      async (d) => {
-        const _payload = formatPayload(d);
+    ref.current.handleSubmit(async (d) => {
+      const _payload = formatPayload(d);
 
-        const func =
-          status === 3 ? updateMaterialSuggest : createMaterialSuggest;
-        const res = await func(_payload);
+      const func = status === 3 ? updateMaterialSuggest : createMaterialSuggest;
+      const res = await func(_payload);
 
-        if (isSuccess(res)) {
-          refetch();
-          setStatus(0);
-          ref.current.clear();
-          noti("success", "Thành công");
-        } else {
-          noti("error", ERROR_MESSAGE.NVL.REQUIRED);
-        }
-      },
-      (e) => {}
-    )();
+      if (isSuccess(res)) {
+        refetch();
+        setStatus(0);
+        ref.current.clear();
+        noti("success", "Thành công");
+      } else {
+        noti("error", ERROR_MESSAGE.NVL.REQUIRED);
+      }
+    })();
   };
 
   const onRemove = async () => {
