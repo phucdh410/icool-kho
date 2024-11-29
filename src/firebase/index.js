@@ -12,13 +12,11 @@ import { CNotification } from "src/common/components/others";
 import { app } from "./config";
 
 export const requestPermission = async () => {
-  console.log("Requesting permission...");
   const permission = await Notification.requestPermission();
-  console.log("🚀 ~ requestPermission ~ permission:", permission);
   if (permission === "granted") {
-    console.log("Notification permission granted.");
+    // console.log("Notification permission granted.");
   } else {
-    console.log("Permission denied.");
+    // console.log("Permission denied.");
   }
 
   return permission;
@@ -27,7 +25,7 @@ export const requestPermission = async () => {
 export const FirebaseRoot = () => {
   //#region Data
   const vapidKey =
-    "BB4RqxfMWd8C1hevOO7feEo8Np6lT45_2AAzlgSGxpJ6AS6-ZbxCMcqfrkZYb5ixckgDm6gWwTr-5BFmUN5aLrA";
+    "BF5PxHqu_mufvH2fkUrXaQkuxgl_vap-iVH8ozBIzxxmhXQY6zyIHCHvoAiNxZab-YK06daMJhd5N2FlLxfPBYk";
 
   const [permission, setPermission] = useState(false);
 
@@ -53,24 +51,27 @@ export const FirebaseRoot = () => {
     if (isPermission === "granted") {
       getToken(messaging, { vapidKey }).then(async (currentToken) => {
         if (currentToken) {
+          console.log("🚀 Your firebase token:", currentToken);
           // await updateFirebaseToken(currentToken); //TODO: send token to BE
 
           onMessage(messaging, (payload) => {
-            console.log("Có một thông báo mới !!! ", payload);
-            toast(() => <CNotification t={payload} />);
+            toast(() => <CNotification notificationPayload={payload} />, {
+              duration: 10000,
+            });
           });
         } else {
+          console.error("Không thể lấy được token cho firebase!");
         }
       });
     }
   };
 
-  // const checkServiceWorkerNoti = (event) => {
-  //   if (event?.data && !event.data?.isFirebaseMessaging === true) {
-  //     console.log(event.data);
-  //     dispatch(setNotifications(formatNotification(event.data)));
-  //   }
-  // };
+  const checkServiceWorkerNoti = (event) => {
+    if (event?.data && !event.data?.isFirebaseMessaging === true) {
+      console.log(event.data);
+      // dispatch(setNotifications(formatNotification(event.data)));
+    }
+  };
   //#endregion
 
   useEffect(() => {

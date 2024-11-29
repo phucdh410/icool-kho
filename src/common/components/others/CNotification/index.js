@@ -1,18 +1,44 @@
+import { useMemo } from "react";
 import toast from "react-hot-toast";
+import classNames from "classnames";
+
+import { history } from "src/App";
 
 import "./styles.scss";
 
-export const CNotification = ({ t }) => {
-  console.log("🚀 ~ CNotification ~ t:", t);
+export const CNotification = ({ notificationPayload }) => {
+  console.log("🚀 ~ CNotification ~ notificationPayload:", notificationPayload);
+  //#region Data
+  // console.log("🚀 ~ CNotification ~ t:", t);
 
+  const notification = useMemo(() => {
+    if (!notificationPayload) {
+      return null;
+    } else {
+      return {
+        title: notificationPayload?.notification?.title ?? "",
+        body: notificationPayload?.notification?.body ?? "",
+        additional: notificationPayload?.data ?? null,
+        //{ url: string }
+      };
+    }
+  }, [notificationPayload]);
+  //#endregion
+
+  //#region Event
   const onClose = () => {
     toast.dismiss(t?.id);
   };
+  //#endregion
 
+  //#region Render
   return (
     <div className="c-notification">
       <div className="content">
         <p
+          className={classNames(
+            notification?.additional?.url && "cursor-pointer"
+          )}
           style={{
             marginBottom: "3px",
             fontSize: "1rem",
@@ -20,11 +46,16 @@ export const CNotification = ({ t }) => {
             lineHeight: "28px",
             color: "#003397",
           }}
+          onClick={() =>
+            notification?.additional?.url
+              ? history.push(notification.additional.url)
+              : undefined
+          }
         >
-          {t?.notification?.title || "Title"}
+          {notification?.title || "Title"}
         </p>
         <p style={{ fontWeight: 500, color: "#3A3A3A" }}>
-          {t?.notification?.body || "Body"}
+          {notification?.body || "Body"}
         </p>
       </div>
       <div className="divider"></div>
@@ -33,4 +64,5 @@ export const CNotification = ({ t }) => {
       </button>
     </div>
   );
+  //#endregion
 };
